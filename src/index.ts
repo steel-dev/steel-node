@@ -99,7 +99,6 @@ export class Steel extends Core.APIClient {
   }
 
   api: API.API = new API.API(this);
-  v1: API.V1 = new API.V1(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -156,8 +155,6 @@ export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
   export import API = API.API;
-
-  export import V1 = API.V1;
 }
 
 export default Steel;
