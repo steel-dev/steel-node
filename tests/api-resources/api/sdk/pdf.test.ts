@@ -5,9 +5,9 @@ import { Response } from 'node-fetch';
 
 const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
-describe('resource scrape', () => {
+describe('resource pdf', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.v1.sdk.scrape.create({ url: 'https://example.com' });
+    const responsePromise = client.api.sdk.pdf.create({ url: 'https://example.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -18,9 +18,6 @@ describe('resource scrape', () => {
   });
 
   test('create: required and optional params', async () => {
-    const response = await client.v1.sdk.scrape.create({
-      url: 'https://example.com',
-      format: ['html', 'readability'],
-    });
+    const response = await client.api.sdk.pdf.create({ url: 'https://example.com' });
   });
 });
