@@ -121,8 +121,30 @@ export class Steel extends Core.APIClient {
     this.bearerToken = bearerToken;
   }
 
-  sessions: API.Sessions = new API.Sessions(this);
+  session: API.Session = new API.Session(this);
   contexts: API.Contexts = new API.Contexts(this);
+
+  /**
+   * Start a new browser session for the organization
+   */
+  createSession(
+    params: TopLevelAPI.CreateSessionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.SessionResponse> {
+    const { orgid, ...body } = params;
+    return this.post('/v1/sessions', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
+
+  /**
+   * Get a list of all active browser sessions for the organization
+   */
+  getSessions(
+    params: TopLevelAPI.GetSessionsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.SessionsResponse> {
+    const { orgid } = params;
+    return this.get('/v1/sessions', { ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
 
   /**
    * Generate a PDF from the specified webpage. This endpoint supports bulk
@@ -218,17 +240,17 @@ export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
   export import ScrapeResponse = API.ScrapeResponse;
+  export import SessionResponse = API.SessionResponse;
+  export import SessionsResponse = API.SessionsResponse;
+  export import CreateSessionParams = API.CreateSessionParams;
+  export import GetSessionsParams = API.GetSessionsParams;
   export import PdfParams = API.PdfParams;
   export import ScrapeParams = API.ScrapeParams;
   export import ScreenshotParams = API.ScreenshotParams;
 
-  export import Sessions = API.Sessions;
+  export import Session = API.Session;
   export import DeleteSessionResponse = API.DeleteSessionResponse;
-  export import SessionResponse = API.SessionResponse;
-  export import SessionsResponse = API.SessionsResponse;
-  export import SessionCreateParams = API.SessionCreateParams;
-  export import SessionListParams = API.SessionListParams;
-  export import SessionDeleteParams = API.SessionDeleteParams;
+  export import SessionReleaseSessionParams = API.SessionReleaseSessionParams;
 
   export import Contexts = API.Contexts;
   export import CreateContextResponse = API.CreateContextResponse;

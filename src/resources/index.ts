@@ -8,13 +8,14 @@ export {
   ContextCreateParams,
   Contexts,
 } from './contexts';
+export { DeleteSessionResponse, SessionReleaseSessionParams, Session } from './session';
 export {
-  DeleteSessionResponse,
+  ScrapeResponse,
   SessionResponse,
   SessionsResponse,
-  SessionCreateParams,
-  SessionListParams,
-  SessionDeleteParams,
-  Sessions,
-} from './sessions';
-export { ScrapeResponse, PdfParams, ScrapeParams, ScreenshotParams } from './top-level';
+  CreateSessionParams,
+  GetSessionsParams,
+  PdfParams,
+  ScrapeParams,
+  ScreenshotParams,
+} from './top-level';
