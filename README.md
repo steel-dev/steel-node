@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Steel REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.steel.com](https://docs.steel.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.steel.dev](https://docs.steel.dev). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -28,7 +28,12 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const schemaRetrieveResponse = await client.api.schema.retrieve();
+  const sessionResponse = await client.sessions.create({
+    orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  });
+
+  console.log(sessionResponse.id);
 }
 
 main();
@@ -45,7 +50,11 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const schemaRetrieveResponse: Steel.API.SchemaRetrieveResponse = await client.api.schema.retrieve();
+  const params: Steel.SessionCreateParams = {
+    orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  };
+  const sessionResponse: Steel.SessionResponse = await client.sessions.create(params);
 }
 
 main();
@@ -62,15 +71,17 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const schemaRetrieveResponse = await client.api.schema.retrieve().catch(async (err) => {
-    if (err instanceof Steel.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const sessionResponse = await client.sessions
+    .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+    .catch(async (err) => {
+      if (err instanceof Steel.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
@@ -105,7 +116,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.api.schema.retrieve({
+await client.sessions.create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   maxRetries: 5,
 });
 ```
@@ -122,7 +133,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.api.schema.retrieve({
+await client.sessions.create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -143,13 +154,17 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client.api.schema.retrieve().asResponse();
+const response = await client.sessions
+  .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: schemaRetrieveResponse, response: raw } = await client.api.schema.retrieve().withResponse();
+const { data: sessionResponse, response: raw } = await client.sessions
+  .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(schemaRetrieveResponse);
+console.log(sessionResponse.id);
 ```
 
 ### Making custom/undocumented requests
@@ -253,9 +268,12 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.api.schema.retrieve({
-  httpAgent: new http.Agent({ keepAlive: false }),
-});
+await client.sessions.create(
+  { orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+  {
+    httpAgent: new http.Agent({ keepAlive: false }),
+  },
+);
 ```
 
 ## Semantic versioning

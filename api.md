@@ -1,73 +1,41 @@
-# API
-
-## Schema
+# Steel
 
 Types:
 
-- <code><a href="./src/resources/api/schema.ts">SchemaRetrieveResponse</a></code>
+- <code><a href="./src/resources/top-level.ts">ScrapeResponse</a></code>
 
 Methods:
 
-- <code title="get /api/schema/">client.api.schema.<a href="./src/resources/api/schema.ts">retrieve</a>({ ...params }) -> SchemaRetrieveResponse</code>
+- <code title="post /v1/pdf">client.<a href="./src/index.ts">pdf</a>({ ...params }) -> Response</code>
+- <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> ScrapeResponse</code>
+- <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> Response</code>
 
-## SDK
-
-### Context
+# Sessions
 
 Types:
 
-- <code><a href="./src/resources/api/sdk/context.ts">Context</a></code>
-- <code><a href="./src/resources/api/sdk/context.ts">ContextListResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">DeleteSessionResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">SessionResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">SessionsResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/sdk/context/">client.api.sdk.context.<a href="./src/resources/api/sdk/context.ts">create</a>({ ...params }) -> Context</code>
-- <code title="get /v1/sdk/context/{id}/">client.api.sdk.context.<a href="./src/resources/api/sdk/context.ts">retrieve</a>(id) -> Context</code>
-- <code title="patch /v1/sdk/context/{id}/">client.api.sdk.context.<a href="./src/resources/api/sdk/context.ts">update</a>(id, { ...params }) -> Context</code>
-- <code title="get /v1/sdk/context/">client.api.sdk.context.<a href="./src/resources/api/sdk/context.ts">list</a>() -> ContextListResponse</code>
-- <code title="delete /v1/sdk/context/{id}/">client.api.sdk.context.<a href="./src/resources/api/sdk/context.ts">delete</a>(id) -> void</code>
+- <code title="post /v1/sessions">client.sessions.<a href="./src/resources/sessions.ts">create</a>({ ...params }) -> SessionResponse</code>
+- <code title="get /v1/sessions">client.sessions.<a href="./src/resources/sessions.ts">list</a>({ ...params }) -> SessionsResponse</code>
+- <code title="delete /v1/sessions/{id}">client.sessions.<a href="./src/resources/sessions.ts">delete</a>(id, { ...params }) -> DeleteSessionResponse</code>
 
-### Pdf
+# Contexts
 
 Types:
 
-- <code><a href="./src/resources/api/sdk/pdf.ts">PdfCreateResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">CreateContextResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">DeleteContextResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">GetContextResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">GetContextsResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/sdk/pdf/">client.api.sdk.pdf.<a href="./src/resources/api/sdk/pdf.ts">create</a>({ ...params }) -> unknown</code>
-
-### Scrape
-
-Types:
-
-- <code><a href="./src/resources/api/sdk/scrape.ts">ScrapeCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/sdk/scrape/">client.api.sdk.scrape.<a href="./src/resources/api/sdk/scrape.ts">create</a>({ ...params }) -> unknown</code>
-
-### Screenshot
-
-Types:
-
-- <code><a href="./src/resources/api/sdk/screenshot.ts">ScreenshotCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/sdk/screenshot/">client.api.sdk.screenshot.<a href="./src/resources/api/sdk/screenshot.ts">create</a>({ ...params }) -> unknown</code>
-
-### Sessions
-
-Types:
-
-- <code><a href="./src/resources/api/sdk/sessions.ts">Session</a></code>
-- <code><a href="./src/resources/api/sdk/sessions.ts">SessionListResponse</a></code>
-
-Methods:
-
-- <code title="post /v1/sdk/sessions/">client.api.sdk.sessions.<a href="./src/resources/api/sdk/sessions.ts">create</a>({ ...params }) -> Session</code>
-- <code title="get /v1/sdk/sessions/{id}/">client.api.sdk.sessions.<a href="./src/resources/api/sdk/sessions.ts">retrieve</a>(id) -> Session</code>
-- <code title="patch /v1/sdk/sessions/{id}/">client.api.sdk.sessions.<a href="./src/resources/api/sdk/sessions.ts">update</a>(id, { ...params }) -> Session</code>
-- <code title="get /v1/sdk/sessions/">client.api.sdk.sessions.<a href="./src/resources/api/sdk/sessions.ts">list</a>() -> SessionListResponse</code>
-- <code title="delete /v1/sdk/sessions/{id}/">client.api.sdk.sessions.<a href="./src/resources/api/sdk/sessions.ts">delete</a>(id) -> void</code>
+- <code title="post /v1/context">client.contexts.<a href="./src/resources/contexts.ts">create</a>({ ...params }) -> CreateContextResponse</code>
+- <code title="get /v1/context/{id}">client.contexts.<a href="./src/resources/contexts.ts">retrieve</a>(id) -> GetContextResponse</code>
+- <code title="get /v1/context">client.contexts.<a href="./src/resources/contexts.ts">list</a>() -> GetContextsResponse</code>
+- <code title="delete /v1/context/{id}">client.contexts.<a href="./src/resources/contexts.ts">delete</a>(id) -> DeleteContextResponse</code>
