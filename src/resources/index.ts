@@ -2,20 +2,21 @@
 
 export {
   CreateContextResponse,
-  DeleteContextResponse,
   GetContextResponse,
   GetContextsResponse,
+  ContextDeleteResponse,
   ContextCreateParams,
   Contexts,
 } from './contexts';
-export { DeleteSessionResponse, SessionReleaseSessionParams, Session } from './session';
+export { ScrapeResponse, PdfParams, ScrapeParams, ScreenshotParams } from './top-level';
 export {
-  ScrapeResponse,
-  SessionResponse,
   SessionsResponse,
-  CreateSessionParams,
-  GetSessionsParams,
-  PdfParams,
-  ScrapeParams,
-  ScreenshotParams,
-} from './top-level';
+  SessionCreateResponse,
+  SessionRetrieveResponse,
+  SessionDeleteResponse,
+  SessionCreateParams,
+  SessionRetrieveParams,
+  SessionListParams,
+  SessionDeleteParams,
+  Sessions,
+} from './sessions';
