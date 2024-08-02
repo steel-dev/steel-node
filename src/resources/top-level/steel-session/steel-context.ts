@@ -37,7 +37,7 @@ export class SteelContext extends APIResource {
   /**
    * Retrieve details of a specific saved browser context
    */
-  getContextData(id: string, options?: Core.RequestOptions): Core.APIPromise<Context> {
+  getContextData(id: string, options?: Core.RequestOptions): Core.APIPromise<GetContextResponse> {
     return this._client.get(`/v1/context/${id}`, options);
   }
 }

@@ -8,9 +8,9 @@ const client = new Steel({
   baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
 });
 
-describe('resource steelBrowser', () => {
+describe('top level methods', () => {
   test('createSession: only required params', async () => {
-    const responsePromise = client.steelBrowser.createSession({
+    const responsePromise = client.createSession({
       orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
@@ -24,21 +24,20 @@ describe('resource steelBrowser', () => {
   });
 
   test('createSession: required and optional params', async () => {
-    const response = await client.steelBrowser.createSession({
+    const response = await client.createSession({
       orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       contextData: {},
       proxy: 'proxy',
       region: 'CA',
       solveCaptcha: true,
+      timeout: 0,
       userAgent: 'userAgent',
     });
   });
 
   test('listSessions: only required params', async () => {
-    const responsePromise = client.steelBrowser.listSessions({
-      orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const responsePromise = client.listSessions({ orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -49,18 +48,18 @@ describe('resource steelBrowser', () => {
   });
 
   test('listSessions: required and optional params', async () => {
-    const response = await client.steelBrowser.listSessions({
+    const response = await client.listSessions({
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       live_only: true,
     });
   });
 
   test('pdf: required and optional params', async () => {
-    const response = await client.steelBrowser.pdf({ url: 'url' });
+    const response = await client.pdf({ url: 'url' });
   });
 
   test('retrieveSession: only required params', async () => {
-    const responsePromise = client.steelBrowser.retrieveSession('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const responsePromise = client.retrieveSession('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
     const rawResponse = await responsePromise.asResponse();
@@ -73,16 +72,13 @@ describe('resource steelBrowser', () => {
   });
 
   test('retrieveSession: required and optional params', async () => {
-    const response = await client.steelBrowser.retrieveSession('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+    const response = await client.retrieveSession('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
   test('scrape: only required params', async () => {
-    const responsePromise = client.steelBrowser.scrape({
-      url: 'url',
-      orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const responsePromise = client.scrape({ url: 'url', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -93,7 +89,7 @@ describe('resource steelBrowser', () => {
   });
 
   test('scrape: required and optional params', async () => {
-    const response = await client.steelBrowser.scrape({
+    const response = await client.scrape({
       url: 'url',
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       format: ['html', 'cleaned_html', 'readability'],
@@ -102,9 +98,6 @@ describe('resource steelBrowser', () => {
   });
 
   test('screenshot: required and optional params', async () => {
-    const response = await client.steelBrowser.screenshot({
-      url: 'url',
-      orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-    });
+    const response = await client.screenshot({ url: 'url', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' });
   });
 });

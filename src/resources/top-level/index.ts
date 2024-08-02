@@ -9,4 +9,11 @@ export {
   RetrieveSessionParams,
   ScrapeParams,
   ScreenshotParams,
-} from './top-level/top-level';
+} from './top-level';
+export {
+  Session,
+  SteelSessionReleaseSessionResponse,
+  SteelSessionGetSessionDataParams,
+  SteelSessionReleaseSessionParams,
+  SteelSession,
+} from './steel-session/index';
