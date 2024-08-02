@@ -2,25 +2,24 @@
 
 export {
   Context,
-  SteelContextCreateContextResponse,
-  SteelContextDeleteContextResponse,
-  SteelContextCreateContextParams,
-  SteelContext,
-} from './steel-context';
+  ContextCreateResponse,
+  ContextListResponse,
+  ContextDeleteResponse,
+  ContextCreateParams,
+  Contexts,
+} from './contexts';
 export {
-  ListSessionsResponse,
-  ScrapeResponse,
-  CreateSessionParams,
-  ListSessionsParams,
-  PdfParams,
-  RetrieveSessionParams,
-  ScrapeParams,
-  ScreenshotParams,
-} from './top-level';
+  Scrape,
+  BrowserToolPdfParams,
+  BrowserToolScrapeParams,
+  BrowserToolScreenshotParams,
+  BrowserTools,
+} from './browser-tools';
 export {
   Session,
-  SteelSessionReleaseSessionResponse,
-  SteelSessionGetSessionDataParams,
-  SteelSessionReleaseSessionParams,
-  SteelSession,
-} from './steel-session';
+  SessionListResponse,
+  SessionReleaseResponse,
+  SessionCreateParams,
+  SessionListParams,
+  Sessions,
+} from './sessions';

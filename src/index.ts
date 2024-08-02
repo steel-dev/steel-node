@@ -5,16 +5,8 @@ import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as API from './resources/index';
-import * as SteelSessionAPI from './resources/steel-session';
-import * as TopLevelAPI from './resources/top-level';
-import { type Response } from './_shims/index';
 
 export interface ClientOptions {
-  /**
-   * Defaults to process.env['STEEL_BEARER_TOKEN'].
-   */
-  bearerToken?: string | undefined;
-
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
@@ -76,14 +68,11 @@ export interface ClientOptions {
  * API Client for interfacing with the Steel API.
  */
 export class Steel extends Core.APIClient {
-  bearerToken: string;
-
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Steel API.
    *
-   * @param {string | undefined} [opts.bearerToken=process.env['STEEL_BEARER_TOKEN'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? http://api.steel.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -92,19 +81,8 @@ export class Steel extends Core.APIClient {
    * @param {Core.Headers} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({
-    baseURL = Core.readEnv('STEEL_BASE_URL'),
-    bearerToken = Core.readEnv('STEEL_BEARER_TOKEN'),
-    ...opts
-  }: ClientOptions = {}) {
-    if (bearerToken === undefined) {
-      throw new Errors.SteelError(
-        "The STEEL_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the Steel client with an bearerToken option, like new Steel({ bearerToken: 'My Bearer Token' }).",
-      );
-    }
-
+  constructor({ baseURL = Core.readEnv('STEEL_BASE_URL'), ...opts }: ClientOptions = {}) {
     const options: ClientOptions = {
-      bearerToken,
       ...opts,
       baseURL: baseURL || `http://api.steel.dev`,
     };
@@ -118,81 +96,11 @@ export class Steel extends Core.APIClient {
     });
 
     this._options = options;
-
-    this.bearerToken = bearerToken;
   }
 
-  steelSession: API.SteelSession = new API.SteelSession(this);
-  steelContext: API.SteelContext = new API.SteelContext(this);
-
-  /**
-   * Start a new browser session for the organization
-   */
-  createSession(
-    params: TopLevelAPI.CreateSessionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SteelSessionAPI.Session> {
-    const { orgid, ...body } = params;
-    return this.post('/v1/sessions', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
-  }
-
-  /**
-   * Get a list of browser sessions for the organization
-   */
-  listSessions(
-    params: TopLevelAPI.ListSessionsParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ListSessionsResponse> {
-    const { orgid, ...query } = params;
-    return this.get('/v1/sessions', { query, ...options, headers: { orgid: orgid, ...options?.headers } });
-  }
-
-  /**
-   * Generate a PDF from the specified webpage. This endpoint supports bulk
-   * operations by passing an array of URLs.
-   */
-  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    return this.post('/v1/pdf', { body, ...options, __binaryResponse: true });
-  }
-
-  /**
-   * Get detailed information about a specific browser session
-   */
-  retrieveSession(
-    id: string,
-    params: TopLevelAPI.RetrieveSessionParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SteelSessionAPI.Session> {
-    const { orgid } = params;
-    return this.get(`/v1/sessions/${id}`, { ...options, headers: { orgid: orgid, ...options?.headers } });
-  }
-
-  /**
-   * Scrape content from a webpage. This endpoint supports bulk operations by passing
-   * an array of URLs. You can specify the desired return type(s) using the 'format'
-   * parameter and request a screenshot using the 'screenshot' flag.
-   */
-  scrape(
-    params: TopLevelAPI.ScrapeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
-    const { orgid, ...body } = params;
-    return this.post('/v1/scrape', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
-  }
-
-  /**
-   * Capture a screenshot of the specified webpage. This endpoint supports bulk
-   * operations by passing an array of URLs.
-   */
-  screenshot(params: TopLevelAPI.ScreenshotParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    const { orgid, ...body } = params;
-    return this.post('/v1/screenshot', {
-      body,
-      ...options,
-      headers: { orgid: orgid, ...options?.headers },
-      __binaryResponse: true,
-    });
-  }
+  sessions: API.Sessions = new API.Sessions(this);
+  browserTools: API.BrowserTools = new API.BrowserTools(this);
+  contexts: API.Contexts = new API.Contexts(this);
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -203,10 +111,6 @@ export class Steel extends Core.APIClient {
       ...super.defaultHeaders(opts),
       ...this._options.defaultHeaders,
     };
-  }
-
-  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return { Authorization: `Bearer ${this.bearerToken}` };
   }
 
   static Steel = this;
@@ -252,26 +156,25 @@ export import fileFromPath = Uploads.fileFromPath;
 export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
-  export import ListSessionsResponse = API.ListSessionsResponse;
-  export import ScrapeResponse = API.ScrapeResponse;
-  export import CreateSessionParams = API.CreateSessionParams;
-  export import ListSessionsParams = API.ListSessionsParams;
-  export import PdfParams = API.PdfParams;
-  export import RetrieveSessionParams = API.RetrieveSessionParams;
-  export import ScrapeParams = API.ScrapeParams;
-  export import ScreenshotParams = API.ScreenshotParams;
-
-  export import SteelSession = API.SteelSession;
+  export import Sessions = API.Sessions;
   export import Session = API.Session;
-  export import SteelSessionReleaseSessionResponse = API.SteelSessionReleaseSessionResponse;
-  export import SteelSessionGetSessionDataParams = API.SteelSessionGetSessionDataParams;
-  export import SteelSessionReleaseSessionParams = API.SteelSessionReleaseSessionParams;
+  export import SessionListResponse = API.SessionListResponse;
+  export import SessionReleaseResponse = API.SessionReleaseResponse;
+  export import SessionCreateParams = API.SessionCreateParams;
+  export import SessionListParams = API.SessionListParams;
 
-  export import SteelContext = API.SteelContext;
+  export import BrowserTools = API.BrowserTools;
+  export import Scrape = API.Scrape;
+  export import BrowserToolPdfParams = API.BrowserToolPdfParams;
+  export import BrowserToolScrapeParams = API.BrowserToolScrapeParams;
+  export import BrowserToolScreenshotParams = API.BrowserToolScreenshotParams;
+
+  export import Contexts = API.Contexts;
   export import Context = API.Context;
-  export import SteelContextCreateContextResponse = API.SteelContextCreateContextResponse;
-  export import SteelContextDeleteContextResponse = API.SteelContextDeleteContextResponse;
-  export import SteelContextCreateContextParams = API.SteelContextCreateContextParams;
+  export import ContextCreateResponse = API.ContextCreateResponse;
+  export import ContextListResponse = API.ContextListResponse;
+  export import ContextDeleteResponse = API.ContextDeleteResponse;
+  export import ContextCreateParams = API.ContextCreateParams;
 }
 
 export default Steel;
