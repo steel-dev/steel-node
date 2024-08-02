@@ -10,6 +10,11 @@ import { type Response } from './_shims/index';
 
 export interface ClientOptions {
   /**
+   * Defaults to process.env['STEEL_BEARER_TOKEN'].
+   */
+  bearerToken?: string | undefined;
+
+  /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
    *
    * Defaults to process.env['STEEL_BASE_URL'].
@@ -70,11 +75,14 @@ export interface ClientOptions {
  * API Client for interfacing with the Steel API.
  */
 export class Steel extends Core.APIClient {
+  bearerToken: string;
+
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Steel API.
    *
+   * @param {string | undefined} [opts.bearerToken=process.env['STEEL_BEARER_TOKEN'] ?? undefined]
    * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? http://api.steel.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -83,8 +91,19 @@ export class Steel extends Core.APIClient {
    * @param {Core.Headers} opts.defaultHeaders - Default headers to include with every request to the API.
    * @param {Core.DefaultQuery} opts.defaultQuery - Default query parameters to include with every request to the API.
    */
-  constructor({ baseURL = Core.readEnv('STEEL_BASE_URL'), ...opts }: ClientOptions = {}) {
+  constructor({
+    baseURL = Core.readEnv('STEEL_BASE_URL'),
+    bearerToken = Core.readEnv('STEEL_BEARER_TOKEN'),
+    ...opts
+  }: ClientOptions = {}) {
+    if (bearerToken === undefined) {
+      throw new Errors.SteelError(
+        "The STEEL_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the Steel client with an bearerToken option, like new Steel({ bearerToken: 'My Bearer Token' }).",
+      );
+    }
+
     const options: ClientOptions = {
+      bearerToken,
       ...opts,
       baseURL: baseURL || `http://api.steel.dev`,
     };
@@ -98,6 +117,8 @@ export class Steel extends Core.APIClient {
     });
 
     this._options = options;
+
+    this.bearerToken = bearerToken;
   }
 
   sessions: API.Sessions = new API.Sessions(this);
@@ -149,6 +170,10 @@ export class Steel extends Core.APIClient {
     };
   }
 
+  protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
+    return { Authorization: `Bearer ${this.bearerToken}` };
+  }
+
   static Steel = this;
   static DEFAULT_TIMEOUT = 60000; // 1 minute
 
@@ -198,20 +223,19 @@ export namespace Steel {
   export import ScreenshotParams = API.ScreenshotParams;
 
   export import Sessions = API.Sessions;
+  export import ReleaseSessionResponse = API.ReleaseSessionResponse;
+  export import SessionResponse = API.SessionResponse;
   export import SessionsResponse = API.SessionsResponse;
-  export import SessionCreateResponse = API.SessionCreateResponse;
-  export import SessionRetrieveResponse = API.SessionRetrieveResponse;
-  export import SessionDeleteResponse = API.SessionDeleteResponse;
-  export import SessionCreateParams = API.SessionCreateParams;
   export import SessionRetrieveParams = API.SessionRetrieveParams;
   export import SessionListParams = API.SessionListParams;
-  export import SessionDeleteParams = API.SessionDeleteParams;
+  export import SessionCreateNewSessionParams = API.SessionCreateNewSessionParams;
+  export import SessionReleaseParams = API.SessionReleaseParams;
 
   export import Contexts = API.Contexts;
   export import CreateContextResponse = API.CreateContextResponse;
+  export import DeleteContextResponse = API.DeleteContextResponse;
   export import GetContextResponse = API.GetContextResponse;
   export import GetContextsResponse = API.GetContextsResponse;
-  export import ContextDeleteResponse = API.ContextDeleteResponse;
   export import ContextCreateParams = API.ContextCreateParams;
 }
 
