@@ -28,12 +28,12 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const topLevel = await client.createSession({
+  const session = await client.createSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   });
 
-  console.log(topLevel.duration);
+  console.log(session.duration);
 }
 
 main();
@@ -54,7 +54,7 @@ async function main() {
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   };
-  const topLevel: SessionData = await client.createSession(params);
+  const session: Steel.Session = await client.createSession(params);
 }
 
 main();
@@ -71,7 +71,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const topLevel = await client
+  const session = await client
     .createSession({
       orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -166,14 +166,14 @@ const response = await client
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: topLevel, response: raw } = await client
+const { data: session, response: raw } = await client
   .createSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(topLevel.duration);
+console.log(session.duration);
 ```
 
 ### Making custom/undocumented requests

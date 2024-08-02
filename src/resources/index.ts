@@ -1,6 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Context,
+  SteelContextCreateContextResponse,
+  SteelContextDeleteContextResponse,
+  SteelContextCreateContextParams,
+  SteelContext,
+} from './steel-context';
+export {
   ListSessionsResponse,
   ScrapeResponse,
   CreateSessionParams,
@@ -9,4 +16,11 @@ export {
   RetrieveSessionParams,
   ScrapeParams,
   ScreenshotParams,
-} from './top-level/top-level';
+} from './top-level';
+export {
+  Session,
+  SteelSessionReleaseSessionResponse,
+  SteelSessionGetSessionDataParams,
+  SteelSessionReleaseSessionParams,
+  SteelSession,
+} from './steel-session';

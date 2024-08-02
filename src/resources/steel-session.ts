@@ -1,17 +1,15 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import * as Core from '../../../core';
+import { APIResource } from '../resource';
+import * as Core from '../core';
 import * as SteelSessionAPI from './steel-session';
 import * as SteelContextAPI from './steel-context';
 
 export class SteelSession extends APIResource {
-  steelContext: SteelContextAPI.SteelContext = new SteelContextAPI.SteelContext(this._client);
-
   /**
    * Retrieve details of a specific saved browser context
    */
-  getContext(id: string, options?: Core.RequestOptions): Core.APIPromise<GetContextResponse> {
+  getContext(id: string, options?: Core.RequestOptions): Core.APIPromise<SteelContextAPI.Context> {
     return this._client.get(`/v1/context/${id}`, options);
   }
 
@@ -22,7 +20,7 @@ export class SteelSession extends APIResource {
     id: string,
     params: SteelSessionGetSessionDataParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionData> {
+  ): Core.APIPromise<Session> {
     const { orgid } = params;
     return this._client.get(`/v1/sessions/${id}`, {
       ...options,
@@ -114,9 +112,4 @@ export namespace SteelSession {
   export import SteelSessionReleaseSessionResponse = SteelSessionAPI.SteelSessionReleaseSessionResponse;
   export import SteelSessionGetSessionDataParams = SteelSessionAPI.SteelSessionGetSessionDataParams;
   export import SteelSessionReleaseSessionParams = SteelSessionAPI.SteelSessionReleaseSessionParams;
-  export import SteelContext = SteelContextAPI.SteelContext;
-  export import Context = SteelContextAPI.Context;
-  export import SteelContextCreateContextResponse = SteelContextAPI.SteelContextCreateContextResponse;
-  export import SteelContextDeleteContextResponse = SteelContextAPI.SteelContextDeleteContextResponse;
-  export import SteelContextCreateContextParams = SteelContextAPI.SteelContextCreateContextParams;
 }

@@ -5,7 +5,8 @@ import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as API from './resources/index';
-import * as TopLevelAPI from './resources/top-level/top-level';
+import * as SteelSessionAPI from './resources/steel-session';
+import * as TopLevelAPI from './resources/top-level';
 import { type Response } from './_shims/index';
 
 export interface ClientOptions {
@@ -121,13 +122,16 @@ export class Steel extends Core.APIClient {
     this.bearerToken = bearerToken;
   }
 
+  steelSession: API.SteelSession = new API.SteelSession(this);
+  steelContext: API.SteelContext = new API.SteelContext(this);
+
   /**
    * Start a new browser session for the organization
    */
   createSession(
     params: TopLevelAPI.CreateSessionParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionData> {
+  ): Core.APIPromise<SteelSessionAPI.Session> {
     const { orgid, ...body } = params;
     return this.post('/v1/sessions', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
   }
@@ -158,7 +162,7 @@ export class Steel extends Core.APIClient {
     id: string,
     params: TopLevelAPI.RetrieveSessionParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionData> {
+  ): Core.APIPromise<SteelSessionAPI.Session> {
     const { orgid } = params;
     return this.get(`/v1/sessions/${id}`, { ...options, headers: { orgid: orgid, ...options?.headers } });
   }
@@ -256,6 +260,18 @@ export namespace Steel {
   export import RetrieveSessionParams = API.RetrieveSessionParams;
   export import ScrapeParams = API.ScrapeParams;
   export import ScreenshotParams = API.ScreenshotParams;
+
+  export import SteelSession = API.SteelSession;
+  export import Session = API.Session;
+  export import SteelSessionReleaseSessionResponse = API.SteelSessionReleaseSessionResponse;
+  export import SteelSessionGetSessionDataParams = API.SteelSessionGetSessionDataParams;
+  export import SteelSessionReleaseSessionParams = API.SteelSessionReleaseSessionParams;
+
+  export import SteelContext = API.SteelContext;
+  export import Context = API.Context;
+  export import SteelContextCreateContextResponse = API.SteelContextCreateContextResponse;
+  export import SteelContextDeleteContextResponse = API.SteelContextDeleteContextResponse;
+  export import SteelContextCreateContextParams = API.SteelContextCreateContextParams;
 }
 
 export default Steel;
