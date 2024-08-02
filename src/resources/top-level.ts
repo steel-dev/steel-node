@@ -1,8 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as TopLevelAPI from './top-level';
-import * as SteelSessionAPI from './steel-session/steel-session';
-import { type Uploadable } from '../../core';
+import { type Uploadable } from '../core';
 
 export interface ListSessionsResponse {
   sessions: Array<ListSessionsResponse.Session>;
@@ -185,9 +184,4 @@ export namespace TopLevel {
   export import RetrieveSessionParams = TopLevelAPI.RetrieveSessionParams;
   export import ScrapeParams = TopLevelAPI.ScrapeParams;
   export import ScreenshotParams = TopLevelAPI.ScreenshotParams;
-  export import SteelSession = SteelSessionAPI.SteelSession;
-  export import Session = SteelSessionAPI.Session;
-  export import SteelSessionReleaseSessionResponse = SteelSessionAPI.SteelSessionReleaseSessionResponse;
-  export import SteelSessionGetSessionDataParams = SteelSessionAPI.SteelSessionGetSessionDataParams;
-  export import SteelSessionReleaseSessionParams = SteelSessionAPI.SteelSessionReleaseSessionParams;
 }

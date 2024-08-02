@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIResource } from '../../../resource';
-import { isRequestOptions } from '../../../core';
-import * as Core from '../../../core';
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import * as Core from '../core';
 import * as SteelContextAPI from './steel-context';
 
 export class SteelContext extends APIResource {
@@ -37,7 +37,7 @@ export class SteelContext extends APIResource {
   /**
    * Retrieve details of a specific saved browser context
    */
-  getContextData(id: string, options?: Core.RequestOptions): Core.APIPromise<GetContextResponse> {
+  getContextData(id: string, options?: Core.RequestOptions): Core.APIPromise<Context> {
     return this._client.get(`/v1/context/${id}`, options);
   }
 }
