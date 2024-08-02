@@ -1,42 +1,42 @@
-# Steel
+# Sessions
 
 Types:
 
-- <code><a href="./src/resources/top-level.ts">ListSessionsResponse</a></code>
-- <code><a href="./src/resources/top-level.ts">ScrapeResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">Session</a></code>
+- <code><a href="./src/resources/sessions.ts">SessionListResponse</a></code>
+- <code><a href="./src/resources/sessions.ts">SessionReleaseResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/sessions">client.<a href="./src/index.ts">createSession</a>({ ...params }) -> Session</code>
-- <code title="get /v1/sessions">client.<a href="./src/index.ts">listSessions</a>({ ...params }) -> ListSessionsResponse</code>
-- <code title="post /v1/pdf">client.<a href="./src/index.ts">pdf</a>({ ...params }) -> Response</code>
-- <code title="get /v1/sessions/{id}">client.<a href="./src/index.ts">retrieveSession</a>(id, { ...params }) -> Session</code>
-- <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> ScrapeResponse</code>
-- <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> Response</code>
+- <code title="post /v1/sessions">client.sessions.<a href="./src/resources/sessions.ts">create</a>({ ...params }) -> Session</code>
+- <code title="get /v1/sessions/{id}">client.sessions.<a href="./src/resources/sessions.ts">retrieve</a>(id) -> Session</code>
+- <code title="get /v1/sessions">client.sessions.<a href="./src/resources/sessions.ts">list</a>({ ...params }) -> SessionListResponse</code>
+- <code title="get /v1/sessions/{id}/release">client.sessions.<a href="./src/resources/sessions.ts">release</a>(id) -> SessionReleaseResponse</code>
 
-# SteelSession
+# BrowserTools
 
 Types:
 
-- <code><a href="./src/resources/steel-session.ts">Session</a></code>
-- <code><a href="./src/resources/steel-session.ts">SteelSessionReleaseSessionResponse</a></code>
+- <code><a href="./src/resources/browser-tools.ts">Scrape</a></code>
 
 Methods:
 
-- <code title="get /v1/context/{id}">client.steelSession.<a href="./src/resources/steel-session.ts">getContext</a>(id) -> Context</code>
-- <code title="get /v1/sessions/{id}">client.steelSession.<a href="./src/resources/steel-session.ts">getSessionData</a>(id, { ...params }) -> Session</code>
-- <code title="get /v1/sessions/{id}/release">client.steelSession.<a href="./src/resources/steel-session.ts">releaseSession</a>(id, { ...params }) -> SteelSessionReleaseSessionResponse</code>
+- <code title="post /v1/pdf">client.browserTools.<a href="./src/resources/browser-tools.ts">pdf</a>({ ...params }) -> Response</code>
+- <code title="post /v1/scrape">client.browserTools.<a href="./src/resources/browser-tools.ts">scrape</a>({ ...params }) -> Scrape</code>
+- <code title="post /v1/screenshot">client.browserTools.<a href="./src/resources/browser-tools.ts">screenshot</a>({ ...params }) -> Response</code>
 
-# SteelContext
+# Contexts
 
 Types:
 
-- <code><a href="./src/resources/steel-context.ts">Context</a></code>
-- <code><a href="./src/resources/steel-context.ts">SteelContextCreateContextResponse</a></code>
-- <code><a href="./src/resources/steel-context.ts">SteelContextDeleteContextResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">Context</a></code>
+- <code><a href="./src/resources/contexts.ts">ContextCreateResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">ContextListResponse</a></code>
+- <code><a href="./src/resources/contexts.ts">ContextDeleteResponse</a></code>
 
 Methods:
 
-- <code title="post /v1/context">client.steelContext.<a href="./src/resources/steel-context.ts">createContext</a>({ ...params }) -> SteelContextCreateContextResponse</code>
-- <code title="delete /v1/context/{id}">client.steelContext.<a href="./src/resources/steel-context.ts">deleteContext</a>(id) -> SteelContextDeleteContextResponse</code>
-- <code title="get /v1/context/{id}">client.steelContext.<a href="./src/resources/steel-context.ts">getContextData</a>(id) -> Context</code>
+- <code title="post /v1/context">client.contexts.<a href="./src/resources/contexts.ts">create</a>({ ...params }) -> ContextCreateResponse</code>
+- <code title="get /v1/context/{id}">client.contexts.<a href="./src/resources/contexts.ts">retrieve</a>(id) -> Context</code>
+- <code title="get /v1/context">client.contexts.<a href="./src/resources/contexts.ts">list</a>() -> ContextListResponse</code>
+- <code title="delete /v1/context/{id}">client.contexts.<a href="./src/resources/contexts.ts">delete</a>(id) -> ContextDeleteResponse</code>
