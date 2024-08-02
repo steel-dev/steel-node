@@ -28,12 +28,12 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const session = await client.steelBrowser.createSession({
+  const topLevel = await client.createSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   });
 
-  console.log(session.duration);
+  console.log(topLevel.duration);
 }
 
 main();
@@ -50,11 +50,11 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const params: Steel.SteelBrowserCreateSessionParams = {
+  const params: Steel.CreateSessionParams = {
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   };
-  const session: Steel.SteelBrowser.Session = await client.steelBrowser.createSession(params);
+  const topLevel: SessionData = await client.createSession(params);
 }
 
 main();
@@ -71,7 +71,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const session = await client.steelBrowser
+  const topLevel = await client
     .createSession({
       orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -119,7 +119,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.steelBrowser.createSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
+await client.createSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   maxRetries: 5,
 });
 ```
@@ -136,7 +136,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.steelBrowser.createSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
+await client.createSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -157,7 +157,7 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client.steelBrowser
+const response = await client
   .createSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
@@ -166,14 +166,14 @@ const response = await client.steelBrowser
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: session, response: raw } = await client.steelBrowser
+const { data: topLevel, response: raw } = await client
   .createSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(session.duration);
+console.log(topLevel.duration);
 ```
 
 ### Making custom/undocumented requests
@@ -277,7 +277,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.steelBrowser.createSession(
+await client.createSession(
   { orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),

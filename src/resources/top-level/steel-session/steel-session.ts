@@ -11,7 +11,7 @@ export class SteelSession extends APIResource {
   /**
    * Retrieve details of a specific saved browser context
    */
-  getContext(id: string, options?: Core.RequestOptions): Core.APIPromise<SteelContextAPI.Context> {
+  getContext(id: string, options?: Core.RequestOptions): Core.APIPromise<GetContextResponse> {
     return this._client.get(`/v1/context/${id}`, options);
   }
 
@@ -22,7 +22,7 @@ export class SteelSession extends APIResource {
     id: string,
     params: SteelSessionGetSessionDataParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
+  ): Core.APIPromise<SessionData> {
     const { orgid } = params;
     return this._client.get(`/v1/sessions/${id}`, {
       ...options,
@@ -71,6 +71,11 @@ export interface Session {
    * Timestamp when the session was started
    */
   startDate: string;
+
+  /**
+   * When to timeout session in ms.
+   */
+  timeout: number;
 
   /**
    * WebSocket URL for connecting to the session

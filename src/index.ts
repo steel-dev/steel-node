@@ -5,6 +5,8 @@ import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as API from './resources/index';
+import * as TopLevelAPI from './resources/top-level/top-level';
+import { type Response } from './_shims/index';
 
 export interface ClientOptions {
   /**
@@ -119,7 +121,74 @@ export class Steel extends Core.APIClient {
     this.bearerToken = bearerToken;
   }
 
-  steelBrowser: API.SteelBrowser = new API.SteelBrowser(this);
+  /**
+   * Start a new browser session for the organization
+   */
+  createSession(
+    params: TopLevelAPI.CreateSessionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionData> {
+    const { orgid, ...body } = params;
+    return this.post('/v1/sessions', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
+
+  /**
+   * Get a list of browser sessions for the organization
+   */
+  listSessions(
+    params: TopLevelAPI.ListSessionsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.ListSessionsResponse> {
+    const { orgid, ...query } = params;
+    return this.get('/v1/sessions', { query, ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
+
+  /**
+   * Generate a PDF from the specified webpage. This endpoint supports bulk
+   * operations by passing an array of URLs.
+   */
+  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    return this.post('/v1/pdf', { body, ...options, __binaryResponse: true });
+  }
+
+  /**
+   * Get detailed information about a specific browser session
+   */
+  retrieveSession(
+    id: string,
+    params: TopLevelAPI.RetrieveSessionParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionData> {
+    const { orgid } = params;
+    return this.get(`/v1/sessions/${id}`, { ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
+
+  /**
+   * Scrape content from a webpage. This endpoint supports bulk operations by passing
+   * an array of URLs. You can specify the desired return type(s) using the 'format'
+   * parameter and request a screenshot using the 'screenshot' flag.
+   */
+  scrape(
+    params: TopLevelAPI.ScrapeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
+    const { orgid, ...body } = params;
+    return this.post('/v1/scrape', { body, ...options, headers: { orgid: orgid, ...options?.headers } });
+  }
+
+  /**
+   * Capture a screenshot of the specified webpage. This endpoint supports bulk
+   * operations by passing an array of URLs.
+   */
+  screenshot(params: TopLevelAPI.ScreenshotParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    const { orgid, ...body } = params;
+    return this.post('/v1/screenshot', {
+      body,
+      ...options,
+      headers: { orgid: orgid, ...options?.headers },
+      __binaryResponse: true,
+    });
+  }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -179,15 +248,14 @@ export import fileFromPath = Uploads.fileFromPath;
 export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
-  export import SteelBrowser = API.SteelBrowser;
-  export import SteelBrowserListSessionsResponse = API.SteelBrowserListSessionsResponse;
-  export import SteelBrowserScrapeResponse = API.SteelBrowserScrapeResponse;
-  export import SteelBrowserCreateSessionParams = API.SteelBrowserCreateSessionParams;
-  export import SteelBrowserListSessionsParams = API.SteelBrowserListSessionsParams;
-  export import SteelBrowserPdfParams = API.SteelBrowserPdfParams;
-  export import SteelBrowserRetrieveSessionParams = API.SteelBrowserRetrieveSessionParams;
-  export import SteelBrowserScrapeParams = API.SteelBrowserScrapeParams;
-  export import SteelBrowserScreenshotParams = API.SteelBrowserScreenshotParams;
+  export import ListSessionsResponse = API.ListSessionsResponse;
+  export import ScrapeResponse = API.ScrapeResponse;
+  export import CreateSessionParams = API.CreateSessionParams;
+  export import ListSessionsParams = API.ListSessionsParams;
+  export import PdfParams = API.PdfParams;
+  export import RetrieveSessionParams = API.RetrieveSessionParams;
+  export import ScrapeParams = API.ScrapeParams;
+  export import ScreenshotParams = API.ScreenshotParams;
 }
 
 export default Steel;
