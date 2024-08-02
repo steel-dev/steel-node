@@ -6,25 +6,13 @@ import * as SessionsAPI from './sessions';
 
 export class Sessions extends APIResource {
   /**
-   * Start a new browser session for the organization
-   */
-  create(params: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<SessionCreateResponse> {
-    const { orgid, ...body } = params;
-    return this._client.post('/v1/sessions', {
-      body,
-      ...options,
-      headers: { orgid: orgid, ...options?.headers },
-    });
-  }
-
-  /**
    * Get detailed information about a specific browser session
    */
   retrieve(
     id: string,
     params: SessionRetrieveParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionRetrieveResponse> {
+  ): Core.APIPromise<SessionResponse> {
     const { orgid } = params;
     return this._client.get(`/v1/sessions/${id}`, {
       ...options,
@@ -41,19 +29,68 @@ export class Sessions extends APIResource {
   }
 
   /**
-   * Release and delete a browser session using its ID
+   * Start a new browser session for the organization
    */
-  delete(
-    id: string,
-    params: SessionDeleteParams,
+  createNewSession(
+    params: SessionCreateNewSessionParams,
     options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionDeleteResponse> {
-    const { orgid } = params;
-    return this._client.delete(`/v1/sessions/${id}`, {
+  ): Core.APIPromise<SessionResponse> {
+    const { orgid, ...body } = params;
+    return this._client.post('/v1/sessions', {
+      body,
       ...options,
       headers: { orgid: orgid, ...options?.headers },
     });
   }
+
+  /**
+   * Release and terminate a browser session using its ID
+   */
+  release(
+    id: string,
+    params: SessionReleaseParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ReleaseSessionResponse> {
+    const { orgid } = params;
+    return this._client.get(`/v1/sessions/${id}/release`, {
+      ...options,
+      headers: { orgid: orgid, ...options?.headers },
+    });
+  }
+}
+
+export interface ReleaseSessionResponse {
+  /**
+   * A message describing the result of the release operation
+   */
+  message: string;
+
+  /**
+   * Indicates whether the session was successfully released
+   */
+  success: boolean;
+}
+
+export interface SessionResponse {
+  /**
+   * Unique identifier for the session
+   */
+  id: string;
+
+  /**
+   * Timestamp when the session was created
+   */
+  createdAt: string;
+
+  /**
+   * Timestamp when the session was last updated
+   */
+  updatedAt: string;
+
+  /**
+   * WebSocket URL for connecting to the session
+   */
+  websocketUrl?: string;
 }
 
 export interface SessionsResponse {
@@ -84,69 +121,6 @@ export namespace SessionsResponse {
   }
 }
 
-export interface SessionCreateResponse {
-  /**
-   * Unique identifier for the session
-   */
-  id: string;
-
-  /**
-   * Timestamp when the session was created
-   */
-  createdAt: string;
-
-  /**
-   * Timestamp when the session was last updated
-   */
-  updatedAt: string;
-
-  /**
-   * WebSocket URL for connecting to the session
-   */
-  websocketUrl?: string;
-}
-
-export interface SessionRetrieveResponse {
-  /**
-   * Unique identifier for the session
-   */
-  id: string;
-
-  /**
-   * Timestamp when the session was created
-   */
-  createdAt: string;
-
-  /**
-   * Timestamp when the session was last updated
-   */
-  updatedAt: string;
-
-  /**
-   * WebSocket URL for connecting to the session
-   */
-  websocketUrl?: string;
-}
-
-export interface SessionDeleteResponse {
-  /**
-   * Indicates whether the session was successfully deleted
-   */
-  success: boolean;
-}
-
-export interface SessionCreateParams {
-  /**
-   * Body param: Unique identifier for the organization creating the session
-   */
-  orgId: string;
-
-  /**
-   * Header param: Organization ID
-   */
-  orgid: string;
-}
-
 export interface SessionRetrieveParams {
   /**
    * Organization ID
@@ -161,7 +135,19 @@ export interface SessionListParams {
   orgid: string;
 }
 
-export interface SessionDeleteParams {
+export interface SessionCreateNewSessionParams {
+  /**
+   * Body param: Unique identifier for the organization creating the session
+   */
+  orgId: string;
+
+  /**
+   * Header param: Organization ID
+   */
+  orgid: string;
+}
+
+export interface SessionReleaseParams {
   /**
    * Organization ID
    */
@@ -169,12 +155,11 @@ export interface SessionDeleteParams {
 }
 
 export namespace Sessions {
+  export import ReleaseSessionResponse = SessionsAPI.ReleaseSessionResponse;
+  export import SessionResponse = SessionsAPI.SessionResponse;
   export import SessionsResponse = SessionsAPI.SessionsResponse;
-  export import SessionCreateResponse = SessionsAPI.SessionCreateResponse;
-  export import SessionRetrieveResponse = SessionsAPI.SessionRetrieveResponse;
-  export import SessionDeleteResponse = SessionsAPI.SessionDeleteResponse;
-  export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionRetrieveParams = SessionsAPI.SessionRetrieveParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
-  export import SessionDeleteParams = SessionsAPI.SessionDeleteParams;
+  export import SessionCreateNewSessionParams = SessionsAPI.SessionCreateNewSessionParams;
+  export import SessionReleaseParams = SessionsAPI.SessionReleaseParams;
 }

@@ -38,7 +38,7 @@ export class Contexts extends APIResource {
   /**
    * Delete a specific saved browser context
    */
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<ContextDeleteResponse> {
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<DeleteContextResponse> {
     return this._client.delete(`/v1/context/${id}`, options);
   }
 }
@@ -48,6 +48,13 @@ export interface CreateContextResponse {
    * Unique identifier for the created context
    */
   id: string;
+}
+
+export interface DeleteContextResponse {
+  /**
+   * A message indicating the result of the delete operation
+   */
+  message: string;
 }
 
 export interface GetContextResponse {
@@ -75,13 +82,6 @@ export interface GetContextsResponse {
   contexts: Array<string>;
 }
 
-export interface ContextDeleteResponse {
-  /**
-   * A message indicating the result of the delete operation
-   */
-  message: string;
-}
-
 export interface ContextCreateParams {
   /**
    * Proxy settings for the context
@@ -91,8 +91,8 @@ export interface ContextCreateParams {
 
 export namespace Contexts {
   export import CreateContextResponse = ContextsAPI.CreateContextResponse;
+  export import DeleteContextResponse = ContextsAPI.DeleteContextResponse;
   export import GetContextResponse = ContextsAPI.GetContextResponse;
   export import GetContextsResponse = ContextsAPI.GetContextsResponse;
-  export import ContextDeleteResponse = ContextsAPI.ContextDeleteResponse;
   export import ContextCreateParams = ContextsAPI.ContextCreateParams;
 }

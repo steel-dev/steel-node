@@ -28,12 +28,12 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const sessionCreateResponse = await client.sessions.create({
+  const sessionResponse = await client.sessions.createNewSession({
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   });
 
-  console.log(sessionCreateResponse.id);
+  console.log(sessionResponse.id);
 }
 
 main();
@@ -50,11 +50,11 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const params: Steel.SessionCreateParams = {
+  const params: Steel.SessionCreateNewSessionParams = {
     orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
   };
-  const sessionCreateResponse: Steel.SessionCreateResponse = await client.sessions.create(params);
+  const sessionResponse: Steel.SessionResponse = await client.sessions.createNewSession(params);
 }
 
 main();
@@ -71,8 +71,11 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const sessionCreateResponse = await client.sessions
-    .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+  const sessionResponse = await client.sessions
+    .createNewSession({
+      orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+      orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    })
     .catch(async (err) => {
       if (err instanceof Steel.APIError) {
         console.log(err.status); // 400
@@ -116,7 +119,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.sessions.create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
+await client.sessions.createNewSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   maxRetries: 5,
 });
 ```
@@ -133,7 +136,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
+await client.sessions.createNewSession({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -155,16 +158,22 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 const client = new Steel();
 
 const response = await client.sessions
-  .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+  .createNewSession({
+    orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: sessionCreateResponse, response: raw } = await client.sessions
-  .create({ orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' })
+const { data: sessionResponse, response: raw } = await client.sessions
+  .createNewSession({
+    orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+  })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(sessionCreateResponse.id);
+console.log(sessionResponse.id);
 ```
 
 ### Making custom/undocumented requests
@@ -268,7 +277,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create(
+await client.sessions.createNewSession(
   { orgId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', orgid: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
