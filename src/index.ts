@@ -5,6 +5,8 @@ import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as API from './resources/index';
+import * as TopLevelAPI from './resources/top-level';
+import { type Response } from './_shims/index';
 
 export interface ClientOptions {
   /**
@@ -99,8 +101,32 @@ export class Steel extends Core.APIClient {
   }
 
   sessions: API.Sessions = new API.Sessions(this);
-  browserTools: API.BrowserTools = new API.BrowserTools(this);
   contexts: API.Contexts = new API.Contexts(this);
+
+  /**
+   * Generate a PDF from the specified webpage. This endpoint supports bulk
+   * operations by passing an array of URLs.
+   */
+  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    return this.post('/v1/pdf', { body, ...options, __binaryResponse: true });
+  }
+
+  /**
+   * Scrape content from a webpage. This endpoint supports bulk operations by passing
+   * an array of URLs. You can specify the desired return type(s) using the 'format'
+   * parameter and request a screenshot using the 'screenshot' flag.
+   */
+  scrape(body: TopLevelAPI.ScrapeParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.Scrape> {
+    return this.post('/v1/scrape', { body, ...options });
+  }
+
+  /**
+   * Capture a screenshot of the specified webpage. This endpoint supports bulk
+   * operations by passing an array of URLs.
+   */
+  screenshot(body: TopLevelAPI.ScreenshotParams, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    return this.post('/v1/screenshot', { body, ...options, __binaryResponse: true });
+  }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
@@ -156,18 +182,17 @@ export import fileFromPath = Uploads.fileFromPath;
 export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
+  export import Scrape = API.Scrape;
+  export import PdfParams = API.PdfParams;
+  export import ScrapeParams = API.ScrapeParams;
+  export import ScreenshotParams = API.ScreenshotParams;
+
   export import Sessions = API.Sessions;
   export import Session = API.Session;
   export import SessionListResponse = API.SessionListResponse;
   export import SessionReleaseResponse = API.SessionReleaseResponse;
   export import SessionCreateParams = API.SessionCreateParams;
   export import SessionListParams = API.SessionListParams;
-
-  export import BrowserTools = API.BrowserTools;
-  export import Scrape = API.Scrape;
-  export import BrowserToolPdfParams = API.BrowserToolPdfParams;
-  export import BrowserToolScrapeParams = API.BrowserToolScrapeParams;
-  export import BrowserToolScreenshotParams = API.BrowserToolScreenshotParams;
 
   export import Contexts = API.Contexts;
   export import Context = API.Context;
