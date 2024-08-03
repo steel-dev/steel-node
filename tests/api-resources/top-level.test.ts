@@ -5,13 +5,13 @@ import { Response } from 'node-fetch';
 
 const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
-describe('resource browserTools', () => {
+describe('top level methods', () => {
   test('pdf: required and optional params', async () => {
-    const response = await client.browserTools.pdf({ url: 'url' });
+    const response = await client.pdf({ url: 'url' });
   });
 
   test('scrape: only required params', async () => {
-    const responsePromise = client.browserTools.scrape({ url: 'url' });
+    const responsePromise = client.scrape({ url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -22,7 +22,7 @@ describe('resource browserTools', () => {
   });
 
   test('scrape: required and optional params', async () => {
-    const response = await client.browserTools.scrape({
+    const response = await client.scrape({
       url: 'url',
       format: ['html', 'cleaned_html', 'readability'],
       screenshot: true,
@@ -30,6 +30,6 @@ describe('resource browserTools', () => {
   });
 
   test('screenshot: required and optional params', async () => {
-    const response = await client.browserTools.screenshot({ url: 'url' });
+    const response = await client.screenshot({ url: 'url' });
   });
 });

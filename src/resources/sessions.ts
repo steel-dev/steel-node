@@ -73,14 +73,14 @@ export interface Session {
   sessionId: string;
 
   /**
+   * When to timeout session in milliseconds.
+   */
+  sessionTimeout: number;
+
+  /**
    * Timestamp when the session was started
    */
   startDate: string;
-
-  /**
-   * When to timeout session in ms.
-   */
-  timeout: number;
 
   /**
    * WebSocket URL for connecting to the session
@@ -115,14 +115,14 @@ export namespace SessionListResponse {
     sessionId: string;
 
     /**
+     * When to timeout session in milliseconds.
+     */
+    sessionTimeout: number;
+
+    /**
      * Timestamp when the session was started
      */
     startDate: string;
-
-    /**
-     * When to timeout session in ms.
-     */
-    timeout: number;
 
     /**
      * WebSocket URL for connecting to the session
@@ -160,14 +160,14 @@ export interface SessionCreateParams {
   region?: 'CA' | 'US' | 'FR';
 
   /**
+   * How long after starting should the session timeout (in milliseconds).
+   */
+  sessionTimeout?: number;
+
+  /**
    * Flag to enable automatic captcha solving
    */
   solveCaptcha?: boolean;
-
-  /**
-   * How long after starting should the session timeout.
-   */
-  timeout?: number;
 
   /**
    * Custom user agent string for the browser session

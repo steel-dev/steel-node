@@ -1,3 +1,15 @@
+# Steel
+
+Types:
+
+- <code><a href="./src/resources/top-level.ts">Scrape</a></code>
+
+Methods:
+
+- <code title="post /v1/pdf">client.<a href="./src/index.ts">pdf</a>({ ...params }) -> Response</code>
+- <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> Scrape</code>
+- <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> Response</code>
+
 # Sessions
 
 Types:
@@ -12,18 +24,6 @@ Methods:
 - <code title="get /v1/sessions/{id}">client.sessions.<a href="./src/resources/sessions.ts">retrieve</a>(id) -> Session</code>
 - <code title="get /v1/sessions">client.sessions.<a href="./src/resources/sessions.ts">list</a>({ ...params }) -> SessionListResponse</code>
 - <code title="get /v1/sessions/{id}/release">client.sessions.<a href="./src/resources/sessions.ts">release</a>(id) -> SessionReleaseResponse</code>
-
-# BrowserTools
-
-Types:
-
-- <code><a href="./src/resources/browser-tools.ts">Scrape</a></code>
-
-Methods:
-
-- <code title="post /v1/pdf">client.browserTools.<a href="./src/resources/browser-tools.ts">pdf</a>({ ...params }) -> Response</code>
-- <code title="post /v1/scrape">client.browserTools.<a href="./src/resources/browser-tools.ts">scrape</a>({ ...params }) -> Scrape</code>
-- <code title="post /v1/screenshot">client.browserTools.<a href="./src/resources/browser-tools.ts">screenshot</a>({ ...params }) -> Response</code>
 
 # Contexts
 

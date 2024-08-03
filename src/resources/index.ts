@@ -8,13 +8,7 @@ export {
   ContextCreateParams,
   Contexts,
 } from './contexts';
-export {
-  Scrape,
-  BrowserToolPdfParams,
-  BrowserToolScrapeParams,
-  BrowserToolScreenshotParams,
-  BrowserTools,
-} from './browser-tools';
+export { Scrape, PdfParams, ScrapeParams, ScreenshotParams } from './top-level';
 export {
   Session,
   SessionListResponse,
