@@ -9,12 +9,12 @@ export class Sessions extends APIResource {
   /**
    * Start a new browser session
    */
-  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Session>;
+  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<SessionResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<SessionResponse>;
   create(
     body: SessionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
+  ): Core.APIPromise<SessionResponse> {
     if (isRequestOptions(body)) {
       return this.create({}, body);
     }
@@ -24,12 +24,13 @@ export class Sessions extends APIResource {
   /**
    * Get detailed information about a specific browser session
    */
-  retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<Session> {
+  retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionResponse> {
     return this._client.get(`/v1/sessions/${id}`, options);
   }
 
   /**
-   * Get a list of browser sessions
+   * Get a paginated list of browser sessions. Use the `next_cursor` from the
+   * response to fetch the next page of results.
    */
   list(query?: SessionListParams, options?: Core.RequestOptions): Core.APIPromise<SessionListResponse>;
   list(options?: Core.RequestOptions): Core.APIPromise<SessionListResponse>;
@@ -46,12 +47,24 @@ export class Sessions extends APIResource {
   /**
    * Release and terminate a browser session using its ID
    */
-  release(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionReleaseResponse> {
+  release(id: string, options?: Core.RequestOptions): Core.APIPromise<ReleaseSessionResponse> {
     return this._client.get(`/v1/sessions/${id}/release`, options);
   }
 }
 
-export interface Session {
+export interface ReleaseSessionResponse {
+  /**
+   * A message describing the result of the release operation
+   */
+  message: string;
+
+  /**
+   * Indicates whether the session was successfully released
+   */
+  success: boolean;
+}
+
+export interface SessionResponse {
   /**
    * Duration of the session in seconds
    */
@@ -89,7 +102,17 @@ export interface Session {
 }
 
 export interface SessionListResponse {
+  /**
+   * Cursor to use for the next page of results. If null, there are no more results.
+   */
+  next_cursor: string;
+
   sessions: Array<SessionListResponse.Session>;
+
+  /**
+   * Total number of sessions matching the query
+   */
+  total_count: number;
 }
 
 export namespace SessionListResponse {
@@ -131,18 +154,6 @@ export namespace SessionListResponse {
   }
 }
 
-export interface SessionReleaseResponse {
-  /**
-   * A message describing the result of the release operation
-   */
-  message: string;
-
-  /**
-   * Indicates whether the session was successfully released
-   */
-  success: boolean;
-}
-
 export interface SessionCreateParams {
   /**
    * Custom user context data for the session
@@ -177,15 +188,25 @@ export interface SessionCreateParams {
 
 export interface SessionListParams {
   /**
+   * Cursor for pagination, use the `next_cursor` from the previous response
+   */
+  cursor?: string;
+
+  /**
+   * Number of sessions to return per request (default: 25, max: 100)
+   */
+  limit?: number;
+
+  /**
    * Flag to retrieve only live sessions (default: true)
    */
   live_only?: boolean;
 }
 
 export namespace Sessions {
-  export import Session = SessionsAPI.Session;
+  export import ReleaseSessionResponse = SessionsAPI.ReleaseSessionResponse;
+  export import SessionResponse = SessionsAPI.SessionResponse;
   export import SessionListResponse = SessionsAPI.SessionListResponse;
-  export import SessionReleaseResponse = SessionsAPI.SessionReleaseResponse;
   export import SessionCreateParams = SessionsAPI.SessionCreateParams;
   export import SessionListParams = SessionsAPI.SessionListParams;
 }
