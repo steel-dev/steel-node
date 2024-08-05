@@ -9,12 +9,12 @@ export class Contexts extends APIResource {
   /**
    * Create a new browser context with specified settings
    */
-  create(body?: ContextCreateParams, options?: Core.RequestOptions): Core.APIPromise<ContextCreateResponse>;
-  create(options?: Core.RequestOptions): Core.APIPromise<ContextCreateResponse>;
+  create(body?: ContextCreateParams, options?: Core.RequestOptions): Core.APIPromise<CreateContextResponse>;
+  create(options?: Core.RequestOptions): Core.APIPromise<CreateContextResponse>;
   create(
     body: ContextCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<ContextCreateResponse> {
+  ): Core.APIPromise<CreateContextResponse> {
     if (isRequestOptions(body)) {
       return this.create({}, body);
     }
@@ -24,35 +24,49 @@ export class Contexts extends APIResource {
   /**
    * Retrieve details of a specific saved browser context
    */
-  retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<Context> {
+  retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<GetContextResponse> {
     return this._client.get(`/v1/context/${id}`, options);
   }
 
   /**
    * Retrieve a list of all saved browser contexts
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<ContextListResponse> {
+  list(options?: Core.RequestOptions): Core.APIPromise<GetContextsResponse> {
     return this._client.get('/v1/context', options);
   }
 
   /**
    * Delete a specific saved browser context
    */
-  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<ContextDeleteResponse> {
+  delete(id: string, options?: Core.RequestOptions): Core.APIPromise<DeleteContextResponse> {
     return this._client.delete(`/v1/context/${id}`, options);
   }
 }
 
-export interface Context {
+export interface CreateContextResponse {
+  /**
+   * Unique identifier for the created context
+   */
+  id: string;
+}
+
+export interface DeleteContextResponse {
+  /**
+   * A message indicating the result of the delete operation
+   */
+  message: string;
+}
+
+export interface GetContextResponse {
   /**
    * Unique identifier for the context
    */
   id: string;
 
-  details: Context.Details;
+  details: GetContextResponse.Details;
 }
 
-export namespace Context {
+export namespace GetContextResponse {
   export interface Details {
     /**
      * Proxy settings for the context
@@ -61,25 +75,11 @@ export namespace Context {
   }
 }
 
-export interface ContextCreateResponse {
-  /**
-   * Unique identifier for the created context
-   */
-  id: string;
-}
-
-export interface ContextListResponse {
+export interface GetContextsResponse {
   /**
    * List of available context IDs
    */
   contexts: Array<string>;
-}
-
-export interface ContextDeleteResponse {
-  /**
-   * A message indicating the result of the delete operation
-   */
-  message: string;
 }
 
 export interface ContextCreateParams {
@@ -90,9 +90,9 @@ export interface ContextCreateParams {
 }
 
 export namespace Contexts {
-  export import Context = ContextsAPI.Context;
-  export import ContextCreateResponse = ContextsAPI.ContextCreateResponse;
-  export import ContextListResponse = ContextsAPI.ContextListResponse;
-  export import ContextDeleteResponse = ContextsAPI.ContextDeleteResponse;
+  export import CreateContextResponse = ContextsAPI.CreateContextResponse;
+  export import DeleteContextResponse = ContextsAPI.DeleteContextResponse;
+  export import GetContextResponse = ContextsAPI.GetContextResponse;
+  export import GetContextsResponse = ContextsAPI.GetContextsResponse;
   export import ContextCreateParams = ContextsAPI.ContextCreateParams;
 }

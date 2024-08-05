@@ -28,9 +28,9 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const session = await client.sessions.create();
+  const sessionResponse = await client.sessions.create();
 
-  console.log(session.duration);
+  console.log(sessionResponse.duration);
 }
 
 main();
@@ -47,7 +47,7 @@ import Steel from 'steel';
 const client = new Steel();
 
 async function main() {
-  const session: Steel.Session = await client.sessions.create();
+  const sessionResponse: Steel.SessionResponse = await client.sessions.create();
 }
 
 main();
@@ -64,7 +64,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const session = await client.sessions.create().catch(async (err) => {
+  const sessionResponse = await client.sessions.create().catch(async (err) => {
     if (err instanceof Steel.APIError) {
       console.log(err.status); // 400
       console.log(err.name); // BadRequestError
@@ -149,9 +149,9 @@ const response = await client.sessions.create().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: session, response: raw } = await client.sessions.create().withResponse();
+const { data: sessionResponse, response: raw } = await client.sessions.create().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(session.duration);
+console.log(sessionResponse.duration);
 ```
 
 ### Making custom/undocumented requests
