@@ -1,25 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  CreateContextResponse,
-  DeleteContextResponse,
-  GetContextResponse,
-  GetContextsResponse,
-  ContextCreateParams,
-  Contexts,
-} from './contexts';
-export {
+  CreateSessionRequest,
   ReleaseSessionResponse,
-  SessionResponse,
-  SessionListResponse,
+  Session,
+  SessionGetContextResponse,
   SessionCreateParams,
-  SessionListParams,
+  SessionsCursorPage,
   Sessions,
 } from './sessions';
 export {
+  PdfRequest,
+  PdfResponse,
+  ScrapeRequest,
   ScrapeResponse,
-  BrowserToolPdfParams,
-  BrowserToolScrapeParams,
-  BrowserToolScreenshotParams,
-  BrowserTools,
-} from './browser-tools';
+  ScreenshotRequest,
+  ScreenshotResponse,
+  ListParams,
+  GeneratePdfParams,
+  ScrapeParams,
+  ScreenshotParams,
+} from './top-level';

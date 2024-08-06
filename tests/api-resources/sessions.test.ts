@@ -3,7 +3,10 @@
 import Steel from 'steel';
 import { Response } from 'node-fetch';
 
-const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const client = new Steel({
+  apiKey: 'My API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource sessions', () => {
   test('create', async () => {
@@ -29,11 +32,12 @@ describe('resource sessions', () => {
     await expect(
       client.sessions.create(
         {
-          contextData: {},
           proxy: 'proxy',
           region: 'CA',
+          sessionContext: {},
           sessionTimeout: 0,
           solveCaptcha: true,
+          stealthMode: true,
           userAgent: 'userAgent',
         },
         { path: '/_stainless_unknown_path' },
@@ -41,8 +45,8 @@ describe('resource sessions', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('retrieve', async () => {
-    const responsePromise = client.sessions.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+  test('getContext', async () => {
+    const responsePromise = client.sessions.getContext('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -52,15 +56,17 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('retrieve: request options instead of params are passed correctly', async () => {
+  test('getContext: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.retrieve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
+      client.sessions.getContext('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('list', async () => {
-    const responsePromise = client.sessions.list();
+  test('getData', async () => {
+    const responsePromise = client.sessions.getData('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -70,20 +76,10 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('list: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.sessions.list({ path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Steel.NotFoundError,
-    );
-  });
-
-  test('list: request options and params are passed correctly', async () => {
+  test('getData: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.list(
-        { cursor: 'cursor', limit: 1, live_only: true },
-        { path: '/_stainless_unknown_path' },
-      ),
+      client.sessions.getData('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
