@@ -126,25 +126,6 @@ export class Steel extends Core.APIClient {
   sessions: API.Sessions = new API.Sessions(this);
 
   /**
-   * Get a paginated list of browser sessions. Use the `next_cursor` from the
-   * response to fetch the next page of results.
-   */
-  list(
-    query?: TopLevelAPI.ListParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
-  list(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
-  list(
-    query: TopLevelAPI.ListParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session> {
-    if (isRequestOptions(query)) {
-      return this.list({}, query);
-    }
-    return this.getAPIList('/v1/sessions', SessionsCursorPage, { query, ...options });
-  }
-
-  /**
    * Generate a PDF from the specified webpage.
    */
   generatePdf(
@@ -152,6 +133,25 @@ export class Steel extends Core.APIClient {
     options?: Core.RequestOptions,
   ): Core.APIPromise<TopLevelAPI.PdfResponse> {
     return this.post('/v1/pdf', { body, ...options });
+  }
+
+  /**
+   * Get a paginated list of browser sessions. Use the `next_cursor` from the
+   * response to fetch the next page of results.
+   */
+  listSessions(
+    query?: TopLevelAPI.ListSessionsParams,
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
+  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
+  listSessions(
+    query: TopLevelAPI.ListSessionsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session> {
+    if (isRequestOptions(query)) {
+      return this.listSessions({}, query);
+    }
+    return this.getAPIList('/v1/sessions', SessionsCursorPage, { query, ...options });
   }
 
   /**
@@ -244,8 +244,9 @@ export namespace Steel {
   export import ScrapeResponse = API.ScrapeResponse;
   export import ScreenshotRequest = API.ScreenshotRequest;
   export import ScreenshotResponse = API.ScreenshotResponse;
-  export import ListParams = API.ListParams;
+  export import Session = API.Session;
   export import GeneratePdfParams = API.GeneratePdfParams;
+  export import ListSessionsParams = API.ListSessionsParams;
   export import ScrapeParams = API.ScrapeParams;
   export import ScreenshotParams = API.ScreenshotParams;
 

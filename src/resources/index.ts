@@ -16,8 +16,9 @@ export {
   ScrapeResponse,
   ScreenshotRequest,
   ScreenshotResponse,
-  ListParams,
+  Session,
   GeneratePdfParams,
+  ListSessionsParams,
   ScrapeParams,
   ScreenshotParams,
 } from './top-level';
