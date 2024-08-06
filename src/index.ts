@@ -244,7 +244,6 @@ export namespace Steel {
   export import ScrapeResponse = API.ScrapeResponse;
   export import ScreenshotRequest = API.ScreenshotRequest;
   export import ScreenshotResponse = API.ScreenshotResponse;
-  export import Session = API.Session;
   export import GeneratePdfParams = API.GeneratePdfParams;
   export import ListSessionsParams = API.ListSessionsParams;
   export import ScrapeParams = API.ScrapeParams;
