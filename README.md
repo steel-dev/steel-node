@@ -163,7 +163,7 @@ You can use `for await … of` syntax to iterate through items across all pages:
 async function fetchAllTopLevels(params) {
   const allTopLevels = [];
   // Automatically fetches more pages as needed.
-  for await (const session of client.list({ limit: 50 })) {
+  for await (const session of client.listSessions({ limit: 50 })) {
     allTopLevels.push(session);
   }
   return allTopLevels;
@@ -173,7 +173,7 @@ async function fetchAllTopLevels(params) {
 Alternatively, you can make request a single page at a time:
 
 ```ts
-let page = await client.list({ limit: 50 });
+let page = await client.listSessions({ limit: 50 });
 for (const session of page.sessions) {
   console.log(session);
 }

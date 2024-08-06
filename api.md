@@ -8,11 +8,12 @@ Types:
 - <code><a href="./src/resources/top-level.ts">ScrapeResponse</a></code>
 - <code><a href="./src/resources/top-level.ts">ScreenshotRequest</a></code>
 - <code><a href="./src/resources/top-level.ts">ScreenshotResponse</a></code>
+- <code><a href="./src/resources/top-level.ts">Session</a></code>
 
 Methods:
 
-- <code title="get /v1/sessions">client.<a href="./src/index.ts">list</a>({ ...params }) -> SessionsCursorPage</code>
 - <code title="post /v1/pdf">client.<a href="./src/index.ts">generatePdf</a>({ ...params }) -> PdfResponse</code>
+- <code title="get /v1/sessions">client.<a href="./src/index.ts">listSessions</a>({ ...params }) -> SessionsCursorPage</code>
 - <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> ScrapeResponse</code>
 - <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> ScreenshotResponse</code>
 
