@@ -16,7 +16,6 @@ export {
   ScrapeResponse,
   ScreenshotRequest,
   ScreenshotResponse,
-  Session,
   GeneratePdfParams,
   ListSessionsParams,
   ScrapeParams,

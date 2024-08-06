@@ -8,7 +8,6 @@ Types:
 - <code><a href="./src/resources/top-level.ts">ScrapeResponse</a></code>
 - <code><a href="./src/resources/top-level.ts">ScreenshotRequest</a></code>
 - <code><a href="./src/resources/top-level.ts">ScreenshotResponse</a></code>
-- <code><a href="./src/resources/top-level.ts">Session</a></code>
 
 Methods:
 

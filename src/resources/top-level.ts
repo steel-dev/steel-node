@@ -163,63 +163,6 @@ export interface ScreenshotResponse {
   url: string;
 }
 
-/**
- * Represents the information for a browser session, including both static and
- * dynamic data.
- */
-export interface Session {
-  /**
-   * Duration of the session in seconds (updates in real-time for live sessions)
-   */
-  duration: number;
-
-  /**
-   * Number of events that occurred in the session (updates in real-time for live
-   * sessions)
-   */
-  eventCount: number;
-
-  /**
-   * Indicates if the session is currently active
-   */
-  isLive: boolean;
-
-  /**
-   * Unique identifier for the session
-   */
-  sessionId: string;
-
-  /**
-   * When to timeout session in milliseconds
-   */
-  sessionTimeout: number;
-
-  /**
-   * Timestamp when the session was started
-   */
-  startDate: string;
-
-  /**
-   * Indicates if stealth mode is enabled for the session
-   */
-  stealthMode: boolean;
-
-  /**
-   * WebSocket URL for connecting to the session
-   */
-  websocketUrl: string;
-
-  /**
-   * debug URL for debugging or embedding the session
-   */
-  debugUrl?: string;
-
-  /**
-   * URL for viewing the session in the Steel Session Viewer
-   */
-  sessionViewerUrl?: string;
-}
-
 export interface GeneratePdfParams {
   /**
    * The URL of the webpage to convert to PDF
@@ -270,7 +213,6 @@ export namespace TopLevel {
   export import ScrapeResponse = TopLevelAPI.ScrapeResponse;
   export import ScreenshotRequest = TopLevelAPI.ScreenshotRequest;
   export import ScreenshotResponse = TopLevelAPI.ScreenshotResponse;
-  export import Session = TopLevelAPI.Session;
   export import GeneratePdfParams = TopLevelAPI.GeneratePdfParams;
   export import ListSessionsParams = TopLevelAPI.ListSessionsParams;
   export import ScrapeParams = TopLevelAPI.ScrapeParams;
