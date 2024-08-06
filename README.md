@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Steel REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.steel.com](https://docs.steel.com). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.steel.dev](https://docs.steel.dev). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -25,12 +25,18 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Steel from 'steel';
 
-const client = new Steel();
+const client = new Steel({
+  apiKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
-  const sessionResponse = await client.sessions.create();
+  const scrapeResponse = await client.scrape({
+    url: 'https://example.com',
+    format: ['html', 'markdown'],
+    screenshot: true,
+  });
 
-  console.log(sessionResponse.duration);
+  console.log(scrapeResponse.content);
 }
 
 main();
@@ -44,10 +50,18 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Steel from 'steel';
 
-const client = new Steel();
+const client = new Steel({
+  apiKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+});
 
 async function main() {
-  const sessionResponse: Steel.SessionResponse = await client.sessions.create();
+  const params: Steel.SessionCreateParams = {
+    region: 'US',
+    solveCaptcha: true,
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  };
+  const session: Steel.Session = await client.sessions.create(params);
 }
 
 main();
@@ -64,15 +78,22 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const sessionResponse = await client.sessions.create().catch(async (err) => {
-    if (err instanceof Steel.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
+  const session = await client.sessions
+    .create({
+      region: 'US',
+      solveCaptcha: true,
+      userAgent:
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    })
+    .catch(async (err) => {
+      if (err instanceof Steel.APIError) {
+        console.log(err.status); // 400
+        console.log(err.name); // BadRequestError
+        console.log(err.headers); // {server: 'nginx', ...}
+      } else {
+        throw err;
+      }
+    });
 }
 
 main();
@@ -107,7 +128,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.sessions.create({
+await client.sessions.create({ region: 'US', solveCaptcha: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
   maxRetries: 5,
 });
 ```
@@ -124,7 +145,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create({
+await client.sessions.create({ region: 'US', solveCaptcha: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -132,6 +153,37 @@ await client.sessions.create({
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
+
+## Auto-pagination
+
+List methods in the Steel API are paginated.
+You can use `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllTopLevels(params) {
+  const allTopLevels = [];
+  // Automatically fetches more pages as needed.
+  for await (const session of client.list({ limit: 50 })) {
+    allTopLevels.push(session);
+  }
+  return allTopLevels;
+}
+```
+
+Alternatively, you can make request a single page at a time:
+
+```ts
+let page = await client.list({ limit: 50 });
+for (const session of page.sessions) {
+  console.log(session);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = page.getNextPage();
+  // ...
+}
+```
 
 ## Advanced Usage
 
@@ -145,13 +197,27 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client.sessions.create().asResponse();
+const response = await client.sessions
+  .create({
+    region: 'US',
+    solveCaptcha: true,
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  })
+  .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: sessionResponse, response: raw } = await client.sessions.create().withResponse();
+const { data: session, response: raw } = await client.sessions
+  .create({
+    region: 'US',
+    solveCaptcha: true,
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  })
+  .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(sessionResponse.duration);
+console.log(session.duration);
 ```
 
 ### Making custom/undocumented requests
@@ -255,9 +321,17 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create({
-  httpAgent: new http.Agent({ keepAlive: false }),
-});
+await client.sessions.create(
+  {
+    region: 'US',
+    solveCaptcha: true,
+    userAgent:
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  },
+  {
+    httpAgent: new http.Agent({ keepAlive: false }),
+  },
+);
 ```
 
 ## Semantic versioning
