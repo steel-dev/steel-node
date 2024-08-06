@@ -3,10 +3,10 @@
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
 import * as Core from '../core';
-import * as SessionsAPI from './sessions';
+import * as SessionAPI from './session';
 import { CursorPage } from '../pagination';
 
-export class Sessions extends APIResource {
+export class SessionResource extends APIResource {
   /**
    * Start a new browser session
    */
@@ -194,10 +194,10 @@ export interface SessionCreateParams {
   userAgent?: string;
 }
 
-export namespace Sessions {
-  export import CreateSessionRequest = SessionsAPI.CreateSessionRequest;
-  export import ReleaseSessionResponse = SessionsAPI.ReleaseSessionResponse;
-  export import Session = SessionsAPI.Session;
-  export import SessionGetContextResponse = SessionsAPI.SessionGetContextResponse;
-  export import SessionCreateParams = SessionsAPI.SessionCreateParams;
+export namespace SessionResource {
+  export import CreateSessionRequest = SessionAPI.CreateSessionRequest;
+  export import ReleaseSessionResponse = SessionAPI.ReleaseSessionResponse;
+  export import Session = SessionAPI.Session;
+  export import SessionGetContextResponse = SessionAPI.SessionGetContextResponse;
+  export import SessionCreateParams = SessionAPI.SessionCreateParams;
 }

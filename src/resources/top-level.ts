@@ -2,7 +2,7 @@
 
 import * as TopLevelAPI from './top-level';
 import { type CursorPageParams } from '../pagination';
-import { SessionsCursorPage } from './sessions';
+import { SessionsCursorPage } from './session';
 
 export interface PdfRequest {
   /**

@@ -56,12 +56,12 @@ const client = new Steel({
 
 async function main() {
   const params: Steel.SessionCreateParams = {
-    region: 'US',
     solveCaptcha: true,
+    stealthMode: true,
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
   };
-  const session: Steel.Session = await client.sessions.create(params);
+  const session: Steel.Session = await client.session.create(params);
 }
 
 main();
@@ -78,10 +78,10 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const session = await client.sessions
+  const session = await client.session
     .create({
-      region: 'US',
       solveCaptcha: true,
+      stealthMode: true,
       userAgent:
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
     })
@@ -128,7 +128,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.sessions.create({ region: 'US', solveCaptcha: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
+await client.session.create({ solveCaptcha: true, stealthMode: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
   maxRetries: 5,
 });
 ```
@@ -145,7 +145,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create({ region: 'US', solveCaptcha: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
+await client.session.create({ solveCaptcha: true, stealthMode: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
   timeout: 5 * 1000,
 });
 ```
@@ -197,10 +197,10 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client.sessions
+const response = await client.session
   .create({
-    region: 'US',
     solveCaptcha: true,
+    stealthMode: true,
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
   })
@@ -208,10 +208,10 @@ const response = await client.sessions
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: session, response: raw } = await client.sessions
+const { data: session, response: raw } = await client.session
   .create({
-    region: 'US',
     solveCaptcha: true,
+    stealthMode: true,
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
   })
@@ -321,10 +321,10 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.sessions.create(
+await client.session.create(
   {
-    region: 'US',
     solveCaptcha: true,
+    stealthMode: true,
     userAgent:
       'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
   },

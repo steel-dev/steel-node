@@ -7,8 +7,8 @@ export {
   SessionGetContextResponse,
   SessionCreateParams,
   SessionsCursorPage,
-  Sessions,
-} from './sessions';
+  SessionResource,
+} from './session';
 export {
   PdfRequest,
   PdfResponse,

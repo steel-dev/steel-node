@@ -7,7 +7,7 @@ import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as Pagination from './pagination';
 import * as API from './resources/index';
-import * as SessionsAPI from './resources/sessions';
+import * as SessionAPI from './resources/session';
 import * as TopLevelAPI from './resources/top-level';
 
 export interface ClientOptions {
@@ -123,7 +123,7 @@ export class Steel extends Core.APIClient {
     this.apiKey = apiKey;
   }
 
-  sessions: API.Sessions = new API.Sessions(this);
+  session: API.SessionResource = new API.SessionResource(this);
 
   /**
    * Generate a PDF from the specified webpage.
@@ -142,12 +142,12 @@ export class Steel extends Core.APIClient {
   listSessions(
     query?: TopLevelAPI.ListSessionsParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
-  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session>;
+  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
+  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
   listSessions(
     query: TopLevelAPI.ListSessionsParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionsAPI.Session> {
+  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session> {
     if (isRequestOptions(query)) {
       return this.listSessions({}, query);
     }
@@ -249,7 +249,7 @@ export namespace Steel {
   export import ScrapeParams = API.ScrapeParams;
   export import ScreenshotParams = API.ScreenshotParams;
 
-  export import Sessions = API.Sessions;
+  export import SessionResource = API.SessionResource;
   export import CreateSessionRequest = API.CreateSessionRequest;
   export import ReleaseSessionResponse = API.ReleaseSessionResponse;
   export import Session = API.Session;
