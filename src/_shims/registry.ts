@@ -46,7 +46,9 @@ export function setShims(shims: Shims, options: { auto: boolean } = { auto: fals
     );
   }
   if (kind) {
-    throw new Error(`can't \`import 'steel/shims/${shims.kind}'\` after \`import 'steel/shims/${kind}'\``);
+    throw new Error(
+      `can't \`import 'steel/shims/${shims.kind}'\` after \`import 'steel/shims/${kind}'\``,
+    );
   }
   auto = options.auto;
   kind = shims.kind;

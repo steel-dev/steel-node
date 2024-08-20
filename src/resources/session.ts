@@ -2,6 +2,7 @@
 
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
 import * as Core from '../core';
 import * as SessionAPI from './session';
 import { CursorPage } from '../pagination';
@@ -10,12 +11,9 @@ export class SessionResource extends APIResource {
   /**
    * Start a new browser session
    */
-  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(
-    body: SessionCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
+  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session>
+  create(options?: Core.RequestOptions): Core.APIPromise<Session>
+  create(body: SessionCreateParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.APIPromise<Session> {
     if (isRequestOptions(body)) {
       return this.create({}, body);
     }
@@ -44,7 +42,8 @@ export class SessionResource extends APIResource {
   }
 }
 
-export class SessionsCursorPage extends CursorPage<Session> {}
+export class SessionsCursorPage extends CursorPage<Session> {
+}
 
 export interface CreateSessionRequest {
   /**
@@ -155,7 +154,7 @@ export interface Session {
 /**
  * A JSON object representing the browser context
  */
-export type SessionGetContextResponse = unknown;
+export type SessionGetContextResponse = unknown
 
 export interface SessionCreateParams {
   /**

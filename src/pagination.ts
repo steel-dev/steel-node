@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
+import { AbstractPage, Response, APIClient, FinalRequestOptions, coerceInteger, coerceFloat, coerceBoolean, ensurePresent, PageInfo } from './core';
+import * as Core from './core';
 
 export interface CursorPageResponse<Item> {
   sessions: Array<Item>;
@@ -23,12 +24,7 @@ export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageRe
 
   total_count: number;
 
-  constructor(
-    client: APIClient,
-    response: Response,
-    body: CursorPageResponse<Item>,
-    options: FinalRequestOptions,
-  ) {
+  constructor(client: APIClient, response: Response, body: CursorPageResponse<Item>, options: FinalRequestOptions) {
     super(client, response, body, options);
 
     this.sessions = body.sessions || [];
@@ -51,15 +47,15 @@ export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageRe
   }
 
   nextPageInfo(): PageInfo | null {
-    const cursor = this.next_cursor;
+    const cursor = this.next_cursor
     if (!cursor) {
       return null;
     }
 
     return {
       params: {
-        cursor: cursor,
-      },
+        cursor: cursor
+      }
     };
   }
 }

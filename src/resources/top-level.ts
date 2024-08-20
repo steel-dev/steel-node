@@ -1,7 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
+import { APIPromise } from '../core';
+import * as Core from '../core';
 import * as TopLevelAPI from './top-level';
-import { type CursorPageParams } from '../pagination';
+import { CursorPage, type CursorPageParams } from '../pagination';
 import { SessionsCursorPage } from './session';
 
 export interface PdfRequest {
@@ -219,4 +223,4 @@ export namespace TopLevel {
   export import ScreenshotParams = TopLevelAPI.ScreenshotParams;
 }
 
-export { SessionsCursorPage };
+export { SessionsCursorPage }
