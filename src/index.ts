@@ -3,7 +3,7 @@
 import * as Errors from './error';
 import * as Uploads from './uploads';
 import { isRequestOptions } from './core';
-import { type Agent } from './_shims/index';
+import { type Agent, type RequestInit } from './_shims/index';
 import * as Core from './core';
 import * as Pagination from './pagination';
 import * as API from './resources/index';
@@ -74,7 +74,7 @@ export interface ClientOptions {
 }
 
 /**
- * API Client for interfacing with the Steel API.
+ * API Client for interfacing with the Steel API. 
  */
 export class Steel extends Core.APIClient {
   apiKey: string;
@@ -85,7 +85,7 @@ export class Steel extends Core.APIClient {
    * API Client for interfacing with the Steel API.
    *
    * @param {string | undefined} [opts.apiKey=process.env['STEEL_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? http://api.steel.dev] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? http://steel-production.up.railway.app] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -100,14 +100,14 @@ export class Steel extends Core.APIClient {
   }: ClientOptions = {}) {
     if (apiKey === undefined) {
       throw new Errors.SteelError(
-        "The STEEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Steel client with an apiKey option, like new Steel({ apiKey: 'My API Key' }).",
+        'The STEEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Steel client with an apiKey option, like new Steel({ apiKey: \'My API Key\' }).'
       );
     }
 
     const options: ClientOptions = {
       apiKey,
       ...opts,
-      baseURL: baseURL || `http://api.steel.dev`,
+      baseURL: baseURL || `http://steel-production.up.railway.app`,
     };
 
     super({
@@ -128,10 +128,7 @@ export class Steel extends Core.APIClient {
   /**
    * Generate a PDF from the specified webpage.
    */
-  generatePdf(
-    body: TopLevelAPI.GeneratePdfParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.PdfResponse> {
+  generatePdf(body: TopLevelAPI.GeneratePdfParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.PdfResponse> {
     return this.post('/v1/pdf', { body, ...options });
   }
 
@@ -139,15 +136,9 @@ export class Steel extends Core.APIClient {
    * Get a paginated list of browser sessions. Use the `next_cursor` from the
    * response to fetch the next page of results.
    */
-  listSessions(
-    query?: TopLevelAPI.ListSessionsParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
-  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
-  listSessions(
-    query: TopLevelAPI.ListSessionsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session> {
+  listSessions(query?: TopLevelAPI.ListSessionsParams, options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>
+  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>
+  listSessions(query: TopLevelAPI.ListSessionsParams | Core.RequestOptions = {}, options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session> {
     if (isRequestOptions(query)) {
       return this.listSessions({}, query);
     }
@@ -159,25 +150,19 @@ export class Steel extends Core.APIClient {
    * return type(s) using the 'format' parameter. You can also request a screenshot
    * and/or PDF using the 'screenshot' and 'pdf' flags.
    */
-  scrape(
-    body: TopLevelAPI.ScrapeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
+  scrape(body: TopLevelAPI.ScrapeParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
     return this.post('/v1/scrape', { body, ...options });
   }
 
   /**
    * Capture a screenshot of the specified webpage.
    */
-  screenshot(
-    body: TopLevelAPI.ScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScreenshotResponse> {
+  screenshot(body: TopLevelAPI.ScreenshotParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.ScreenshotResponse> {
     return this.post('/v1/screenshot', { body, ...options });
   }
 
   protected override defaultQuery(): Core.DefaultQuery | undefined {
-    return this._options.defaultQuery;
+    return this._options.defaultQuery
   }
 
   protected override defaultHeaders(opts: Core.FinalRequestOptions): Core.Headers {
@@ -192,7 +177,7 @@ export class Steel extends Core.APIClient {
   }
 
   static Steel = this;
-  static DEFAULT_TIMEOUT = 60000; // 1 minute
+  static DEFAULT_TIMEOUT = 60000 // 1 minute
 
   static SteelError = Errors.SteelError;
   static APIError = Errors.APIError;
@@ -212,21 +197,7 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
-  SteelError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} = Errors;
+export const { SteelError, APIError, APIConnectionError, APIConnectionTimeoutError, APIUserAbortError, NotFoundError, ConflictError, RateLimitError, BadRequestError, AuthenticationError, InternalServerError, PermissionDeniedError, UnprocessableEntityError } = Errors
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
