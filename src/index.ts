@@ -2,19 +2,17 @@
 
 import * as Errors from './error';
 import * as Uploads from './uploads';
-import { isRequestOptions } from './core';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
 import * as Pagination from './pagination';
 import * as API from './resources/index';
-import * as SessionAPI from './resources/session';
 import * as TopLevelAPI from './resources/top-level';
 
 export interface ClientOptions {
   /**
-   * Your Steel API key
+   * The API key required to authenticate the request. Typically provided in the header.
    */
-  apiKey?: string | undefined;
+  steelAPIKey?: string | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -77,15 +75,15 @@ export interface ClientOptions {
  * API Client for interfacing with the Steel API.
  */
 export class Steel extends Core.APIClient {
-  apiKey: string;
+  steelAPIKey: string;
 
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Steel API.
    *
-   * @param {string | undefined} [opts.apiKey=process.env['STEEL_API_KEY'] ?? null]
-   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? http://steel-production.up.railway.app] - Override the default base URL for the API.
+   * @param {string | undefined} [opts.steelAPIKey=process.env['STEEL_API_KEY'] ?? undefined]
+   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? https://steel-api-staging.fly.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -95,19 +93,19 @@ export class Steel extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('STEEL_BASE_URL'),
-    apiKey = Core.readEnv('STEEL_API_KEY'),
+    steelAPIKey = Core.readEnv('STEEL_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
-    if (apiKey === undefined) {
+    if (steelAPIKey === undefined) {
       throw new Errors.SteelError(
-        "The STEEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Steel client with an apiKey option, like new Steel({ apiKey: 'My API Key' }).",
+        "The STEEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Steel client with an steelAPIKey option, like new Steel({ steelAPIKey: 'My Steel API Key' }).",
       );
     }
 
     const options: ClientOptions = {
-      apiKey,
+      steelAPIKey,
       ...opts,
-      baseURL: baseURL || `http://steel-production.up.railway.app`,
+      baseURL: baseURL || `https://steel-api-staging.fly.dev`,
     };
 
     super({
@@ -120,44 +118,20 @@ export class Steel extends Core.APIClient {
 
     this._options = options;
 
-    this.apiKey = apiKey;
+    this.steelAPIKey = steelAPIKey;
   }
 
-  session: API.SessionResource = new API.SessionResource(this);
+  sessions: API.Sessions = new API.Sessions(this);
 
   /**
-   * Generate a PDF from the specified webpage.
+   * Generates a PDF from a specified webpage.
    */
-  generatePdf(
-    body: TopLevelAPI.GeneratePdfParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.PdfResponse> {
+  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.PdfResponse> {
     return this.post('/v1/pdf', { body, ...options });
   }
 
   /**
-   * Get a paginated list of browser sessions. Use the `next_cursor` from the
-   * response to fetch the next page of results.
-   */
-  listSessions(
-    query?: TopLevelAPI.ListSessionsParams,
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
-  listSessions(options?: Core.RequestOptions): Core.PagePromise<SessionsCursorPage, SessionAPI.Session>;
-  listSessions(
-    query: TopLevelAPI.ListSessionsParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionsCursorPage, SessionAPI.Session> {
-    if (isRequestOptions(query)) {
-      return this.listSessions({}, query);
-    }
-    return this.getAPIList('/v1/sessions', SessionsCursorPage, { query, ...options });
-  }
-
-  /**
-   * Scrape content from a webpage. This endpoint supports specifying the desired
-   * return type(s) using the 'format' parameter. You can also request a screenshot
-   * and/or PDF using the 'screenshot' and 'pdf' flags.
+   * Extracts content from a specified URL.
    */
   scrape(
     body: TopLevelAPI.ScrapeParams,
@@ -167,7 +141,7 @@ export class Steel extends Core.APIClient {
   }
 
   /**
-   * Capture a screenshot of the specified webpage.
+   * Captures a screenshot of a specified webpage.
    */
   screenshot(
     body: TopLevelAPI.ScreenshotParams,
@@ -188,7 +162,7 @@ export class Steel extends Core.APIClient {
   }
 
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
-    return { 'steel-api-key': this.apiKey };
+    return { 'steel-api-key': this.steelAPIKey };
   }
 
   static Steel = this;
@@ -234,27 +208,26 @@ export import fileFromPath = Uploads.fileFromPath;
 export namespace Steel {
   export import RequestOptions = Core.RequestOptions;
 
-  export import CursorPage = Pagination.CursorPage;
-  export import CursorPageParams = Pagination.CursorPageParams;
-  export import CursorPageResponse = Pagination.CursorPageResponse;
+  export import SessionsCursor = Pagination.SessionsCursor;
+  export import SessionsCursorParams = Pagination.SessionsCursorParams;
+  export import SessionsCursorResponse = Pagination.SessionsCursorResponse;
 
-  export import PdfRequest = API.PdfRequest;
   export import PdfResponse = API.PdfResponse;
-  export import ScrapeRequest = API.ScrapeRequest;
   export import ScrapeResponse = API.ScrapeResponse;
-  export import ScreenshotRequest = API.ScreenshotRequest;
   export import ScreenshotResponse = API.ScreenshotResponse;
-  export import GeneratePdfParams = API.GeneratePdfParams;
-  export import ListSessionsParams = API.ListSessionsParams;
+  export import PdfParams = API.PdfParams;
   export import ScrapeParams = API.ScrapeParams;
   export import ScreenshotParams = API.ScreenshotParams;
 
-  export import SessionResource = API.SessionResource;
-  export import CreateSessionRequest = API.CreateSessionRequest;
-  export import ReleaseSessionResponse = API.ReleaseSessionResponse;
+  export import Sessions = API.Sessions;
   export import Session = API.Session;
-  export import SessionGetContextResponse = API.SessionGetContextResponse;
+  export import SessionContext = API.SessionContext;
+  export import SessionListResponse = API.SessionListResponse;
+  export import SessionReleaseResponse = API.SessionReleaseResponse;
+  export import SessionReleaseAllResponse = API.SessionReleaseAllResponse;
+  export import SessionListResponsesSessionsCursor = API.SessionListResponsesSessionsCursor;
   export import SessionCreateParams = API.SessionCreateParams;
+  export import SessionListParams = API.SessionListParams;
 }
 
 export default Steel;
