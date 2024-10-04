@@ -11,11 +11,12 @@ export {
 export {
   Session,
   SessionContext,
-  Sessions,
+  Sessionslist,
   SessionListResponse,
   SessionReleaseResponse,
   SessionReleaseAllResponse,
   SessionCreateParams,
   SessionListParams,
   SessionListResponsesSessionsCursor,
+  Sessions,
 } from './sessions';
