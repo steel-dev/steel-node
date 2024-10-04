@@ -222,6 +222,7 @@ export namespace Steel {
   export import Sessions = API.Sessions;
   export import Session = API.Session;
   export import SessionContext = API.SessionContext;
+  export import Sessionslist = API.Sessionslist;
   export import SessionListResponse = API.SessionListResponse;
   export import SessionReleaseResponse = API.SessionReleaseResponse;
   export import SessionReleaseAllResponse = API.SessionReleaseAllResponse;

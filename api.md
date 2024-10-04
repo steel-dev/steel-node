@@ -18,7 +18,7 @@ Types:
 
 - <code><a href="./src/resources/sessions.ts">Session</a></code>
 - <code><a href="./src/resources/sessions.ts">SessionContext</a></code>
-- <code><a href="./src/resources/sessions.ts">Sessions</a></code>
+- <code><a href="./src/resources/sessions.ts">Sessionslist</a></code>
 - <code><a href="./src/resources/sessions.ts">SessionListResponse</a></code>
 - <code><a href="./src/resources/sessions.ts">SessionReleaseResponse</a></code>
 - <code><a href="./src/resources/sessions.ts">SessionReleaseAllResponse</a></code>

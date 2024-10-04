@@ -172,14 +172,14 @@ export interface SessionContext {
 /**
  * Response containing a list of browser sessions with pagination details.
  */
-export interface Sessions {
+export interface Sessionslist {
   /**
    * List of browser sessions
    */
-  sessions: Array<Sessions.Session>;
+  sessions: Array<Sessionslist.Session>;
 }
 
-export namespace Sessions {
+export namespace Sessionslist {
   /**
    * Represents the data structure for a browser session, including its configuration
    * and status.
@@ -450,7 +450,7 @@ export interface SessionListParams extends SessionsCursorParams {
 export namespace Sessions {
   export import Session = SessionsAPI.Session;
   export import SessionContext = SessionsAPI.SessionContext;
-  export import Sessions = SessionsAPI.Sessions;
+  export import Sessionslist = SessionsAPI.Sessionslist;
   export import SessionListResponse = SessionsAPI.SessionListResponse;
   export import SessionReleaseResponse = SessionsAPI.SessionReleaseResponse;
   export import SessionReleaseAllResponse = SessionsAPI.SessionReleaseAllResponse;
