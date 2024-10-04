@@ -4,7 +4,7 @@
 
 This library provides convenient access to the Steel REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [docs.steel.dev](https://docs.steel.dev). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.steel.com](https://docs.steel.com). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainlessapi.com/).
 
@@ -26,17 +26,13 @@ The full API of this library can be found in [api.md](api.md).
 import Steel from 'steel';
 
 const client = new Steel({
-  apiKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const scrapeResponse = await client.scrape({
-    url: 'https://example.com',
-    format: ['html', 'markdown'],
-    screenshot: true,
-  });
+  const session = await client.sessions.create();
 
-  console.log(scrapeResponse.content);
+  console.log(session.id);
 }
 
 main();
@@ -51,17 +47,15 @@ This library includes TypeScript definitions for all request params and response
 import Steel from 'steel';
 
 const client = new Steel({
-  apiKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
 });
 
 async function main() {
-  const params: Steel.SessionCreateParams = {
-    solveCaptcha: true,
-    stealthMode: true,
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+  const params: Steel.ScrapeParams = {
+    url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/',
+    format: ['markdown'],
   };
-  const session: Steel.Session = await client.session.create(params);
+  const scrapeResponse: Steel.ScrapeResponse = await client.scrape(params);
 }
 
 main();
@@ -78,13 +72,8 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const session = await client.session
-    .create({
-      solveCaptcha: true,
-      stealthMode: true,
-      userAgent:
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-    })
+  const scrapeResponse = await client
+    .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
     .catch(async (err) => {
       if (err instanceof Steel.APIError) {
         console.log(err.status); // 400
@@ -128,7 +117,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.session.create({ solveCaptcha: true, stealthMode: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
+await client.scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] }, {
   maxRetries: 5,
 });
 ```
@@ -145,7 +134,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.session.create({ solveCaptcha: true, stealthMode: true, userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36' }, {
+await client.scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] }, {
   timeout: 5 * 1000,
 });
 ```
@@ -160,22 +149,22 @@ List methods in the Steel API are paginated.
 You can use `for await … of` syntax to iterate through items across all pages:
 
 ```ts
-async function fetchAllTopLevels(params) {
-  const allTopLevels = [];
+async function fetchAllSessions(params) {
+  const allSessions = [];
   // Automatically fetches more pages as needed.
-  for await (const session of client.listSessions({ limit: 50 })) {
-    allTopLevels.push(session);
+  for await (const sessionListResponse of client.sessions.list({ status: 'live' })) {
+    allSessions.push(sessionListResponse);
   }
-  return allTopLevels;
+  return allSessions;
 }
 ```
 
 Alternatively, you can make request a single page at a time:
 
 ```ts
-let page = await client.listSessions({ limit: 50 });
-for (const session of page.sessions) {
-  console.log(session);
+let page = await client.sessions.list({ status: 'live' });
+for (const sessionListResponse of page.sessions) {
+  console.log(sessionListResponse);
 }
 
 // Convenience methods are provided for manually paginating:
@@ -197,27 +186,17 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client.session
-  .create({
-    solveCaptcha: true,
-    stealthMode: true,
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-  })
+const response = await client
+  .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: session, response: raw } = await client.session
-  .create({
-    solveCaptcha: true,
-    stealthMode: true,
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-  })
+const { data: scrapeResponse, response: raw } = await client
+  .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(session.duration);
+console.log(scrapeResponse.content);
 ```
 
 ### Making custom/undocumented requests
@@ -321,13 +300,8 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.session.create(
-  {
-    solveCaptcha: true,
-    stealthMode: true,
-    userAgent:
-      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-  },
+await client.scrape(
+  { url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },

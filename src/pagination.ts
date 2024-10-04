@@ -2,38 +2,31 @@
 
 import { AbstractPage, Response, APIClient, FinalRequestOptions, PageInfo } from './core';
 
-export interface CursorPageResponse<Item> {
+export interface SessionsCursorResponse<Item> {
   sessions: Array<Item>;
-
-  next_cursor: string | null;
-
-  total_count: number;
 }
 
-export interface CursorPageParams {
-  cursor?: string;
+export interface SessionsCursorParams {
+  cursorId?: string;
 
   limit?: number;
 }
 
-export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageResponse<Item> {
+export class SessionsCursor<Item extends { id: string }>
+  extends AbstractPage<Item>
+  implements SessionsCursorResponse<Item>
+{
   sessions: Array<Item>;
-
-  next_cursor: string | null;
-
-  total_count: number;
 
   constructor(
     client: APIClient,
     response: Response,
-    body: CursorPageResponse<Item>,
+    body: SessionsCursorResponse<Item>,
     options: FinalRequestOptions,
   ) {
     super(client, response, body, options);
 
     this.sessions = body.sessions || [];
-    this.next_cursor = body.next_cursor || '';
-    this.total_count = body.total_count || 0;
   }
 
   getPaginatedItems(): Item[] {
@@ -41,7 +34,7 @@ export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageRe
   }
 
   // @deprecated Please use `nextPageInfo()` instead
-  nextPageParams(): Partial<CursorPageParams> | null {
+  nextPageParams(): Partial<SessionsCursorParams> | null {
     const info = this.nextPageInfo();
     if (!info) return null;
     if ('params' in info) return info.params;
@@ -51,15 +44,16 @@ export class CursorPage<Item> extends AbstractPage<Item> implements CursorPageRe
   }
 
   nextPageInfo(): PageInfo | null {
-    const cursor = this.next_cursor;
-    if (!cursor) {
+    const sessions = this.getPaginatedItems();
+    if (!sessions.length) {
       return null;
     }
 
-    return {
-      params: {
-        cursor: cursor,
-      },
-    };
+    const id = sessions[sessions.length - 1]?.id;
+    if (!id) {
+      return null;
+    }
+
+    return { params: { cursorId: id } };
   }
 }

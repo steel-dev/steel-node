@@ -1,51 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import * as TopLevelAPI from './top-level';
-import { type CursorPageParams } from '../pagination';
-import { SessionsCursorPage } from './session';
-
-export interface PdfRequest {
-  /**
-   * The URL of the webpage to convert to PDF
-   */
-  url: string;
-}
 
 export interface PdfResponse {
   /**
-   * URL where the generated PDF is hosted
+   * URL where the PDF is hosted
    */
   url: string;
 }
 
-export interface ScrapeRequest {
-  /**
-   * The URL of the webpage to scrape
-   */
-  url: string;
-
-  /**
-   * The desired format(s) for the scraped content
-   */
-  format?: Array<'html' | 'cleaned_html' | 'readability' | 'markdown'>;
-
-  /**
-   * Flag to include a PDF of the page in the response
-   */
-  pdf?: boolean;
-
-  /**
-   * Flag to include a screenshot of the page in the response
-   */
-  screenshot?: boolean;
-}
-
+/**
+ * Response from a successful scrape request
+ */
 export interface ScrapeResponse {
-  content?: ScrapeResponse.Content;
+  content: ScrapeResponse.Content;
 
-  links?: Array<ScrapeResponse.Link>;
+  links: Array<ScrapeResponse.Link>;
 
-  metadata?: ScrapeResponse.Metadata;
+  metadata: ScrapeResponse.Metadata;
 
   pdf?: ScrapeResponse.Pdf;
 
@@ -55,168 +27,173 @@ export interface ScrapeResponse {
 export namespace ScrapeResponse {
   export interface Content {
     /**
-     * The cleaned HTML content of the scraped webpage
+     * Cleaned HTML content of the webpage
      */
     cleaned_html?: string;
 
     /**
-     * The raw HTML content of the scraped webpage
+     * Raw HTML content of the webpage
      */
     html?: string;
 
     /**
-     * The content of the webpage converted to Markdown format
+     * Webpage content converted to Markdown
      */
     markdown?: string;
+
+    /**
+     * Webpage content in Readability format
+     */
+    readability?: Record<string, unknown>;
   }
 
   export interface Link {
     /**
-     * The text content of the link
+     * Text content of the link
      */
-    text?: string;
+    text: string;
 
     /**
-     * The URL of the link
+     * URL of the link
      */
-    url?: string;
+    url: string;
   }
 
   export interface Metadata {
     /**
-     * The description of the webpage
+     * HTTP status code of the response
+     */
+    statusCode: number;
+
+    /**
+     * Description of the webpage
      */
     description?: string;
 
     /**
-     * The detected language of the webpage
+     * Detected language of the webpage
      */
     language?: string;
 
     /**
-     * The Open Graph description
+     * Open Graph description
      */
     ogDescription?: string;
 
     /**
-     * The Open Graph image URL
+     * Open Graph image URL
      */
     ogImage?: string;
 
     /**
-     * The Open Graph title
+     * Open Graph title
      */
     ogTitle?: string;
 
     /**
-     * The timestamp of when the content was published (if available)
+     * Publication timestamp of the content (if available)
      */
     published_timestamp?: string;
 
     /**
-     * The HTTP status code of the response
-     */
-    statusCode?: number;
-
-    /**
-     * The timestamp of when the scrape was performed
+     * Timestamp when the scrape was performed
      */
     timestamp?: string;
 
     /**
-     * The title of the webpage
+     * Title of the webpage
      */
     title?: string;
 
     /**
-     * The source URL of the scraped page
+     * Source URL of the scraped page
      */
     urlSource?: string;
   }
 
   export interface Pdf {
     /**
-     * The URL of the generated PDF
+     * URL of the generated PDF
      */
-    url?: string;
+    url: string;
   }
 
   export interface Screenshot {
     /**
-     * The URL of the screenshot image
+     * URL of the screenshot image
      */
-    url?: string;
+    url: string;
   }
-}
-
-export interface ScreenshotRequest {
-  /**
-   * The URL of the webpage to screenshot
-   */
-  url: string;
 }
 
 export interface ScreenshotResponse {
   /**
-   * URL where the screenshot image is hosted
+   * URL where the screenshot is hosted
    */
   url: string;
 }
 
-export interface GeneratePdfParams {
+export interface PdfParams {
   /**
-   * The URL of the webpage to convert to PDF
+   * URL of the webpage to convert to PDF
    */
   url: string;
-}
 
-export interface ListSessionsParams extends CursorPageParams {
   /**
-   * Flag to retrieve only live sessions (default: true)
+   * Use a Steel-provided residential proxy for generating the PDF
    */
-  live_only?: boolean;
+  useProxy?: boolean;
 }
 
 export interface ScrapeParams {
   /**
-   * The URL of the webpage to scrape
+   * URL of the webpage to scrape
    */
   url: string;
 
   /**
-   * The desired format(s) for the scraped content
+   * Delay before scraping (in milliseconds)
    */
-  format?: Array<'html' | 'cleaned_html' | 'readability' | 'markdown'>;
+  delay?: number;
 
   /**
-   * Flag to include a PDF of the page in the response
+   * Desired format(s) for the scraped content. Default is `html`.
+   */
+  format?: Array<'html' | 'readability' | 'cleaned_html' | 'markdown'>;
+
+  /**
+   * Include a PDF in the response
    */
   pdf?: boolean;
 
   /**
-   * Flag to include a screenshot of the page in the response
+   * Include a screenshot in the response
    */
   screenshot?: boolean;
+
+  /**
+   * Use a Steel-provided residential proxy for the scrape
+   */
+  useProxy?: boolean;
 }
 
 export interface ScreenshotParams {
   /**
-   * The URL of the webpage to screenshot
+   * URL of the webpage to capture
    */
   url: string;
+
+  /**
+   * Use a Steel-provided residential proxy for capturing the screenshot
+   */
+  useProxy?: boolean;
 }
 
 export namespace TopLevel {
-  export import PdfRequest = TopLevelAPI.PdfRequest;
   export import PdfResponse = TopLevelAPI.PdfResponse;
-  export import ScrapeRequest = TopLevelAPI.ScrapeRequest;
   export import ScrapeResponse = TopLevelAPI.ScrapeResponse;
-  export import ScreenshotRequest = TopLevelAPI.ScreenshotRequest;
   export import ScreenshotResponse = TopLevelAPI.ScreenshotResponse;
-  export import GeneratePdfParams = TopLevelAPI.GeneratePdfParams;
-  export import ListSessionsParams = TopLevelAPI.ListSessionsParams;
+  export import PdfParams = TopLevelAPI.PdfParams;
   export import ScrapeParams = TopLevelAPI.ScrapeParams;
   export import ScreenshotParams = TopLevelAPI.ScreenshotParams;
 }
-
-export { SessionsCursorPage };
