@@ -55,7 +55,7 @@ async function main() {
     url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/',
     format: ['markdown'],
   };
-  const scrapeResponse: Steel.ScrapeResponse = await client.scrape(params);
+  const response: Steel.ScrapeResponse = await client.scrape(params);
 }
 
 main();
@@ -72,7 +72,7 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const scrapeResponse = await client
+  const response = await client
     .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
     .catch(async (err) => {
       if (err instanceof Steel.APIError) {
@@ -192,11 +192,11 @@ const response = await client
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: scrapeResponse, response: raw } = await client
+const { data: response, response: raw } = await client
   .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(scrapeResponse.content);
+console.log(response.content);
 ```
 
 ### Making custom/undocumented requests
