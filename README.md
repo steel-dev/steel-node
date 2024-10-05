@@ -52,7 +52,7 @@ const client = new Steel({
 
 async function main() {
   const params: Steel.ScrapeParams = {
-    url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/',
+    url: 'https://www.eff.org/cyberspace-independence',
     format: ['markdown'],
   };
   const response: Steel.ScrapeResponse = await client.scrape(params);
@@ -73,7 +73,7 @@ a subclass of `APIError` will be thrown:
 ```ts
 async function main() {
   const response = await client
-    .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
+    .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
     .catch(async (err) => {
       if (err instanceof Steel.APIError) {
         console.log(err.status); // 400
@@ -117,7 +117,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] }, {
+await client.scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] }, {
   maxRetries: 5,
 });
 ```
@@ -134,7 +134,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] }, {
+await client.scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] }, {
   timeout: 5 * 1000,
 });
 ```
@@ -187,13 +187,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 const client = new Steel();
 
 const response = await client
-  .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
+  .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
   .asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
 const { data: response, response: raw } = await client
-  .scrape({ url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] })
+  .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
   .withResponse();
 console.log(raw.headers.get('X-My-Header'));
 console.log(response.content);
@@ -301,7 +301,7 @@ const client = new Steel({
 
 // Override per-request:
 await client.scrape(
-  { url: 'https://slatestarcodex.com/2014/07/30/meditations-on-moloch/', format: ['markdown'] },
+  { url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] },
   {
     httpAgent: new http.Agent({ keepAlive: false }),
   },
