@@ -9,9 +9,9 @@ export function getRuntime({ manuallyImported }: { manuallyImported?: boolean } 
   const recommendation =
     manuallyImported ?
       `You may need to use polyfills`
-    : `Add one of these imports before your first \`import … from 'steel'\`:
-- \`import 'steel/shims/node'\` (if you're running on Node)
-- \`import 'steel/shims/web'\` (otherwise)
+    : `Add one of these imports before your first \`import … from 'steel-sdk'\`:
+- \`import 'steel-sdk/shims/node'\` (if you're running on Node)
+- \`import 'steel-sdk/shims/web'\` (otherwise)
 `;
 
   let _fetch, _Request, _Response, _Headers;
@@ -95,7 +95,7 @@ export function getRuntime({ manuallyImported }: { manuallyImported?: boolean } 
     getDefaultAgent: (url: string) => undefined,
     fileFromPath: () => {
       throw new Error(
-        'The `fileFromPath` function is only supported in Node. See the README for more details: https://www.github.com/stainless-sdks/steel-node#file-uploads',
+        'The `fileFromPath` function is only supported in Node. See the README for more details: https://www.github.com/0xnenlabs/steel-node#file-uploads',
       );
     },
     isFsReadStream: (value: any) => false,

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Steel } from 'steel';
+import { Steel } from 'steel-sdk';
 
 const { stringifyQuery } = Steel.prototype as any;
 
