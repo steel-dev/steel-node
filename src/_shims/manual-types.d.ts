@@ -4,8 +4,8 @@
 /**
  * Types will get added to this namespace when you import one of the following:
  *
- *   import 'steel/shims/node'
- *   import 'steel/shims/web'
+ *   import 'steel-sdk/shims/node'
+ *   import 'steel-sdk/shims/web'
  *
  * Importing more than one will cause type and runtime errors.
  */

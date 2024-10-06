@@ -6,9 +6,9 @@
     "rootDir": "./deno",
     "lib": ["es2020", "DOM"],
     "paths": {
-      "steel/_shims/auto/*": ["deno/_shims/auto/*-deno"],
-      "steel/*": ["deno/*"],
-      "steel": ["deno/index.ts"],
+      "steel-sdk/_shims/auto/*": ["deno/_shims/auto/*-deno"],
+      "steel-sdk/*": ["deno/*"],
+      "steel-sdk": ["deno/index.ts"],
     },
     "noEmit": true,
     "declaration": true,

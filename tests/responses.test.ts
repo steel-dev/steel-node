@@ -1,5 +1,5 @@
-import { createResponseHeaders } from 'steel/core';
-import { Headers } from 'steel/_shims/index';
+import { createResponseHeaders } from 'steel-sdk/core';
+import { Headers } from 'steel-sdk/_shims/index';
 
 describe('response parsing', () => {
   // TODO: test unicode characters

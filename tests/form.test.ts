@@ -1,6 +1,6 @@
-import { multipartFormRequestOptions, createForm } from 'steel/core';
-import { Blob } from 'steel/_shims/index';
-import { toFile } from 'steel';
+import { multipartFormRequestOptions, createForm } from 'steel-sdk/core';
+import { Blob } from 'steel-sdk/_shims/index';
+import { toFile } from 'steel-sdk';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {
