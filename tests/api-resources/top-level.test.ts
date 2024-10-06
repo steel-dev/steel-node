@@ -10,7 +10,7 @@ const client = new Steel({
 
 describe('top level methods', () => {
   test('pdf: only required params', async () => {
-    const responsePromise = client.pdf({ url: 'url' });
+    const responsePromise = client.pdf({ url: 'https://example.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -21,11 +21,11 @@ describe('top level methods', () => {
   });
 
   test('pdf: required and optional params', async () => {
-    const response = await client.pdf({ url: 'url', useProxy: true });
+    const response = await client.pdf({ url: 'https://example.com', delay: 0, useProxy: true });
   });
 
   test('scrape: only required params', async () => {
-    const responsePromise = client.scrape({ url: 'url' });
+    const responsePromise = client.scrape({ url: 'https://example.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -37,7 +37,7 @@ describe('top level methods', () => {
 
   test('scrape: required and optional params', async () => {
     const response = await client.scrape({
-      url: 'url',
+      url: 'https://example.com',
       delay: 0,
       format: ['html', 'readability', 'cleaned_html'],
       pdf: true,
@@ -47,7 +47,7 @@ describe('top level methods', () => {
   });
 
   test('screenshot: only required params', async () => {
-    const responsePromise = client.screenshot({ url: 'url' });
+    const responsePromise = client.screenshot({ url: 'https://example.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -58,6 +58,6 @@ describe('top level methods', () => {
   });
 
   test('screenshot: required and optional params', async () => {
-    const response = await client.screenshot({ url: 'url', useProxy: true });
+    const response = await client.screenshot({ url: 'https://example.com', delay: 0, useProxy: true });
   });
 });
