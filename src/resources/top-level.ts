@@ -140,6 +140,11 @@ export interface PdfParams {
   url: string;
 
   /**
+   * Delay before generating the PDF (in milliseconds)
+   */
+  delay?: number;
+
+  /**
    * Use a Steel-provided residential proxy for generating the PDF
    */
   useProxy?: boolean;
@@ -182,6 +187,11 @@ export interface ScreenshotParams {
    * URL of the webpage to capture
    */
   url: string;
+
+  /**
+   * Delay before capturing the screenshot (in milliseconds)
+   */
+  delay?: number;
 
   /**
    * Use a Steel-provided residential proxy for capturing the screenshot
