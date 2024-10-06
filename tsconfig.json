@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
-      "steel/_shims/auto/*": ["src/_shims/auto/*-node"],
-      "steel/*": ["src/*"],
-      "steel": ["src/index.ts"],
+      "steel-sdk/_shims/auto/*": ["src/_shims/auto/*-node"],
+      "steel-sdk/*": ["src/*"],
+      "steel-sdk": ["src/index.ts"],
     },
     "noEmit": true,
 

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import { toFile, type ResponseLike } from 'steel/uploads';
-import { File } from 'steel/_shims/index';
+import { toFile, type ResponseLike } from 'steel-sdk/uploads';
+import { File } from 'steel-sdk/_shims/index';
 
 class MyClass {
   name: string = 'foo';

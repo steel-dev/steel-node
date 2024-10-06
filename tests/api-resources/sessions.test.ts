@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Steel from 'steel';
+import Steel from 'steel-sdk';
 import { Response } from 'node-fetch';
 
 const client = new Steel({

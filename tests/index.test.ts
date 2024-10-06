@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Steel from 'steel';
-import { APIUserAbortError } from 'steel';
-import { Headers } from 'steel/core';
+import Steel from 'steel-sdk';
+import { APIUserAbortError } from 'steel-sdk';
+import { Headers } from 'steel-sdk/core';
 import defaultFetch, { Response, type RequestInit, type RequestInfo } from 'node-fetch';
 
 describe('instantiate client', () => {

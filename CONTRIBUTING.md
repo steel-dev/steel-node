@@ -55,12 +55,12 @@ $ cd steel-node
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link steel
+$ yarn link steel-sdk
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global steel
+$ pnpm link -—global steel-sdk
 ```
 
 ## Running tests

@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "steel/*": ["dist/src/*"],
-      "steel": ["dist/src/index.ts"],
+      "steel-sdk/*": ["dist/src/*"],
+      "steel-sdk": ["dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,
