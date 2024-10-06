@@ -166,7 +166,7 @@ export interface SessionContext {
   /**
    * Local storage data associated with the session
    */
-  localStorage: Array<Record<string, unknown>>;
+  localStorage: Record<string, unknown>;
 }
 
 /**
