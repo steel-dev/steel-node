@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2024-10-06)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/0xnenlabs/steel-node/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** update via SDK Studio ([#6](https://github.com/0xnenlabs/steel-node/issues/6)) ([d1b6d9f](https://github.com/0xnenlabs/steel-node/commit/d1b6d9fe3cafadee5f2f356e9eecfa70318f5e48))
+
 ## 0.1.0-alpha.1 (2024-10-06)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/0xnenlabs/steel-node/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
