@@ -157,13 +157,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['STEEL_BASE_URL'] = ''; // empty
       const client = new Steel({ steelAPIKey: 'My Steel API Key' });
-      expect(client.baseURL).toEqual('https://steel-api-staging.fly.dev');
+      expect(client.baseURL).toEqual('https://api.steel.dev');
     });
 
     test('blank env variable', () => {
       process.env['STEEL_BASE_URL'] = '  '; // blank
       const client = new Steel({ steelAPIKey: 'My Steel API Key' });
-      expect(client.baseURL).toEqual('https://steel-api-staging.fly.dev');
+      expect(client.baseURL).toEqual('https://api.steel.dev');
     });
   });
 
