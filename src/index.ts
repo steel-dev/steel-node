@@ -83,7 +83,7 @@ export class Steel extends Core.APIClient {
    * API Client for interfacing with the Steel API.
    *
    * @param {string | undefined} [opts.steelAPIKey=process.env['STEEL_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? https://steel-api-staging.fly.dev] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? https://api.steel.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
    * @param {Core.Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -105,7 +105,7 @@ export class Steel extends Core.APIClient {
     const options: ClientOptions = {
       steelAPIKey,
       ...opts,
-      baseURL: baseURL || `https://steel-api-staging.fly.dev`,
+      baseURL: baseURL || `https://api.steel.dev`,
     };
 
     super({
