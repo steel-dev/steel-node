@@ -3,7 +3,6 @@
 import { APIResource } from '../resource';
 import { isRequestOptions } from '../core';
 import * as Core from '../core';
-import * as SessionsAPI from './sessions';
 import { SessionsCursor, type SessionsCursorParams } from '../pagination';
 
 export class Sessions extends APIResource {
@@ -109,11 +108,6 @@ export interface Session {
   eventCount: number;
 
   /**
-   * Session timeout duration in milliseconds
-   */
-  sessionTimeout: number;
-
-  /**
    * URL to view session details
    */
   sessionViewerUrl: string;
@@ -122,6 +116,11 @@ export interface Session {
    * Status of the session
    */
   status: 'live' | 'released' | 'failed';
+
+  /**
+   * Session timeout duration in milliseconds
+   */
+  timeout: number;
 
   /**
    * URL for the session's WebSocket connection
@@ -216,11 +215,6 @@ export namespace Sessionslist {
     eventCount: number;
 
     /**
-     * Session timeout duration in milliseconds
-     */
-    sessionTimeout: number;
-
-    /**
      * URL to view session details
      */
     sessionViewerUrl: string;
@@ -229,6 +223,11 @@ export namespace Sessionslist {
      * Status of the session
      */
     status: 'live' | 'released' | 'failed';
+
+    /**
+     * Session timeout duration in milliseconds
+     */
+    timeout: number;
 
     /**
      * URL for the session's WebSocket connection
@@ -298,11 +297,6 @@ export interface SessionListResponse {
   eventCount: number;
 
   /**
-   * Session timeout duration in milliseconds
-   */
-  sessionTimeout: number;
-
-  /**
    * URL to view session details
    */
   sessionViewerUrl: string;
@@ -311,6 +305,11 @@ export interface SessionListResponse {
    * Status of the session
    */
   status: 'live' | 'released' | 'failed';
+
+  /**
+   * Session timeout duration in milliseconds
+   */
+  timeout: number;
 
   /**
    * URL for the session's WebSocket connection
@@ -444,17 +443,24 @@ export namespace SessionCreateParams {
 }
 
 export interface SessionListParams extends SessionsCursorParams {
+  /**
+   * Filter sessions by current status
+   */
   status?: 'live' | 'released' | 'failed';
 }
 
-export namespace Sessions {
-  export import Session = SessionsAPI.Session;
-  export import SessionContext = SessionsAPI.SessionContext;
-  export import Sessionslist = SessionsAPI.Sessionslist;
-  export import SessionListResponse = SessionsAPI.SessionListResponse;
-  export import SessionReleaseResponse = SessionsAPI.SessionReleaseResponse;
-  export import SessionReleaseAllResponse = SessionsAPI.SessionReleaseAllResponse;
-  export import SessionListResponsesSessionsCursor = SessionsAPI.SessionListResponsesSessionsCursor;
-  export import SessionCreateParams = SessionsAPI.SessionCreateParams;
-  export import SessionListParams = SessionsAPI.SessionListParams;
+Sessions.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
+
+export declare namespace Sessions {
+  export {
+    type Session as Session,
+    type SessionContext as SessionContext,
+    type Sessionslist as Sessionslist,
+    type SessionListResponse as SessionListResponse,
+    type SessionReleaseResponse as SessionReleaseResponse,
+    type SessionReleaseAllResponse as SessionReleaseAllResponse,
+    SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionListParams as SessionListParams,
+  };
 }
