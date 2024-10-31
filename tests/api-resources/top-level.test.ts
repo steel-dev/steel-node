@@ -58,6 +58,11 @@ describe('top level methods', () => {
   });
 
   test('screenshot: required and optional params', async () => {
-    const response = await client.screenshot({ url: 'https://example.com', delay: 0, useProxy: true });
+    const response = await client.screenshot({
+      url: 'https://example.com',
+      delay: 0,
+      fullPage: true,
+      useProxy: true,
+    });
   });
 });
