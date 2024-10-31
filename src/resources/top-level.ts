@@ -1,7 +1,5 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as TopLevelAPI from './top-level';
-
 export interface PdfResponse {
   /**
    * URL where the PDF is hosted
@@ -194,16 +192,23 @@ export interface ScreenshotParams {
   delay?: number;
 
   /**
+   * Capture the full page screenshot. Default is `false`.
+   */
+  fullPage?: boolean;
+
+  /**
    * Use a Steel-provided residential proxy for capturing the screenshot
    */
   useProxy?: boolean;
 }
 
-export namespace TopLevel {
-  export import PdfResponse = TopLevelAPI.PdfResponse;
-  export import ScrapeResponse = TopLevelAPI.ScrapeResponse;
-  export import ScreenshotResponse = TopLevelAPI.ScreenshotResponse;
-  export import PdfParams = TopLevelAPI.PdfParams;
-  export import ScrapeParams = TopLevelAPI.ScrapeParams;
-  export import ScreenshotParams = TopLevelAPI.ScreenshotParams;
+export declare namespace TopLevel {
+  export {
+    type PdfResponse as PdfResponse,
+    type ScrapeResponse as ScrapeResponse,
+    type ScreenshotResponse as ScreenshotResponse,
+    type PdfParams as PdfParams,
+    type ScrapeParams as ScrapeParams,
+    type ScreenshotParams as ScreenshotParams,
+  };
 }
