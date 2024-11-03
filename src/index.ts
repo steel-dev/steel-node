@@ -7,15 +7,6 @@ import * as Pagination from './pagination';
 import { type SessionsCursorParams, SessionsCursorResponse } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
-import * as TopLevelAPI from './resources/top-level';
-import {
-  PdfParams,
-  PdfResponse,
-  ScrapeParams,
-  ScrapeResponse,
-  ScreenshotParams,
-  ScreenshotResponse,
-} from './resources/top-level';
 import {
   Session,
   SessionContext,
@@ -144,33 +135,6 @@ export class Steel extends Core.APIClient {
 
   sessions: API.Sessions = new API.Sessions(this);
 
-  /**
-   * Generates a PDF from a specified webpage.
-   */
-  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.PdfResponse> {
-    return this.post('/v1/pdf', { body, ...options });
-  }
-
-  /**
-   * Extracts content from a specified URL.
-   */
-  scrape(
-    body: TopLevelAPI.ScrapeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
-    return this.post('/v1/scrape', { body, ...options });
-  }
-
-  /**
-   * Captures a screenshot of a specified webpage.
-   */
-  screenshot(
-    body: TopLevelAPI.ScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScreenshotResponse> {
-    return this.post('/v1/screenshot', { body, ...options });
-  }
-
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
   }
@@ -207,19 +171,21 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const SteelError = Errors.SteelError;
-export const APIError = Errors.APIError;
-export const APIConnectionError = Errors.APIConnectionError;
-export const APIConnectionTimeoutError = Errors.APIConnectionTimeoutError;
-export const APIUserAbortError = Errors.APIUserAbortError;
-export const NotFoundError = Errors.NotFoundError;
-export const ConflictError = Errors.ConflictError;
-export const RateLimitError = Errors.RateLimitError;
-export const BadRequestError = Errors.BadRequestError;
-export const AuthenticationError = Errors.AuthenticationError;
-export const InternalServerError = Errors.InternalServerError;
-export const PermissionDeniedError = Errors.PermissionDeniedError;
-export const UnprocessableEntityError = Errors.UnprocessableEntityError;
+export {
+  SteelError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from './error';
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
@@ -234,15 +200,6 @@ export declare namespace Steel {
   export {
     type SessionsCursorParams as SessionsCursorParams,
     type SessionsCursorResponse as SessionsCursorResponse,
-  };
-
-  export {
-    type PdfResponse as PdfResponse,
-    type ScrapeResponse as ScrapeResponse,
-    type ScreenshotResponse as ScreenshotResponse,
-    type PdfParams as PdfParams,
-    type ScrapeParams as ScrapeParams,
-    type ScreenshotParams as ScreenshotParams,
   };
 
   export {

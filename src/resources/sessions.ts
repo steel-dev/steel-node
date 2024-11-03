@@ -403,14 +403,14 @@ export interface SessionCreateParams {
   sessionId?: string;
 
   /**
-   * Session timeout duration in milliseconds. Default is 900000 (15 minutes).
-   */
-  sessionTimeout?: number;
-
-  /**
    * Enable automatic captcha solving. Default is false.
    */
   solveCaptcha?: boolean;
+
+  /**
+   * Session timeout duration in milliseconds. Default is 900000 (15 minutes).
+   */
+  timeout?: number;
 
   /**
    * Enable Steel-provided residential proxy usage for the browser session. Default
