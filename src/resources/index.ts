@@ -12,11 +12,3 @@ export {
   type SessionCreateParams,
   type SessionListParams,
 } from './sessions';
-export {
-  type PdfResponse,
-  type ScrapeResponse,
-  type ScreenshotResponse,
-  type PdfParams,
-  type ScrapeParams,
-  type ScreenshotParams,
-} from './top-level';
