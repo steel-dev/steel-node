@@ -11,7 +11,7 @@
     "paths": {
       "steel-sdk/_shims/auto/*": ["src/_shims/auto/*-node"],
       "steel-sdk/*": ["src/*"],
-      "steel-sdk": ["src/index.ts"],
+      "steel-sdk": ["src/index.ts"]
     },
     "noEmit": true,
 
@@ -32,6 +32,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
+		"isolatedModules": false,
 
     "skipLibCheck": true
   }

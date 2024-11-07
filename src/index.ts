@@ -1,12 +1,24 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import * as Errors from './error';
-import * as Uploads from './uploads';
 import { type Agent } from './_shims/index';
 import * as Core from './core';
+import * as Errors from './error';
 import * as Pagination from './pagination';
+import { type SessionsCursorParams, SessionsCursorResponse } from './pagination';
+import * as Uploads from './uploads';
 import * as API from './resources/index';
-import * as TopLevelAPI from './resources/top-level';
+import {
+  Session,
+  SessionContext,
+  SessionCreateParams,
+  SessionListParams,
+  SessionListResponse,
+  SessionListResponsesSessionsCursor,
+  SessionReleaseAllResponse,
+  SessionReleaseResponse,
+  Sessions,
+  Sessionslist,
+} from './resources/sessions';
 
 export interface ClientOptions {
   /**
@@ -123,33 +135,6 @@ export class Steel extends Core.APIClient {
 
   sessions: API.Sessions = new API.Sessions(this);
 
-  /**
-   * Generates a PDF from a specified webpage.
-   */
-  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.PdfResponse> {
-    return this.post('/v1/pdf', { body, ...options });
-  }
-
-  /**
-   * Extracts content from a specified URL.
-   */
-  scrape(
-    body: TopLevelAPI.ScrapeParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
-    return this.post('/v1/scrape', { body, ...options });
-  }
-
-  /**
-   * Captures a screenshot of a specified webpage.
-   */
-  screenshot(
-    body: TopLevelAPI.ScreenshotParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<TopLevelAPI.ScreenshotResponse> {
-    return this.post('/v1/screenshot', { body, ...options });
-  }
-
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
   }
@@ -186,7 +171,7 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export const {
+export {
   SteelError,
   APIError,
   APIConnectionError,
@@ -200,35 +185,35 @@ export const {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} = Errors;
+} from './error';
 
 export import toFile = Uploads.toFile;
 export import fileFromPath = Uploads.fileFromPath;
 
-export namespace Steel {
-  export import RequestOptions = Core.RequestOptions;
+Steel.Sessions = Sessions;
+Steel.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
+
+export declare namespace Steel {
+  export type RequestOptions = Core.RequestOptions;
 
   export import SessionsCursor = Pagination.SessionsCursor;
-  export import SessionsCursorParams = Pagination.SessionsCursorParams;
-  export import SessionsCursorResponse = Pagination.SessionsCursorResponse;
+  export {
+    type SessionsCursorParams as SessionsCursorParams,
+    type SessionsCursorResponse as SessionsCursorResponse,
+  };
 
-  export import PdfResponse = API.PdfResponse;
-  export import ScrapeResponse = API.ScrapeResponse;
-  export import ScreenshotResponse = API.ScreenshotResponse;
-  export import PdfParams = API.PdfParams;
-  export import ScrapeParams = API.ScrapeParams;
-  export import ScreenshotParams = API.ScreenshotParams;
-
-  export import Sessions = API.Sessions;
-  export import Session = API.Session;
-  export import SessionContext = API.SessionContext;
-  export import Sessionslist = API.Sessionslist;
-  export import SessionListResponse = API.SessionListResponse;
-  export import SessionReleaseResponse = API.SessionReleaseResponse;
-  export import SessionReleaseAllResponse = API.SessionReleaseAllResponse;
-  export import SessionListResponsesSessionsCursor = API.SessionListResponsesSessionsCursor;
-  export import SessionCreateParams = API.SessionCreateParams;
-  export import SessionListParams = API.SessionListParams;
+  export {
+    Sessions as Sessions,
+    type Session as Session,
+    type SessionContext as SessionContext,
+    type Sessionslist as Sessionslist,
+    type SessionListResponse as SessionListResponse,
+    type SessionReleaseResponse as SessionReleaseResponse,
+    type SessionReleaseAllResponse as SessionReleaseAllResponse,
+    SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionListParams as SessionListParams,
+  };
 }
 
 export default Steel;

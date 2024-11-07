@@ -48,11 +48,7 @@ const client = new Steel({
 });
 
 async function main() {
-  const params: Steel.ScrapeParams = {
-    url: 'https://www.eff.org/cyberspace-independence',
-    format: ['markdown'],
-  };
-  const response: Steel.ScrapeResponse = await client.scrape(params);
+  const session: Steel.Session = await client.sessions.create();
 }
 
 main();
@@ -69,17 +65,15 @@ a subclass of `APIError` will be thrown:
 <!-- prettier-ignore -->
 ```ts
 async function main() {
-  const response = await client
-    .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
-    .catch(async (err) => {
-      if (err instanceof Steel.APIError) {
-        console.log(err.status); // 400
-        console.log(err.name); // BadRequestError
-        console.log(err.headers); // {server: 'nginx', ...}
-      } else {
-        throw err;
-      }
-    });
+  const session = await client.sessions.create().catch(async (err) => {
+    if (err instanceof Steel.APIError) {
+      console.log(err.status); // 400
+      console.log(err.name); // BadRequestError
+      console.log(err.headers); // {server: 'nginx', ...}
+    } else {
+      throw err;
+    }
+  });
 }
 
 main();
@@ -114,7 +108,7 @@ const client = new Steel({
 });
 
 // Or, configure per-request:
-await client.scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] }, {
+await client.sessions.create({
   maxRetries: 5,
 });
 ```
@@ -131,7 +125,7 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] }, {
+await client.sessions.create({
   timeout: 5 * 1000,
 });
 ```
@@ -143,7 +137,7 @@ Note that requests which time out will be [retried twice by default](#retries).
 ## Auto-pagination
 
 List methods in the Steel API are paginated.
-You can use `for await … of` syntax to iterate through items across all pages:
+You can use the `for await … of` syntax to iterate through items across all pages:
 
 ```ts
 async function fetchAllSessions(params) {
@@ -156,7 +150,7 @@ async function fetchAllSessions(params) {
 }
 ```
 
-Alternatively, you can make request a single page at a time:
+Alternatively, you can request a single page at a time:
 
 ```ts
 let page = await client.sessions.list({ status: 'live' });
@@ -183,17 +177,13 @@ You can also use the `.withResponse()` method to get the raw `Response` along wi
 ```ts
 const client = new Steel();
 
-const response = await client
-  .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
-  .asResponse();
+const response = await client.sessions.create().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: response, response: raw } = await client
-  .scrape({ url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] })
-  .withResponse();
+const { data: session, response: raw } = await client.sessions.create().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(response.content);
+console.log(session.id);
 ```
 
 ### Making custom/undocumented requests
@@ -297,12 +287,9 @@ const client = new Steel({
 });
 
 // Override per-request:
-await client.scrape(
-  { url: 'https://www.eff.org/cyberspace-independence', format: ['markdown'] },
-  {
-    httpAgent: new http.Agent({ keepAlive: false }),
-  },
-);
+await client.sessions.create({
+  httpAgent: new http.Agent({ keepAlive: false }),
+});
 ```
 
 ## Semantic versioning
