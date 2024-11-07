@@ -27,7 +27,7 @@ const client = new Steel({
 });
 
 async function main() {
-  const session = await client.sessions.create();
+  const session = await client.sessions.create({ timeout: 20000, useProxy: true });
 
   console.log(session.id);
 }
