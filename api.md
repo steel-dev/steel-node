@@ -1,5 +1,3 @@
-# Steel
-
 # Sessions
 
 Types:
