@@ -196,7 +196,7 @@ export declare namespace Steel {
   };
 }
 
-export { toFile, fileFromPath } from 'steel-sdk/uploads';
+export { toFile, fileFromPath } from './uploads';
 export {
   SteelError,
   APIError,
@@ -211,6 +211,6 @@ export {
   InternalServerError,
   PermissionDeniedError,
   UnprocessableEntityError,
-} from 'steel-sdk/error';
+} from './error';
 
 export default Steel;
