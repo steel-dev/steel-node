@@ -171,28 +171,8 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-export {
-  SteelError,
-  APIError,
-  APIConnectionError,
-  APIConnectionTimeoutError,
-  APIUserAbortError,
-  NotFoundError,
-  ConflictError,
-  RateLimitError,
-  BadRequestError,
-  AuthenticationError,
-  InternalServerError,
-  PermissionDeniedError,
-  UnprocessableEntityError,
-} from './error';
-
-export import toFile = Uploads.toFile;
-export import fileFromPath = Uploads.fileFromPath;
-
 Steel.Sessions = Sessions;
 Steel.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
-
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
 
@@ -215,5 +195,22 @@ export declare namespace Steel {
     type SessionListParams as SessionListParams,
   };
 }
+
+export { toFile, fileFromPath } from './uploads';
+export {
+  SteelError,
+  APIError,
+  APIConnectionError,
+  APIConnectionTimeoutError,
+  APIUserAbortError,
+  NotFoundError,
+  ConflictError,
+  RateLimitError,
+  BadRequestError,
+  AuthenticationError,
+  InternalServerError,
+  PermissionDeniedError,
+  UnprocessableEntityError,
+} from './error';
 
 export default Steel;

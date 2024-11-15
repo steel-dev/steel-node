@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.1.0-beta.3 (2024-11-15)
+
+Full Changelog: [v0.1.0-beta.2...v0.1.0-beta.3](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.2...v0.1.0-beta.3)
+
+### Features
+
+* Update package.json ([a2dd1ba](https://github.com/steel-dev/steel-node/commit/a2dd1bab1dfe4f170e2841fe8e09ebec94f4a612))
+* Update package.json ([05c6fd1](https://github.com/steel-dev/steel-node/commit/05c6fd17335e823fb58544633c285b18f69be23e))
+
+
+### Chores
+
+* rebuild project due to codegen change ([#13](https://github.com/steel-dev/steel-node/issues/13)) ([f817588](https://github.com/steel-dev/steel-node/commit/f817588c141755063be1176a2653887ed4ef5699))
+* rebuild project due to codegen change ([#15](https://github.com/steel-dev/steel-node/issues/15)) ([4105f3b](https://github.com/steel-dev/steel-node/commit/4105f3b739e4c5dfb86e08f6c3beb0c40ff8ea46))
+
 ## 0.1.0-beta.2 (2024-11-07)
 
 Full Changelog: [v0.1.0-beta.1...v0.1.0-beta.2](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.1...v0.1.0-beta.2)
