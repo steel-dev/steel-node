@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.1.0-beta.4 (2024-11-28)
+
+Full Changelog: [v0.1.0-beta.3...v0.1.0-beta.4](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.3...v0.1.0-beta.4)
+
+### Features
+
+* **internal:** make git install file structure match npm ([#22](https://github.com/steel-dev/steel-node/issues/22)) ([7ec8db2](https://github.com/steel-dev/steel-node/commit/7ec8db291c9b1bc5880bfc5bff7c51ebaf52608e))
+
+
+### Chores
+
+* **internal:** version bump ([#17](https://github.com/steel-dev/steel-node/issues/17)) ([f1437e4](https://github.com/steel-dev/steel-node/commit/f1437e49caab55e46f9a0d04dfc7ab4e51d20b45))
+* rebuild project due to codegen change ([#19](https://github.com/steel-dev/steel-node/issues/19)) ([c0edb4c](https://github.com/steel-dev/steel-node/commit/c0edb4c5425d9369d19fa3d5d1c213cc0484f185))
+* remove redundant word in comment ([#21](https://github.com/steel-dev/steel-node/issues/21)) ([a1cc68a](https://github.com/steel-dev/steel-node/commit/a1cc68aa11c56912682c4dd040e147ed2bd9aefe))
+
+
+### Documentation
+
+* remove suggestion to use `npm` call out ([#20](https://github.com/steel-dev/steel-node/issues/20)) ([79a2c48](https://github.com/steel-dev/steel-node/commit/79a2c4841e2e1b148fe6858dc494ab8c0d81878e))
+
 ## 0.1.0-beta.3 (2024-11-15)
 
 Full Changelog: [v0.1.0-beta.2...v0.1.0-beta.3](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.2...v0.1.0-beta.3)
