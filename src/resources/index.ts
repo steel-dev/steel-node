@@ -11,4 +11,6 @@ export {
   type SessionReleaseAllResponse,
   type SessionCreateParams,
   type SessionListParams,
+  type SessionReleaseParams,
+  type SessionReleaseAllParams,
 } from './sessions';

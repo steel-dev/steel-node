@@ -58,15 +58,22 @@ export class Sessions extends APIResource {
   /**
    * Releases a specific session by ID.
    */
-  release(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionReleaseResponse> {
-    return this._client.post(`/v1/sessions/${id}/release`, options);
+  release(
+    id: string,
+    body?: SessionReleaseParams | null | undefined,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseResponse> {
+    return this._client.post(`/v1/sessions/${id}/release`, { body, ...options });
   }
 
   /**
    * Releases all active sessions for the current organization.
    */
-  releaseAll(options?: Core.RequestOptions): Core.APIPromise<SessionReleaseAllResponse> {
-    return this._client.post('/v1/sessions/release', options);
+  releaseAll(
+    body?: SessionReleaseAllParams | null | undefined,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseAllResponse> {
+    return this._client.post('/v1/sessions/release', { body, ...options });
   }
 }
 
@@ -136,11 +143,6 @@ export interface Session {
    * Proxy server used for the session
    */
   proxy?: string;
-
-  /**
-   * Geographical region of the session
-   */
-  region?: 'LAX' | 'ORD' | 'NYC' | 'SFO';
 
   /**
    * Indicates if captcha solving is enabled
@@ -245,11 +247,6 @@ export namespace Sessionslist {
     proxy?: string;
 
     /**
-     * Geographical region of the session
-     */
-    region?: 'LAX' | 'ORD' | 'NYC' | 'SFO';
-
-    /**
      * Indicates if captcha solving is enabled
      */
     solveCaptcha?: boolean;
@@ -325,11 +322,6 @@ export interface SessionListResponse {
    * Proxy server used for the session
    */
   proxy?: string;
-
-  /**
-   * Geographical region of the session
-   */
-  region?: 'LAX' | 'ORD' | 'NYC' | 'SFO';
 
   /**
    * Indicates if captcha solving is enabled
@@ -408,7 +400,7 @@ export interface SessionCreateParams {
   solveCaptcha?: boolean;
 
   /**
-   * Session timeout duration in milliseconds. Default is 900000 (15 minutes).
+   * Session timeout duration in milliseconds. Default is 300000 (5 minutes).
    */
   timeout?: number;
 
@@ -449,6 +441,10 @@ export interface SessionListParams extends SessionsCursorParams {
   status?: 'live' | 'released' | 'failed';
 }
 
+export interface SessionReleaseParams {}
+
+export interface SessionReleaseAllParams {}
+
 Sessions.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
 
 export declare namespace Sessions {
@@ -462,5 +458,7 @@ export declare namespace Sessions {
     SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
+    type SessionReleaseParams as SessionReleaseParams,
+    type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 }
