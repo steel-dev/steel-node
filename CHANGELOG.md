@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.0-beta.5 (2024-12-03)
+
+Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.4...v0.1.0-beta.5)
+
+### Features
+
+* **api:** api update ([#24](https://github.com/steel-dev/steel-node/issues/24)) ([45a7e47](https://github.com/steel-dev/steel-node/commit/45a7e47b0a3cb2d25d282ee4fe81b4fbe9444018))
+
 ## 0.1.0-beta.4 (2024-11-28)
 
 Full Changelog: [v0.1.0-beta.3...v0.1.0-beta.4](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.3...v0.1.0-beta.4)
