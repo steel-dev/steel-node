@@ -14,7 +14,9 @@ import {
   SessionListParams,
   SessionListResponse,
   SessionListResponsesSessionsCursor,
+  SessionReleaseAllParams,
   SessionReleaseAllResponse,
+  SessionReleaseParams,
   SessionReleaseResponse,
   Sessions,
   Sessionslist,
@@ -193,6 +195,8 @@ export declare namespace Steel {
     SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
+    type SessionReleaseParams as SessionReleaseParams,
+    type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 }
 
