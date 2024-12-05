@@ -22,9 +22,7 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Steel from 'steel-sdk';
 
-const client = new Steel({
-  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
-});
+const client = new Steel();
 
 async function main() {
   const session = await client.sessions.create({ timeout: 20000, useProxy: true });
@@ -43,9 +41,7 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Steel from 'steel-sdk';
 
-const client = new Steel({
-  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
-});
+const client = new Steel();
 
 async function main() {
   const session: Steel.Session = await client.sessions.create();
