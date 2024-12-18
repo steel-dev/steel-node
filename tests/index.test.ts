@@ -183,7 +183,7 @@ describe('instantiate client', () => {
     expect(client.steelAPIKey).toBe('My Steel API Key');
   });
 
-  test('with overriden environment variable arguments', () => {
+  test('with overridden environment variable arguments', () => {
     // set options via env var
     process.env['STEEL_API_KEY'] = 'another My Steel API Key';
     const client = new Steel({ steelAPIKey: 'My Steel API Key' });
