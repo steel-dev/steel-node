@@ -7,6 +7,15 @@ import * as Pagination from './pagination';
 import { type SessionsCursorParams, SessionsCursorResponse } from './pagination';
 import * as Uploads from './uploads';
 import * as API from './resources/index';
+import * as TopLevelAPI from './resources/top-level';
+import {
+  PdfParams,
+  PdfResponse,
+  ScrapeParams,
+  ScrapeResponse,
+  ScreenshotParams,
+  ScreenshotResponse,
+} from './resources/top-level';
 import {
   Session,
   SessionContext,
@@ -137,6 +146,33 @@ export class Steel extends Core.APIClient {
 
   sessions: API.Sessions = new API.Sessions(this);
 
+  /**
+   * Generates a PDF from a specified webpage.
+   */
+  pdf(body: TopLevelAPI.PdfParams, options?: Core.RequestOptions): Core.APIPromise<TopLevelAPI.PdfResponse> {
+    return this.post('/v1/pdf', { body, ...options });
+  }
+
+  /**
+   * Extracts content from a specified URL.
+   */
+  scrape(
+    body: TopLevelAPI.ScrapeParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.ScrapeResponse> {
+    return this.post('/v1/scrape', { body, ...options });
+  }
+
+  /**
+   * Captures a screenshot of a specified webpage.
+   */
+  screenshot(
+    body: TopLevelAPI.ScreenshotParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<TopLevelAPI.ScreenshotResponse> {
+    return this.post('/v1/screenshot', { body, ...options });
+  }
+
   protected override defaultQuery(): Core.DefaultQuery | undefined {
     return this._options.defaultQuery;
   }
@@ -182,6 +218,15 @@ export declare namespace Steel {
   export {
     type SessionsCursorParams as SessionsCursorParams,
     type SessionsCursorResponse as SessionsCursorResponse,
+  };
+
+  export {
+    type PdfResponse as PdfResponse,
+    type ScrapeResponse as ScrapeResponse,
+    type ScreenshotResponse as ScreenshotResponse,
+    type PdfParams as PdfParams,
+    type ScrapeParams as ScrapeParams,
+    type ScreenshotParams as ScreenshotParams,
   };
 
   export {
