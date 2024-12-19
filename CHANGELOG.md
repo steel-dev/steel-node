@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.0-beta.6 (2024-12-19)
+
+Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.5...v0.1.0-beta.6)
+
+### Features
+
+* **api:** api update ([#34](https://github.com/steel-dev/steel-node/issues/34)) ([51a7bbe](https://github.com/steel-dev/steel-node/commit/51a7bbe4d8be15b77f7831f5da74962212e9b29e))
+
+
+### Chores
+
+* **internal:** bump cross-spawn to v7.0.6 ([#28](https://github.com/steel-dev/steel-node/issues/28)) ([916d489](https://github.com/steel-dev/steel-node/commit/916d489b7ca78156fa7ce5e40ba8bc9ff427bc47))
+* **internal:** codegen related update ([#32](https://github.com/steel-dev/steel-node/issues/32)) ([d417931](https://github.com/steel-dev/steel-node/commit/d417931a5ac720d8131e8955b050a7473daee5e6))
+* **internal:** fix some typos ([#33](https://github.com/steel-dev/steel-node/issues/33)) ([fc64e4a](https://github.com/steel-dev/steel-node/commit/fc64e4a7163c2ecfd5469c4480832a768f1c02cb))
+* **types:** nicer error class types + jsdocs ([#30](https://github.com/steel-dev/steel-node/issues/30)) ([c35bfa6](https://github.com/steel-dev/steel-node/commit/c35bfa6f9afaad73143e18ccd4b91c013a081f7f))
+
 ## 0.1.0-beta.5 (2024-12-03)
 
 Full Changelog: [v0.1.0-beta.4...v0.1.0-beta.5](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.4...v0.1.0-beta.5)

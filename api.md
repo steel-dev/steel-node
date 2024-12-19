@@ -1,3 +1,17 @@
+# Steel
+
+Types:
+
+- <code><a href="./src/resources/top-level.ts">PdfResponse</a></code>
+- <code><a href="./src/resources/top-level.ts">ScrapeResponse</a></code>
+- <code><a href="./src/resources/top-level.ts">ScreenshotResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/pdf">client.<a href="./src/index.ts">pdf</a>({ ...params }) -> PdfResponse</code>
+- <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> ScrapeResponse</code>
+- <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> ScreenshotResponse</code>
+
 # Sessions
 
 Types:
