@@ -6,7 +6,11 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.js",
   "type": "commonjs",
-  "repository": "github:steel-dev/steel-node",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/steel-dev/steel-node.git"
+  },
+  "homepage": "https://steel.dev",
   "license": "Apache-2.0",
   "packageManager": "yarn@1.22.22",
   "files": [
