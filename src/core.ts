@@ -540,6 +540,10 @@ export abstract class APIClient {
     );
   }
 
+  protected getRequestClient(): RequestClient {
+    return { fetch: this.fetch };
+  }
+
   private shouldRetry(response: Response): boolean {
     // Note this is not a standard header.
     const shouldRetryHeader = response.headers.get('x-should-retry');
