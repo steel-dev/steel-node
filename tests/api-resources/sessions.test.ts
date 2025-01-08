@@ -32,6 +32,7 @@ describe('resource sessions', () => {
     await expect(
       client.sessions.create(
         {
+          blockAds: true,
           concurrency: 0,
           isSelenium: true,
           proxyUrl: 'proxyUrl',
