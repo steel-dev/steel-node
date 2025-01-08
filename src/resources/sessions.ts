@@ -366,6 +366,11 @@ export interface SessionReleaseAllResponse {
 
 export interface SessionCreateParams {
   /**
+   * Block ads in the browser session. Default is false.
+   */
+  blockAds?: boolean;
+
+  /**
    * Number of sessions to create concurrently (check your plan limit)
    */
   concurrency?: number;
