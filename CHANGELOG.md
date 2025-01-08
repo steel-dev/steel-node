@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.1.0-beta.7 (2025-01-08)
+
+Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.6...v0.1.0-beta.7)
+
+### Features
+
+* **api:** api update ([#41](https://github.com/steel-dev/steel-node/issues/41)) ([6c1d329](https://github.com/steel-dev/steel-node/commit/6c1d32992bf366ec8048129a6eefdeeb5f3ffb50))
+
+
+### Bug Fixes
+
+* **client:** normalize method ([#36](https://github.com/steel-dev/steel-node/issues/36)) ([bea0050](https://github.com/steel-dev/steel-node/commit/bea00502212cd74c9d35e231b93166dcb3a4d0b4))
+
+
+### Chores
+
+* **internal:** codegen related update ([#39](https://github.com/steel-dev/steel-node/issues/39)) ([9d83913](https://github.com/steel-dev/steel-node/commit/9d839139cd615b0b2e3950b9438c872b11b2aa46))
+
+
+### Documentation
+
+* minor formatting changes ([#38](https://github.com/steel-dev/steel-node/issues/38)) ([827fb18](https://github.com/steel-dev/steel-node/commit/827fb184685a2df377e7f636c89a68918af9fe2d))
+
 ## 0.1.0-beta.6 (2024-12-19)
 
 Full Changelog: [v0.1.0-beta.5...v0.1.0-beta.6](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.5...v0.1.0-beta.6)
