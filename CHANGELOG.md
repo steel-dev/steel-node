@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.1.0-beta.8 (2025-01-15)
+
+Full Changelog: [v0.1.0-beta.7...v0.1.0-beta.8](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.7...v0.1.0-beta.8)
+
+### Bug Fixes
+
+* **sessions:** remove conditional request options causing incorrect params ([3d524a7](https://github.com/steel-dev/steel-node/commit/3d524a7feb97babfe7a0c1d9b3dcde49a3eff91b))
+
+
+### Chores
+
+* **internal:** codegen related update ([#43](https://github.com/steel-dev/steel-node/issues/43)) ([b013f25](https://github.com/steel-dev/steel-node/commit/b013f25e7057674daf2038a6b7b66c1dd69ad54b))
+
 ## 0.1.0-beta.7 (2025-01-08)
 
 Full Changelog: [v0.1.0-beta.6...v0.1.0-beta.7](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.6...v0.1.0-beta.7)
