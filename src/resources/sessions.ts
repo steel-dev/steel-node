@@ -9,15 +9,7 @@ export class Sessions extends APIResource {
   /**
    * Creates a new session with the provided configuration.
    */
-  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(
-    body: SessionCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
-    if (isRequestOptions(body)) {
-      return this.create({}, body);
-    }
+  create(body: SessionCreateParams = {}, options?: Core.RequestOptions): Core.APIPromise<Session> {
     return this._client.post('/v1/sessions', { body, ...options });
   }
 
