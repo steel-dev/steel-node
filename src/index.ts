@@ -21,14 +21,13 @@ import {
   SessionContext,
   SessionCreateParams,
   SessionListParams,
-  SessionListResponse,
-  SessionListResponsesSessionsCursor,
   SessionReleaseAllParams,
   SessionReleaseAllResponse,
   SessionReleaseParams,
   SessionReleaseResponse,
   Sessions,
   Sessionslist,
+  SessionslistSessionsSessionsCursor,
 } from './resources/sessions';
 
 export interface ClientOptions {
@@ -210,7 +209,7 @@ export class Steel extends Core.APIClient {
 }
 
 Steel.Sessions = Sessions;
-Steel.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
+Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
 
@@ -234,10 +233,9 @@ export declare namespace Steel {
     type Session as Session,
     type SessionContext as SessionContext,
     type Sessionslist as Sessionslist,
-    type SessionListResponse as SessionListResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
     type SessionReleaseAllResponse as SessionReleaseAllResponse,
-    SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
+    SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionReleaseParams as SessionReleaseParams,

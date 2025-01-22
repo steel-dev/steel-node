@@ -26,18 +26,18 @@ export class Sessions extends APIResource {
   list(
     query?: SessionListParams,
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionListResponsesSessionsCursor, SessionListResponse>;
+  ): Core.PagePromise<SessionslistSessionsSessionsCursor, Sessionslist.Session>;
   list(
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionListResponsesSessionsCursor, SessionListResponse>;
+  ): Core.PagePromise<SessionslistSessionsSessionsCursor, Sessionslist.Session>;
   list(
     query: SessionListParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.PagePromise<SessionListResponsesSessionsCursor, SessionListResponse> {
+  ): Core.PagePromise<SessionslistSessionsSessionsCursor, Sessionslist.Session> {
     if (isRequestOptions(query)) {
       return this.list({}, query);
     }
-    return this._client.getAPIList('/v1/sessions', SessionListResponsesSessionsCursor, { query, ...options });
+    return this._client.getAPIList('/v1/sessions', SessionslistSessionsSessionsCursor, { query, ...options });
   }
 
   /**
@@ -69,7 +69,7 @@ export class Sessions extends APIResource {
   }
 }
 
-export class SessionListResponsesSessionsCursor extends SessionsCursor<SessionListResponse> {}
+export class SessionslistSessionsSessionsCursor extends SessionsCursor<Sessionslist.Session> {}
 
 /**
  * Represents the data structure for a browser session, including its configuration
@@ -251,82 +251,6 @@ export namespace Sessionslist {
 }
 
 /**
- * Represents the data structure for a browser session, including its configuration
- * and status.
- */
-export interface SessionListResponse {
-  /**
-   * Unique identifier for the session
-   */
-  id: string;
-
-  /**
-   * Timestamp when the session started
-   */
-  createdAt: string;
-
-  /**
-   * Amount of credits consumed by the session
-   */
-  creditsUsed: number;
-
-  /**
-   * URL for debugging the session
-   */
-  debugUrl: string;
-
-  /**
-   * Duration of the session in milliseconds
-   */
-  duration: number;
-
-  /**
-   * Number of events processed in the session
-   */
-  eventCount: number;
-
-  /**
-   * URL to view session details
-   */
-  sessionViewerUrl: string;
-
-  /**
-   * Status of the session
-   */
-  status: 'live' | 'released' | 'failed';
-
-  /**
-   * Session timeout duration in milliseconds
-   */
-  timeout: number;
-
-  /**
-   * URL for the session's WebSocket connection
-   */
-  websocketUrl: string;
-
-  /**
-   * Indicates if Selenium is used in the session
-   */
-  isSelenium?: boolean;
-
-  /**
-   * Proxy server used for the session
-   */
-  proxy?: string;
-
-  /**
-   * Indicates if captcha solving is enabled
-   */
-  solveCaptcha?: boolean;
-
-  /**
-   * User agent string used in the session
-   */
-  userAgent?: string;
-}
-
-/**
  * Response for releasing a single session.
  */
 export interface SessionReleaseResponse {
@@ -442,17 +366,16 @@ export interface SessionReleaseParams {}
 
 export interface SessionReleaseAllParams {}
 
-Sessions.SessionListResponsesSessionsCursor = SessionListResponsesSessionsCursor;
+Sessions.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 
 export declare namespace Sessions {
   export {
     type Session as Session,
     type SessionContext as SessionContext,
     type Sessionslist as Sessionslist,
-    type SessionListResponse as SessionListResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
     type SessionReleaseAllResponse as SessionReleaseAllResponse,
-    SessionListResponsesSessionsCursor as SessionListResponsesSessionsCursor,
+    SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionReleaseParams as SessionReleaseParams,
