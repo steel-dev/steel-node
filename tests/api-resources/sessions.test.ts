@@ -27,6 +27,7 @@ describe('resource sessions', () => {
         {
           blockAds: true,
           concurrency: 0,
+          dimensions: { height: 0, width: 0 },
           isSelenium: true,
           proxyUrl: 'proxyUrl',
           sessionContext: { cookies: [{ foo: 'bar' }], localStorage: [{ foo: 'bar' }] },
