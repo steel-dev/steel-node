@@ -1,12 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
-  SessionListResponsesSessionsCursor,
+  SessionslistSessionsSessionsCursor,
   Sessions,
   type Session,
   type SessionContext,
   type Sessionslist,
-  type SessionListResponse,
   type SessionReleaseResponse,
   type SessionReleaseAllResponse,
   type SessionCreateParams,

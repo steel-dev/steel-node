@@ -139,8 +139,8 @@ You can use the `for await … of` syntax to iterate through items across all pa
 async function fetchAllSessions(params) {
   const allSessions = [];
   // Automatically fetches more pages as needed.
-  for await (const sessionListResponse of client.sessions.list({ status: 'live' })) {
-    allSessions.push(sessionListResponse);
+  for await (const session of client.sessions.list({ status: 'live' })) {
+    allSessions.push(session);
   }
   return allSessions;
 }
@@ -150,8 +150,8 @@ Alternatively, you can request a single page at a time:
 
 ```ts
 let page = await client.sessions.list({ status: 'live' });
-for (const sessionListResponse of page.sessions) {
-  console.log(sessionListResponse);
+for (const session of page.sessions) {
+  console.log(session);
 }
 
 // Convenience methods are provided for manually paginating:
