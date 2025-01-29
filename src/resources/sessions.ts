@@ -105,6 +105,11 @@ export interface Session {
   debugUrl: string;
 
   /**
+   * Viewport and browser window dimensions for the session
+   */
+  dimensions: Session.Dimensions;
+
+  /**
    * Duration of the session in milliseconds
    */
   duration: number;
@@ -113,6 +118,11 @@ export interface Session {
    * Number of events processed in the session
    */
   eventCount: number;
+
+  /**
+   * Amount of data transmitted through the proxy
+   */
+  proxyBytesUsed: number;
 
   /**
    * URL to view session details
@@ -153,6 +163,23 @@ export interface Session {
    * User agent string used in the session
    */
   userAgent?: string;
+}
+
+export namespace Session {
+  /**
+   * Viewport and browser window dimensions for the session
+   */
+  export interface Dimensions {
+    /**
+     * Height of the browser window
+     */
+    height: number;
+
+    /**
+     * Width of the browser window
+     */
+    width: number;
+  }
 }
 
 /**
@@ -207,6 +234,11 @@ export namespace Sessionslist {
     debugUrl: string;
 
     /**
+     * Viewport and browser window dimensions for the session
+     */
+    dimensions: Session.Dimensions;
+
+    /**
      * Duration of the session in milliseconds
      */
     duration: number;
@@ -215,6 +247,11 @@ export namespace Sessionslist {
      * Number of events processed in the session
      */
     eventCount: number;
+
+    /**
+     * Amount of data transmitted through the proxy
+     */
+    proxyBytesUsed: number;
 
     /**
      * URL to view session details
@@ -255,6 +292,23 @@ export namespace Sessionslist {
      * User agent string used in the session
      */
     userAgent?: string;
+  }
+
+  export namespace Session {
+    /**
+     * Viewport and browser window dimensions for the session
+     */
+    export interface Dimensions {
+      /**
+       * Height of the browser window
+       */
+      height: number;
+
+      /**
+       * Width of the browser window
+       */
+      width: number;
+    }
   }
 }
 
@@ -298,6 +352,11 @@ export interface SessionCreateParams {
    * Number of sessions to create concurrently (check your plan limit)
    */
   concurrency?: number;
+
+  /**
+   * Viewport and browser window dimensions for the session
+   */
+  dimensions?: SessionCreateParams.Dimensions;
 
   /**
    * Enable Selenium mode for the browser session (default is false). Use this when
@@ -346,6 +405,21 @@ export interface SessionCreateParams {
 }
 
 export namespace SessionCreateParams {
+  /**
+   * Viewport and browser window dimensions for the session
+   */
+  export interface Dimensions {
+    /**
+     * Height of the session
+     */
+    height: number;
+
+    /**
+     * Width of the session
+     */
+    width: number;
+  }
+
   /**
    * Session context data to be used in the created session. Sessions will start with
    * an empty context by default.
