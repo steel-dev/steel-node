@@ -428,12 +428,56 @@ export namespace SessionCreateParams {
     /**
      * Cookies to initialize in the session
      */
-    cookies?: Array<Record<string, unknown>>;
+    cookies?: Array<SessionContext.Cookie>;
 
     /**
-     * Local storage items to initialize in the session
+     * Domain-specific localStorage items to initialize in the session
      */
-    localStorage?: Array<Record<string, unknown>>;
+    localStorage?: Record<string, Record<string, unknown>>;
+  }
+
+  export namespace SessionContext {
+    export interface Cookie {
+      /**
+       * Domain the cookie belongs to
+       */
+      domain: string;
+
+      /**
+       * Name of the cookie
+       */
+      name: string;
+
+      /**
+       * Value of the cookie
+       */
+      value: string;
+
+      /**
+       * Unix timestamp when the cookie expires
+       */
+      expires?: number;
+
+      /**
+       * Whether the cookie is HTTP only
+       */
+      httpOnly?: boolean;
+
+      /**
+       * Path the cookie is valid for
+       */
+      path?: string;
+
+      /**
+       * SameSite attribute of the cookie
+       */
+      sameSite?: 'Strict' | 'Lax' | 'None';
+
+      /**
+       * Whether the cookie requires HTTPS
+       */
+      secure?: boolean;
+    }
   }
 }
 
