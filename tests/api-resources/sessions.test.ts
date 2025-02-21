@@ -30,7 +30,21 @@ describe('resource sessions', () => {
           dimensions: { height: 0, width: 0 },
           isSelenium: true,
           proxyUrl: 'proxyUrl',
-          sessionContext: { cookies: [{ foo: 'bar' }], localStorage: [{ foo: 'bar' }] },
+          sessionContext: {
+            cookies: [
+              {
+                domain: 'domain',
+                name: 'name',
+                value: 'value',
+                expires: 0,
+                httpOnly: true,
+                path: 'path',
+                sameSite: 'Strict',
+                secure: true,
+              },
+            ],
+            localStorage: { foo: { foo: 'bar' } },
+          },
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,
           timeout: 0,
