@@ -1,6 +1,6 @@
 {
   "name": "steel-sdk",
-  "version": "0.1.0-beta.9",
+  "version": "0.1.0-beta.10",
   "description": "The official TypeScript library for the Steel API",
   "author": "Steel <team@steel.dev>",
   "types": "dist/index.d.ts",
@@ -111,17 +111,38 @@
       "default": "./dist/index.mjs"
     },
     "./*.mjs": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.mjs"
+      "types": [
+        "./dist/*.d.ts",
+        "./dist/*/index.d.ts"
+      ],
+      "default": [
+        "./dist/*.mjs",
+        "./dist/*/index.mjs"
+      ]
     },
     "./*.js": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
+      "types": [
+        "./dist/*.d.ts",
+        "./dist/*/index.d.ts"
+      ],
+      "default": [
+        "./dist/*.js",
+        "./dist/*/index.js"
+      ]
     },
     "./*": {
-      "types": "./dist/*.d.ts",
-      "require": "./dist/*.js",
-      "default": "./dist/*.mjs"
+      "types": [
+        "./dist/*.d.ts",
+        "./dist/*/index.d.ts"
+      ],
+      "require": [
+        "./dist/*.js",
+        "./dist/*/index.js"
+      ],
+      "default": [
+        "./dist/*.mjs",
+        "./dist/*/index.mjs"
+      ]
     }
   }
 }
