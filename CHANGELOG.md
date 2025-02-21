@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0-beta.10 (2025-02-21)
+
+Full Changelog: [v0.1.0-beta.9...v0.1.0-beta.10](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.9...v0.1.0-beta.10)
+
+### Features
+
+* **api:** api update ([#54](https://github.com/steel-dev/steel-node/issues/54)) ([f5b7f50](https://github.com/steel-dev/steel-node/commit/f5b7f50c41217650b859152c9d9ca675fed7bcc1))
+* **client:** send `X-Stainless-Timeout` header ([#51](https://github.com/steel-dev/steel-node/issues/51)) ([fa34df9](https://github.com/steel-dev/steel-node/commit/fa34df91d4a0469c62cfd36a8f620967decc01b5))
+
+
+### Bug Fixes
+
+* **client:** fix export map for index exports ([#53](https://github.com/steel-dev/steel-node/issues/53)) ([2ed9f92](https://github.com/steel-dev/steel-node/commit/2ed9f922bc35aa30d97a20825b50dbc73d59f4c3))
+
 ## 0.1.0-beta.9 (2025-01-29)
 
 Full Changelog: [v0.1.0-beta.8...v0.1.0-beta.9](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.8...v0.1.0-beta.9)
