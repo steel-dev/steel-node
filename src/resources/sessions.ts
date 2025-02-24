@@ -175,18 +175,62 @@ export namespace Session {
 }
 
 /**
- * Context data of a browser session, including cookies and local storage.
+ * Session context data returned from a browser session.
  */
 export interface SessionContext {
   /**
-   * List of cookies associated with the session
+   * Cookies from the session
    */
-  cookies: Array<Record<string, unknown>>;
+  cookies?: Array<SessionContext.Cookie>;
 
   /**
-   * Local storage data associated with the session
+   * Local storage items from the session
    */
-  localStorage: Record<string, unknown>;
+  localStorage?: Record<string, Record<string, unknown>>;
+}
+
+export namespace SessionContext {
+  export interface Cookie {
+    /**
+     * Domain the cookie belongs to
+     */
+    domain: string;
+
+    /**
+     * Name of the cookie
+     */
+    name: string;
+
+    /**
+     * Value of the cookie
+     */
+    value: string;
+
+    /**
+     * Unix timestamp when the cookie expires
+     */
+    expires?: number;
+
+    /**
+     * Whether the cookie is HTTP only
+     */
+    httpOnly?: boolean;
+
+    /**
+     * Path the cookie is valid for
+     */
+    path?: string;
+
+    /**
+     * SameSite attribute of the cookie
+     */
+    sameSite?: 'Strict' | 'Lax' | 'None';
+
+    /**
+     * Whether the cookie requires HTTPS
+     */
+    secure?: boolean;
+  }
 }
 
 /**
