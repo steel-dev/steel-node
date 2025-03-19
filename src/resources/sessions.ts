@@ -48,6 +48,20 @@ export class Sessions extends APIResource {
   }
 
   /**
+   * This endpoint allows you to get the recorded session events in the RRWeb format
+   */
+  events(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionEventsResponse> {
+    return this._client.get(`/v1/sessions/${id}/events`, options);
+  }
+
+  /**
+   * Returns the live state of the session, including pages, tabs, and browser state
+   */
+  liveDetails(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionLiveDetailsResponse> {
+    return this._client.get(`/v1/sessions/${id}/live-details`, options);
+  }
+
+  /**
    * Releases a specific session by ID.
    */
   release(
@@ -349,6 +363,37 @@ export namespace Sessionslist {
 }
 
 /**
+ * Events for a browser session
+ */
+export type SessionEventsResponse = Array<Record<string, unknown>>;
+
+export interface SessionLiveDetailsResponse {
+  pages: Array<SessionLiveDetailsResponse.Page>;
+
+  sessionViewerFullscreenUrl: string;
+
+  sessionViewerUrl: string;
+
+  wsUrl: string;
+}
+
+export namespace SessionLiveDetailsResponse {
+  export interface Page {
+    id: string;
+
+    favicon: string | null;
+
+    sessionViewerFullscreenUrl: string;
+
+    sessionViewerUrl: string;
+
+    title: string;
+
+    url: string;
+  }
+}
+
+/**
  * Response for releasing a single session.
  */
 export interface SessionReleaseResponse {
@@ -535,6 +580,8 @@ export declare namespace Sessions {
     type Session as Session,
     type SessionContext as SessionContext,
     type Sessionslist as Sessionslist,
+    type SessionEventsResponse as SessionEventsResponse,
+    type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
     type SessionReleaseAllResponse as SessionReleaseAllResponse,
     SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
