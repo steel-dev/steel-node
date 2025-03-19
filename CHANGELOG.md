@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.0.1 (2025-03-19)
+
+Full Changelog: [v0.1.0-beta.11...v0.0.1](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.11...v0.0.1)
+
+### Features
+
+* add SKIP_BREW env var to ./scripts/bootstrap ([#64](https://github.com/steel-dev/steel-node/issues/64)) ([4d0121b](https://github.com/steel-dev/steel-node/commit/4d0121b42631076ce975068a618047cdb64a3777))
+* **api:** api update ([#60](https://github.com/steel-dev/steel-node/issues/60)) ([2fc549a](https://github.com/steel-dev/steel-node/commit/2fc549a2150891d673de379a6fa514f34284dfcb))
+* **api:** api update ([#62](https://github.com/steel-dev/steel-node/issues/62)) ([d0f2f66](https://github.com/steel-dev/steel-node/commit/d0f2f662ea92c42f739c6baed9098ca738ff3e9a))
+* **api:** api update ([#67](https://github.com/steel-dev/steel-node/issues/67)) ([ab2b4a2](https://github.com/steel-dev/steel-node/commit/ab2b4a2bec5156464522d4b3034a121d90b3fb73))
+* **client:** accept RFC6838 JSON content types ([#65](https://github.com/steel-dev/steel-node/issues/65)) ([83439a1](https://github.com/steel-dev/steel-node/commit/83439a19256686d9901d07a563f5a1fe86d6ba66))
+
+
+### Chores
+
+* **internal:** remove extra empty newlines ([#66](https://github.com/steel-dev/steel-node/issues/66)) ([a53ac52](https://github.com/steel-dev/steel-node/commit/a53ac5224a622f494c75dafdabfa3985fd41abcc))
+
 ## 0.1.0-beta.11 (2025-02-24)
 
 Full Changelog: [v0.1.0-beta.10...v0.1.0-beta.11](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.10...v0.1.0-beta.11)
