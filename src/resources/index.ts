@@ -6,6 +6,8 @@ export {
   type Session,
   type SessionContext,
   type Sessionslist,
+  type SessionEventsResponse,
+  type SessionLiveDetailsResponse,
   type SessionReleaseResponse,
   type SessionReleaseAllResponse,
   type SessionCreateParams,
