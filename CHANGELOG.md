@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.0.2 (2025-03-22)
+
+Full Changelog: [v0.0.1...v0.0.2](https://github.com/steel-dev/steel-node/compare/v0.0.1...v0.0.2)
+
+### Bug Fixes
+
+* avoid type error in certain environments ([#72](https://github.com/steel-dev/steel-node/issues/72)) ([980a1ac](https://github.com/steel-dev/steel-node/commit/980a1ac7fc8e0eec17d061b2f9bb664a2149aeac))
+
+
+### Chores
+
+* **exports:** cleaner resource index imports ([#69](https://github.com/steel-dev/steel-node/issues/69)) ([79949a4](https://github.com/steel-dev/steel-node/commit/79949a4858476b7ec2b47a3af4d3c45279471071))
+* **exports:** stop using path fallbacks ([#71](https://github.com/steel-dev/steel-node/issues/71)) ([569727b](https://github.com/steel-dev/steel-node/commit/569727b569a811f727b1e2aee79fe92be27537ac))
+
 ## 0.0.1 (2025-03-19)
 
 Full Changelog: [v0.1.0-beta.11...v0.0.1](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.11...v0.0.1)
