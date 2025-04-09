@@ -30,7 +30,7 @@ import {
   Sessions,
   Sessionslist,
   SessionslistSessionsSessionsCursor,
-} from './resources/sessions';
+} from './resources/sessions/sessions';
 
 export interface ClientOptions {
   /**

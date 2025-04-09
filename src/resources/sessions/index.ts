@@ -1,6 +1,14 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Files,
+  type File,
+  type Fileslist,
+  type FileDeleteResponse,
+  type FileDeleteAllResponse,
+  type FileUploadParams,
+} from './files';
+export {
   SessionslistSessionsSessionsCursor,
   Sessions,
   type Session,
@@ -14,12 +22,4 @@ export {
   type SessionListParams,
   type SessionReleaseParams,
   type SessionReleaseAllParams,
-} from './sessions/sessions';
-export {
-  type PdfResponse,
-  type ScrapeResponse,
-  type ScreenshotResponse,
-  type PdfParams,
-  type ScrapeParams,
-  type ScreenshotParams,
-} from './top-level';
+} from './sessions';
