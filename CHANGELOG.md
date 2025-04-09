@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.0 (2025-04-09)
+
+Full Changelog: [v0.0.1...v0.1.0](https://github.com/steel-dev/steel-node/compare/v0.0.1...v0.1.0)
+
+### Features
+
+* **api:** api update ([#78](https://github.com/steel-dev/steel-node/issues/78)) ([6379fa7](https://github.com/steel-dev/steel-node/commit/6379fa7f8a2ecac6491b80607ec8d1aded8c7e73))
+
+
+### Bug Fixes
+
+* **api:** improve type resolution when importing as a package ([#76](https://github.com/steel-dev/steel-node/issues/76)) ([6db2ff1](https://github.com/steel-dev/steel-node/commit/6db2ff19d816bad085eea3391243649c6d999c80))
+* avoid type error in certain environments ([#72](https://github.com/steel-dev/steel-node/issues/72)) ([980a1ac](https://github.com/steel-dev/steel-node/commit/980a1ac7fc8e0eec17d061b2f9bb664a2149aeac))
+* **client:** send `X-Stainless-Timeout` in seconds ([#74](https://github.com/steel-dev/steel-node/issues/74)) ([958e85a](https://github.com/steel-dev/steel-node/commit/958e85a2739490f21bdf48f21c3bd012b7957c71))
+* **internal:** work around https://github.com/vercel/next.js/issues/76881 ([#73](https://github.com/steel-dev/steel-node/issues/73)) ([aab4bc0](https://github.com/steel-dev/steel-node/commit/aab4bc06688d263bf05ef262b6707750281007ce))
+* **mcp:** remove unused tools.ts ([#77](https://github.com/steel-dev/steel-node/issues/77)) ([bd1b199](https://github.com/steel-dev/steel-node/commit/bd1b199a3d196b16845a75dfea43256168c43416))
+
+
+### Chores
+
+* **exports:** cleaner resource index imports ([#69](https://github.com/steel-dev/steel-node/issues/69)) ([79949a4](https://github.com/steel-dev/steel-node/commit/79949a4858476b7ec2b47a3af4d3c45279471071))
+* **exports:** stop using path fallbacks ([#71](https://github.com/steel-dev/steel-node/issues/71)) ([569727b](https://github.com/steel-dev/steel-node/commit/569727b569a811f727b1e2aee79fe92be27537ac))
+* **internal:** add aliases for Record and Array ([#75](https://github.com/steel-dev/steel-node/issues/75)) ([6975415](https://github.com/steel-dev/steel-node/commit/6975415fb940b960de2911194e94af8a7dc13447))
+
 ## 0.0.1 (2025-03-19)
 
 Full Changelog: [v0.1.0-beta.11...v0.0.1](https://github.com/steel-dev/steel-node/compare/v0.1.0-beta.11...v0.0.1)
