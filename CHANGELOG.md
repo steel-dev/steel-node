@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1 (2025-04-10)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/steel-dev/steel-node/compare/v0.1.0...v0.1.1)
+
+### Chores
+
+* **internal:** reduce CI branch coverage ([2899b1d](https://github.com/steel-dev/steel-node/commit/2899b1da094a87aff32575ba80be34ccdf5da767))
+* **internal:** upload builds and expand CI branch coverage ([24dab2a](https://github.com/steel-dev/steel-node/commit/24dab2a7b6af9986f3cbf25d2a9b7b7c2caf0c8e))
+
 ## 0.1.0 (2025-04-09)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/steel-dev/steel-node/compare/v0.0.1...v0.1.0)
