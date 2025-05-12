@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
+import { type Record as BuiltinRecord } from '../../core';
 import * as FilesAPI from './files';
 import { File, FileDeleteAllResponse, FileDeleteResponse, FileUploadParams, Files, Fileslist } from './files';
 import { SessionsCursor, type SessionsCursorParams } from '../../pagination';
@@ -212,17 +213,17 @@ export interface SessionContext {
   /**
    * Domain-specific indexedDB items to initialize in the session
    */
-  indexedDB?: Record<string, Array<Record<string, unknown>>>;
+  indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
 
   /**
    * Domain-specific localStorage items to initialize in the session
    */
-  localStorage?: Record<string, Record<string, unknown>>;
+  localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
 
   /**
    * Domain-specific sessionStorage items to initialize in the session
    */
-  sessionStorage?: Record<string, Record<string, unknown>>;
+  sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
 }
 
 export namespace SessionContext {
@@ -255,7 +256,7 @@ export namespace SessionContext {
     /**
      * The partition key of the cookie
      */
-    partitionKey?: string;
+    partitionKey?: Cookie.PartitionKey;
 
     /**
      * The path of the cookie
@@ -306,6 +307,69 @@ export namespace SessionContext {
      * The URL of the cookie
      */
     url?: string;
+  }
+
+  export namespace Cookie {
+    /**
+     * The partition key of the cookie
+     */
+    export interface PartitionKey {
+      /**
+       * Indicates if the cookie has any ancestors that are cross-site to the
+       * topLevelSite.
+       */
+      hasCrossSiteAncestor: boolean;
+
+      /**
+       * The site of the top-level URL the browser was visiting at the start of the
+       * request to the endpoint that set the cookie.
+       */
+      topLevelSite: string;
+    }
+  }
+
+  export interface IndexedDB {
+    id: number;
+
+    data: Array<IndexedDB.Data>;
+
+    name: string;
+  }
+
+  export namespace IndexedDB {
+    export interface Data {
+      id: number;
+
+      name: string;
+
+      records: Array<Data.Record>;
+    }
+
+    export namespace Data {
+      export interface Record {
+        blobFiles?: Array<Record.BlobFile>;
+
+        key?: unknown;
+
+        value?: unknown;
+      }
+
+      export namespace Record {
+        export interface BlobFile {
+          blobNumber: number;
+
+          mimeType: string;
+
+          size: number;
+
+          filename?: string;
+
+          lastModified?: string;
+
+          path?: string;
+        }
+      }
+    }
   }
 }
 
@@ -576,17 +640,17 @@ export namespace SessionCreateParams {
     /**
      * Domain-specific indexedDB items to initialize in the session
      */
-    indexedDB?: Record<string, Array<Record<string, unknown>>>;
+    indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
 
     /**
      * Domain-specific localStorage items to initialize in the session
      */
-    localStorage?: Record<string, Record<string, unknown>>;
+    localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
 
     /**
      * Domain-specific sessionStorage items to initialize in the session
      */
-    sessionStorage?: Record<string, Record<string, unknown>>;
+    sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
   }
 
   export namespace SessionContext {
@@ -619,7 +683,7 @@ export namespace SessionCreateParams {
       /**
        * The partition key of the cookie
        */
-      partitionKey?: string;
+      partitionKey?: Cookie.PartitionKey;
 
       /**
        * The path of the cookie
@@ -670,6 +734,69 @@ export namespace SessionCreateParams {
        * The URL of the cookie
        */
       url?: string;
+    }
+
+    export namespace Cookie {
+      /**
+       * The partition key of the cookie
+       */
+      export interface PartitionKey {
+        /**
+         * Indicates if the cookie has any ancestors that are cross-site to the
+         * topLevelSite.
+         */
+        hasCrossSiteAncestor: boolean;
+
+        /**
+         * The site of the top-level URL the browser was visiting at the start of the
+         * request to the endpoint that set the cookie.
+         */
+        topLevelSite: string;
+      }
+    }
+
+    export interface IndexedDB {
+      id: number;
+
+      data: Array<IndexedDB.Data>;
+
+      name: string;
+    }
+
+    export namespace IndexedDB {
+      export interface Data {
+        id: number;
+
+        name: string;
+
+        records: Array<Data.Record>;
+      }
+
+      export namespace Data {
+        export interface Record {
+          blobFiles?: Array<Record.BlobFile>;
+
+          key?: unknown;
+
+          value?: unknown;
+        }
+
+        export namespace Record {
+          export interface BlobFile {
+            blobNumber: number;
+
+            mimeType: string;
+
+            size: number;
+
+            filename?: string;
+
+            lastModified?: string;
+
+            path?: string;
+          }
+        }
+      }
     }
   }
 }

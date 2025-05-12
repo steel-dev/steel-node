@@ -36,7 +36,7 @@ describe('resource sessions', () => {
           concurrency: 0,
           dimensions: { height: 0, width: 0 },
           isSelenium: true,
-          proxyUrl: 'proxyUrl',
+          proxyUrl: 'https://example.com',
           sessionContext: {
             cookies: [
               {
@@ -45,7 +45,7 @@ describe('resource sessions', () => {
                 domain: 'domain',
                 expires: 0,
                 httpOnly: true,
-                partitionKey: 'partitionKey',
+                partitionKey: { hasCrossSiteAncestor: true, topLevelSite: 'topLevelSite' },
                 path: 'path',
                 priority: 'Low',
                 sameParty: true,
@@ -58,9 +58,38 @@ describe('resource sessions', () => {
                 url: 'url',
               },
             ],
-            indexedDB: { foo: [{ foo: 'bar' }] },
-            localStorage: { foo: { foo: 'bar' } },
-            sessionStorage: { foo: { foo: 'bar' } },
+            indexedDB: {
+              foo: [
+                {
+                  id: 0,
+                  data: [
+                    {
+                      id: 0,
+                      name: 'name',
+                      records: [
+                        {
+                          blobFiles: [
+                            {
+                              blobNumber: 0,
+                              mimeType: 'mimeType',
+                              size: 0,
+                              filename: 'filename',
+                              lastModified: '2019-12-27T18:11:19.117Z',
+                              path: 'path',
+                            },
+                          ],
+                          key: {},
+                          value: {},
+                        },
+                      ],
+                    },
+                  ],
+                  name: 'name',
+                },
+              ],
+            },
+            localStorage: { foo: { foo: 'string' } },
+            sessionStorage: { foo: { foo: 'string' } },
           },
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,
