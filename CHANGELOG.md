@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.2.0 (2025-05-12)
+
+Full Changelog: [v0.1.0...v0.2.0](https://github.com/steel-dev/steel-node/compare/v0.1.0...v0.2.0)
+
+### Features
+
+* **api:** api update ([6e57bf7](https://github.com/steel-dev/steel-node/commit/6e57bf737f13f9a08c30208686df972f503db10d))
+* **api:** api update ([4267d40](https://github.com/steel-dev/steel-node/commit/4267d40f9a20d66b1ec632d42e659037e8895f3c))
+
+
+### Chores
+
+* **ci:** add timeout thresholds for CI jobs ([51a4a02](https://github.com/steel-dev/steel-node/commit/51a4a02aadb69e49ecb826e1294dba443298b1a9))
+* **ci:** bump node version for release workflows ([ef86c2a](https://github.com/steel-dev/steel-node/commit/ef86c2a8b1dce3dbaee15afc0a4e35ec252c3a88))
+* **ci:** only use depot for staging repos ([85a6880](https://github.com/steel-dev/steel-node/commit/85a6880ca0801320a4d5492a941b37e52ace1fee))
+* **client:** minor internal fixes ([c1ad391](https://github.com/steel-dev/steel-node/commit/c1ad391a58124d8a491b080882b32830f6061e93))
+* **internal:** codegen related update ([7fb77dc](https://github.com/steel-dev/steel-node/commit/7fb77dcb9b64ddb06dafbb519e515b3fbd5d749b))
+* **internal:** reduce CI branch coverage ([2899b1d](https://github.com/steel-dev/steel-node/commit/2899b1da094a87aff32575ba80be34ccdf5da767))
+* **internal:** upload builds and expand CI branch coverage ([24dab2a](https://github.com/steel-dev/steel-node/commit/24dab2a7b6af9986f3cbf25d2a9b7b7c2caf0c8e))
+
+
+### Documentation
+
+* **readme:** fix typo ([d60a49e](https://github.com/steel-dev/steel-node/commit/d60a49e3b87876e2e46176fa935382ca98d4f7f6))
+
 ## 0.1.0 (2025-04-09)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/steel-dev/steel-node/compare/v0.0.1...v0.1.0)

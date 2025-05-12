@@ -29,21 +29,60 @@ describe('resource sessions', () => {
           concurrency: 0,
           dimensions: { height: 0, width: 0 },
           isSelenium: true,
-          proxyUrl: 'proxyUrl',
+          proxyUrl: 'https://example.com',
           sessionContext: {
             cookies: [
               {
-                domain: 'domain',
                 name: 'name',
                 value: 'value',
+                domain: 'domain',
                 expires: 0,
                 httpOnly: true,
+                partitionKey: { hasCrossSiteAncestor: true, topLevelSite: 'topLevelSite' },
                 path: 'path',
+                priority: 'Low',
+                sameParty: true,
                 sameSite: 'Strict',
                 secure: true,
+                session: true,
+                size: 0,
+                sourcePort: 0,
+                sourceScheme: 'Unset',
+                url: 'url',
               },
             ],
-            localStorage: { foo: { foo: 'bar' } },
+            indexedDB: {
+              foo: [
+                {
+                  id: 0,
+                  data: [
+                    {
+                      id: 0,
+                      name: 'name',
+                      records: [
+                        {
+                          blobFiles: [
+                            {
+                              blobNumber: 0,
+                              mimeType: 'mimeType',
+                              size: 0,
+                              filename: 'filename',
+                              lastModified: '2019-12-27T18:11:19.117Z',
+                              path: 'path',
+                            },
+                          ],
+                          key: {},
+                          value: {},
+                        },
+                      ],
+                    },
+                  ],
+                  name: 'name',
+                },
+              ],
+            },
+            localStorage: { foo: { foo: 'string' } },
+            sessionStorage: { foo: { foo: 'string' } },
           },
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,

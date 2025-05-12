@@ -3,6 +3,7 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
+import { type Record as BuiltinRecord } from '../../core';
 import * as FilesAPI from './files';
 import { File, FileDeleteAllResponse, FileDeleteResponse, FileUploadParams, Files, Fileslist } from './files';
 import { SessionsCursor, type SessionsCursorParams } from '../../pagination';
@@ -205,35 +206,45 @@ export namespace Session {
  */
 export interface SessionContext {
   /**
-   * Cookies from the session
+   * Cookies to initialize in the session
    */
   cookies?: Array<SessionContext.Cookie>;
 
   /**
-   * Local storage items from the session
+   * Domain-specific indexedDB items to initialize in the session
    */
-  localStorage?: Record<string, Record<string, unknown>>;
+  indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
+
+  /**
+   * Domain-specific localStorage items to initialize in the session
+   */
+  localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+
+  /**
+   * Domain-specific sessionStorage items to initialize in the session
+   */
+  sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
 }
 
 export namespace SessionContext {
   export interface Cookie {
     /**
-     * Domain the cookie belongs to
-     */
-    domain: string;
-
-    /**
-     * Name of the cookie
+     * The name of the cookie
      */
     name: string;
 
     /**
-     * Value of the cookie
+     * The value of the cookie
      */
     value: string;
 
     /**
-     * Unix timestamp when the cookie expires
+     * The domain of the cookie
+     */
+    domain?: string;
+
+    /**
+     * The expiration date of the cookie
      */
     expires?: number;
 
@@ -243,19 +254,122 @@ export namespace SessionContext {
     httpOnly?: boolean;
 
     /**
-     * Path the cookie is valid for
+     * The partition key of the cookie
+     */
+    partitionKey?: Cookie.PartitionKey;
+
+    /**
+     * The path of the cookie
      */
     path?: string;
 
     /**
-     * SameSite attribute of the cookie
+     * The priority of the cookie
+     */
+    priority?: 'Low' | 'Medium' | 'High';
+
+    /**
+     * Whether the cookie is a same party cookie
+     */
+    sameParty?: boolean;
+
+    /**
+     * The same site attribute of the cookie
      */
     sameSite?: 'Strict' | 'Lax' | 'None';
 
     /**
-     * Whether the cookie requires HTTPS
+     * Whether the cookie is secure
      */
     secure?: boolean;
+
+    /**
+     * Whether the cookie is a session cookie
+     */
+    session?: boolean;
+
+    /**
+     * The size of the cookie
+     */
+    size?: number;
+
+    /**
+     * The source port of the cookie
+     */
+    sourcePort?: number;
+
+    /**
+     * The source scheme of the cookie
+     */
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+    /**
+     * The URL of the cookie
+     */
+    url?: string;
+  }
+
+  export namespace Cookie {
+    /**
+     * The partition key of the cookie
+     */
+    export interface PartitionKey {
+      /**
+       * Indicates if the cookie has any ancestors that are cross-site to the
+       * topLevelSite.
+       */
+      hasCrossSiteAncestor: boolean;
+
+      /**
+       * The site of the top-level URL the browser was visiting at the start of the
+       * request to the endpoint that set the cookie.
+       */
+      topLevelSite: string;
+    }
+  }
+
+  export interface IndexedDB {
+    id: number;
+
+    data: Array<IndexedDB.Data>;
+
+    name: string;
+  }
+
+  export namespace IndexedDB {
+    export interface Data {
+      id: number;
+
+      name: string;
+
+      records: Array<Data.Record>;
+    }
+
+    export namespace Data {
+      export interface Record {
+        blobFiles?: Array<Record.BlobFile>;
+
+        key?: unknown;
+
+        value?: unknown;
+      }
+
+      export namespace Record {
+        export interface BlobFile {
+          blobNumber: number;
+
+          mimeType: string;
+
+          size: number;
+
+          filename?: string;
+
+          lastModified?: string;
+
+          path?: string;
+        }
+      }
+    }
   }
 }
 
@@ -377,7 +491,7 @@ export namespace Sessionslist {
 /**
  * Events for a browser session
  */
-export type SessionEventsResponse = Array<Record<string, unknown>>;
+export type SessionEventsResponse = Array<unknown>;
 
 export interface SessionLiveDetailsResponse {
   pages: Array<SessionLiveDetailsResponse.Page>;
@@ -524,30 +638,40 @@ export namespace SessionCreateParams {
     cookies?: Array<SessionContext.Cookie>;
 
     /**
+     * Domain-specific indexedDB items to initialize in the session
+     */
+    indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
+
+    /**
      * Domain-specific localStorage items to initialize in the session
      */
-    localStorage?: Record<string, Record<string, unknown>>;
+    localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+
+    /**
+     * Domain-specific sessionStorage items to initialize in the session
+     */
+    sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
   }
 
   export namespace SessionContext {
     export interface Cookie {
       /**
-       * Domain the cookie belongs to
-       */
-      domain: string;
-
-      /**
-       * Name of the cookie
+       * The name of the cookie
        */
       name: string;
 
       /**
-       * Value of the cookie
+       * The value of the cookie
        */
       value: string;
 
       /**
-       * Unix timestamp when the cookie expires
+       * The domain of the cookie
+       */
+      domain?: string;
+
+      /**
+       * The expiration date of the cookie
        */
       expires?: number;
 
@@ -557,19 +681,122 @@ export namespace SessionCreateParams {
       httpOnly?: boolean;
 
       /**
-       * Path the cookie is valid for
+       * The partition key of the cookie
+       */
+      partitionKey?: Cookie.PartitionKey;
+
+      /**
+       * The path of the cookie
        */
       path?: string;
 
       /**
-       * SameSite attribute of the cookie
+       * The priority of the cookie
+       */
+      priority?: 'Low' | 'Medium' | 'High';
+
+      /**
+       * Whether the cookie is a same party cookie
+       */
+      sameParty?: boolean;
+
+      /**
+       * The same site attribute of the cookie
        */
       sameSite?: 'Strict' | 'Lax' | 'None';
 
       /**
-       * Whether the cookie requires HTTPS
+       * Whether the cookie is secure
        */
       secure?: boolean;
+
+      /**
+       * Whether the cookie is a session cookie
+       */
+      session?: boolean;
+
+      /**
+       * The size of the cookie
+       */
+      size?: number;
+
+      /**
+       * The source port of the cookie
+       */
+      sourcePort?: number;
+
+      /**
+       * The source scheme of the cookie
+       */
+      sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+
+      /**
+       * The URL of the cookie
+       */
+      url?: string;
+    }
+
+    export namespace Cookie {
+      /**
+       * The partition key of the cookie
+       */
+      export interface PartitionKey {
+        /**
+         * Indicates if the cookie has any ancestors that are cross-site to the
+         * topLevelSite.
+         */
+        hasCrossSiteAncestor: boolean;
+
+        /**
+         * The site of the top-level URL the browser was visiting at the start of the
+         * request to the endpoint that set the cookie.
+         */
+        topLevelSite: string;
+      }
+    }
+
+    export interface IndexedDB {
+      id: number;
+
+      data: Array<IndexedDB.Data>;
+
+      name: string;
+    }
+
+    export namespace IndexedDB {
+      export interface Data {
+        id: number;
+
+        name: string;
+
+        records: Array<Data.Record>;
+      }
+
+      export namespace Data {
+        export interface Record {
+          blobFiles?: Array<Record.BlobFile>;
+
+          key?: unknown;
+
+          value?: unknown;
+        }
+
+        export namespace Record {
+          export interface BlobFile {
+            blobNumber: number;
+
+            mimeType: string;
+
+            size: number;
+
+            filename?: string;
+
+            lastModified?: string;
+
+            path?: string;
+          }
+        }
+      }
     }
   }
 }
