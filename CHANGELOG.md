@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.1 (2025-05-22)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/steel-dev/steel-node/compare/v0.2.0...v0.2.1)
+
+### Chores
+
+* **docs:** grammar improvements ([50ad88b](https://github.com/steel-dev/steel-node/commit/50ad88b251dcbef33a6b4213d7821ce0a39f6c4f))
+
 ## 0.2.0 (2025-05-12)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/steel-dev/steel-node/compare/v0.1.0...v0.2.0)
