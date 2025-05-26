@@ -2,9 +2,6 @@
 
 export {
   Credentials,
-  type Session,
-  type SessionContext,
-  type Sessionslist,
   type CredentialCreateResponse,
   type CredentialUpdateResponse,
   type CredentialListResponse,
@@ -13,16 +10,20 @@ export {
   type CredentialUpdateParams,
   type CredentialListParams,
   type CredentialDeleteParams,
-} from './credentials/credentials';
+} from './credentials';
 export {
+  SessionslistSessionsSessionsCursor,
   Sessions,
+  type Session,
+  type SessionContext,
+  type Sessionslist,
   type SessionEventsResponse,
   type SessionLiveDetailsResponse,
   type SessionReleaseResponse,
   type SessionCreateParams,
   type SessionListParams,
   type SessionReleaseParams,
-} from './sessions';
+} from './sessions/sessions';
 export {
   type PdfResponse,
   type ScrapeResponse,
