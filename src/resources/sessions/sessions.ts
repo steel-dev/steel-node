@@ -84,6 +84,16 @@ export class Sessions extends APIResource {
   ): Core.APIPromise<SessionReleaseResponse> {
     return this._client.post(`/v1/sessions/${id}/release`, { body, ...options });
   }
+
+  /**
+   * Releases all active sessions for the current organization.
+   */
+  releaseAll(
+    body?: SessionReleaseAllParams | null | undefined,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseAllResponse> {
+    return this._client.post('/v1/sessions/release', { body, ...options });
+  }
 }
 
 export class SessionslistSessionsSessionsCursor extends SessionsCursor<Sessionslist.Session> {}
@@ -524,6 +534,21 @@ export interface SessionReleaseResponse {
   success: boolean;
 }
 
+/**
+ * Response for releasing multiple sessions.
+ */
+export interface SessionReleaseAllResponse {
+  /**
+   * Details about the outcome of the release operation
+   */
+  message: string;
+
+  /**
+   * Indicates if the sessions were successfully released
+   */
+  success: boolean;
+}
+
 export interface SessionCreateParams {
   /**
    * Block ads in the browser session. Default is false.
@@ -806,6 +831,8 @@ export interface SessionListParams extends SessionsCursorParams {
 
 export interface SessionReleaseParams {}
 
+export interface SessionReleaseAllParams {}
+
 Sessions.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Sessions.Files = Files;
 
@@ -817,10 +844,12 @@ export declare namespace Sessions {
     type SessionEventsResponse as SessionEventsResponse,
     type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
+    type SessionReleaseAllResponse as SessionReleaseAllResponse,
     SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionReleaseParams as SessionReleaseParams,
+    type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 
   export {

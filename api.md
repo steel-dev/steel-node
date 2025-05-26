@@ -38,6 +38,7 @@ Types:
 - <code><a href="./src/resources/sessions/sessions.ts">SessionEventsResponse</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionLiveDetailsResponse</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionReleaseResponse</a></code>
+- <code><a href="./src/resources/sessions/sessions.ts">SessionReleaseAllResponse</a></code>
 
 Methods:
 
@@ -48,6 +49,7 @@ Methods:
 - <code title="get /v1/sessions/{id}/events">client.sessions.<a href="./src/resources/sessions/sessions.ts">events</a>(id) -> SessionEventsResponse</code>
 - <code title="get /v1/sessions/{id}/live-details">client.sessions.<a href="./src/resources/sessions/sessions.ts">liveDetails</a>(id) -> SessionLiveDetailsResponse</code>
 - <code title="post /v1/sessions/{id}/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">release</a>(id) -> SessionReleaseResponse</code>
+- <code title="post /v1/sessions/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">releaseAll</a>() -> SessionReleaseAllResponse</code>
 
 ## Files
 
