@@ -17,15 +17,6 @@ import {
   ScreenshotResponse,
 } from './resources/top-level';
 import {
-  SessionCreateParams,
-  SessionEventsResponse,
-  SessionListParams,
-  SessionLiveDetailsResponse,
-  SessionReleaseParams,
-  SessionReleaseResponse,
-  Sessions,
-} from './resources/sessions';
-import {
   CredentialCreateParams,
   CredentialCreateResponse,
   CredentialDeleteParams,
@@ -35,10 +26,20 @@ import {
   CredentialUpdateParams,
   CredentialUpdateResponse,
   Credentials,
+} from './resources/credentials';
+import {
   Session,
   SessionContext,
+  SessionCreateParams,
+  SessionEventsResponse,
+  SessionListParams,
+  SessionLiveDetailsResponse,
+  SessionReleaseParams,
+  SessionReleaseResponse,
+  Sessions,
   Sessionslist,
-} from './resources/credentials/credentials';
+  SessionslistSessionsSessionsCursor,
+} from './resources/sessions/sessions';
 
 export interface ClientOptions {
   /**
@@ -153,8 +154,8 @@ export class Steel extends Core.APIClient {
     this.steelAPIKey = steelAPIKey;
   }
 
-  sessions: API.Sessions = new API.Sessions(this);
   credentials: API.Credentials = new API.Credentials(this);
+  sessions: API.Sessions = new API.Sessions(this);
 
   /**
    * Generates a PDF from a specified webpage.
@@ -219,8 +220,9 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
-Steel.Sessions = Sessions;
 Steel.Credentials = Credentials;
+Steel.Sessions = Sessions;
+Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
 
@@ -240,20 +242,7 @@ export declare namespace Steel {
   };
 
   export {
-    Sessions as Sessions,
-    type SessionEventsResponse as SessionEventsResponse,
-    type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
-    type SessionReleaseResponse as SessionReleaseResponse,
-    type SessionCreateParams as SessionCreateParams,
-    type SessionListParams as SessionListParams,
-    type SessionReleaseParams as SessionReleaseParams,
-  };
-
-  export {
     Credentials as Credentials,
-    type Session as Session,
-    type SessionContext as SessionContext,
-    type Sessionslist as Sessionslist,
     type CredentialCreateResponse as CredentialCreateResponse,
     type CredentialUpdateResponse as CredentialUpdateResponse,
     type CredentialListResponse as CredentialListResponse,
@@ -262,6 +251,20 @@ export declare namespace Steel {
     type CredentialUpdateParams as CredentialUpdateParams,
     type CredentialListParams as CredentialListParams,
     type CredentialDeleteParams as CredentialDeleteParams,
+  };
+
+  export {
+    Sessions as Sessions,
+    type Session as Session,
+    type SessionContext as SessionContext,
+    type Sessionslist as Sessionslist,
+    type SessionEventsResponse as SessionEventsResponse,
+    type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
+    type SessionReleaseResponse as SessionReleaseResponse,
+    SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
+    type SessionCreateParams as SessionCreateParams,
+    type SessionListParams as SessionListParams,
+    type SessionReleaseParams as SessionReleaseParams,
   };
 }
 
