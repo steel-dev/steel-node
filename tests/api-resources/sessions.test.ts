@@ -27,8 +27,10 @@ describe('resource sessions', () => {
         {
           blockAds: true,
           concurrency: 0,
+          credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
           dimensions: { height: 0, width: 0 },
           isSelenium: true,
+          namespace: 'namespace',
           proxyUrl: 'https://example.com',
           sessionContext: {
             cookies: [
@@ -217,23 +219,5 @@ describe('resource sessions', () => {
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
-  });
-
-  test('releaseAll', async () => {
-    const responsePromise = client.sessions.releaseAll();
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('releaseAll: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.sessions.releaseAll({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Steel.NotFoundError,
-    );
   });
 });
