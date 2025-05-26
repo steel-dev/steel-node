@@ -20,9 +20,11 @@ export {
   type SessionEventsResponse,
   type SessionLiveDetailsResponse,
   type SessionReleaseResponse,
+  type SessionReleaseAllResponse,
   type SessionCreateParams,
   type SessionListParams,
   type SessionReleaseParams,
+  type SessionReleaseAllParams,
 } from './sessions/sessions';
 export {
   type PdfResponse,
