@@ -13,21 +13,12 @@ export {
   type CredentialUpdateParams,
   type CredentialListParams,
   type CredentialDeleteParams,
-} from './credentials/credentials';
+} from './credentials';
 export {
-  Sessions,
-  type SessionEventsResponse,
-  type SessionLiveDetailsResponse,
-  type SessionReleaseResponse,
-  type SessionCreateParams,
-  type SessionListParams,
-  type SessionReleaseParams,
-} from './sessions';
-export {
-  type PdfResponse,
-  type ScrapeResponse,
-  type ScreenshotResponse,
-  type PdfParams,
-  type ScrapeParams,
-  type ScreenshotParams,
-} from './top-level';
+  Files,
+  type File,
+  type Fileslist,
+  type FileDeleteResponse,
+  type FileDeleteAllResponse,
+  type FileUploadParams,
+} from './files';

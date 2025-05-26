@@ -17,20 +17,28 @@ import {
   ScreenshotResponse,
 } from './resources/top-level';
 import {
-  Session,
-  SessionContext,
   SessionCreateParams,
   SessionEventsResponse,
   SessionListParams,
   SessionLiveDetailsResponse,
-  SessionReleaseAllParams,
-  SessionReleaseAllResponse,
   SessionReleaseParams,
   SessionReleaseResponse,
   Sessions,
+} from './resources/sessions';
+import {
+  CredentialCreateParams,
+  CredentialCreateResponse,
+  CredentialDeleteParams,
+  CredentialDeleteResponse,
+  CredentialListParams,
+  CredentialListResponse,
+  CredentialUpdateParams,
+  CredentialUpdateResponse,
+  Credentials,
+  Session,
+  SessionContext,
   Sessionslist,
-  SessionslistSessionsSessionsCursor,
-} from './resources/sessions/sessions';
+} from './resources/credentials/credentials';
 
 export interface ClientOptions {
   /**
@@ -146,6 +154,7 @@ export class Steel extends Core.APIClient {
   }
 
   sessions: API.Sessions = new API.Sessions(this);
+  credentials: API.Credentials = new API.Credentials(this);
 
   /**
    * Generates a PDF from a specified webpage.
@@ -211,7 +220,7 @@ export class Steel extends Core.APIClient {
 }
 
 Steel.Sessions = Sessions;
-Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
+Steel.Credentials = Credentials;
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
 
@@ -232,18 +241,27 @@ export declare namespace Steel {
 
   export {
     Sessions as Sessions,
-    type Session as Session,
-    type SessionContext as SessionContext,
-    type Sessionslist as Sessionslist,
     type SessionEventsResponse as SessionEventsResponse,
     type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
-    type SessionReleaseAllResponse as SessionReleaseAllResponse,
-    SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionReleaseParams as SessionReleaseParams,
-    type SessionReleaseAllParams as SessionReleaseAllParams,
+  };
+
+  export {
+    Credentials as Credentials,
+    type Session as Session,
+    type SessionContext as SessionContext,
+    type Sessionslist as Sessionslist,
+    type CredentialCreateResponse as CredentialCreateResponse,
+    type CredentialUpdateResponse as CredentialUpdateResponse,
+    type CredentialListResponse as CredentialListResponse,
+    type CredentialDeleteResponse as CredentialDeleteResponse,
+    type CredentialCreateParams as CredentialCreateParams,
+    type CredentialUpdateParams as CredentialUpdateParams,
+    type CredentialListParams as CredentialListParams,
+    type CredentialDeleteParams as CredentialDeleteParams,
   };
 }
 

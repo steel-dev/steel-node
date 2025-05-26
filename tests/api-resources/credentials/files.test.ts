@@ -10,7 +10,7 @@ const client = new Steel({
 
 describe('resource files', () => {
   test('retrieve', async () => {
-    const responsePromise = client.sessions.files.retrieve('sessionId', 'fileId');
+    const responsePromise = client.credentials.files.retrieve('sessionId', 'fileId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,12 +23,12 @@ describe('resource files', () => {
   test('retrieve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.retrieve('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.retrieve('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('list', async () => {
-    const responsePromise = client.sessions.files.list('sessionId');
+    const responsePromise = client.credentials.files.list('sessionId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -41,12 +41,12 @@ describe('resource files', () => {
   test('list: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.list('sessionId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.list('sessionId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('delete', async () => {
-    const responsePromise = client.sessions.files.delete('sessionId', 'fileId');
+    const responsePromise = client.credentials.files.delete('sessionId', 'fileId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -59,12 +59,12 @@ describe('resource files', () => {
   test('delete: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.delete('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.delete('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('deleteAll', async () => {
-    const responsePromise = client.sessions.files.deleteAll('sessionId');
+    const responsePromise = client.credentials.files.deleteAll('sessionId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -77,19 +77,19 @@ describe('resource files', () => {
   test('deleteAll: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.deleteAll('sessionId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.deleteAll('sessionId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('download: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.download('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.download('sessionId', 'fileId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('upload', async () => {
-    const responsePromise = client.sessions.files.upload('sessionId');
+    const responsePromise = client.credentials.files.upload('sessionId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -102,14 +102,14 @@ describe('resource files', () => {
   test('upload: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.upload('sessionId', { path: '/_stainless_unknown_path' }),
+      client.credentials.files.upload('sessionId', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('upload: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.files.upload(
+      client.credentials.files.upload(
         'sessionId',
         { file: {}, fileUrl: 'https://example.com', metadata: { foo: 'bar' }, name: 'name' },
         { path: '/_stainless_unknown_path' },
