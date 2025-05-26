@@ -17,6 +17,17 @@ import {
   ScreenshotResponse,
 } from './resources/top-level';
 import {
+  CredentialCreateParams,
+  CredentialCreateResponse,
+  CredentialDeleteParams,
+  CredentialDeleteResponse,
+  CredentialListParams,
+  CredentialListResponse,
+  CredentialUpdateParams,
+  CredentialUpdateResponse,
+  Credentials,
+} from './resources/credentials';
+import {
   Session,
   SessionContext,
   SessionCreateParams,
@@ -145,6 +156,7 @@ export class Steel extends Core.APIClient {
     this.steelAPIKey = steelAPIKey;
   }
 
+  credentials: API.Credentials = new API.Credentials(this);
   sessions: API.Sessions = new API.Sessions(this);
 
   /**
@@ -210,6 +222,7 @@ export class Steel extends Core.APIClient {
   static fileFromPath = Uploads.fileFromPath;
 }
 
+Steel.Credentials = Credentials;
 Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 export declare namespace Steel {
@@ -228,6 +241,18 @@ export declare namespace Steel {
     type PdfParams as PdfParams,
     type ScrapeParams as ScrapeParams,
     type ScreenshotParams as ScreenshotParams,
+  };
+
+  export {
+    Credentials as Credentials,
+    type CredentialCreateResponse as CredentialCreateResponse,
+    type CredentialUpdateResponse as CredentialUpdateResponse,
+    type CredentialListResponse as CredentialListResponse,
+    type CredentialDeleteResponse as CredentialDeleteResponse,
+    type CredentialCreateParams as CredentialCreateParams,
+    type CredentialUpdateParams as CredentialUpdateParams,
+    type CredentialListParams as CredentialListParams,
+    type CredentialDeleteParams as CredentialDeleteParams,
   };
 
   export {

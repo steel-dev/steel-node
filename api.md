@@ -12,6 +12,22 @@ Methods:
 - <code title="post /v1/scrape">client.<a href="./src/index.ts">scrape</a>({ ...params }) -> ScrapeResponse</code>
 - <code title="post /v1/screenshot">client.<a href="./src/index.ts">screenshot</a>({ ...params }) -> ScreenshotResponse</code>
 
+# Credentials
+
+Types:
+
+- <code><a href="./src/resources/credentials.ts">CredentialCreateResponse</a></code>
+- <code><a href="./src/resources/credentials.ts">CredentialUpdateResponse</a></code>
+- <code><a href="./src/resources/credentials.ts">CredentialListResponse</a></code>
+- <code><a href="./src/resources/credentials.ts">CredentialDeleteResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">create</a>({ ...params }) -> CredentialCreateResponse</code>
+- <code title="put /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">update</a>({ ...params }) -> CredentialUpdateResponse</code>
+- <code title="get /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">list</a>({ ...params }) -> CredentialListResponse</code>
+- <code title="delete /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">delete</a>({ ...params }) -> CredentialDeleteResponse</code>
+
 # Sessions
 
 Types:

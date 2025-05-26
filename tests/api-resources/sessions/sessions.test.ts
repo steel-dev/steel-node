@@ -27,8 +27,10 @@ describe('resource sessions', () => {
         {
           blockAds: true,
           concurrency: 0,
+          credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
           dimensions: { height: 0, width: 0 },
           isSelenium: true,
+          namespace: 'namespace',
           proxyUrl: 'https://example.com',
           sessionContext: {
             cookies: [

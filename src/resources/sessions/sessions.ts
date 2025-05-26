@@ -561,6 +561,11 @@ export interface SessionCreateParams {
   concurrency?: number;
 
   /**
+   * Configuration for session credentials
+   */
+  credentials?: SessionCreateParams.Credentials;
+
+  /**
    * Viewport and browser window dimensions for the session
    */
   dimensions?: SessionCreateParams.Dimensions;
@@ -570,6 +575,11 @@ export interface SessionCreateParams {
    * you plan to connect to the browser session via Selenium.
    */
   isSelenium?: boolean;
+
+  /**
+   * The namespace the session should be created against. Defaults to "default".
+   */
+  namespace?: string;
 
   /**
    * Custom proxy URL for the browser session. Overrides useProxy, disabling
@@ -612,6 +622,17 @@ export interface SessionCreateParams {
 }
 
 export namespace SessionCreateParams {
+  /**
+   * Configuration for session credentials
+   */
+  export interface Credentials {
+    autoSubmit?: boolean;
+
+    blurFields?: boolean;
+
+    exactOrigin?: boolean;
+  }
+
   /**
    * Viewport and browser window dimensions for the session
    */
