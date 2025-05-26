@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 (2025-05-26)
+
+Full Changelog: [v0.2.0...v0.3.0](https://github.com/steel-dev/steel-node/compare/v0.2.0...v0.3.0)
+
+### Features
+
+* **api:** api update ([b10a7f1](https://github.com/steel-dev/steel-node/commit/b10a7f12b1223de10619c9a3db4df498e52861e0))
+* **api:** api update ([a394ae1](https://github.com/steel-dev/steel-node/commit/a394ae1df7e06f0cc1b8e33a041204ec232ca50f))
+* **api:** api update ([fc0e49c](https://github.com/steel-dev/steel-node/commit/fc0e49c11fe0695761355d981c6ce154e792ca15))
+
+
+### Chores
+
+* **docs:** grammar improvements ([50ad88b](https://github.com/steel-dev/steel-node/commit/50ad88b251dcbef33a6b4213d7821ce0a39f6c4f))
+
 ## 0.2.0 (2025-05-12)
 
 Full Changelog: [v0.1.0...v0.2.0](https://github.com/steel-dev/steel-node/compare/v0.1.0...v0.2.0)
