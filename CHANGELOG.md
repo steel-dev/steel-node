@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.4.0 (2025-05-28)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/steel-dev/steel-node/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **api:** api update ([e5b1d39](https://github.com/steel-dev/steel-node/commit/e5b1d39239abaff3e2f47a993e0fb6fdda87fead))
+* **api:** api update ([87d9b0c](https://github.com/steel-dev/steel-node/commit/87d9b0cdcc6c3c2889f3b71662cd3cd5c9582a98))
+
+
+### Chores
+
+* improve publish-npm script --latest tag logic ([773e534](https://github.com/steel-dev/steel-node/commit/773e5346f8ea178dedb0f13ed585ef623a1b4a0d))
+
 ## 0.3.0 (2025-05-26)
 
 Full Changelog: [v0.2.0...v0.3.0](https://github.com/steel-dev/steel-node/compare/v0.2.0...v0.3.0)
