@@ -39,6 +39,7 @@ describe('resource sessions', () => {
           isSelenium: true,
           namespace: 'namespace',
           proxyUrl: 'https://example.com',
+          region: 'lax',
           sessionContext: {
             cookies: [
               {

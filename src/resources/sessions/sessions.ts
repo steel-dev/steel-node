@@ -174,6 +174,11 @@ export interface Session {
   proxy?: string;
 
   /**
+   * The desired region for the session to be started in
+   */
+  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+
+  /**
    * Indicates if captcha solving is enabled
    */
   solveCaptcha?: boolean;
@@ -460,6 +465,11 @@ export namespace Sessionslist {
     proxy?: string;
 
     /**
+     * The desired region for the session to be started in
+     */
+    region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+
+    /**
      * Indicates if captcha solving is enabled
      */
     solveCaptcha?: boolean;
@@ -587,6 +597,11 @@ export interface SessionCreateParams {
    * http(s)://username:password@hostname:port
    */
   proxyUrl?: string;
+
+  /**
+   * The desired region for the session to be started in
+   */
+  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
 
   /**
    * Session context data to be used in the created session. Sessions will start with
