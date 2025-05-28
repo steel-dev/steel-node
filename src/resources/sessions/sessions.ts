@@ -174,7 +174,7 @@ export interface Session {
   proxy?: string;
 
   /**
-   * The desired region for the session to be started in
+   * The region where the session was created
    */
   region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
 
@@ -465,7 +465,7 @@ export namespace Sessionslist {
     proxy?: string;
 
     /**
-     * The desired region for the session to be started in
+     * The region where the session was created
      */
     region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
 
