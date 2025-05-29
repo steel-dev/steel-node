@@ -27,6 +27,7 @@ import {
   CredentialUpdateResponse,
   Credentials,
 } from './resources/credentials';
+import { File, FileUploadParams, Files, Fileslist } from './resources/files';
 import {
   Session,
   SessionContext,
@@ -157,6 +158,7 @@ export class Steel extends Core.APIClient {
   }
 
   credentials: API.Credentials = new API.Credentials(this);
+  files: API.Files = new API.Files(this);
   sessions: API.Sessions = new API.Sessions(this);
 
   /**
@@ -223,6 +225,7 @@ export class Steel extends Core.APIClient {
 }
 
 Steel.Credentials = Credentials;
+Steel.Files = Files;
 Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 export declare namespace Steel {
@@ -253,6 +256,13 @@ export declare namespace Steel {
     type CredentialUpdateParams as CredentialUpdateParams,
     type CredentialListParams as CredentialListParams,
     type CredentialDeleteParams as CredentialDeleteParams,
+  };
+
+  export {
+    Files as Files,
+    type File as File,
+    type Fileslist as Fileslist,
+    type FileUploadParams as FileUploadParams,
   };
 
   export {

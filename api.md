@@ -28,6 +28,20 @@ Methods:
 - <code title="get /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">list</a>({ ...params }) -> CredentialListResponse</code>
 - <code title="delete /v1/credentials">client.credentials.<a href="./src/resources/credentials.ts">delete</a>({ ...params }) -> CredentialDeleteResponse</code>
 
+# Files
+
+Types:
+
+- <code><a href="./src/resources/files.ts">File</a></code>
+- <code><a href="./src/resources/files.ts">Fileslist</a></code>
+
+Methods:
+
+- <code title="get /v1/files">client.files.<a href="./src/resources/files.ts">list</a>() -> Fileslist</code>
+- <code title="delete /v1/files/{path}">client.files.<a href="./src/resources/files.ts">delete</a>(path\_) -> void</code>
+- <code title="get /v1/files/{path}">client.files.<a href="./src/resources/files.ts">download</a>(path\_) -> Response</code>
+- <code title="post /v1/files/{path}">client.files.<a href="./src/resources/files.ts">upload</a>(path\_, { ...params }) -> File</code>
+
 # Sessions
 
 Types:
@@ -53,18 +67,11 @@ Methods:
 
 ## Files
 
-Types:
-
-- <code><a href="./src/resources/sessions/files.ts">File</a></code>
-- <code><a href="./src/resources/sessions/files.ts">Fileslist</a></code>
-- <code><a href="./src/resources/sessions/files.ts">FileDeleteResponse</a></code>
-- <code><a href="./src/resources/sessions/files.ts">FileDeleteAllResponse</a></code>
-
 Methods:
 
-- <code title="get /v1/sessions/{sessionId}/files/{fileId}">client.sessions.files.<a href="./src/resources/sessions/files.ts">retrieve</a>(sessionId, fileId) -> File</code>
 - <code title="get /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">list</a>(sessionId) -> Fileslist</code>
-- <code title="delete /v1/sessions/{sessionId}/files/{fileId}">client.sessions.files.<a href="./src/resources/sessions/files.ts">delete</a>(sessionId, fileId) -> FileDeleteResponse</code>
-- <code title="delete /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">deleteAll</a>(sessionId) -> FileDeleteAllResponse</code>
-- <code title="get /v1/sessions/{sessionId}/files/{fileId}/download">client.sessions.files.<a href="./src/resources/sessions/files.ts">download</a>(sessionId, fileId) -> Response</code>
-- <code title="post /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">upload</a>(sessionId, { ...params }) -> File</code>
+- <code title="delete /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">delete</a>(sessionId, path\_) -> void</code>
+- <code title="delete /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">deleteAll</a>(sessionId) -> void</code>
+- <code title="get /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">download</a>(sessionId, path\_) -> Response</code>
+- <code title="get /v1/sessions/{sessionId}/files.zip">client.sessions.files.<a href="./src/resources/sessions/files.ts">downloadArchive</a>(sessionId) -> Response</code>
+- <code title="post /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">upload</a>(sessionId, path\_, { ...params }) -> File</code>
