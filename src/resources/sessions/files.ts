@@ -58,26 +58,25 @@ export class Files extends APIResource {
 
   /**
    * Uploads a file to a session via `multipart/form-data` with a `file` field that
-   * accepts either binary data or a URL string to download from.
+   * accepts either binary data or a URL string to download from, and an optional
+   * `path` field for the file storage path.
    */
   upload(
     sessionId: string,
-    path_: string,
     body?: FileUploadParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilesAPI.File>;
-  upload(sessionId: string, path_: string, options?: Core.RequestOptions): Core.APIPromise<FilesAPI.File>;
+  upload(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<FilesAPI.File>;
   upload(
     sessionId: string,
-    path_: string,
     body: FileUploadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<FilesAPI.File> {
     if (isRequestOptions(body)) {
-      return this.upload(sessionId, path_, {}, body);
+      return this.upload(sessionId, {}, body);
     }
     return this._client.post(
-      `/v1/sessions/${sessionId}/files/${path_}`,
+      `/v1/sessions/${sessionId}/files`,
       Core.multipartFormRequestOptions({ body, ...options }),
     );
   }
@@ -88,6 +87,11 @@ export interface FileUploadParams {
    * The file to upload (binary) or URL string to download from
    */
   file?: unknown;
+
+  /**
+   * Path to the file in the storage system
+   */
+  path?: string;
 }
 
 export declare namespace Files {
