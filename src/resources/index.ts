@@ -11,6 +11,7 @@ export {
   type CredentialListParams,
   type CredentialDeleteParams,
 } from './credentials';
+export { Files, type File, type Fileslist, type FileUploadParams } from './files';
 export {
   SessionslistSessionsSessionsCursor,
   Sessions,

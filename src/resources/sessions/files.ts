@@ -3,46 +3,42 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
+import * as FilesAPI from '../files';
 import { type Response } from '../../_shims/index';
 
 export class Files extends APIResource {
   /**
-   * Get details of a file in a session
-   */
-  retrieve(sessionId: string, fileId: string, options?: Core.RequestOptions): Core.APIPromise<File> {
-    return this._client.get(`/v1/sessions/${sessionId}/files/${fileId}`, options);
-  }
-
-  /**
    * List all files from the session in descending order.
    */
-  list(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<Fileslist> {
+  list(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<FilesAPI.Fileslist> {
     return this._client.get(`/v1/sessions/${sessionId}/files`, options);
   }
 
   /**
    * Delete a file from a session
    */
-  delete(
-    sessionId: string,
-    fileId: string,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<FileDeleteResponse> {
-    return this._client.delete(`/v1/sessions/${sessionId}/files/${fileId}`, options);
+  delete(sessionId: string, path_: string, options?: Core.RequestOptions): Core.APIPromise<void> {
+    return this._client.delete(`/v1/sessions/${sessionId}/files/${path_}`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
    * Delete all files from a session
    */
-  deleteAll(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<FileDeleteAllResponse> {
-    return this._client.delete(`/v1/sessions/${sessionId}/files`, options);
+  deleteAll(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<void> {
+    return this._client.delete(`/v1/sessions/${sessionId}/files`, {
+      ...options,
+      headers: { Accept: '*/*', ...options?.headers },
+    });
   }
 
   /**
    * Download a file from a session
    */
-  download(sessionId: string, fileId: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
-    return this._client.get(`/v1/sessions/${sessionId}/files/${fileId}/download`, {
+  download(sessionId: string, path_: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    return this._client.get(`/v1/sessions/${sessionId}/files/${path_}`, {
       ...options,
       headers: { Accept: 'application/octet-stream', ...options?.headers },
       __binaryResponse: true,
@@ -50,17 +46,32 @@ export class Files extends APIResource {
   }
 
   /**
-   * Uploads a file to a session via `multipart/form-data` with form fields: `file`
-   * (binary data, prioritized), `fileUrl` (remote URL), `name` (custom filename),
-   * and `metadata` (custom key-value pairs).
+   * Download all files from the session as a zip archive.
    */
-  upload(sessionId: string, body?: FileUploadParams, options?: Core.RequestOptions): Core.APIPromise<File>;
-  upload(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<File>;
+  downloadArchive(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<Response> {
+    return this._client.get(`/v1/sessions/${sessionId}/files.zip`, {
+      ...options,
+      headers: { Accept: 'application/zip', ...options?.headers },
+      __binaryResponse: true,
+    });
+  }
+
+  /**
+   * Uploads a file to a session via `multipart/form-data` with a `file` field that
+   * accepts either binary data or a URL string to download from, and an optional
+   * `path` field for the file storage path.
+   */
+  upload(
+    sessionId: string,
+    body?: FileUploadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<FilesAPI.File>;
+  upload(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<FilesAPI.File>;
   upload(
     sessionId: string,
     body: FileUploadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<File> {
+  ): Core.APIPromise<FilesAPI.File> {
     if (isRequestOptions(body)) {
       return this.upload(sessionId, {}, body);
     }
@@ -71,250 +82,18 @@ export class Files extends APIResource {
   }
 }
 
-export interface File {
-  /**
-   * Unique identifier for the file
-   */
-  id: string;
-
-  /**
-   * Checksum or hash of the file content for integrity verification
-   */
-  checksum: string;
-
-  /**
-   * MIME type of the file
-   */
-  contentType: string;
-
-  /**
-   * Timestamp when the file was created
-   */
-  createdAt: string;
-
-  /**
-   * Name of the file
-   */
-  name: string;
-
-  /**
-   * Path to the file in the storage system
-   */
-  path: string;
-
-  /**
-   * Size of the file in bytes
-   */
-  size: number;
-
-  /**
-   * Timestamp when the file was last updated
-   */
-  updatedAt: string;
-
-  /**
-   * Custom metadata associated with the file
-   */
-  metadata?: Record<string, unknown>;
-}
-
-export interface Fileslist {
-  /**
-   * Array of files for the current page
-   */
-  data: Array<Fileslist.Data>;
-}
-
-export namespace Fileslist {
-  export interface Data {
-    /**
-     * Unique identifier for the file
-     */
-    id: string;
-
-    /**
-     * Checksum or hash of the file content for integrity verification
-     */
-    checksum: string;
-
-    /**
-     * MIME type of the file
-     */
-    contentType: string;
-
-    /**
-     * Timestamp when the file was created
-     */
-    createdAt: string;
-
-    /**
-     * Name of the file
-     */
-    name: string;
-
-    /**
-     * Path to the file in the storage system
-     */
-    path: string;
-
-    /**
-     * Size of the file in bytes
-     */
-    size: number;
-
-    /**
-     * Timestamp when the file was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * Custom metadata associated with the file
-     */
-    metadata?: Record<string, unknown>;
-  }
-}
-
-export interface FileDeleteResponse {
-  /**
-   * Unique identifier for the file
-   */
-  id: string;
-
-  /**
-   * Checksum or hash of the file content for integrity verification
-   */
-  checksum: string;
-
-  /**
-   * MIME type of the file
-   */
-  contentType: string;
-
-  /**
-   * Timestamp when the file was created
-   */
-  createdAt: string;
-
-  /**
-   * Name of the file
-   */
-  name: string;
-
-  /**
-   * Path to the file in the storage system
-   */
-  path: string;
-
-  /**
-   * Size of the file in bytes
-   */
-  size: number;
-
-  /**
-   * Indicates if the file deletion was successful
-   */
-  success: boolean;
-
-  /**
-   * Timestamp when the file was last updated
-   */
-  updatedAt: string;
-
-  /**
-   * Custom metadata associated with the file
-   */
-  metadata?: Record<string, unknown>;
-}
-
-export interface FileDeleteAllResponse {
-  /**
-   * Array of deleted files
-   */
-  data: Array<FileDeleteAllResponse.Data>;
-}
-
-export namespace FileDeleteAllResponse {
-  export interface Data {
-    /**
-     * Unique identifier for the file
-     */
-    id: string;
-
-    /**
-     * Checksum or hash of the file content for integrity verification
-     */
-    checksum: string;
-
-    /**
-     * MIME type of the file
-     */
-    contentType: string;
-
-    /**
-     * Timestamp when the file was created
-     */
-    createdAt: string;
-
-    /**
-     * Name of the file
-     */
-    name: string;
-
-    /**
-     * Path to the file in the storage system
-     */
-    path: string;
-
-    /**
-     * Size of the file in bytes
-     */
-    size: number;
-
-    /**
-     * Indicates if the file deletion was successful
-     */
-    success: boolean;
-
-    /**
-     * Timestamp when the file was last updated
-     */
-    updatedAt: string;
-
-    /**
-     * Custom metadata associated with the file
-     */
-    metadata?: Record<string, unknown>;
-  }
-}
-
 export interface FileUploadParams {
   /**
-   * The file to upload (binary)
+   * The file to upload (binary) or URL string to download from
    */
   file?: unknown;
 
   /**
-   * Public URL to download file from
+   * Path to the file in the storage system
    */
-  fileUrl?: string;
-
-  /**
-   * Custom metadata to associate with the file
-   */
-  metadata?: Record<string, unknown>;
-
-  /**
-   * Filename to use in session
-   */
-  name?: string;
+  path?: string;
 }
 
 export declare namespace Files {
-  export {
-    type File as File,
-    type Fileslist as Fileslist,
-    type FileDeleteResponse as FileDeleteResponse,
-    type FileDeleteAllResponse as FileDeleteAllResponse,
-    type FileUploadParams as FileUploadParams,
-  };
+  export { type FileUploadParams as FileUploadParams };
 }
