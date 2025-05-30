@@ -40,7 +40,7 @@ Methods:
 - <code title="get /v1/files">client.files.<a href="./src/resources/files.ts">list</a>() -> Fileslist</code>
 - <code title="delete /v1/files/{path}">client.files.<a href="./src/resources/files.ts">delete</a>(path\_) -> void</code>
 - <code title="get /v1/files/{path}">client.files.<a href="./src/resources/files.ts">download</a>(path\_) -> Response</code>
-- <code title="post /v1/files/{path}">client.files.<a href="./src/resources/files.ts">upload</a>(path\_, { ...params }) -> File</code>
+- <code title="post /v1/files">client.files.<a href="./src/resources/files.ts">upload</a>({ ...params }) -> File</code>
 
 # Sessions
 
@@ -74,4 +74,4 @@ Methods:
 - <code title="delete /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">deleteAll</a>(sessionId) -> void</code>
 - <code title="get /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">download</a>(sessionId, path\_) -> Response</code>
 - <code title="get /v1/sessions/{sessionId}/files.zip">client.sessions.files.<a href="./src/resources/sessions/files.ts">downloadArchive</a>(sessionId) -> Response</code>
-- <code title="post /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">upload</a>(sessionId, path\_, { ...params }) -> File</code>
+- <code title="post /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">upload</a>(sessionId, { ...params }) -> File</code>

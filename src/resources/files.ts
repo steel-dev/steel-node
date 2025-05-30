@@ -36,19 +36,19 @@ export class Files extends APIResource {
 
   /**
    * Uploads a file to global storage via `multipart/form-data` with a `file` field
-   * that accepts either binary data or a URL string to download from.
+   * that accepts either binary data or a URL string to download from, and an
+   * optional `path` field for the file storage path.
    */
-  upload(path_: string, body?: FileUploadParams, options?: Core.RequestOptions): Core.APIPromise<File>;
-  upload(path_: string, options?: Core.RequestOptions): Core.APIPromise<File>;
+  upload(body?: FileUploadParams, options?: Core.RequestOptions): Core.APIPromise<File>;
+  upload(options?: Core.RequestOptions): Core.APIPromise<File>;
   upload(
-    path_: string,
     body: FileUploadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<File> {
     if (isRequestOptions(body)) {
-      return this.upload(path_, {}, body);
+      return this.upload({}, body);
     }
-    return this._client.post(`/v1/files/${path_}`, Core.multipartFormRequestOptions({ body, ...options }));
+    return this._client.post('/v1/files', Core.multipartFormRequestOptions({ body, ...options }));
   }
 }
 
@@ -100,6 +100,11 @@ export interface FileUploadParams {
    * The file to upload (binary) or URL string to download from
    */
   file?: unknown;
+
+  /**
+   * Path to the file in the storage system
+   */
+  path?: string;
 }
 
 export declare namespace Files {
