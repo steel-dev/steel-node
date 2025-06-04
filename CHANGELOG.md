@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 (2025-06-04)
+
+Full Changelog: [v0.4.0...v0.5.0](https://github.com/steel-dev/steel-node/compare/v0.4.0...v0.5.0)
+
+### Features
+
+* **api:** api update ([d5eed59](https://github.com/steel-dev/steel-node/commit/d5eed59309aeb3ab88ad00888f0f4015dc366f01))
+* **api:** api update ([5f4e8f8](https://github.com/steel-dev/steel-node/commit/5f4e8f8b6673c488d6c4c6b7f1ef09792a3c63c6))
+
+
+### Chores
+
+* **docs:** use top-level-await in example snippets ([c7ca887](https://github.com/steel-dev/steel-node/commit/c7ca8871e6ee862ee9ce637df388a32581fa9cf7))
+
 ## 0.4.0 (2025-05-28)
 
 Full Changelog: [v0.3.0...v0.4.0](https://github.com/steel-dev/steel-node/compare/v0.3.0...v0.4.0)
