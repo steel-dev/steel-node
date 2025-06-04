@@ -24,13 +24,9 @@ import Steel from 'steel-sdk';
 
 const client = new Steel();
 
-async function main() {
-  const session = await client.sessions.create({ timeout: 20000, useProxy: true });
+const session = await client.sessions.create({ timeout: 20000, useProxy: true });
 
-  console.log(session.id);
-}
-
-main();
+console.log(session.id);
 ```
 
 ### Request & Response types
@@ -43,11 +39,7 @@ import Steel from 'steel-sdk';
 
 const client = new Steel();
 
-async function main() {
-  const session: Steel.Session = await client.sessions.create();
-}
-
-main();
+const session: Steel.Session = await client.sessions.create();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,19 +52,15 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-async function main() {
-  const session = await client.sessions.create().catch(async (err) => {
-    if (err instanceof Steel.APIError) {
-      console.log(err.status); // 400
-      console.log(err.name); // BadRequestError
-      console.log(err.headers); // {server: 'nginx', ...}
-    } else {
-      throw err;
-    }
-  });
-}
-
-main();
+const session = await client.sessions.create().catch(async (err) => {
+  if (err instanceof Steel.APIError) {
+    console.log(err.status); // 400
+    console.log(err.name); // BadRequestError
+    console.log(err.headers); // {server: 'nginx', ...}
+  } else {
+    throw err;
+  }
+});
 ```
 
 Error codes are as follows:
