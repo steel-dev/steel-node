@@ -5,7 +5,7 @@ import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 import { type Record as BuiltinRecord } from '../../core';
 import * as FilesAPI from './files';
-import { File, FileDeleteAllResponse, FileDeleteResponse, FileUploadParams, Files, Fileslist } from './files';
+import { FileUploadParams, Files } from './files';
 import { SessionsCursor, type SessionsCursorParams } from '../../pagination';
 
 export class Sessions extends APIResource {
@@ -867,12 +867,5 @@ export declare namespace Sessions {
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 
-  export {
-    Files as Files,
-    type File as File,
-    type Fileslist as Fileslist,
-    type FileDeleteResponse as FileDeleteResponse,
-    type FileDeleteAllResponse as FileDeleteAllResponse,
-    type FileUploadParams as FileUploadParams,
-  };
+  export { Files as Files, type FileUploadParams as FileUploadParams };
 }
