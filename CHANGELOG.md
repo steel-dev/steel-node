@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.1 (2025-06-14)
+
+Full Changelog: [v0.5.0...v0.5.1](https://github.com/steel-dev/steel-node/compare/v0.5.0...v0.5.1)
+
+### Bug Fixes
+
+* publish script — handle NPM errors correctly ([be998bb](https://github.com/steel-dev/steel-node/commit/be998bb59df0f34fb83e0e2ec8059fc6deb2dc9d))
+
+
+### Chores
+
+* **internal:** make base APIResource abstract ([0b79e22](https://github.com/steel-dev/steel-node/commit/0b79e222bd6fd2d30b6a007c01faa971015e6f17))
+
 ## 0.5.0 (2025-06-04)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/steel-dev/steel-node/compare/v0.4.0...v0.5.0)
