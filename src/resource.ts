@@ -2,7 +2,7 @@
 
 import type { Steel } from './index';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Steel;
 
   constructor(client: Steel) {
