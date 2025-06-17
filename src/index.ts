@@ -146,6 +146,7 @@ export class Steel extends Core.APIClient {
 
     super({
       baseURL: options.baseURL!,
+      baseURLOverridden: baseURL ? baseURL !== 'https://api.steel.dev' : false,
       timeout: options.timeout ?? 60000 /* 1 minute */,
       httpAgent: options.httpAgent,
       maxRetries: options.maxRetries,
@@ -160,6 +161,13 @@ export class Steel extends Core.APIClient {
   credentials: API.Credentials = new API.Credentials(this);
   files: API.Files = new API.Files(this);
   sessions: API.Sessions = new API.Sessions(this);
+
+  /**
+   * Check whether the base URL is set to its default.
+   */
+  #baseURLOverridden(): boolean {
+    return this.baseURL !== 'https://api.steel.dev';
+  }
 
   /**
    * Generates a PDF from a specified webpage.
