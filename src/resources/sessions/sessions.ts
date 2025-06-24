@@ -3,7 +3,6 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
-import { type Record as BuiltinRecord } from '../../core';
 import * as FilesAPI from './files';
 import { FileUploadParams, Files } from './files';
 import { SessionsCursor, type SessionsCursorParams } from '../../pagination';
@@ -218,17 +217,17 @@ export interface SessionContext {
   /**
    * Domain-specific indexedDB items to initialize in the session
    */
-  indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
+  indexedDB?: { [key: string]: Array<SessionContext.IndexedDB> };
 
   /**
    * Domain-specific localStorage items to initialize in the session
    */
-  localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+  localStorage?: { [key: string]: { [key: string]: string } };
 
   /**
    * Domain-specific sessionStorage items to initialize in the session
    */
-  sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+  sessionStorage?: { [key: string]: { [key: string]: string } };
 }
 
 export namespace SessionContext {
@@ -676,17 +675,17 @@ export namespace SessionCreateParams {
     /**
      * Domain-specific indexedDB items to initialize in the session
      */
-    indexedDB?: BuiltinRecord<string, Array<SessionContext.IndexedDB>>;
+    indexedDB?: { [key: string]: Array<SessionContext.IndexedDB> };
 
     /**
      * Domain-specific localStorage items to initialize in the session
      */
-    localStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+    localStorage?: { [key: string]: { [key: string]: string } };
 
     /**
      * Domain-specific sessionStorage items to initialize in the session
      */
-    sessionStorage?: BuiltinRecord<string, BuiltinRecord<string, string>>;
+    sessionStorage?: { [key: string]: { [key: string]: string } };
   }
 
   export namespace SessionContext {

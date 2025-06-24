@@ -42,7 +42,7 @@ export namespace ScrapeResponse {
     /**
      * Webpage content in Readability format
      */
-    readability?: Record<string, unknown>;
+    readability?: { [key: string]: unknown };
   }
 
   export interface Link {
