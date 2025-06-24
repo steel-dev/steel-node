@@ -48,7 +48,7 @@ export interface ClientOptions {
   /**
    * The API key required to authenticate the request. Typically provided in the header.
    */
-  steelAPIKey?: string | undefined;
+  steelAPIKey?: string | null | undefined;
 
   /**
    * Override the default base URL for the API, e.g., "https://api.example.com/v2/"
@@ -111,14 +111,14 @@ export interface ClientOptions {
  * API Client for interfacing with the Steel API.
  */
 export class Steel extends Core.APIClient {
-  steelAPIKey: string;
+  steelAPIKey: string | null;
 
   private _options: ClientOptions;
 
   /**
    * API Client for interfacing with the Steel API.
    *
-   * @param {string | undefined} [opts.steelAPIKey=process.env['STEEL_API_KEY'] ?? undefined]
+   * @param {string | null | undefined} [opts.steelAPIKey=process.env['STEEL_API_KEY'] ?? null]
    * @param {string} [opts.baseURL=process.env['STEEL_BASE_URL'] ?? https://api.steel.dev] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {number} [opts.httpAgent] - An HTTP agent used to manage HTTP(s) connections.
@@ -129,15 +129,9 @@ export class Steel extends Core.APIClient {
    */
   constructor({
     baseURL = Core.readEnv('STEEL_BASE_URL'),
-    steelAPIKey = Core.readEnv('STEEL_API_KEY'),
+    steelAPIKey = Core.readEnv('STEEL_API_KEY') ?? null,
     ...opts
   }: ClientOptions = {}) {
-    if (steelAPIKey === undefined) {
-      throw new Errors.SteelError(
-        "The STEEL_API_KEY environment variable is missing or empty; either provide it, or instantiate the Steel client with an steelAPIKey option, like new Steel({ steelAPIKey: 'My Steel API Key' }).",
-      );
-    }
-
     const options: ClientOptions = {
       steelAPIKey,
       ...opts,
@@ -208,6 +202,9 @@ export class Steel extends Core.APIClient {
   }
 
   protected override authHeaders(opts: Core.FinalRequestOptions): Core.Headers {
+    if (this.steelAPIKey == null) {
+      return {};
+    }
     return { 'steel-api-key': this.steelAPIKey };
   }
 
