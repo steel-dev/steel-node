@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.6.0 (2025-06-28)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/steel-dev/steel-node/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** api update ([f35d937](https://github.com/steel-dev/steel-node/commit/f35d93725bc1f0e53fdd85d097625a43b4619997))
+* **client:** add support for endpoint-specific base URLs ([ece8c7d](https://github.com/steel-dev/steel-node/commit/ece8c7d82139abb8f5da125c6352ef169ca1f1a0))
+
+
+### Bug Fixes
+
+* **ci:** release-doctor — report correct token name ([7a2dace](https://github.com/steel-dev/steel-node/commit/7a2daceb2a32e35c8fcaf31d90a0581541a4de11))
+* publish script — handle NPM errors correctly ([be998bb](https://github.com/steel-dev/steel-node/commit/be998bb59df0f34fb83e0e2ec8059fc6deb2dc9d))
+
+
+### Chores
+
+* **ci:** enable for pull requests ([95c7701](https://github.com/steel-dev/steel-node/commit/95c7701f8c3675c2fc1166a13e8a05b09e5b0e92))
+* **ci:** only run for pushes and fork pull requests ([ecaf21f](https://github.com/steel-dev/steel-node/commit/ecaf21f78f25ab455fb49635d2676e6f4351cbd3))
+* **internal:** make base APIResource abstract ([0b79e22](https://github.com/steel-dev/steel-node/commit/0b79e222bd6fd2d30b6a007c01faa971015e6f17))
+
+
+### Refactors
+
+* **types:** replace Record with mapped types ([bfd0aff](https://github.com/steel-dev/steel-node/commit/bfd0affc072663b70df06330cc5ea66b35e1bcbd))
+
 ## 0.5.0 (2025-06-04)
 
 Full Changelog: [v0.4.0...v0.5.0](https://github.com/steel-dev/steel-node/compare/v0.4.0...v0.5.0)

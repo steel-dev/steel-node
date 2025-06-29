@@ -154,7 +154,7 @@ export interface CredentialCreateParams {
   /**
    * Value for the credential
    */
-  value: Record<string, string>;
+  value: { [key: string]: string };
 
   /**
    * Label for the credential
@@ -191,7 +191,7 @@ export interface CredentialUpdateParams {
   /**
    * Value for the credential
    */
-  value?: Record<string, string>;
+  value?: { [key: string]: string };
 }
 
 export interface CredentialListParams {
