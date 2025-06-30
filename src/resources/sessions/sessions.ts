@@ -143,6 +143,11 @@ export interface Session {
   proxyBytesUsed: number;
 
   /**
+   * Source of the proxy used for the session
+   */
+  proxySource: 'steel' | 'external' | null;
+
+  /**
    * URL to view session details
    */
   sessionViewerUrl: string;
@@ -163,14 +168,14 @@ export interface Session {
   websocketUrl: string;
 
   /**
+   * Indicates if advanced stealth mode is enabled
+   */
+  advancedStealth?: boolean;
+
+  /**
    * Indicates if Selenium is used in the session
    */
   isSelenium?: boolean;
-
-  /**
-   * Proxy server used for the session
-   */
-  proxy?: string;
 
   /**
    * The region where the session was created
@@ -434,6 +439,11 @@ export namespace Sessionslist {
     proxyBytesUsed: number;
 
     /**
+     * Source of the proxy used for the session
+     */
+    proxySource: 'steel' | 'external' | null;
+
+    /**
      * URL to view session details
      */
     sessionViewerUrl: string;
@@ -454,14 +464,14 @@ export namespace Sessionslist {
     websocketUrl: string;
 
     /**
+     * Indicates if advanced stealth mode is enabled
+     */
+    advancedStealth?: boolean;
+
+    /**
      * Indicates if Selenium is used in the session
      */
     isSelenium?: boolean;
-
-    /**
-     * Proxy server used for the session
-     */
-    proxy?: string;
 
     /**
      * The region where the session was created
@@ -560,6 +570,11 @@ export interface SessionReleaseAllResponse {
 
 export interface SessionCreateParams {
   /**
+   * Enable advanced stealth mode for the browser session. Default is false.
+   */
+  advancedStealth?: boolean;
+
+  /**
    * Block ads in the browser session. Default is false.
    */
   blockAds?: boolean;
@@ -624,10 +639,10 @@ export interface SessionCreateParams {
   timeout?: number;
 
   /**
-   * Enable Steel-provided residential proxy usage for the browser session. Default
-   * is false, which routes requests through datacenter proxies.
+   * Proxy configuration for the session. Can be a boolean or array of proxy
+   * configurations
    */
-  useProxy?: boolean;
+  useProxy?: unknown | boolean | SessionCreateParams.Geolocation | SessionCreateParams.Server;
 
   /**
    * Custom user agent string for the browser session
@@ -833,6 +848,238 @@ export namespace SessionCreateParams {
         }
       }
     }
+  }
+
+  export interface Geolocation {
+    /**
+     * Geographic location for the proxy
+     */
+    geolocation: Geolocation.Geolocation;
+  }
+
+  export namespace Geolocation {
+    /**
+     * Geographic location for the proxy
+     */
+    export interface Geolocation {
+      /**
+       * Country code (e.g., 'US', 'GB', 'DE') - ISO 3166-1 alpha-2
+       */
+      country:
+        | 'US'
+        | 'CA'
+        | 'MX'
+        | 'GB'
+        | 'DE'
+        | 'FR'
+        | 'IT'
+        | 'ES'
+        | 'PL'
+        | 'NL'
+        | 'SE'
+        | 'NO'
+        | 'DK'
+        | 'FI'
+        | 'CH'
+        | 'AT'
+        | 'BE'
+        | 'IE'
+        | 'PT'
+        | 'GR'
+        | 'CZ'
+        | 'HU'
+        | 'RO'
+        | 'BG'
+        | 'SK'
+        | 'SI'
+        | 'HR'
+        | 'EE'
+        | 'LV'
+        | 'LT'
+        | 'LU'
+        | 'MT'
+        | 'CY'
+        | 'IS'
+        | 'LI'
+        | 'MC'
+        | 'SM'
+        | 'VA'
+        | 'JP'
+        | 'KR'
+        | 'CN'
+        | 'HK'
+        | 'TW'
+        | 'SG'
+        | 'AU'
+        | 'NZ'
+        | 'IN'
+        | 'TH'
+        | 'MY'
+        | 'PH'
+        | 'ID'
+        | 'VN'
+        | 'AF'
+        | 'BD'
+        | 'BN'
+        | 'KH'
+        | 'LA'
+        | 'LK'
+        | 'MM'
+        | 'NP'
+        | 'PK'
+        | 'FJ'
+        | 'PG'
+        | 'AE'
+        | 'SA'
+        | 'IL'
+        | 'TR'
+        | 'IR'
+        | 'IQ'
+        | 'JO'
+        | 'KW'
+        | 'LB'
+        | 'OM'
+        | 'QA'
+        | 'BH'
+        | 'YE'
+        | 'SY'
+        | 'ZA'
+        | 'EG'
+        | 'MA'
+        | 'NG'
+        | 'KE'
+        | 'DZ'
+        | 'AO'
+        | 'BW'
+        | 'ET'
+        | 'GH'
+        | 'CI'
+        | 'LY'
+        | 'MZ'
+        | 'RW'
+        | 'SN'
+        | 'TN'
+        | 'UG'
+        | 'ZM'
+        | 'ZW'
+        | 'TZ'
+        | 'MU'
+        | 'SC'
+        | 'BR'
+        | 'AR'
+        | 'CL'
+        | 'CO'
+        | 'PE'
+        | 'VE'
+        | 'EC'
+        | 'UY'
+        | 'PY'
+        | 'BO'
+        | 'CR'
+        | 'CU'
+        | 'DO'
+        | 'GT'
+        | 'HN'
+        | 'JM'
+        | 'NI'
+        | 'PA'
+        | 'SV'
+        | 'TT'
+        | 'BB'
+        | 'BZ'
+        | 'GY'
+        | 'SR'
+        | 'RU'
+        | 'UA'
+        | 'BY'
+        | 'KZ'
+        | 'UZ'
+        | 'AZ'
+        | 'GE'
+        | 'AM'
+        | 'MD'
+        | 'MK'
+        | 'AL'
+        | 'BA'
+        | 'RS'
+        | 'ME'
+        | 'XK'
+        | 'MN'
+        | 'KG'
+        | 'TJ'
+        | 'TM';
+
+      /**
+       * City name (e.g., 'NEW_YORK', 'LOS_ANGELES')
+       */
+      city?: string;
+
+      /**
+       * State code (e.g., 'NY', 'CA') - US states only
+       */
+      state?:
+        | 'AL'
+        | 'AK'
+        | 'AZ'
+        | 'AR'
+        | 'CA'
+        | 'CO'
+        | 'CT'
+        | 'DE'
+        | 'FL'
+        | 'GA'
+        | 'HI'
+        | 'ID'
+        | 'IL'
+        | 'IN'
+        | 'IA'
+        | 'KS'
+        | 'KY'
+        | 'LA'
+        | 'ME'
+        | 'MD'
+        | 'MA'
+        | 'MI'
+        | 'MN'
+        | 'MS'
+        | 'MO'
+        | 'MT'
+        | 'NE'
+        | 'NV'
+        | 'NH'
+        | 'NJ'
+        | 'NM'
+        | 'NY'
+        | 'NC'
+        | 'ND'
+        | 'OH'
+        | 'OK'
+        | 'OR'
+        | 'PA'
+        | 'RI'
+        | 'SC'
+        | 'SD'
+        | 'TN'
+        | 'TX'
+        | 'UT'
+        | 'VT'
+        | 'VA'
+        | 'WA'
+        | 'WV'
+        | 'WI'
+        | 'WY'
+        | 'DC'
+        | 'PR'
+        | 'GU'
+        | 'VI';
+    }
+  }
+
+  export interface Server {
+    /**
+     * Proxy server URL
+     */
+    server: string;
   }
 }
 
