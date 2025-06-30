@@ -29,6 +29,7 @@ describe('resource sessions', () => {
     await expect(
       client.sessions.create(
         {
+          advancedStealth: true,
           blockAds: true,
           concurrency: 0,
           credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
@@ -94,7 +95,7 @@ describe('resource sessions', () => {
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,
           timeout: 0,
-          useProxy: true,
+          useProxy: {},
           userAgent: 'userAgent',
         },
         { path: '/_stainless_unknown_path' },
