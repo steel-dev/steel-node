@@ -1,5 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
+export {
+  Captchas,
+  type CaptchaSolveImageResponse,
+  type CaptchaStatusResponse,
+  type CaptchaSolveImageParams,
+} from './captchas';
 export { Files, type FileUploadParams } from './files';
 export {
   SessionslistSessionsSessionsCursor,
