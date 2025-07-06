@@ -3,12 +3,20 @@
 import { APIResource } from '../../resource';
 import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
+import * as CaptchasAPI from './captchas';
+import {
+  CaptchaSolveImageParams,
+  CaptchaSolveImageResponse,
+  CaptchaStatusResponse,
+  Captchas,
+} from './captchas';
 import * as FilesAPI from './files';
 import { FileUploadParams, Files } from './files';
 import { SessionsCursor, type SessionsCursorParams } from '../../pagination';
 
 export class Sessions extends APIResource {
   files: FilesAPI.Files = new FilesAPI.Files(this._client);
+  captchas: CaptchasAPI.Captchas = new CaptchasAPI.Captchas(this._client);
 
   /**
    * Creates a new session with the provided configuration.
@@ -2272,6 +2280,7 @@ export interface SessionReleaseAllParams {}
 
 Sessions.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Sessions.Files = Files;
+Sessions.Captchas = Captchas;
 
 export declare namespace Sessions {
   export {
@@ -2290,4 +2299,11 @@ export declare namespace Sessions {
   };
 
   export { Files as Files, type FileUploadParams as FileUploadParams };
+
+  export {
+    Captchas as Captchas,
+    type CaptchaSolveImageResponse as CaptchaSolveImageResponse,
+    type CaptchaStatusResponse as CaptchaStatusResponse,
+    type CaptchaSolveImageParams as CaptchaSolveImageParams,
+  };
 }
