@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.8.0 (2025-07-10)
+
+Full Changelog: [v0.7.0...v0.8.0](https://github.com/steel-dev/steel-node/compare/v0.7.0...v0.8.0)
+
+### Features
+
+* **api:** api update ([51209a9](https://github.com/steel-dev/steel-node/commit/51209a929683c151d8ec64ec318aee693d3482e4))
+
+
+### Bug Fixes
+
+* **client:** don't send `Content-Type` for bodyless methods ([fbcc781](https://github.com/steel-dev/steel-node/commit/fbcc781f939e34ab3cfcf1801be63c7be1f4d5d7))
+
+
+### Chores
+
+* make some internal functions async ([fd19e8c](https://github.com/steel-dev/steel-node/commit/fd19e8cb618e589abb450b5a3350f8f8a3875899))
+* mention unit type in timeout docs ([b3ec443](https://github.com/steel-dev/steel-node/commit/b3ec443a202ff2fd237e91f491fc482189f0ee8b))
+
 ## 0.7.0 (2025-07-02)
 
 Full Changelog: [v0.6.0...v0.7.0](https://github.com/steel-dev/steel-node/compare/v0.6.0...v0.7.0)
