@@ -75,3 +75,15 @@ Methods:
 - <code title="get /v1/sessions/{sessionId}/files/{path}">client.sessions.files.<a href="./src/resources/sessions/files.ts">download</a>(sessionId, path\_) -> Response</code>
 - <code title="get /v1/sessions/{sessionId}/files.zip">client.sessions.files.<a href="./src/resources/sessions/files.ts">downloadArchive</a>(sessionId) -> Response</code>
 - <code title="post /v1/sessions/{sessionId}/files">client.sessions.files.<a href="./src/resources/sessions/files.ts">upload</a>(sessionId, { ...params }) -> File</code>
+
+## Captchas
+
+Types:
+
+- <code><a href="./src/resources/sessions/captchas.ts">CaptchaSolveImageResponse</a></code>
+- <code><a href="./src/resources/sessions/captchas.ts">CaptchaStatusResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/sessions/{sessionId}/captchas/solve-image">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">solveImage</a>(sessionId, { ...params }) -> CaptchaSolveImageResponse</code>
+- <code title="get /v1/sessions/{sessionId}/captchas/status">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">status</a>(sessionId) -> CaptchaStatusResponse</code>
