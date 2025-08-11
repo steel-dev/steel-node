@@ -18,7 +18,12 @@ describe('top level methods', () => {
   });
 
   test('pdf: required and optional params', async () => {
-    const response = await client.pdf({ url: 'https://example.com', delay: 0, useProxy: true });
+    const response = await client.pdf({
+      url: 'https://example.com',
+      delay: 0,
+      region: 'lax',
+      useProxy: true,
+    });
   });
 
   test('scrape: only required params', async () => {
@@ -38,6 +43,7 @@ describe('top level methods', () => {
       delay: 0,
       format: ['html'],
       pdf: true,
+      region: 'lax',
       screenshot: true,
       useProxy: true,
     });
@@ -59,6 +65,7 @@ describe('top level methods', () => {
       url: 'https://example.com',
       delay: 0,
       fullPage: true,
+      region: 'lax',
       useProxy: true,
     });
   });
