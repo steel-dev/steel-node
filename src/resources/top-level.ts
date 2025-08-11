@@ -143,6 +143,11 @@ export interface PdfParams {
   delay?: number;
 
   /**
+   * The desired region for the action to be performed in
+   */
+  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+
+  /**
    * Use a Steel-provided residential proxy for generating the PDF
    */
   useProxy?: boolean;
@@ -170,6 +175,11 @@ export interface ScrapeParams {
   pdf?: boolean;
 
   /**
+   * The desired region for the action to be performed in
+   */
+  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+
+  /**
    * Include a screenshot in the response
    */
   screenshot?: boolean;
@@ -195,6 +205,11 @@ export interface ScreenshotParams {
    * Capture the full page screenshot. Default is `false`.
    */
   fullPage?: boolean;
+
+  /**
+   * The desired region for the action to be performed in
+   */
+  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
 
   /**
    * Use a Steel-provided residential proxy for capturing the screenshot
