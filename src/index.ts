@@ -235,6 +235,7 @@ Steel.Credentials = Credentials;
 Steel.Files = Files;
 Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
+
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
 
