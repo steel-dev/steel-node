@@ -101,9 +101,9 @@ Types:
 
 Methods:
 
-- <code title="put /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">update</a>(extensionId) -> ExtensionUpdateResponse</code>
+- <code title="put /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">update</a>(extensionId, { ...params }) -> ExtensionUpdateResponse</code>
 - <code title="get /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">list</a>() -> ExtensionListResponse</code>
 - <code title="delete /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">delete</a>(extensionId) -> ExtensionDeleteResponse</code>
 - <code title="delete /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">deleteAll</a>() -> ExtensionDeleteAllResponse</code>
 - <code title="get /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(extensionId) -> string</code>
-- <code title="post /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>() -> ExtensionUploadResponse</code>
+- <code title="post /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>({ ...params }) -> ExtensionUploadResponse</code>

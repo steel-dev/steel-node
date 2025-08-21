@@ -19,6 +19,8 @@ export {
   type ExtensionDeleteAllResponse,
   type ExtensionDownloadResponse,
   type ExtensionUploadResponse,
+  type ExtensionUpdateParams,
+  type ExtensionUploadParams,
 } from './extensions';
 export { Files, type File, type Fileslist, type FileUploadParams } from './files';
 export {

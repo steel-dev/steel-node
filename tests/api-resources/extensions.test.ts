@@ -24,6 +24,17 @@ describe('resource extensions', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
+  test('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.extensions.update(
+        'extensionId',
+        { file: {}, url: 'https://example.com' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
   test('list', async () => {
     const responsePromise = client.extensions.list();
     const rawResponse = await responsePromise.asResponse();
@@ -112,5 +123,15 @@ describe('resource extensions', () => {
     await expect(client.extensions.upload({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Steel.NotFoundError,
     );
+  });
+
+  test('upload: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.extensions.upload(
+        { file: {}, url: 'https://example.com' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 });
