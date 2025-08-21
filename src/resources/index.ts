@@ -11,6 +11,15 @@ export {
   type CredentialListParams,
   type CredentialDeleteParams,
 } from './credentials';
+export {
+  Extensions,
+  type ExtensionUpdateResponse,
+  type ExtensionListResponse,
+  type ExtensionDeleteResponse,
+  type ExtensionDeleteAllResponse,
+  type ExtensionDownloadResponse,
+  type ExtensionUploadResponse,
+} from './extensions';
 export { Files, type File, type Fileslist, type FileUploadParams } from './files';
 export {
   SessionslistSessionsSessionsCursor,

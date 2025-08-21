@@ -30,19 +30,9 @@ export interface CaptchaSolveImageResponse {
   success: boolean;
 
   /**
-   * Whether the message was broadcasted
-   */
-  broadcasted?: boolean;
-
-  /**
    * Response message
    */
   message?: string;
-
-  /**
-   * Whether the state was requested
-   */
-  requested?: boolean;
 }
 
 export type CaptchaStatusResponse = Array<CaptchaStatusResponse.CaptchaStatusResponseItem>;
@@ -93,7 +83,7 @@ export interface CaptchaSolveImageParams {
   inputXPath: string;
 
   /**
-   * URL where the captcha is located
+   * URL where the captcha is located. Defaults to the current page URL
    */
   url?: string;
 }

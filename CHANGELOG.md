@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.9.0 (2025-08-21)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/steel-dev/steel-node/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** api update ([933b018](https://github.com/steel-dev/steel-node/commit/933b01855bcb5e389d690f3e6145358664dc9178))
+* **api:** api update ([b758214](https://github.com/steel-dev/steel-node/commit/b7582149865fdc8ed70f02a7cd19759029097291))
+* **api:** api update ([1d6a82f](https://github.com/steel-dev/steel-node/commit/1d6a82f49274f0d963a314a3a383fb560a04a812))
+* **api:** api update ([7cb5d74](https://github.com/steel-dev/steel-node/commit/7cb5d746911aa337e85e622a80ff12f6fd68d4d0))
+
+
+### Chores
+
+* **deps:** update dependency node-fetch to v2.6.13 ([302e80e](https://github.com/steel-dev/steel-node/commit/302e80ee1877f01853d2fbaad87216e81b049eef))
+* **internal:** formatting change ([0233d4a](https://github.com/steel-dev/steel-node/commit/0233d4a4462af5654e883b71e7c7edd292eb57b5))
+* **internal:** move publish config ([b16f26f](https://github.com/steel-dev/steel-node/commit/b16f26fd0b8cb3a20986f30b2c70fefb41185489))
+* **internal:** remove redundant imports config ([1ecf06d](https://github.com/steel-dev/steel-node/commit/1ecf06d9d74e2d8b0072229cb720f010d4d53f55))
+* **internal:** update comment in script ([942ccf2](https://github.com/steel-dev/steel-node/commit/942ccf23c70421372b0ce8aeb3db1395dd32e90e))
+* update @stainless-api/prism-cli to v5.15.0 ([8849645](https://github.com/steel-dev/steel-node/commit/88496459599a13becfcd309bb315b6bc6d78322c))
+
 ## 0.8.0 (2025-07-10)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/steel-dev/steel-node/compare/v0.7.0...v0.8.0)
