@@ -64,14 +64,49 @@ export namespace ScrapeResponse {
     statusCode: number;
 
     /**
+     * Author of the article content
+     */
+    articleAuthor?: string;
+
+    /**
+     * Author of the webpage content
+     */
+    author?: string;
+
+    /**
+     * Canonical URL of the webpage
+     */
+    canonical?: string;
+
+    /**
      * Description of the webpage
      */
     description?: string;
 
     /**
+     * Favicon URL of the website
+     */
+    favicon?: string;
+
+    /**
+     * JSON-LD structured data from the webpage
+     */
+    jsonLd?: unknown;
+
+    /**
+     * Keywords associated with the webpage
+     */
+    keywords?: string;
+
+    /**
      * Detected language of the webpage
      */
     language?: string;
+
+    /**
+     * Last modification time of the content
+     */
+    modifiedTime?: string;
 
     /**
      * Open Graph description
@@ -84,14 +119,24 @@ export namespace ScrapeResponse {
     ogImage?: string;
 
     /**
+     * Open Graph site name
+     */
+    ogSiteName?: string;
+
+    /**
      * Open Graph title
      */
     ogTitle?: string;
 
     /**
-     * Publication timestamp of the content (if available)
+     * Open Graph URL
      */
-    published_timestamp?: string;
+    ogUrl?: string;
+
+    /**
+     * Publication time of the content
+     */
+    publishedTime?: string;
 
     /**
      * Timestamp when the scrape was performed

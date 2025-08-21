@@ -630,6 +630,12 @@ export interface SessionCreateParams {
   dimensions?: SessionCreateParams.Dimensions;
 
   /**
+   * Array of extension IDs to install in the session. Use ['all_ext'] to install all
+   * uploaded extensions.
+   */
+  extensionIds?: Array<string>;
+
+  /**
    * Enable Selenium mode for the browser session (default is false). Use this when
    * you plan to connect to the browser session via Selenium.
    */
