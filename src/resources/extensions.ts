@@ -49,14 +49,14 @@ export class Extensions extends APIResource {
 
 export interface ExtensionUpdateResponse {
   /**
+   * Unique extension identifier (e.g., ext_12345)
+   */
+  id: string;
+
+  /**
    * Creation timestamp
    */
   createdAt: string;
-
-  /**
-   * Unique extension identifier (e.g., ext_12345)
-   */
-  extensionId: string;
 
   /**
    * Extension name
@@ -87,14 +87,14 @@ export interface ExtensionListResponse {
 export namespace ExtensionListResponse {
   export interface Extension {
     /**
+     * Unique extension identifier (e.g., ext_12345)
+     */
+    id: string;
+
+    /**
      * Creation timestamp
      */
     createdAt: string;
-
-    /**
-     * Unique extension identifier (e.g., ext_12345)
-     */
-    extensionId: string;
 
     /**
      * Extension name
@@ -123,14 +123,14 @@ export type ExtensionDownloadResponse = Core.Uploadable;
 
 export interface ExtensionUploadResponse {
   /**
+   * Unique extension identifier (e.g., ext_12345)
+   */
+  id: string;
+
+  /**
    * Creation timestamp
    */
   createdAt: string;
-
-  /**
-   * Unique extension identifier (e.g., ext_12345)
-   */
-  extensionId: string;
 
   /**
    * Extension name
