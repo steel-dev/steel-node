@@ -87,3 +87,23 @@ Methods:
 
 - <code title="post /v1/sessions/{sessionId}/captchas/solve-image">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">solveImage</a>(sessionId, { ...params }) -> CaptchaSolveImageResponse</code>
 - <code title="get /v1/sessions/{sessionId}/captchas/status">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">status</a>(sessionId) -> CaptchaStatusResponse</code>
+
+# Extensions
+
+Types:
+
+- <code><a href="./src/resources/extensions.ts">ExtensionUpdateResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionListResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionDeleteResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionDeleteAllResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionDownloadResponse</a></code>
+- <code><a href="./src/resources/extensions.ts">ExtensionUploadResponse</a></code>
+
+Methods:
+
+- <code title="put /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">update</a>(extensionId) -> ExtensionUpdateResponse</code>
+- <code title="get /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">list</a>() -> ExtensionListResponse</code>
+- <code title="delete /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">delete</a>(extensionId) -> ExtensionDeleteResponse</code>
+- <code title="delete /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">deleteAll</a>() -> ExtensionDeleteAllResponse</code>
+- <code title="get /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(extensionId) -> string</code>
+- <code title="post /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>() -> ExtensionUploadResponse</code>

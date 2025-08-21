@@ -33,6 +33,7 @@ describe('resource sessions', () => {
           concurrency: 0,
           credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
           dimensions: { height: 0, width: 0 },
+          extensionIds: ['string'],
           isSelenium: true,
           namespace: 'namespace',
           proxyUrl: 'https://example.com',

@@ -27,7 +27,7 @@ describe('top level methods', () => {
   });
 
   test('scrape: only required params', async () => {
-    const responsePromise = client.scrape({ url: 'https://example.com' });
+    const responsePromise = client.scrape({ url: 'url' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -39,7 +39,7 @@ describe('top level methods', () => {
 
   test('scrape: required and optional params', async () => {
     const response = await client.scrape({
-      url: 'https://example.com',
+      url: 'url',
       delay: 0,
       format: ['html'],
       pdf: true,

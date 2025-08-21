@@ -27,6 +27,15 @@ import {
   CredentialUpdateResponse,
   Credentials,
 } from './resources/credentials';
+import {
+  ExtensionDeleteAllResponse,
+  ExtensionDeleteResponse,
+  ExtensionDownloadResponse,
+  ExtensionListResponse,
+  ExtensionUpdateResponse,
+  ExtensionUploadResponse,
+  Extensions,
+} from './resources/extensions';
 import { File, FileUploadParams, Files, Fileslist } from './resources/files';
 import {
   Session,
@@ -157,6 +166,7 @@ export class Steel extends Core.APIClient {
   credentials: API.Credentials = new API.Credentials(this);
   files: API.Files = new API.Files(this);
   sessions: API.Sessions = new API.Sessions(this);
+  extensions: API.Extensions = new API.Extensions(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -235,6 +245,7 @@ Steel.Credentials = Credentials;
 Steel.Files = Files;
 Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
+Steel.Extensions = Extensions;
 
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
@@ -287,6 +298,16 @@ export declare namespace Steel {
     type SessionListParams as SessionListParams,
     type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
+  };
+
+  export {
+    Extensions as Extensions,
+    type ExtensionUpdateResponse as ExtensionUpdateResponse,
+    type ExtensionListResponse as ExtensionListResponse,
+    type ExtensionDeleteResponse as ExtensionDeleteResponse,
+    type ExtensionDeleteAllResponse as ExtensionDeleteAllResponse,
+    type ExtensionDownloadResponse as ExtensionDownloadResponse,
+    type ExtensionUploadResponse as ExtensionUploadResponse,
   };
 }
 
