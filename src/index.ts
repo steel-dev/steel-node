@@ -32,7 +32,9 @@ import {
   ExtensionDeleteResponse,
   ExtensionDownloadResponse,
   ExtensionListResponse,
+  ExtensionUpdateParams,
   ExtensionUpdateResponse,
+  ExtensionUploadParams,
   ExtensionUploadResponse,
   Extensions,
 } from './resources/extensions';
@@ -308,6 +310,8 @@ export declare namespace Steel {
     type ExtensionDeleteAllResponse as ExtensionDeleteAllResponse,
     type ExtensionDownloadResponse as ExtensionDownloadResponse,
     type ExtensionUploadResponse as ExtensionUploadResponse,
+    type ExtensionUpdateParams as ExtensionUpdateParams,
+    type ExtensionUploadParams as ExtensionUploadParams,
   };
 }
 

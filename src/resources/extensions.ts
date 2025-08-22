@@ -1,14 +1,32 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class Extensions extends APIResource {
   /**
-   * Update a Chrome extension (.zip/.crx file) for the organization
+   * Update a Chrome extension (.zip/.crx file or Chrome Web Store URL) for the
+   * organization
    */
-  update(extensionId: string, options?: Core.RequestOptions): Core.APIPromise<ExtensionUpdateResponse> {
-    return this._client.put(`/v1/extensions/${extensionId}`, options);
+  update(
+    extensionId: string,
+    body?: ExtensionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUpdateResponse>;
+  update(extensionId: string, options?: Core.RequestOptions): Core.APIPromise<ExtensionUpdateResponse>;
+  update(
+    extensionId: string,
+    body: ExtensionUpdateParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUpdateResponse> {
+    if (isRequestOptions(body)) {
+      return this.update(extensionId, {}, body);
+    }
+    return this._client.put(
+      `/v1/extensions/${extensionId}`,
+      Core.multipartFormRequestOptions({ body, ...options }),
+    );
   }
 
   /**
@@ -40,10 +58,22 @@ export class Extensions extends APIResource {
   }
 
   /**
-   * Upload a Chrome extension (.zip/.crx file) for the organization
+   * Upload a Chrome extension (.zip/.crx file or Chrome Web Store URL) for the
+   * organization
    */
-  upload(options?: Core.RequestOptions): Core.APIPromise<ExtensionUploadResponse> {
-    return this._client.post('/v1/extensions', options);
+  upload(
+    body?: ExtensionUploadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUploadResponse>;
+  upload(options?: Core.RequestOptions): Core.APIPromise<ExtensionUploadResponse>;
+  upload(
+    body: ExtensionUploadParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUploadResponse> {
+    if (isRequestOptions(body)) {
+      return this.upload({}, body);
+    }
+    return this._client.post('/v1/extensions', Core.multipartFormRequestOptions({ body, ...options }));
   }
 }
 
@@ -143,6 +173,30 @@ export interface ExtensionUploadResponse {
   updatedAt: string;
 }
 
+export interface ExtensionUpdateParams {
+  /**
+   * Extension .zip/.crx file
+   */
+  file?: unknown;
+
+  /**
+   * Extension URL
+   */
+  url?: string;
+}
+
+export interface ExtensionUploadParams {
+  /**
+   * Extension .zip/.crx file
+   */
+  file?: unknown;
+
+  /**
+   * Extension URL
+   */
+  url?: string;
+}
+
 export declare namespace Extensions {
   export {
     type ExtensionUpdateResponse as ExtensionUpdateResponse,
@@ -151,5 +205,7 @@ export declare namespace Extensions {
     type ExtensionDeleteAllResponse as ExtensionDeleteAllResponse,
     type ExtensionDownloadResponse as ExtensionDownloadResponse,
     type ExtensionUploadResponse as ExtensionUploadResponse,
+    type ExtensionUpdateParams as ExtensionUpdateParams,
+    type ExtensionUploadParams as ExtensionUploadParams,
   };
 }
