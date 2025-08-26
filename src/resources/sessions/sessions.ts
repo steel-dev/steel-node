@@ -27,9 +27,6 @@ export class Sessions extends APIResource {
     body: SessionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
-    if (isRequestOptions(body)) {
-      return this.create({}, body);
-    }
     return this._client.post('/v1/sessions', { body, ...options });
   }
 
