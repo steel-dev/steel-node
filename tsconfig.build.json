@@ -6,7 +6,7 @@
     "rootDir": "./dist/src",
     "paths": {
       "steel-sdk/*": ["./dist/src/*"],
-      "steel-sdk": ["./dist/src/index.ts"]
+      "steel-sdk": ["./dist/src/index.ts"],
     },
     "noEmit": false,
     "declaration": true,
