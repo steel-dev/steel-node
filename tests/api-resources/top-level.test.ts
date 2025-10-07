@@ -21,7 +21,7 @@ describe('top level methods', () => {
     const response = await client.pdf({
       url: 'https://example.com',
       delay: 0,
-      region: 'lax',
+      region: 'region',
       useProxy: true,
     });
   });
@@ -43,7 +43,7 @@ describe('top level methods', () => {
       delay: 0,
       format: ['html'],
       pdf: true,
-      region: 'lax',
+      region: 'region',
       screenshot: true,
       useProxy: true,
     });
@@ -65,7 +65,7 @@ describe('top level methods', () => {
       url: 'https://example.com',
       delay: 0,
       fullPage: true,
-      region: 'lax',
+      region: 'region',
       useProxy: true,
     });
   });

@@ -146,6 +146,11 @@ export interface Session {
   eventCount: number;
 
   /**
+   * Bandwidth optimizations that were applied to the session.
+   */
+  optimizeBandwidth: Session.OptimizeBandwidth;
+
+  /**
    * Amount of data transmitted through the proxy
    */
   proxyBytesUsed: number;
@@ -183,7 +188,7 @@ export interface Session {
   /**
    * The region where the session was created
    */
-  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+  region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
 
   /**
    * Indicates if captcha solving is enabled
@@ -215,6 +220,21 @@ export namespace Session {
      * Width of the browser window
      */
     width: number;
+  }
+
+  /**
+   * Bandwidth optimizations that were applied to the session.
+   */
+  export interface OptimizeBandwidth {
+    blockHosts?: Array<string>;
+
+    blockImages?: boolean;
+
+    blockMedia?: boolean;
+
+    blockStylesheets?: boolean;
+
+    blockUrlPatterns?: Array<string>;
   }
 
   /**
@@ -458,6 +478,11 @@ export namespace Sessionslist {
     eventCount: number;
 
     /**
+     * Bandwidth optimizations that were applied to the session.
+     */
+    optimizeBandwidth: Session.OptimizeBandwidth;
+
+    /**
      * Amount of data transmitted through the proxy
      */
     proxyBytesUsed: number;
@@ -495,7 +520,7 @@ export namespace Sessionslist {
     /**
      * The region where the session was created
      */
-    region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+    region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
 
     /**
      * Indicates if captcha solving is enabled
@@ -527,6 +552,21 @@ export namespace Sessionslist {
        * Width of the browser window
        */
       width: number;
+    }
+
+    /**
+     * Bandwidth optimizations that were applied to the session.
+     */
+    export interface OptimizeBandwidth {
+      blockHosts?: Array<string>;
+
+      blockImages?: boolean;
+
+      blockMedia?: boolean;
+
+      blockStylesheets?: boolean;
+
+      blockUrlPatterns?: Array<string>;
     }
 
     /**
@@ -647,6 +687,12 @@ export interface SessionCreateParams {
   namespace?: string;
 
   /**
+   * Enable bandwidth optimizations. Passing true enables all flags (except
+   * hosts/patterns). Object allows granular control.
+   */
+  optimizeBandwidth?: boolean | SessionCreateParams.UnionMember1;
+
+  /**
    * Custom proxy URL for the browser session. Overrides useProxy, disabling
    * Steel-provided proxies in favor of your specified proxy. Format:
    * http(s)://username:password@hostname:port
@@ -656,7 +702,7 @@ export interface SessionCreateParams {
   /**
    * The desired region for the session to be started in
    */
-  region?: 'lax' | 'ord' | 'iad' | 'bom' | 'scl' | 'fra' | 'hkg';
+  region?: string;
 
   /**
    * Session context data to be used in the created session. Sessions will start with
@@ -721,6 +767,18 @@ export namespace SessionCreateParams {
      * Width of the session
      */
     width: number;
+  }
+
+  export interface UnionMember1 {
+    blockHosts?: Array<string>;
+
+    blockImages?: boolean;
+
+    blockMedia?: boolean;
+
+    blockStylesheets?: boolean;
+
+    blockUrlPatterns?: Array<string>;
   }
 
   /**

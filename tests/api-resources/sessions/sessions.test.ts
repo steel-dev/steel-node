@@ -36,8 +36,9 @@ describe('resource sessions', () => {
           extensionIds: ['string'],
           isSelenium: true,
           namespace: 'namespace',
+          optimizeBandwidth: true,
           proxyUrl: 'https://example.com',
-          region: 'lax',
+          region: 'region',
           sessionContext: {
             cookies: [
               {
