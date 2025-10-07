@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.11.0 (2025-10-07)
+
+Full Changelog: [v0.10.1...v0.11.0](https://github.com/steel-dev/steel-node/compare/v0.10.1...v0.11.0)
+
+### Features
+
+* **api:** api update ([c70b16f](https://github.com/steel-dev/steel-node/commit/c70b16fc881c5956231de63683a33c5ead6616f8))
+
+
+### Performance Improvements
+
+* faster formatting ([b47cd3d](https://github.com/steel-dev/steel-node/commit/b47cd3d00d5d8edc97b9f16d58b51197c54dfcc4))
+
+
+### Chores
+
+* ci build action ([fa55c83](https://github.com/steel-dev/steel-node/commit/fa55c83492277b96c7dd50d5cf597e741dbfdfb4))
+* do not install brew dependencies in ./scripts/bootstrap by default ([09e9b9f](https://github.com/steel-dev/steel-node/commit/09e9b9f0fec2acdb7875ae4c03b193e74e63fb4d))
+* **internal:** codegen related update ([6741dc5](https://github.com/steel-dev/steel-node/commit/6741dc54cea49a8d5b9865bfdd90b6cb29afbe9e))
+* **internal:** codegen related update ([ffef013](https://github.com/steel-dev/steel-node/commit/ffef0138c5f6454710a8040ed5d6d638d3cf5199))
+* **internal:** codegen related update ([94fff7a](https://github.com/steel-dev/steel-node/commit/94fff7a79c01499f09276a07111b9e1c498e9827))
+* **internal:** fix incremental formatting in some cases ([341a074](https://github.com/steel-dev/steel-node/commit/341a0741ec50926751690de46eb614da93d91313))
+* **internal:** ignore .eslintcache ([7ad79e6](https://github.com/steel-dev/steel-node/commit/7ad79e6f1056621881d1677e467c1042af14dd45))
+* **internal:** remove .eslintcache ([2f88a25](https://github.com/steel-dev/steel-node/commit/2f88a25c0e5cc61e39b6ec121db3609940720af4))
+* **internal:** remove deprecated `compilerOptions.baseUrl` from tsconfig.json ([844491d](https://github.com/steel-dev/steel-node/commit/844491d73abb23bc61240a9dbcb3d6cda8c09a0e))
+* **internal:** use npm pack for build uploads ([87f70ad](https://github.com/steel-dev/steel-node/commit/87f70ad329327fdffd2f4bdd46d01a9723c92815))
+
 ## 0.10.1 (2025-08-23)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/steel-dev/steel-node/compare/v0.10.0...v0.10.1)
