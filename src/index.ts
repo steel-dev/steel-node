@@ -40,6 +40,12 @@ import {
 } from './resources/extensions';
 import { File, FileUploadParams, Files, Fileslist } from './resources/files';
 import {
+  ProfileCreateParams,
+  ProfileCreateResponse,
+  ProfileListResponse,
+  Profiles,
+} from './resources/profiles';
+import {
   Session,
   SessionContext,
   SessionCreateParams,
@@ -169,6 +175,7 @@ export class Steel extends Core.APIClient {
   files: API.Files = new API.Files(this);
   sessions: API.Sessions = new API.Sessions(this);
   extensions: API.Extensions = new API.Extensions(this);
+  profiles: API.Profiles = new API.Profiles(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -248,6 +255,7 @@ Steel.Files = Files;
 Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Steel.Extensions = Extensions;
+Steel.Profiles = Profiles;
 
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
@@ -312,6 +320,13 @@ export declare namespace Steel {
     type ExtensionUploadResponse as ExtensionUploadResponse,
     type ExtensionUpdateParams as ExtensionUpdateParams,
     type ExtensionUploadParams as ExtensionUploadParams,
+  };
+
+  export {
+    Profiles as Profiles,
+    type ProfileCreateResponse as ProfileCreateResponse,
+    type ProfileListResponse as ProfileListResponse,
+    type ProfileCreateParams as ProfileCreateParams,
   };
 }
 
