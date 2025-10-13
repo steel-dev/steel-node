@@ -107,3 +107,15 @@ Methods:
 - <code title="delete /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">deleteAll</a>() -> ExtensionDeleteAllResponse</code>
 - <code title="get /v1/extensions/{extensionId}">client.extensions.<a href="./src/resources/extensions.ts">download</a>(extensionId) -> string</code>
 - <code title="post /v1/extensions">client.extensions.<a href="./src/resources/extensions.ts">upload</a>({ ...params }) -> ExtensionUploadResponse</code>
+
+# Profiles
+
+Types:
+
+- <code><a href="./src/resources/profiles.ts">ProfileCreateResponse</a></code>
+- <code><a href="./src/resources/profiles.ts">ProfileListResponse</a></code>
+
+Methods:
+
+- <code title="post /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">create</a>({ ...params }) -> ProfileCreateResponse</code>
+- <code title="get /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>() -> ProfileListResponse</code>
