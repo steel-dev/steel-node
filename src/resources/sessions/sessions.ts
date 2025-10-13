@@ -183,6 +183,16 @@ export interface Session {
   isSelenium?: boolean;
 
   /**
+   * This flag will persist the profile for the session.
+   */
+  persistProfile?: boolean;
+
+  /**
+   * The ID of the profile associated with the session
+   */
+  profileId?: string;
+
+  /**
    * The region where the session was created
    */
   region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
@@ -515,6 +525,16 @@ export namespace Sessionslist {
     isSelenium?: boolean;
 
     /**
+     * This flag will persist the profile for the session.
+     */
+    persistProfile?: boolean;
+
+    /**
+     * The ID of the profile associated with the session
+     */
+    profileId?: string;
+
+    /**
      * The region where the session was created
      */
     region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
@@ -688,6 +708,16 @@ export interface SessionCreateParams {
    * hosts/patterns). Object allows granular control.
    */
   optimizeBandwidth?: boolean | SessionCreateParams.UnionMember1;
+
+  /**
+   * This flag will persist the user profile for the session.
+   */
+  persistProfile?: boolean;
+
+  /**
+   * This flag will set the profile for the session.
+   */
+  profileId?: string;
 
   /**
    * Custom proxy URL for the browser session. Overrides useProxy, disabling

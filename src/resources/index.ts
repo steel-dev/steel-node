@@ -24,6 +24,12 @@ export {
 } from './extensions';
 export { Files, type File, type Fileslist, type FileUploadParams } from './files';
 export {
+  Profiles,
+  type ProfileCreateResponse,
+  type ProfileListResponse,
+  type ProfileCreateParams,
+} from './profiles';
+export {
   SessionslistSessionsSessionsCursor,
   Sessions,
   type Session,
