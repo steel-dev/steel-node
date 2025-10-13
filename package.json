@@ -1,6 +1,6 @@
 {
   "name": "steel-sdk",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "description": "The official TypeScript library for the Steel API",
   "author": "Steel <team@steel.dev>",
   "types": "dist/index.d.ts",
