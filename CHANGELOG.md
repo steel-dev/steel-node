@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.13.0 (2025-10-14)
+
+Full Changelog: [v0.12.0...v0.13.0](https://github.com/steel-dev/steel-node/compare/v0.12.0...v0.13.0)
+
+### Features
+
+* **api:** api update ([f9c83e6](https://github.com/steel-dev/steel-node/commit/f9c83e671a0672c61413724e37221bf6b3d252e5))
+
 ## 0.12.0 (2025-10-13)
 
 Full Changelog: [v0.11.0...v0.12.0](https://github.com/steel-dev/steel-node/compare/v0.11.0...v0.12.0)
