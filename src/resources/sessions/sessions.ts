@@ -178,6 +178,11 @@ export interface Session {
   websocketUrl: string;
 
   /**
+   * Device configuration for the session
+   */
+  deviceConfig?: Session.DeviceConfig;
+
+  /**
    * Indicates if Selenium is used in the session
    */
   isSelenium?: boolean;
@@ -242,6 +247,13 @@ export namespace Session {
     blockStylesheets?: boolean;
 
     blockUrlPatterns?: Array<string>;
+  }
+
+  /**
+   * Device configuration for the session
+   */
+  export interface DeviceConfig {
+    device?: 'desktop' | 'mobile';
   }
 
   /**
@@ -520,6 +532,11 @@ export namespace Sessionslist {
     websocketUrl: string;
 
     /**
+     * Device configuration for the session
+     */
+    deviceConfig?: Session.DeviceConfig;
+
+    /**
      * Indicates if Selenium is used in the session
      */
     isSelenium?: boolean;
@@ -584,6 +601,13 @@ export namespace Sessionslist {
       blockStylesheets?: boolean;
 
       blockUrlPatterns?: Array<string>;
+    }
+
+    /**
+     * Device configuration for the session
+     */
+    export interface DeviceConfig {
+      device?: 'desktop' | 'mobile';
     }
 
     /**
@@ -680,6 +704,12 @@ export interface SessionCreateParams {
    * Configuration for session credentials
    */
   credentials?: SessionCreateParams.Credentials;
+
+  /**
+   * Device configuration for the session. Specify 'mobile' for mobile device
+   * fingerprints and configurations.
+   */
+  deviceConfig?: SessionCreateParams.DeviceConfig;
 
   /**
    * Viewport and browser window dimensions for the session
@@ -779,6 +809,14 @@ export namespace SessionCreateParams {
     blurFields?: boolean;
 
     exactOrigin?: boolean;
+  }
+
+  /**
+   * Device configuration for the session. Specify 'mobile' for mobile device
+   * fingerprints and configurations.
+   */
+  export interface DeviceConfig {
+    device?: 'desktop' | 'mobile';
   }
 
   /**
