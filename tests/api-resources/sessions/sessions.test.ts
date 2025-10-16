@@ -35,7 +35,7 @@ describe('resource sessions', () => {
           deviceConfig: { device: 'desktop' },
           dimensions: { height: 0, width: 0 },
           extensionIds: ['string'],
-          isHeadful: true,
+          headless: true,
           isSelenium: true,
           namespace: 'namespace',
           optimizeBandwidth: true,
