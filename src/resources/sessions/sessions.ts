@@ -733,9 +733,9 @@ export interface SessionCreateParams {
   extensionIds?: Array<string>;
 
   /**
-   * Enable experimental Headful browser support
+   * Enable headless browser mode (disable Headful mode)
    */
-  isHeadful?: boolean;
+  headless?: boolean;
 
   /**
    * Enable Selenium mode for the browser session (default is false). Use this when
