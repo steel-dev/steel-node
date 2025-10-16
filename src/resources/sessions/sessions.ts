@@ -146,6 +146,11 @@ export interface Session {
   eventCount: number;
 
   /**
+   * Indicates if the session is headless or headful
+   */
+  headless: boolean;
+
+  /**
    * Bandwidth optimizations that were applied to the session.
    */
   optimizeBandwidth: Session.OptimizeBandwidth;
@@ -500,6 +505,11 @@ export namespace Sessionslist {
     eventCount: number;
 
     /**
+     * Indicates if the session is headless or headful
+     */
+    headless: boolean;
+
+    /**
      * Bandwidth optimizations that were applied to the session.
      */
     optimizeBandwidth: Session.OptimizeBandwidth;
@@ -724,6 +734,11 @@ export interface SessionCreateParams {
    * uploaded extensions.
    */
   extensionIds?: Array<string>;
+
+  /**
+   * Enable experimental Headful browser support
+   */
+  isHeadful?: boolean;
 
   /**
    * Enable Selenium mode for the browser session (default is false). Use this when
