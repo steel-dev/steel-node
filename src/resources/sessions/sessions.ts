@@ -146,11 +146,6 @@ export interface Session {
   eventCount: number;
 
   /**
-   * Indicates if the session is headless or headful
-   */
-  headless: boolean;
-
-  /**
    * Bandwidth optimizations that were applied to the session.
    */
   optimizeBandwidth: Session.OptimizeBandwidth;
@@ -191,6 +186,11 @@ export interface Session {
   deviceConfig?: Session.DeviceConfig;
 
   /**
+   * Indicates if the session is headless or headful
+   */
+  headless?: boolean;
+
+  /**
    * Indicates if Selenium is used in the session
    */
   isSelenium?: boolean;
@@ -208,12 +208,17 @@ export interface Session {
   /**
    * The region where the session was created
    */
-  region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
+  region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
 
   /**
    * Indicates if captcha solving is enabled
    */
   solveCaptcha?: boolean;
+
+  /**
+   * Source of the session, e.g. 'api:sessions'
+   */
+  source?: string;
 
   /**
    * Stealth configuration for the session
@@ -505,11 +510,6 @@ export namespace Sessionslist {
     eventCount: number;
 
     /**
-     * Indicates if the session is headless or headful
-     */
-    headless: boolean;
-
-    /**
      * Bandwidth optimizations that were applied to the session.
      */
     optimizeBandwidth: Session.OptimizeBandwidth;
@@ -550,6 +550,11 @@ export namespace Sessionslist {
     deviceConfig?: Session.DeviceConfig;
 
     /**
+     * Indicates if the session is headless or headful
+     */
+    headless?: boolean;
+
+    /**
      * Indicates if Selenium is used in the session
      */
     isSelenium?: boolean;
@@ -567,12 +572,17 @@ export namespace Sessionslist {
     /**
      * The region where the session was created
      */
-    region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra';
+    region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
 
     /**
      * Indicates if captcha solving is enabled
      */
     solveCaptcha?: boolean;
+
+    /**
+     * Source of the session, e.g. 'api:sessions'
+     */
+    source?: string;
 
     /**
      * Stealth configuration for the session
