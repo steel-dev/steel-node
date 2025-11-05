@@ -213,11 +213,6 @@ export interface Session {
   solveCaptcha?: boolean;
 
   /**
-   * Source of the session, e.g. 'api:sessions'
-   */
-  source?: string;
-
-  /**
    * Stealth configuration for the session
    */
   stealthConfig?: Session.StealthConfig;
@@ -575,11 +570,6 @@ export namespace Sessionslist {
      * Indicates if captcha solving is enabled
      */
     solveCaptcha?: boolean;
-
-    /**
-     * Source of the session, e.g. 'api:sessions'
-     */
-    source?: string;
 
     /**
      * Stealth configuration for the session
