@@ -772,7 +772,8 @@ export interface SessionCreateParams {
   proxyUrl?: string;
 
   /**
-   * The desired region for the session to be started in
+   * The desired region for the session to be started in. Available regions are lax,
+   * ord, iad
    */
   region?: string;
 
