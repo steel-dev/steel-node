@@ -47,6 +47,8 @@ import {
 } from './resources/profiles';
 import {
   Session,
+  SessionComputerParams,
+  SessionComputerResponse,
   SessionContext,
   SessionCreateParams,
   SessionEventsResponse,
@@ -299,6 +301,7 @@ export declare namespace Steel {
     type Session as Session,
     type SessionContext as SessionContext,
     type Sessionslist as Sessionslist,
+    type SessionComputerResponse as SessionComputerResponse,
     type SessionEventsResponse as SessionEventsResponse,
     type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
@@ -306,6 +309,7 @@ export declare namespace Steel {
     SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
+    type SessionComputerParams as SessionComputerParams,
     type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
