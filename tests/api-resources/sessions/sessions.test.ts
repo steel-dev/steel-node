@@ -148,8 +148,11 @@ describe('resource sessions', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('computer', async () => {
-    const responsePromise = client.sessions.computer('sessionId');
+  test('computer: only required params', async () => {
+    const responsePromise = client.sessions.computer('sessionId', {
+      action: 'move_mouse',
+      coordinates: [0, 0],
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -159,18 +162,13 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('computer: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.sessions.computer('sessionId', { path: '/_stainless_unknown_path' })).rejects.toThrow(
-      Steel.NotFoundError,
-    );
-  });
-
-  test('computer: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.sessions.computer('sessionId', {}, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Steel.NotFoundError);
+  test('computer: required and optional params', async () => {
+    const response = await client.sessions.computer('sessionId', {
+      action: 'move_mouse',
+      coordinates: [0, 0],
+      hold_keys: ['string'],
+      screenshot: true,
+    });
   });
 
   test('context', async () => {
