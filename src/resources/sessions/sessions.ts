@@ -58,6 +58,26 @@ export class Sessions extends APIResource {
   }
 
   /**
+   * Execute computer actions like mouse movements, clicks, keyboard input, and more
+   */
+  computer(
+    sessionId: string,
+    body?: SessionComputerParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionComputerResponse>;
+  computer(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<SessionComputerResponse>;
+  computer(
+    sessionId: string,
+    body?: SessionComputerParams | Core.RequestOptions,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionComputerResponse> {
+    if (isRequestOptions(body)) {
+      return this.computer(sessionId, undefined, body);
+    }
+    return this._client.post(`/v1/sessions/${sessionId}/computer`, { body, ...options });
+  }
+
+  /**
    * Fetches the context data of a specific session.
    */
   context(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionContext> {
@@ -636,6 +656,28 @@ export namespace Sessionslist {
       skipFingerprintInjection?: boolean;
     }
   }
+}
+
+export interface SessionComputerResponse {
+  /**
+   * Base64 encoded screenshot if requested
+   */
+  base64_image?: string;
+
+  /**
+   * Error message if action failed
+   */
+  error?: string;
+
+  /**
+   * Output message from the action
+   */
+  output?: string;
+
+  /**
+   * System information
+   */
+  system?: string;
 }
 
 /**
@@ -2419,6 +2461,8 @@ export interface SessionListParams extends SessionsCursorParams {
   status?: 'live' | 'released' | 'failed';
 }
 
+export type SessionComputerParams = unknown;
+
 export interface SessionReleaseParams {}
 
 export interface SessionReleaseAllParams {}
@@ -2432,6 +2476,7 @@ export declare namespace Sessions {
     type Session as Session,
     type SessionContext as SessionContext,
     type Sessionslist as Sessionslist,
+    type SessionComputerResponse as SessionComputerResponse,
     type SessionEventsResponse as SessionEventsResponse,
     type SessionLiveDetailsResponse as SessionLiveDetailsResponse,
     type SessionReleaseResponse as SessionReleaseResponse,
@@ -2439,6 +2484,7 @@ export declare namespace Sessions {
     SessionslistSessionsSessionsCursor as SessionslistSessionsSessionsCursor,
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
+    type SessionComputerParams as SessionComputerParams,
     type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
