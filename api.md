@@ -49,6 +49,7 @@ Types:
 - <code><a href="./src/resources/sessions/sessions.ts">Session</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionContext</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">Sessionslist</a></code>
+- <code><a href="./src/resources/sessions/sessions.ts">SessionComputerResponse</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionEventsResponse</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionLiveDetailsResponse</a></code>
 - <code><a href="./src/resources/sessions/sessions.ts">SessionReleaseResponse</a></code>
@@ -59,6 +60,7 @@ Methods:
 - <code title="post /v1/sessions">client.sessions.<a href="./src/resources/sessions/sessions.ts">create</a>({ ...params }) -> Session</code>
 - <code title="get /v1/sessions/{id}">client.sessions.<a href="./src/resources/sessions/sessions.ts">retrieve</a>(id) -> Session</code>
 - <code title="get /v1/sessions">client.sessions.<a href="./src/resources/sessions/sessions.ts">list</a>({ ...params }) -> SessionslistSessionsSessionsCursor</code>
+- <code title="post /v1/sessions/{sessionId}/computer">client.sessions.<a href="./src/resources/sessions/sessions.ts">computer</a>(sessionId, { ...params }) -> SessionComputerResponse</code>
 - <code title="get /v1/sessions/{id}/context">client.sessions.<a href="./src/resources/sessions/sessions.ts">context</a>(id) -> SessionContext</code>
 - <code title="get /v1/sessions/{id}/events">client.sessions.<a href="./src/resources/sessions/sessions.ts">events</a>(id) -> SessionEventsResponse</code>
 - <code title="get /v1/sessions/{id}/live-details">client.sessions.<a href="./src/resources/sessions/sessions.ts">liveDetails</a>(id) -> SessionLiveDetailsResponse</code>

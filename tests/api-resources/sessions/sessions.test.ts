@@ -148,6 +148,29 @@ describe('resource sessions', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
+  test('computer: only required params', async () => {
+    const responsePromise = client.sessions.computer('sessionId', {
+      action: 'move_mouse',
+      coordinates: [0, 0],
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('computer: required and optional params', async () => {
+    const response = await client.sessions.computer('sessionId', {
+      action: 'move_mouse',
+      coordinates: [0, 0],
+      hold_keys: ['string'],
+      screenshot: true,
+    });
+  });
+
   test('context', async () => {
     const responsePromise = client.sessions.context('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
