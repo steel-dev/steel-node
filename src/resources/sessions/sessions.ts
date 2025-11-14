@@ -65,18 +65,9 @@ export class Sessions extends APIResource {
    */
   computer(
     sessionId: string,
-    body?: SessionComputerParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionComputerResponse>;
-  computer(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<SessionComputerResponse>;
-  computer(
-    sessionId: string,
-    body?: SessionComputerParams | Core.RequestOptions,
+    body: SessionComputerParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionComputerResponse> {
-    if (isRequestOptions(body)) {
-      return this.computer(sessionId, undefined, body);
-    }
     return this._client.post(`/v1/sessions/${sessionId}/computer`, { body, ...options });
   }
 
@@ -2464,7 +2455,179 @@ export interface SessionListParams extends SessionsCursorParams {
   status?: 'live' | 'released' | 'failed';
 }
 
-export type SessionComputerParams = unknown;
+export type SessionComputerParams =
+  | SessionComputerParams.Variant0
+  | SessionComputerParams.Variant1
+  | SessionComputerParams.Variant2
+  | SessionComputerParams.Variant3
+  | SessionComputerParams.Variant4
+  | SessionComputerParams.Variant5
+  | SessionComputerParams.Variant6
+  | SessionComputerParams.Variant7
+  | SessionComputerParams.Variant8;
+
+export declare namespace SessionComputerParams {
+  export interface Variant0 {
+    action: 'move_mouse';
+
+    /**
+     * X and Y coordinates [x, y]
+     */
+    coordinates: Array<number>;
+
+    /**
+     * Keys to hold while moving
+     */
+    hold_keys?: Array<string>;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant1 {
+    action: 'click_mouse';
+
+    /**
+     * Mouse button to click
+     */
+    button: 'left' | 'right' | 'middle' | 'back' | 'forward';
+
+    /**
+     * Type of click (down, up, or click). Defaults to 'click'
+     */
+    click_type?: 'down' | 'up' | 'click';
+
+    /**
+     * X and Y coordinates [x, y]
+     */
+    coordinates?: Array<number>;
+
+    /**
+     * Keys to hold while clicking
+     */
+    hold_keys?: Array<string>;
+
+    /**
+     * Number of clicks. Defaults to 1
+     */
+    num_clicks?: number;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant2 {
+    action: 'drag_mouse';
+
+    /**
+     * Array of [x, y] coordinate pairs
+     */
+    path: Array<Array<number>>;
+
+    /**
+     * Keys to hold while dragging
+     */
+    hold_keys?: Array<string>;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant3 {
+    action: 'scroll';
+
+    /**
+     * X and Y coordinates [x, y]
+     */
+    coordinates?: Array<number>;
+
+    /**
+     * Horizontal scroll amount. Defaults to 0
+     */
+    delta_x?: number;
+
+    /**
+     * Vertical scroll amount. Defaults to 0
+     */
+    delta_y?: number;
+
+    /**
+     * Keys to hold while scrolling
+     */
+    hold_keys?: Array<string>;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant4 {
+    action: 'press_key';
+
+    /**
+     * Keys to press
+     */
+    keys: Array<string>;
+
+    /**
+     * Duration to hold keys in seconds
+     */
+    duration?: number;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant5 {
+    action: 'type_text';
+
+    /**
+     * Text to type
+     */
+    text: string;
+
+    /**
+     * Keys to hold while typing
+     */
+    hold_keys?: Array<string>;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant6 {
+    action: 'wait';
+
+    /**
+     * Duration to wait in seconds
+     */
+    duration: number;
+
+    /**
+     * Whether to take a screenshot after the action
+     */
+    screenshot?: boolean;
+  }
+
+  export interface Variant7 {
+    action: 'take_screenshot';
+  }
+
+  export interface Variant8 {
+    action: 'get_cursor_position';
+  }
+}
 
 export interface SessionReleaseParams {}
 
