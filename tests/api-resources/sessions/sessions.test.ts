@@ -25,6 +25,7 @@ describe('resource sessions', () => {
           blockAds: true,
           concurrency: 0,
           credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
+          debugConfig: { interactive: true, systemCursor: true },
           deviceConfig: { device: 'desktop' },
           dimensions: { height: 0, width: 0 },
           extensionIds: ['string'],

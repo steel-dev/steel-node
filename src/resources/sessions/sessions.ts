@@ -189,6 +189,12 @@ export interface Session {
   websocketUrl: string;
 
   /**
+   * Configuration for the debug URL and session viewer. Controls interaction
+   * capabilities and cursor visibility.
+   */
+  debugConfig?: Session.DebugConfig;
+
+  /**
    * Device configuration for the session
    */
   deviceConfig?: Session.DeviceConfig;
@@ -263,6 +269,24 @@ export namespace Session {
     blockStylesheets?: boolean;
 
     blockUrlPatterns?: Array<string>;
+  }
+
+  /**
+   * Configuration for the debug URL and session viewer. Controls interaction
+   * capabilities and cursor visibility.
+   */
+  export interface DebugConfig {
+    /**
+     * Whether interaction is allowed via the debug URL viewer. When false, the session
+     * viewer is view-only.
+     */
+    interactive?: boolean;
+
+    /**
+     * Whether the OS-level mouse cursor is shown in the WebRTC stream (headful mode
+     * only).
+     */
+    systemCursor?: boolean;
   }
 
   /**
@@ -548,6 +572,12 @@ export namespace Sessionslist {
     websocketUrl: string;
 
     /**
+     * Configuration for the debug URL and session viewer. Controls interaction
+     * capabilities and cursor visibility.
+     */
+    debugConfig?: Session.DebugConfig;
+
+    /**
      * Device configuration for the session
      */
     deviceConfig?: Session.DeviceConfig;
@@ -622,6 +652,24 @@ export namespace Sessionslist {
       blockStylesheets?: boolean;
 
       blockUrlPatterns?: Array<string>;
+    }
+
+    /**
+     * Configuration for the debug URL and session viewer. Controls interaction
+     * capabilities and cursor visibility.
+     */
+    export interface DebugConfig {
+      /**
+       * Whether interaction is allowed via the debug URL viewer. When false, the session
+       * viewer is view-only.
+       */
+      interactive?: boolean;
+
+      /**
+       * Whether the OS-level mouse cursor is shown in the WebRTC stream (headful mode
+       * only).
+       */
+      systemCursor?: boolean;
     }
 
     /**
@@ -749,6 +797,12 @@ export interface SessionCreateParams {
   credentials?: SessionCreateParams.Credentials;
 
   /**
+   * Configuration for the debug URL and session viewer. Controls interaction
+   * capabilities, cursor visibility, and other debug-related settings.
+   */
+  debugConfig?: SessionCreateParams.DebugConfig;
+
+  /**
    * Device configuration for the session. Specify 'mobile' for mobile device
    * fingerprints and configurations.
    */
@@ -858,6 +912,24 @@ export namespace SessionCreateParams {
     blurFields?: boolean;
 
     exactOrigin?: boolean;
+  }
+
+  /**
+   * Configuration for the debug URL and session viewer. Controls interaction
+   * capabilities, cursor visibility, and other debug-related settings.
+   */
+  export interface DebugConfig {
+    /**
+     * Allow interaction with the browser session via the debug URL viewer. When false,
+     * the session viewer will be view-only. Default is true.
+     */
+    interactive?: boolean;
+
+    /**
+     * Show the OS-level mouse cursor in the WebRTC stream (headful mode only). When
+     * false, the system cursor will not be rendered in the stream. Default is true.
+     */
+    systemCursor?: boolean;
   }
 
   /**
