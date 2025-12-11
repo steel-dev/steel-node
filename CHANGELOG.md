@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.16.1 (2025-12-11)
+
+Full Changelog: [v0.16.0...v0.16.1](https://github.com/steel-dev/steel-node/compare/v0.16.0...v0.16.1)
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([307d77c](https://github.com/steel-dev/steel-node/commit/307d77cc62b34e54d2d746cf816dd04177d599ee))
+* **mcp:** return correct lines on typescript errors ([bc76aaf](https://github.com/steel-dev/steel-node/commit/bc76aaf674738370adcde96d819750f25c37106f))
+
+
+### Chores
+
+* **internal:** codegen related update ([fce3f41](https://github.com/steel-dev/steel-node/commit/fce3f41e600bf78fd8c5ad7838bad7838ee1eace))
+* **internal:** codegen related update ([ddb5128](https://github.com/steel-dev/steel-node/commit/ddb5128539eef48711d00d56281691384a497007))
+
 ## 0.16.0 (2025-12-05)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/steel-dev/steel-node/compare/v0.15.0...v0.16.0)
