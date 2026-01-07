@@ -48,7 +48,12 @@ describe('resource credentials', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.credentials.update(
-        { label: 'label', namespace: 'namespace', origin: 'origin', value: { foo: 'string' } },
+        {
+          label: 'label',
+          namespace: 'namespace',
+          origin: 'origin',
+          value: { foo: 'string' },
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
