@@ -24,7 +24,11 @@ describe('resource sessions', () => {
         {
           blockAds: true,
           concurrency: 0,
-          credentials: { autoSubmit: true, blurFields: true, exactOrigin: true },
+          credentials: {
+            autoSubmit: true,
+            blurFields: true,
+            exactOrigin: true,
+          },
           debugConfig: { interactive: true, systemCursor: true },
           deviceConfig: { device: 'desktop' },
           dimensions: { height: 0, width: 0 },
@@ -143,7 +147,11 @@ describe('resource sessions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.list(
-        { cursorId: 'cursorId', limit: 0, status: 'live' },
+        {
+          cursorId: 'cursorId',
+          limit: 0,
+          status: 'live',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);

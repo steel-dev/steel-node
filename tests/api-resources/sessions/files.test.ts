@@ -97,7 +97,10 @@ describe('resource files', () => {
     await expect(
       client.sessions.files.upload(
         'sessionId',
-        { file: {}, path: 'path' },
+        {
+          file: {},
+          path: 'path',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);

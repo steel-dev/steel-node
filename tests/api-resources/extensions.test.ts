@@ -29,7 +29,10 @@ describe('resource extensions', () => {
     await expect(
       client.extensions.update(
         'extensionId',
-        { file: {}, url: 'https://example.com' },
+        {
+          file: {},
+          url: 'https://example.com',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
@@ -129,7 +132,10 @@ describe('resource extensions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.extensions.upload(
-        { file: {}, url: 'https://example.com' },
+        {
+          file: {},
+          url: 'https://example.com',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
