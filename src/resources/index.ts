@@ -26,8 +26,11 @@ export { Files, type File, type Fileslist, type FileUploadParams } from './files
 export {
   Profiles,
   type ProfileCreateResponse,
+  type ProfileUpdateResponse,
   type ProfileListResponse,
+  type ProfileGetResponse,
   type ProfileCreateParams,
+  type ProfileUpdateParams,
 } from './profiles';
 export {
   SessionslistSessionsSessionsCursor,
