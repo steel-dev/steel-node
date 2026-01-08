@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Steel from 'steel-sdk';
+import Steel, { toFile } from 'steel-sdk';
 import { Response } from 'node-fetch';
 
 const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
@@ -74,8 +74,10 @@ describe('resource files', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('upload', async () => {
-    const responsePromise = client.sessions.files.upload('sessionId');
+  test('upload: only required params', async () => {
+    const responsePromise = client.sessions.files.upload('sessionId', {
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+    });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -85,24 +87,10 @@ describe('resource files', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('upload: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.sessions.files.upload('sessionId', { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(Steel.NotFoundError);
-  });
-
-  test('upload: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.sessions.files.upload(
-        'sessionId',
-        {
-          file: {},
-          path: 'path',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Steel.NotFoundError);
+  test('upload: required and optional params', async () => {
+    const response = await client.sessions.files.upload('sessionId', {
+      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      path: 'path',
+    });
   });
 });

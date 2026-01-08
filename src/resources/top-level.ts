@@ -190,7 +190,7 @@ export interface PdfParams {
   /**
    * The desired region for the action to be performed in
    */
-  region?: string;
+  region?: unknown;
 
   /**
    * Use a Steel-provided residential proxy for generating the PDF
@@ -222,7 +222,7 @@ export interface ScrapeParams {
   /**
    * The desired region for the action to be performed in
    */
-  region?: string;
+  region?: unknown;
 
   /**
    * Include a screenshot in the response
@@ -254,7 +254,7 @@ export interface ScreenshotParams {
   /**
    * The desired region for the action to be performed in
    */
-  region?: string;
+  region?: unknown;
 
   /**
    * Use a Steel-provided residential proxy for capturing the screenshot

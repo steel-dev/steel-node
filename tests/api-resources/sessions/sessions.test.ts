@@ -23,7 +23,7 @@ describe('resource sessions', () => {
       client.sessions.create(
         {
           blockAds: true,
-          concurrency: 0,
+          concurrency: -9007199254740991,
           credentials: {
             autoSubmit: true,
             blurFields: true,
@@ -31,7 +31,7 @@ describe('resource sessions', () => {
           },
           debugConfig: { interactive: true, systemCursor: true },
           deviceConfig: { device: 'desktop' },
-          dimensions: { height: 0, width: 0 },
+          dimensions: { height: -9007199254740991, width: -9007199254740991 },
           extensionIds: ['string'],
           headless: true,
           isSelenium: true,
@@ -40,7 +40,7 @@ describe('resource sessions', () => {
           persistProfile: true,
           profileId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           proxyUrl: 'https://example.com',
-          region: 'region',
+          region: {},
           sessionContext: {
             cookies: [
               {
@@ -72,6 +72,8 @@ describe('resource sessions', () => {
                       name: 'name',
                       records: [
                         {
+                          key: {},
+                          value: {},
                           blobFiles: [
                             {
                               blobNumber: 0,
@@ -82,8 +84,6 @@ describe('resource sessions', () => {
                               path: 'path',
                             },
                           ],
-                          key: {},
-                          value: {},
                         },
                       ],
                     },
@@ -98,8 +98,8 @@ describe('resource sessions', () => {
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,
           stealthConfig: { humanizeInteractions: true, skipFingerprintInjection: true },
-          timeout: 0,
-          useProxy: {},
+          timeout: -9007199254740991,
+          useProxy: true,
           userAgent: 'userAgent',
         },
         { path: '/_stainless_unknown_path' },
@@ -149,7 +149,7 @@ describe('resource sessions', () => {
       client.sessions.list(
         {
           cursorId: 'cursorId',
-          limit: 0,
+          limit: 1,
           status: 'live',
         },
         { path: '/_stainless_unknown_path' },
