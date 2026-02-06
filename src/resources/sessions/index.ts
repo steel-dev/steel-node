@@ -2,8 +2,10 @@
 
 export {
   Captchas,
+  type CaptchaSolveResponse,
   type CaptchaSolveImageResponse,
   type CaptchaStatusResponse,
+  type CaptchaSolveParams,
   type CaptchaSolveImageParams,
 } from './captchas';
 export { Files, type FileUploadParams } from './files';

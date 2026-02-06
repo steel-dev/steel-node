@@ -104,7 +104,11 @@ describe('resource sessions', () => {
           },
           sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           solveCaptcha: true,
-          stealthConfig: { humanizeInteractions: true, skipFingerprintInjection: true },
+          stealthConfig: {
+            autoCaptchaSolving: true,
+            humanizeInteractions: true,
+            skipFingerprintInjection: true,
+          },
           timeout: -9007199254740991,
           useProxy: true,
           userAgent: 'userAgent',

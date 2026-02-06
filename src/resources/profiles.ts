@@ -76,7 +76,7 @@ export interface ProfileCreateResponse {
   /**
    * The status of the profile
    */
-  status: 'UPLOADING' | 'READY' | 'FAILED' | 'DELETED';
+  status: 'UPLOADING' | 'READY' | 'FAILED';
 
   /**
    * The date and time when the profile was last updated
@@ -435,7 +435,7 @@ export interface ProfileUpdateResponse {
   /**
    * The status of the profile
    */
-  status: 'UPLOADING' | 'READY' | 'FAILED' | 'DELETED';
+  status: 'UPLOADING' | 'READY' | 'FAILED';
 
   /**
    * The date and time when the profile was last updated
@@ -807,7 +807,7 @@ export namespace ProfileListResponse {
     /**
      * The status of the profile
      */
-    status: 'UPLOADING' | 'READY' | 'FAILED' | 'DELETED';
+    status: 'UPLOADING' | 'READY' | 'FAILED';
 
     /**
      * The date and time when the profile was last updated
@@ -1167,7 +1167,7 @@ export interface ProfileGetResponse {
   /**
    * The status of the profile
    */
-  status: 'UPLOADING' | 'READY' | 'FAILED' | 'DELETED';
+  status: 'UPLOADING' | 'READY' | 'FAILED';
 
   /**
    * The date and time when the profile was last updated

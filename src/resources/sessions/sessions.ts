@@ -7,6 +7,8 @@ import * as CaptchasAPI from './captchas';
 import {
   CaptchaSolveImageParams,
   CaptchaSolveImageResponse,
+  CaptchaSolveParams,
+  CaptchaSolveResponse,
   CaptchaStatusResponse,
   Captchas,
 } from './captchas';
@@ -303,6 +305,12 @@ export namespace Session {
    * Stealth configuration for the session
    */
   export interface StealthConfig {
+    /**
+     * When true, captchas will be automatically solved when detected. When false, use
+     * the solve endpoints to manually initiate solving.
+     */
+    autoCaptchaSolving?: boolean;
+
     /**
      * This flag will make the browser act more human-like by moving the mouse in a
      * more natural way
@@ -696,6 +704,12 @@ export namespace Sessionslist {
      * Stealth configuration for the session
      */
     export interface StealthConfig {
+      /**
+       * When true, captchas will be automatically solved when detected. When false, use
+       * the solve endpoints to manually initiate solving.
+       */
+      autoCaptchaSolving?: boolean;
+
       /**
        * This flag will make the browser act more human-like by moving the mouse in a
        * more natural way
@@ -1156,6 +1170,12 @@ export namespace SessionCreateParams {
    * Stealth configuration for the session
    */
   export interface StealthConfig {
+    /**
+     * When true, captchas will be automatically solved when detected. When false, use
+     * the solve endpoints to manually initiate solving.
+     */
+    autoCaptchaSolving?: boolean;
+
     /**
      * This flag will make the browser act more human-like by moving the mouse in a
      * more natural way.
@@ -2740,8 +2760,10 @@ export declare namespace Sessions {
 
   export {
     Captchas as Captchas,
+    type CaptchaSolveResponse as CaptchaSolveResponse,
     type CaptchaSolveImageResponse as CaptchaSolveImageResponse,
     type CaptchaStatusResponse as CaptchaStatusResponse,
+    type CaptchaSolveParams as CaptchaSolveParams,
     type CaptchaSolveImageParams as CaptchaSolveImageParams,
   };
 }
