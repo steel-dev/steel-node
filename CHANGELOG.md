@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.17.0 (2026-02-06)
+
+Full Changelog: [v0.16.0...v0.17.0](https://github.com/steel-dev/steel-node/compare/v0.16.0...v0.17.0)
+
+### Features
+
+* **api:** api update ([2c44b89](https://github.com/steel-dev/steel-node/commit/2c44b898d256617f1c6fb8ff183cc8775c7aaae4))
+* **api:** api update ([363391a](https://github.com/steel-dev/steel-node/commit/363391a54a2aa34a5823a8ff6e9724883d94028d))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([307d77c](https://github.com/steel-dev/steel-node/commit/307d77cc62b34e54d2d746cf816dd04177d599ee))
+* **mcp:** return correct lines on typescript errors ([bc76aaf](https://github.com/steel-dev/steel-node/commit/bc76aaf674738370adcde96d819750f25c37106f))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([1bee4cb](https://github.com/steel-dev/steel-node/commit/1bee4cb69d050dce0aa3f52c75e75437c28d8072))
+* **ci:** upgrade `actions/github-script` ([0c70ebc](https://github.com/steel-dev/steel-node/commit/0c70ebcd6c3bc655a77426f603e76c0d8d4a8706))
+* **client:** do not parse responses with empty content-length ([80975f8](https://github.com/steel-dev/steel-node/commit/80975f8251fbe0c4b0ee28a022742e736dad22d1))
+* **internal:** codegen related update ([76fa55e](https://github.com/steel-dev/steel-node/commit/76fa55e90f4d01e0c401dad181ca59431ecb5f80))
+* **internal:** codegen related update ([fce3f41](https://github.com/steel-dev/steel-node/commit/fce3f41e600bf78fd8c5ad7838bad7838ee1eace))
+* **internal:** codegen related update ([ddb5128](https://github.com/steel-dev/steel-node/commit/ddb5128539eef48711d00d56281691384a497007))
+* **internal:** update `actions/checkout` version ([30c824d](https://github.com/steel-dev/steel-node/commit/30c824d030b0ae8aa0dedb9a9b80e63692d96b95))
+* **internal:** upgrade babel, qs, js-yaml ([358df38](https://github.com/steel-dev/steel-node/commit/358df382d2d5607f93f88e78e72d0871b3e6b5c7))
+
 ## 0.16.0 (2025-12-05)
 
 Full Changelog: [v0.15.0...v0.16.0](https://github.com/steel-dev/steel-node/compare/v0.15.0...v0.16.0)

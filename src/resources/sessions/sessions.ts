@@ -7,6 +7,8 @@ import * as CaptchasAPI from './captchas';
 import {
   CaptchaSolveImageParams,
   CaptchaSolveImageResponse,
+  CaptchaSolveParams,
+  CaptchaSolveResponse,
   CaptchaStatusResponse,
   Captchas,
 } from './captchas';
@@ -301,6 +303,12 @@ export namespace Session {
    */
   export interface StealthConfig {
     /**
+     * When true, captchas will be automatically solved when detected. When false, use
+     * the solve endpoints to manually initiate solving.
+     */
+    autoCaptchaSolving?: boolean;
+
+    /**
      * This flag will make the browser act more human-like by moving the mouse in a
      * more natural way
      */
@@ -459,11 +467,11 @@ export namespace SessionContext {
 
     export namespace Data {
       export interface Record {
+        key: unknown;
+
+        value: unknown;
+
         blobFiles?: Array<Record.BlobFile>;
-
-        key?: unknown;
-
-        value?: unknown;
       }
 
       export namespace Record {
@@ -490,9 +498,19 @@ export namespace SessionContext {
  */
 export interface Sessionslist {
   /**
+   * Cursor for the next page of results. Null if no more pages.
+   */
+  nextCursor: string | null;
+
+  /**
    * List of browser sessions
    */
   sessions: Array<Sessionslist.Session>;
+
+  /**
+   * Total number of sessions matching the query
+   */
+  totalCount: number;
 }
 
 export namespace Sessionslist {
@@ -684,6 +702,12 @@ export namespace Sessionslist {
      */
     export interface StealthConfig {
       /**
+       * When true, captchas will be automatically solved when detected. When false, use
+       * the solve endpoints to manually initiate solving.
+       */
+      autoCaptchaSolving?: boolean;
+
+      /**
        * This flag will make the browser act more human-like by moving the mouse in a
        * more natural way
        */
@@ -862,7 +886,7 @@ export interface SessionCreateParams {
    * The desired region for the session to be started in. Available regions are lax,
    * ord, iad
    */
-  region?: string;
+  region?: unknown;
 
   /**
    * Session context data to be used in the created session. Sessions will start with
@@ -891,10 +915,9 @@ export interface SessionCreateParams {
   timeout?: number;
 
   /**
-   * Proxy configuration for the session. Can be a boolean or array of proxy
-   * configurations
+   * Simple boolean to enable/disable Steel proxies
    */
-  useProxy?: unknown | boolean | SessionCreateParams.Geolocation | SessionCreateParams.Server;
+  useProxy?: boolean | SessionCreateParams.Geolocation | SessionCreateParams.Server | unknown;
 
   /**
    * Custom user agent string for the browser session
@@ -1114,11 +1137,11 @@ export namespace SessionCreateParams {
 
       export namespace Data {
         export interface Record {
+          key: unknown;
+
+          value: unknown;
+
           blobFiles?: Array<Record.BlobFile>;
-
-          key?: unknown;
-
-          value?: unknown;
         }
 
         export namespace Record {
@@ -1144,6 +1167,12 @@ export namespace SessionCreateParams {
    * Stealth configuration for the session
    */
   export interface StealthConfig {
+    /**
+     * When true, captchas will be automatically solved when detected. When false, use
+     * the solve endpoints to manually initiate solving.
+     */
+    autoCaptchaSolving?: boolean;
+
     /**
      * This flag will make the browser act more human-like by moving the mouse in a
      * more natural way.
@@ -2728,8 +2757,10 @@ export declare namespace Sessions {
 
   export {
     Captchas as Captchas,
+    type CaptchaSolveResponse as CaptchaSolveResponse,
     type CaptchaSolveImageResponse as CaptchaSolveImageResponse,
     type CaptchaStatusResponse as CaptchaStatusResponse,
+    type CaptchaSolveParams as CaptchaSolveParams,
     type CaptchaSolveImageParams as CaptchaSolveImageParams,
   };
 }

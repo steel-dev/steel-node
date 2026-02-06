@@ -82,11 +82,13 @@ Methods:
 
 Types:
 
+- <code><a href="./src/resources/sessions/captchas.ts">CaptchaSolveResponse</a></code>
 - <code><a href="./src/resources/sessions/captchas.ts">CaptchaSolveImageResponse</a></code>
 - <code><a href="./src/resources/sessions/captchas.ts">CaptchaStatusResponse</a></code>
 
 Methods:
 
+- <code title="post /v1/sessions/{sessionId}/captchas/solve">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">solve</a>(sessionId, { ...params }) -> CaptchaSolveResponse</code>
 - <code title="post /v1/sessions/{sessionId}/captchas/solve-image">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">solveImage</a>(sessionId, { ...params }) -> CaptchaSolveImageResponse</code>
 - <code title="get /v1/sessions/{sessionId}/captchas/status">client.sessions.captchas.<a href="./src/resources/sessions/captchas.ts">status</a>(sessionId) -> CaptchaStatusResponse</code>
 
@@ -115,9 +117,13 @@ Methods:
 Types:
 
 - <code><a href="./src/resources/profiles.ts">ProfileCreateResponse</a></code>
+- <code><a href="./src/resources/profiles.ts">ProfileUpdateResponse</a></code>
 - <code><a href="./src/resources/profiles.ts">ProfileListResponse</a></code>
+- <code><a href="./src/resources/profiles.ts">ProfileGetResponse</a></code>
 
 Methods:
 
 - <code title="post /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">create</a>({ ...params }) -> ProfileCreateResponse</code>
+- <code title="patch /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">update</a>(id, { ...params }) -> ProfileUpdateResponse</code>
 - <code title="get /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>() -> ProfileListResponse</code>
+- <code title="get /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">get</a>(id) -> ProfileGetResponse</code>

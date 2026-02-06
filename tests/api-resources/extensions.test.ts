@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Steel from 'steel-sdk';
+import Steel, { toFile } from 'steel-sdk';
 import { Response } from 'node-fetch';
 
 const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
@@ -29,7 +29,7 @@ describe('resource extensions', () => {
     await expect(
       client.extensions.update(
         'extensionId',
-        { file: {}, url: 'https://example.com' },
+        { file: await toFile(Buffer.from('# my file contents'), 'README.md'), url: 'https://example.com' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
@@ -129,7 +129,7 @@ describe('resource extensions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.extensions.upload(
-        { file: {}, url: 'https://example.com' },
+        { file: await toFile(Buffer.from('# my file contents'), 'README.md'), url: 'https://example.com' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);

@@ -1,7 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
-import { isRequestOptions } from '../core';
 import * as Core from '../core';
 import { type Response } from '../_shims/index';
 
@@ -39,15 +38,7 @@ export class Files extends APIResource {
    * that accepts either binary data or a URL string to download from, and an
    * optional `path` field for the file storage path.
    */
-  upload(body?: FileUploadParams, options?: Core.RequestOptions): Core.APIPromise<File>;
-  upload(options?: Core.RequestOptions): Core.APIPromise<File>;
-  upload(
-    body: FileUploadParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<File> {
-    if (isRequestOptions(body)) {
-      return this.upload({}, body);
-    }
+  upload(body: FileUploadParams, options?: Core.RequestOptions): Core.APIPromise<File> {
     return this._client.post('/v1/files', Core.multipartFormRequestOptions({ body, ...options }));
   }
 }
@@ -99,7 +90,7 @@ export interface FileUploadParams {
   /**
    * The file to upload (binary) or URL string to download from
    */
-  file?: unknown;
+  file: Core.Uploadable;
 
   /**
    * Path to the file in the storage system

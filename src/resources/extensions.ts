@@ -177,7 +177,7 @@ export interface ExtensionUpdateParams {
   /**
    * Extension .zip/.crx file
    */
-  file?: unknown;
+  file?: Core.Uploadable;
 
   /**
    * Extension URL
@@ -189,7 +189,7 @@ export interface ExtensionUploadParams {
   /**
    * Extension .zip/.crx file
    */
-  file?: unknown;
+  file?: Core.Uploadable;
 
   /**
    * Extension URL
