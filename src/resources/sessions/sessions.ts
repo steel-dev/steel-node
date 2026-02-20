@@ -80,8 +80,21 @@ export class Sessions extends APIResource {
   /**
    * This endpoint allows you to get the recorded session events in the RRWeb format
    */
-  events(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionEventsResponse> {
-    return this._client.get(`/v1/sessions/${id}/events`, options);
+  events(
+    id: string,
+    query?: SessionEventsParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionEventsResponse>;
+  events(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionEventsResponse>;
+  events(
+    id: string,
+    query: SessionEventsParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionEventsResponse> {
+    if (isRequestOptions(query)) {
+      return this.events(id, {}, query);
+    }
+    return this._client.get(`/v1/sessions/${id}/events`, { query, ...options });
   }
 
   /**
@@ -2727,6 +2740,23 @@ export declare namespace SessionComputerParams {
   }
 }
 
+export interface SessionEventsParams {
+  /**
+   * Compress the events
+   */
+  compressed?: boolean;
+
+  /**
+   * Optional pagination limit
+   */
+  limit?: number;
+
+  /**
+   * Pagination pointer
+   */
+  pointer?: string;
+}
+
 export interface SessionReleaseParams {}
 
 export interface SessionReleaseAllParams {}
@@ -2749,6 +2779,7 @@ export declare namespace Sessions {
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionComputerParams as SessionComputerParams,
+    type SessionEventsParams as SessionEventsParams,
     type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
