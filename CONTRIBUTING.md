@@ -60,7 +60,7 @@ $ yarn link steel-sdk
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global steel-sdk
+$ pnpm link --global steel-sdk
 ```
 
 ## Running tests
