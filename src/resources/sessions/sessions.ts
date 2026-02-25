@@ -2755,7 +2755,7 @@ export interface SessionEventsParams {
   limit?: number;
 
   /**
-   * Pagination pointer
+   * Opaque pagination token. Pass the Next-Cursor header value to get the next page.
    */
   pointer?: string;
 }

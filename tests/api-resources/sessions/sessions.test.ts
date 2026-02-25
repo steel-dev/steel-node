@@ -234,7 +234,7 @@ describe('resource sessions', () => {
         '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
           compressed: true,
-          limit: -9007199254740991,
+          limit: 1,
           pointer: 'pointer',
         },
         { path: '/_stainless_unknown_path' },
