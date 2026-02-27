@@ -54,6 +54,7 @@ import {
   SessionComputerResponse,
   SessionContext,
   SessionCreateParams,
+  SessionEventsParams,
   SessionEventsResponse,
   SessionListParams,
   SessionLiveDetailsResponse,
@@ -313,6 +314,7 @@ export declare namespace Steel {
     type SessionCreateParams as SessionCreateParams,
     type SessionListParams as SessionListParams,
     type SessionComputerParams as SessionComputerParams,
+    type SessionEventsParams as SessionEventsParams,
     type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };

@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.18.0 (2026-02-27)
+
+Full Changelog: [v0.17.0...v0.18.0](https://github.com/steel-dev/steel-node/compare/v0.17.0...v0.18.0)
+
+### Features
+
+* **api:** api update ([34de369](https://github.com/steel-dev/steel-node/commit/34de3694682b68fe48f799cc116caa9de8df215c))
+* **api:** api update ([95c42cd](https://github.com/steel-dev/steel-node/commit/95c42cd171f43b25f2b527608210f4c6a0ebdba8))
+
+
+### Bug Fixes
+
+* **docs/contributing:** correct pnpm link command ([e3dddca](https://github.com/steel-dev/steel-node/commit/e3dddca3f68711c46b554a84a37c5d9161c26394))
+* **internal:** skip tests that depend on mock server ([d73bebe](https://github.com/steel-dev/steel-node/commit/d73bebeca00b88e47357778c9365b332c8cbd5c2))
+* publish via npm registry in release script ([74f0eae](https://github.com/steel-dev/steel-node/commit/74f0eae3e6987b92dada862eb4ab2a2ba6a22465))
+* publish via npm registry in release script ([700090e](https://github.com/steel-dev/steel-node/commit/700090e76c67b8f6ee44efc41da77997f1b4edce))
+
+
+### Chores
+
+* **internal:** move stringifyQuery implementation to internal function ([ff8f1d9](https://github.com/steel-dev/steel-node/commit/ff8f1d9e4b65ab114f171c93ddba59aeded03192))
+* update mock server docs ([782421b](https://github.com/steel-dev/steel-node/commit/782421bbe1366c326ec5b0e61b6538701d15118f))
+
 ## 0.17.0 (2026-02-06)
 
 Full Changelog: [v0.16.0...v0.17.0](https://github.com/steel-dev/steel-node/compare/v0.16.0...v0.17.0)

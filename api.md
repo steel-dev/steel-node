@@ -62,7 +62,7 @@ Methods:
 - <code title="get /v1/sessions">client.sessions.<a href="./src/resources/sessions/sessions.ts">list</a>({ ...params }) -> SessionslistSessionsSessionsCursor</code>
 - <code title="post /v1/sessions/{sessionId}/computer">client.sessions.<a href="./src/resources/sessions/sessions.ts">computer</a>(sessionId, { ...params }) -> SessionComputerResponse</code>
 - <code title="get /v1/sessions/{id}/context">client.sessions.<a href="./src/resources/sessions/sessions.ts">context</a>(id) -> SessionContext</code>
-- <code title="get /v1/sessions/{id}/events">client.sessions.<a href="./src/resources/sessions/sessions.ts">events</a>(id) -> SessionEventsResponse</code>
+- <code title="get /v1/sessions/{id}/events">client.sessions.<a href="./src/resources/sessions/sessions.ts">events</a>(id, { ...params }) -> SessionEventsResponse</code>
 - <code title="get /v1/sessions/{id}/live-details">client.sessions.<a href="./src/resources/sessions/sessions.ts">liveDetails</a>(id) -> SessionLiveDetailsResponse</code>
 - <code title="post /v1/sessions/{id}/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">release</a>(id) -> SessionReleaseResponse</code>
 - <code title="post /v1/sessions/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">releaseAll</a>() -> SessionReleaseAllResponse</code>
