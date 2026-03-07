@@ -29,7 +29,7 @@ describe('resource extensions', () => {
     await expect(
       client.extensions.update(
         'extensionId',
-        { file: await toFile(Buffer.from('# my file contents'), 'README.md'), url: 'https://example.com' },
+        { file: await toFile(Buffer.from('Example data'), 'README.md'), url: 'https://example.com' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
@@ -129,7 +129,7 @@ describe('resource extensions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.extensions.upload(
-        { file: await toFile(Buffer.from('# my file contents'), 'README.md'), url: 'https://example.com' },
+        { file: await toFile(Buffer.from('Example data'), 'README.md'), url: 'https://example.com' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);

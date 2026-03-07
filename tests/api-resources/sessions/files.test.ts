@@ -60,14 +60,16 @@ describe('resource files', () => {
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('download: request options instead of params are passed correctly', async () => {
+  // Mock server doesn't support application/octet-stream responses
+  test.skip('download: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.files.download('sessionId', 'path', { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
-  test('downloadArchive: request options instead of params are passed correctly', async () => {
+  // Mock server doesn't support application/zip responses
+  test.skip('downloadArchive: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.files.downloadArchive('sessionId', { path: '/_stainless_unknown_path' }),
@@ -76,7 +78,7 @@ describe('resource files', () => {
 
   test('upload: only required params', async () => {
     const responsePromise = client.sessions.files.upload('sessionId', {
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -89,7 +91,7 @@ describe('resource files', () => {
 
   test('upload: required and optional params', async () => {
     const response = await client.sessions.files.upload('sessionId', {
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       path: 'path',
     });
   });
