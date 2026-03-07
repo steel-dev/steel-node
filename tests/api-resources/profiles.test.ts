@@ -8,7 +8,7 @@ const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://
 describe('resource profiles', () => {
   test('create: only required params', async () => {
     const responsePromise = client.profiles.create({
-      userDataDir: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -21,7 +21,7 @@ describe('resource profiles', () => {
 
   test('create: required and optional params', async () => {
     const response = await client.profiles.create({
-      userDataDir: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
       dimensions: { height: 0, width: 0 },
       proxyUrl: 'https://example.com',
       userAgent: 'userAgent',
@@ -30,7 +30,7 @@ describe('resource profiles', () => {
 
   test('update: only required params', async () => {
     const responsePromise = client.profiles.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      userDataDir: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -43,7 +43,7 @@ describe('resource profiles', () => {
 
   test('update: required and optional params', async () => {
     const response = await client.profiles.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-      userDataDir: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
       dimensions: { height: 0, width: 0 },
       proxyUrl: 'https://example.com',
       userAgent: 'userAgent',
