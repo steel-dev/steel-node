@@ -42,7 +42,8 @@ describe('resource files', () => {
     );
   });
 
-  test('download: request options instead of params are passed correctly', async () => {
+  // Mock server doesn't support application/octet-stream responses
+  test.skip('download: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(client.files.download('path', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Steel.NotFoundError,
@@ -51,7 +52,7 @@ describe('resource files', () => {
 
   test('upload: only required params', async () => {
     const responsePromise = client.files.upload({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
     });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
@@ -64,7 +65,7 @@ describe('resource files', () => {
 
   test('upload: required and optional params', async () => {
     const response = await client.files.upload({
-      file: await toFile(Buffer.from('# my file contents'), 'README.md'),
+      file: await toFile(Buffer.from('Example data'), 'README.md'),
       path: 'path',
     });
   });

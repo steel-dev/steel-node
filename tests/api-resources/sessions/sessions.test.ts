@@ -32,6 +32,7 @@ describe('resource sessions', () => {
           debugConfig: { interactive: true, systemCursor: true },
           deviceConfig: { device: 'desktop' },
           dimensions: { height: -9007199254740991, width: -9007199254740991 },
+          experimentalFeatures: ['string'],
           extensionIds: ['string'],
           headless: true,
           isSelenium: true,
@@ -217,6 +218,21 @@ describe('resource sessions', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.events('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
+  test('events: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessions.events(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        {
+          compressed: true,
+          limit: 1,
+          pointer: 'pointer',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
