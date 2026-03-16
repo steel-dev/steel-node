@@ -39,6 +39,7 @@ describe('resource sessions', () => {
           debugConfig: { interactive: true, systemCursor: true },
           deviceConfig: { device: 'desktop' },
           dimensions: { height: -9007199254740991, width: -9007199254740991 },
+          experimentalFeatures: ['string'],
           extensionIds: ['string'],
           headless: true,
           isSelenium: true,
