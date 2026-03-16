@@ -521,9 +521,10 @@ export interface Sessionslist {
   sessions: Array<Sessionslist.Session>;
 
   /**
-   * Total number of sessions matching the query
+   * Total number of sessions matching the query. Only included for filtered queries
+   * (e.g. status=live).
    */
-  totalCount: number;
+  totalCount?: number;
 }
 
 export namespace Sessionslist {
@@ -849,6 +850,11 @@ export interface SessionCreateParams {
    * Viewport and browser window dimensions for the session
    */
   dimensions?: SessionCreateParams.Dimensions;
+
+  /**
+   * Enable experimental features for the session.
+   */
+  experimentalFeatures?: Array<string>;
 
   /**
    * Array of extension IDs to install in the session. Use ['all_ext'] to install all
