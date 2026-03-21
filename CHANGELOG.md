@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.18.1 (2026-03-21)
+
+Full Changelog: [v0.18.0...v0.18.1](https://github.com/steel-dev/steel-node/compare/v0.18.0...v0.18.1)
+
+### Chores
+
+* **internal:** tweak CI branches ([fa4a3c8](https://github.com/steel-dev/steel-node/commit/fa4a3c8cb25f384b0011669024aa85d51d908636))
+* **tests:** bump steady to v0.19.4 ([ebe3263](https://github.com/steel-dev/steel-node/commit/ebe3263f2a981298c9bfe55b8459b33b0dc0ed86))
+* **tests:** bump steady to v0.19.5 ([9f1d01b](https://github.com/steel-dev/steel-node/commit/9f1d01b37859cfff93c2573125e071cfe0a91625))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([afabeb3](https://github.com/steel-dev/steel-node/commit/afabeb349db6ed4586b5312c263350af5d6eaec9))
+
 ## 0.18.0 (2026-03-16)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/steel-dev/steel-node/compare/v0.17.0...v0.18.0)
