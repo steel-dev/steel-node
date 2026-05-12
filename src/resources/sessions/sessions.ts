@@ -218,6 +218,12 @@ export interface Session {
   deviceConfig?: Session.DeviceConfig;
 
   /**
+   * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+   * UI.
+   */
+  fullscreen?: boolean;
+
+  /**
    * Indicates if the session is headless or headful
    */
   headless?: boolean;
@@ -618,6 +624,12 @@ export namespace Sessionslist {
     deviceConfig?: Session.DeviceConfig;
 
     /**
+     * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+     * UI.
+     */
+    fullscreen?: boolean;
+
+    /**
      * Indicates if the session is headless or headful
      */
     headless?: boolean;
@@ -864,6 +876,12 @@ export interface SessionCreateParams {
    * uploaded extensions.
    */
   extensionIds?: Array<string>;
+
+  /**
+   * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+   * UI. Default is false.
+   */
+  fullscreen?: boolean;
 
   /**
    * Enable headless browser mode (disable Headful mode)

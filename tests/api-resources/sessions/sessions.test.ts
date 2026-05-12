@@ -41,6 +41,7 @@ describe('resource sessions', () => {
           dimensions: { height: -9007199254740991, width: -9007199254740991 },
           experimentalFeatures: ['string'],
           extensionIds: ['string'],
+          fullscreen: true,
           headless: true,
           isSelenium: true,
           namespace: 'namespace',
