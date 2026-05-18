@@ -246,7 +246,15 @@ export interface Session {
   /**
    * The region where the session was created
    */
-  region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
+  region?:
+    | 'us-east'
+    | 'us-west'
+    | 'us-central'
+    | 'eu-west'
+    | 'eu-central'
+    | 'ap-northeast'
+    | 'ap-southeast'
+    | 'sa-east';
 
   /**
    * Indicates if captcha solving is enabled
@@ -652,7 +660,15 @@ export namespace Sessionslist {
     /**
      * The region where the session was created
      */
-    region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
+    region?:
+      | 'us-east'
+      | 'us-west'
+      | 'us-central'
+      | 'eu-west'
+      | 'eu-central'
+      | 'ap-northeast'
+      | 'ap-southeast'
+      | 'sa-east';
 
     /**
      * Indicates if captcha solving is enabled
@@ -923,8 +939,9 @@ export interface SessionCreateParams {
   proxyUrl?: string;
 
   /**
-   * The desired region for the session to be started in. Available regions are lax,
-   * ord, iad
+   * The desired region for the session. Available: us-east, us-west, us-central,
+   * eu-west, eu-central, ap-northeast, ap-southeast, sa-east. Legacy codes (iad,
+   * lax, ord) are also accepted.
    */
   region?: unknown;
 
