@@ -244,8 +244,7 @@ export interface Session {
   profileId?: string;
 
   /**
-   * The region where the session was created. Fly sessions return airport codes;
-   * multi-provider sessions return meta-regions.
+   * The region where the session was created.
    */
   region?:
     | 'lax'
@@ -665,8 +664,7 @@ export namespace Sessionslist {
     profileId?: string;
 
     /**
-     * The region where the session was created. Fly sessions return airport codes;
-     * multi-provider sessions return meta-regions.
+     * The region where the session was created.
      */
     region?:
       | 'lax'
