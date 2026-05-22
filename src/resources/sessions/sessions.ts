@@ -244,9 +244,16 @@ export interface Session {
   profileId?: string;
 
   /**
-   * The region where the session was created
+   * The region where the session was created. Fly sessions return airport codes;
+   * multi-provider sessions return meta-regions.
    */
   region?:
+    | 'lax'
+    | 'ord'
+    | 'iad'
+    | 'scl'
+    | 'fra'
+    | 'nrt'
     | 'us-east'
     | 'us-west'
     | 'us-central'
@@ -658,9 +665,16 @@ export namespace Sessionslist {
     profileId?: string;
 
     /**
-     * The region where the session was created
+     * The region where the session was created. Fly sessions return airport codes;
+     * multi-provider sessions return meta-regions.
      */
     region?:
+      | 'lax'
+      | 'ord'
+      | 'iad'
+      | 'scl'
+      | 'fra'
+      | 'nrt'
       | 'us-east'
       | 'us-west'
       | 'us-central'
@@ -2645,9 +2659,9 @@ export declare namespace SessionComputerParams {
     action: 'click_mouse';
 
     /**
-     * Mouse button to click
+     * Mouse button to click. Defaults to 'left'
      */
-    button: 'left' | 'right' | 'middle' | 'back' | 'forward';
+    button?: 'left' | 'right' | 'middle' | 'back' | 'forward';
 
     /**
      * Type of click (down, up, or click). Defaults to 'click'
