@@ -890,7 +890,9 @@ export interface SessionCreateParams {
   deviceConfig?: SessionCreateParams.DeviceConfig;
 
   /**
-   * Viewport and browser window dimensions for the session
+   * Viewport and browser window dimensions for the session. Mobile sessions require
+   * dimensions of at least 508x1074; smaller mobile dimensions are rejected with a
+   * 400 response.
    */
   dimensions?: SessionCreateParams.Dimensions;
 
@@ -1033,7 +1035,9 @@ export namespace SessionCreateParams {
   }
 
   /**
-   * Viewport and browser window dimensions for the session
+   * Viewport and browser window dimensions for the session. Mobile sessions require
+   * dimensions of at least 508x1074; smaller mobile dimensions are rejected with a
+   * 400 response.
    */
   export interface Dimensions {
     /**
