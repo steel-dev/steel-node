@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class Profiles extends APIResource {
@@ -16,24 +17,49 @@ export class Profiles extends APIResource {
    */
   update(
     id: string,
-    body: ProfileUpdateParams,
+    params: ProfileUpdateParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<ProfileUpdateResponse> {
-    return this._client.patch(`/v1/profiles/${id}`, Core.multipartFormRequestOptions({ body, ...options }));
+    const { query_projectId, ...body } = params;
+    return this._client.patch(
+      `/v1/profiles/${id}`,
+      Core.multipartFormRequestOptions({ query: { projectId: query_projectId }, body, ...options }),
+    );
   }
 
   /**
    * Retrieve a list of all profiles
    */
-  list(options?: Core.RequestOptions): Core.APIPromise<ProfileListResponse> {
-    return this._client.get('/v1/profiles', options);
+  list(query?: ProfileListParams, options?: Core.RequestOptions): Core.APIPromise<ProfileListResponse>;
+  list(options?: Core.RequestOptions): Core.APIPromise<ProfileListResponse>;
+  list(
+    query: ProfileListParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfileListResponse> {
+    if (isRequestOptions(query)) {
+      return this.list({}, query);
+    }
+    return this._client.get('/v1/profiles', { query, ...options });
   }
 
   /**
    * Retrieve a profile by ID
    */
-  get(id: string, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse> {
-    return this._client.get(`/v1/profiles/${id}`, options);
+  get(
+    id: string,
+    query?: ProfileGetParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfileGetResponse>;
+  get(id: string, options?: Core.RequestOptions): Core.APIPromise<ProfileGetResponse>;
+  get(
+    id: string,
+    query: ProfileGetParams | Core.RequestOptions = {},
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ProfileGetResponse> {
+    if (isRequestOptions(query)) {
+      return this.get(id, {}, query);
+    }
+    return this._client.get(`/v1/profiles/${id}`, { query, ...options });
   }
 }
 
@@ -67,6 +93,11 @@ export interface ProfileCreateResponse {
    * The fingerprint associated with the profile
    */
   fingerprint: ProfileCreateResponse.Fingerprint | null;
+
+  /**
+   * The project ID associated with the profile
+   */
+  projectId: string | null;
 
   /**
    * The last session ID associated with the profile
@@ -426,6 +457,11 @@ export interface ProfileUpdateResponse {
    * The fingerprint associated with the profile
    */
   fingerprint: ProfileUpdateResponse.Fingerprint | null;
+
+  /**
+   * The project ID associated with the profile
+   */
+  projectId: string | null;
 
   /**
    * The last session ID associated with the profile
@@ -800,6 +836,11 @@ export namespace ProfileListResponse {
     fingerprint: Profile.Fingerprint | null;
 
     /**
+     * The project ID associated with the profile
+     */
+    projectId: string | null;
+
+    /**
      * The last session ID associated with the profile
      */
     sourceSessionId: string | null;
@@ -1160,6 +1201,11 @@ export interface ProfileGetResponse {
   fingerprint: ProfileGetResponse.Fingerprint | null;
 
   /**
+   * The project ID associated with the profile
+   */
+  projectId: string | null;
+
+  /**
    * The last session ID associated with the profile
    */
   sourceSessionId: string | null;
@@ -1499,6 +1545,11 @@ export interface ProfileCreateParams {
   dimensions?: ProfileCreateParams.Dimensions;
 
   /**
+   * Project to create the profile in
+   */
+  projectId?: string;
+
+  /**
    * The proxy associated with the profile
    */
   proxyUrl?: string;
@@ -1522,22 +1573,32 @@ export namespace ProfileCreateParams {
 
 export interface ProfileUpdateParams {
   /**
-   * The user data directory associated with the profile
+   * Body param: The user data directory associated with the profile
    */
   userDataDir: Core.Uploadable;
 
   /**
-   * The dimensions associated with the profile
+   * Query param: Project to query profiles from
+   */
+  query_projectId?: string;
+
+  /**
+   * Body param: The dimensions associated with the profile
    */
   dimensions?: ProfileUpdateParams.Dimensions;
 
   /**
-   * The proxy associated with the profile
+   * Body param: Project to create the profile in
+   */
+  body_projectId?: string;
+
+  /**
+   * Body param: The proxy associated with the profile
    */
   proxyUrl?: string;
 
   /**
-   * The user agent associated with the profile
+   * Body param: The user agent associated with the profile
    */
   userAgent?: string;
 }
@@ -1553,6 +1614,20 @@ export namespace ProfileUpdateParams {
   }
 }
 
+export interface ProfileListParams {
+  /**
+   * Project to query profiles from
+   */
+  projectId?: string;
+}
+
+export interface ProfileGetParams {
+  /**
+   * Project to query profiles from
+   */
+  projectId?: string;
+}
+
 export declare namespace Profiles {
   export {
     type ProfileCreateResponse as ProfileCreateResponse,
@@ -1561,5 +1636,7 @@ export declare namespace Profiles {
     type ProfileGetResponse as ProfileGetResponse,
     type ProfileCreateParams as ProfileCreateParams,
     type ProfileUpdateParams as ProfileUpdateParams,
+    type ProfileListParams as ProfileListParams,
+    type ProfileGetParams as ProfileGetParams,
   };
 }

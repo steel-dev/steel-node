@@ -7,7 +7,7 @@ const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://
 
 describe('resource captchas', () => {
   test('solve', async () => {
-    const responsePromise = client.sessions.captchas.solve('sessionId');
+    const responsePromise = client.sessions.captchas.solve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -20,7 +20,9 @@ describe('resource captchas', () => {
   test('solve: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.captchas.solve('sessionId', { path: '/_stainless_unknown_path' }),
+      client.sessions.captchas.solve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 
@@ -28,7 +30,7 @@ describe('resource captchas', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.sessions.captchas.solve(
-        'sessionId',
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
         {
           pageId: 'pageId',
           taskId: 'taskId',
@@ -40,7 +42,7 @@ describe('resource captchas', () => {
   });
 
   test('solveImage: only required params', async () => {
-    const responsePromise = client.sessions.captchas.solveImage('sessionId', {
+    const responsePromise = client.sessions.captchas.solveImage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       imageXPath: 'imageXPath',
       inputXPath: 'inputXPath',
     });
@@ -54,7 +56,7 @@ describe('resource captchas', () => {
   });
 
   test('solveImage: required and optional params', async () => {
-    const response = await client.sessions.captchas.solveImage('sessionId', {
+    const response = await client.sessions.captchas.solveImage('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       imageXPath: 'imageXPath',
       inputXPath: 'inputXPath',
       url: 'url',
@@ -62,7 +64,7 @@ describe('resource captchas', () => {
   });
 
   test('status', async () => {
-    const responsePromise = client.sessions.captchas.status('sessionId');
+    const responsePromise = client.sessions.captchas.status('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -75,7 +77,9 @@ describe('resource captchas', () => {
   test('status: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.sessions.captchas.status('sessionId', { path: '/_stainless_unknown_path' }),
+      client.sessions.captchas.status('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
+        path: '/_stainless_unknown_path',
+      }),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 });

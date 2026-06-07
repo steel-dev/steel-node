@@ -42,7 +42,9 @@ import { File, FileUploadParams, Files, Fileslist } from './resources/files';
 import {
   ProfileCreateParams,
   ProfileCreateResponse,
+  ProfileGetParams,
   ProfileGetResponse,
+  ProfileListParams,
   ProfileListResponse,
   ProfileUpdateParams,
   ProfileUpdateResponse,
@@ -351,6 +353,8 @@ export declare namespace Steel {
     type ProfileGetResponse as ProfileGetResponse,
     type ProfileCreateParams as ProfileCreateParams,
     type ProfileUpdateParams as ProfileUpdateParams,
+    type ProfileListParams as ProfileListParams,
+    type ProfileGetParams as ProfileGetParams,
   };
 }
 
