@@ -188,6 +188,11 @@ export interface PdfParams {
   delay?: number;
 
   /**
+   * Project to execute the PDF generation in.
+   */
+  projectId?: string;
+
+  /**
    * The desired region for the action to be performed in
    */
   region?: unknown;
@@ -220,6 +225,11 @@ export interface ScrapeParams {
   pdf?: boolean;
 
   /**
+   * Project to execute the scrape in.
+   */
+  projectId?: string;
+
+  /**
    * The desired region for the action to be performed in
    */
   region?: unknown;
@@ -250,6 +260,11 @@ export interface ScreenshotParams {
    * Capture the full page screenshot. Default is `false`.
    */
   fullPage?: boolean;
+
+  /**
+   * Project to execute the screenshot in.
+   */
+  projectId?: string;
 
   /**
    * The desired region for the action to be performed in

@@ -21,6 +21,7 @@ describe('top level methods', () => {
     const response = await client.pdf({
       url: 'https://example.com',
       delay: 0,
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       region: {},
       useProxy: true,
     });
@@ -43,6 +44,7 @@ describe('top level methods', () => {
       delay: 0,
       format: ['html'],
       pdf: true,
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       region: {},
       screenshot: true,
       useProxy: true,
@@ -65,6 +67,7 @@ describe('top level methods', () => {
       url: 'https://example.com',
       delay: 0,
       fullPage: true,
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       region: {},
       useProxy: true,
     });

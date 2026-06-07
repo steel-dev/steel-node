@@ -43,11 +43,13 @@ describe('resource sessions', () => {
           extensionIds: ['string'],
           fullscreen: true,
           headless: true,
+          inactivityTimeout: 1,
           isSelenium: true,
           namespace: 'namespace',
           optimizeBandwidth: true,
           persistProfile: true,
           profileId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           proxyUrl: 'https://example.com',
           region: {},
           sessionContext: {
@@ -163,6 +165,7 @@ describe('resource sessions', () => {
         {
           cursorId: 'cursorId',
           limit: 1,
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           status: 'live',
         },
         { path: '/_stainless_unknown_path' },
@@ -297,10 +300,20 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  test('releaseAll: request options and params are passed correctly', async () => {
+  test('releaseAll: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(client.sessions.releaseAll({}, { path: '/_stainless_unknown_path' })).rejects.toThrow(
+    await expect(client.sessions.releaseAll({ path: '/_stainless_unknown_path' })).rejects.toThrow(
       Steel.NotFoundError,
     );
+  });
+
+  test('releaseAll: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessions.releaseAll(
+        { projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 });

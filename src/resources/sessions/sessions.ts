@@ -122,10 +122,19 @@ export class Sessions extends APIResource {
    * Releases all active sessions for the current organization.
    */
   releaseAll(
-    body?: SessionReleaseAllParams | null | undefined,
+    params?: SessionReleaseAllParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(options?: Core.RequestOptions): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(
+    params: SessionReleaseAllParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionReleaseAllResponse> {
-    return this._client.post('/v1/sessions/release', { body, ...options });
+    if (isRequestOptions(params)) {
+      return this.releaseAll({}, params);
+    }
+    const { projectId, ...body } = params;
+    return this._client.post('/v1/sessions/release', { query: { projectId }, body, ...options });
   }
 }
 
@@ -229,6 +238,11 @@ export interface Session {
   headless?: boolean;
 
   /**
+   * Inactivity timeout in milliseconds, if one was set when the session was created
+   */
+  inactivityTimeout?: number;
+
+  /**
    * Indicates if Selenium is used in the session
    */
   isSelenium?: boolean;
@@ -242,6 +256,11 @@ export interface Session {
    * The ID of the profile associated with the session
    */
   profileId?: string;
+
+  /**
+   * The project associated with the session
+   */
+  projectId?: string | null;
 
   /**
    * The region where the session was created.
@@ -649,6 +668,11 @@ export namespace Sessionslist {
     headless?: boolean;
 
     /**
+     * Inactivity timeout in milliseconds, if one was set when the session was created
+     */
+    inactivityTimeout?: number;
+
+    /**
      * Indicates if Selenium is used in the session
      */
     isSelenium?: boolean;
@@ -662,6 +686,11 @@ export namespace Sessionslist {
      * The ID of the profile associated with the session
      */
     profileId?: string;
+
+    /**
+     * The project associated with the session
+     */
+    projectId?: string | null;
 
     /**
      * The region where the session was created.
@@ -919,6 +948,15 @@ export interface SessionCreateParams {
   headless?: boolean;
 
   /**
+   * Inactivity timeout in milliseconds. When set, the session is released if no CDP
+   * command or remote input is received for this duration, even if `timeout` has not
+   * yet elapsed. Note that `timeout` remains the hard cap on session lifetime: if
+   * `inactivityTimeout` is greater than or equal to the effective `timeout`, it has
+   * no effect since `timeout` always elapses first. Omit to disable.
+   */
+  inactivityTimeout?: number;
+
+  /**
    * Enable Selenium mode for the browser session (default is false). Use this when
    * you plan to connect to the browser session via Selenium.
    */
@@ -944,6 +982,12 @@ export interface SessionCreateParams {
    * This flag will set the profile for the session.
    */
   profileId?: string;
+
+  /**
+   * The project to create the session in. When provided, the session namespace is
+   * resolved from the project.
+   */
+  projectId?: string;
 
   /**
    * Custom proxy URL for the browser session. Overrides useProxy, disabling
@@ -2621,6 +2665,11 @@ export namespace SessionCreateParams {
 
 export interface SessionListParams extends SessionsCursorParams {
   /**
+   * Filter sessions by project
+   */
+  projectId?: string;
+
+  /**
    * Filter sessions by current status
    */
   status?: 'live' | 'released' | 'failed';
@@ -2819,7 +2868,12 @@ export interface SessionEventsParams {
 
 export interface SessionReleaseParams {}
 
-export interface SessionReleaseAllParams {}
+export interface SessionReleaseAllParams {
+  /**
+   * Release sessions only within this project
+   */
+  projectId?: string;
+}
 
 Sessions.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Sessions.Files = Files;

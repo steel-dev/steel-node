@@ -23,6 +23,7 @@ describe('resource profiles', () => {
     const response = await client.profiles.create({
       userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
       dimensions: { height: 0, width: 0 },
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       proxyUrl: 'https://example.com',
       userAgent: 'userAgent',
     });
@@ -44,7 +45,9 @@ describe('resource profiles', () => {
   test('update: required and optional params', async () => {
     const response = await client.profiles.update('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
       userDataDir: await toFile(Buffer.from('Example data'), 'README.md'),
+      query_projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       dimensions: { height: 0, width: 0 },
+      body_projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       proxyUrl: 'https://example.com',
       userAgent: 'userAgent',
     });
@@ -68,6 +71,16 @@ describe('resource profiles', () => {
     );
   });
 
+  test('list: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.profiles.list(
+        { projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
   test('get', async () => {
     const responsePromise = client.profiles.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
@@ -83,6 +96,17 @@ describe('resource profiles', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.profiles.get('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
+  test('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.profiles.get(
+        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        { projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        { path: '/_stainless_unknown_path' },
+      ),
     ).rejects.toThrow(Steel.NotFoundError);
   });
 });
