@@ -894,6 +894,12 @@ export interface SessionCreateParams {
   blockAds?: boolean;
 
   /**
+   * PEM-encoded root CA certificates to trust in this session. THIS IS CURRENTLY AN
+   * EXPERIMENTAL FEATURE.
+   */
+  caCertificates?: Array<string>;
+
+  /**
    * Number of sessions to create concurrently (check your plan limit)
    */
   concurrency?: number;
