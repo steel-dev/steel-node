@@ -42,7 +42,9 @@ import { File, FileUploadParams, Files, Fileslist } from './resources/files';
 import {
   ProfileCreateParams,
   ProfileCreateResponse,
+  ProfileGetParams,
   ProfileGetResponse,
+  ProfileListParams,
   ProfileListResponse,
   ProfileUpdateParams,
   ProfileUpdateResponse,
@@ -171,6 +173,18 @@ export class Steel extends Core.APIClient {
       maxRetries: options.maxRetries,
       fetch: options.fetch,
     });
+
+    const customHeadersEnv = Core.readEnv('STEEL_CUSTOM_HEADERS');
+    if (customHeadersEnv) {
+      const parsed: Record<string, string> = {};
+      for (const line of customHeadersEnv.split('\n')) {
+        const colon = line.indexOf(':');
+        if (colon >= 0) {
+          parsed[line.substring(0, colon).trim()] = line.substring(colon + 1).trim();
+        }
+      }
+      options.defaultHeaders = { ...parsed, ...options.defaultHeaders };
+    }
 
     this._options = options;
 
@@ -339,6 +353,8 @@ export declare namespace Steel {
     type ProfileGetResponse as ProfileGetResponse,
     type ProfileCreateParams as ProfileCreateParams,
     type ProfileUpdateParams as ProfileUpdateParams,
+    type ProfileListParams as ProfileListParams,
+    type ProfileGetParams as ProfileGetParams,
   };
 }
 

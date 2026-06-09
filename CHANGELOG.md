@@ -1,5 +1,42 @@
 # Changelog
 
+## 0.19.0 (2026-06-09)
+
+Full Changelog: [v0.18.0...v0.19.0](https://github.com/steel-dev/steel-node/compare/v0.18.0...v0.19.0)
+
+### Features
+
+* **api:** api update ([cc8ce26](https://github.com/steel-dev/steel-node/commit/cc8ce2691b8e4cdeb95148553aca21eb4936df33))
+* **api:** api update ([d6a0f5e](https://github.com/steel-dev/steel-node/commit/d6a0f5e5aa186e7f6168fbd50f53e70792b98f69))
+* **api:** api update ([aaadca3](https://github.com/steel-dev/steel-node/commit/aaadca3f8cca131736618f65bfe453667438d042))
+* **api:** api update ([ac19060](https://github.com/steel-dev/steel-node/commit/ac1906018dae823d12e766e4325dcc6cf519d041))
+* **api:** api update ([4269370](https://github.com/steel-dev/steel-node/commit/4269370b9a6413c88b5c75eff75766667ed8c1fa))
+* **api:** api update ([29050a6](https://github.com/steel-dev/steel-node/commit/29050a6a62b6db38e9fa08b2f931aeefa5ea1cce))
+* **api:** api update ([dff738f](https://github.com/steel-dev/steel-node/commit/dff738f76544eb483b8f995f8a8d7376c5aca07e))
+* support setting headers via env ([27b562f](https://github.com/steel-dev/steel-node/commit/27b562f48bcb95531512e1d9abc74fe132b0fdd6))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([24d527e](https://github.com/steel-dev/steel-node/commit/24d527ee0bbb9159048c661a2d3d0033c633ad08))
+* **internal:** codegen related update ([c9697ba](https://github.com/steel-dev/steel-node/commit/c9697bab39cf28fcc66db25fa673460ca873ba11))
+* **internal:** more robust bootstrap script ([3e8773c](https://github.com/steel-dev/steel-node/commit/3e8773cfe5528550cb278bc9df68c705773f8589))
+* **internal:** tweak CI branches ([fa4a3c8](https://github.com/steel-dev/steel-node/commit/fa4a3c8cb25f384b0011669024aa85d51d908636))
+* **internal:** update gitignore ([8f42087](https://github.com/steel-dev/steel-node/commit/8f42087e15148c16aa986c3eea1b97b92f6c4823))
+* **internal:** update multipart form array serialization ([30cc0e9](https://github.com/steel-dev/steel-node/commit/30cc0e9954f7b602cabeec5267a1fcb9fd4f96de))
+* **tests:** bump steady to v0.19.4 ([ebe3263](https://github.com/steel-dev/steel-node/commit/ebe3263f2a981298c9bfe55b8459b33b0dc0ed86))
+* **tests:** bump steady to v0.19.5 ([9f1d01b](https://github.com/steel-dev/steel-node/commit/9f1d01b37859cfff93c2573125e071cfe0a91625))
+* **tests:** bump steady to v0.19.6 ([c17e027](https://github.com/steel-dev/steel-node/commit/c17e02724dd15ae8305d459156fd2bf76f596d77))
+* **tests:** bump steady to v0.19.7 ([c92d874](https://github.com/steel-dev/steel-node/commit/c92d8740ee32a60c865f8ee8ef73b16a3fbc0fd0))
+* **tests:** bump steady to v0.20.1 ([7794f96](https://github.com/steel-dev/steel-node/commit/7794f964afb8713c7a56327819bde7c3eb072d0c))
+* **tests:** bump steady to v0.20.2 ([610ae06](https://github.com/steel-dev/steel-node/commit/610ae061487360930cd244c9a6f7887e804e42b8))
+* **tests:** bump steady to v0.22.1 ([185d80e](https://github.com/steel-dev/steel-node/commit/185d80ea1737db17fcd5eb6b0bb36d927d368745))
+
+
+### Refactors
+
+* **tests:** switch from prism to steady ([afabeb3](https://github.com/steel-dev/steel-node/commit/afabeb349db6ed4586b5312c263350af5d6eaec9))
+
 ## 0.18.0 (2026-03-16)
 
 Full Changelog: [v0.17.0...v0.18.0](https://github.com/steel-dev/steel-node/compare/v0.17.0...v0.18.0)

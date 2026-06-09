@@ -23,6 +23,7 @@ describe('resource credentials', () => {
       label: 'label',
       namespace: 'namespace',
       origin: 'origin',
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
     });
   });
 
@@ -52,6 +53,7 @@ describe('resource credentials', () => {
           label: 'label',
           namespace: 'namespace',
           origin: 'origin',
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
           value: { foo: 'string' },
         },
         { path: '/_stainless_unknown_path' },
@@ -81,7 +83,11 @@ describe('resource credentials', () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
       client.credentials.list(
-        { namespace: 'namespace', origin: 'origin' },
+        {
+          namespace: 'namespace',
+          origin: 'origin',
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+        },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(Steel.NotFoundError);
@@ -99,6 +105,10 @@ describe('resource credentials', () => {
   });
 
   test('delete: required and optional params', async () => {
-    const response = await client.credentials.delete({ origin: 'origin', namespace: 'namespace' });
+    const response = await client.credentials.delete({
+      origin: 'origin',
+      namespace: 'namespace',
+      projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+    });
   });
 });

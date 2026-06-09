@@ -65,7 +65,7 @@ Methods:
 - <code title="get /v1/sessions/{id}/events">client.sessions.<a href="./src/resources/sessions/sessions.ts">events</a>(id, { ...params }) -> SessionEventsResponse</code>
 - <code title="get /v1/sessions/{id}/live-details">client.sessions.<a href="./src/resources/sessions/sessions.ts">liveDetails</a>(id) -> SessionLiveDetailsResponse</code>
 - <code title="post /v1/sessions/{id}/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">release</a>(id) -> SessionReleaseResponse</code>
-- <code title="post /v1/sessions/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">releaseAll</a>() -> SessionReleaseAllResponse</code>
+- <code title="post /v1/sessions/release">client.sessions.<a href="./src/resources/sessions/sessions.ts">releaseAll</a>({ ...params }) -> SessionReleaseAllResponse</code>
 
 ## Files
 
@@ -125,5 +125,5 @@ Methods:
 
 - <code title="post /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">create</a>({ ...params }) -> ProfileCreateResponse</code>
 - <code title="patch /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">update</a>(id, { ...params }) -> ProfileUpdateResponse</code>
-- <code title="get /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>() -> ProfileListResponse</code>
-- <code title="get /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">get</a>(id) -> ProfileGetResponse</code>
+- <code title="get /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>({ ...params }) -> ProfileListResponse</code>
+- <code title="get /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">get</a>(id, { ...params }) -> ProfileGetResponse</code>

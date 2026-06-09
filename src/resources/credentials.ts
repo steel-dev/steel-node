@@ -170,6 +170,11 @@ export interface CredentialCreateParams {
    * Website origin the credential is for
    */
   origin?: string;
+
+  /**
+   * Project to store the credential in.
+   */
+  projectId?: string;
 }
 
 export interface CredentialUpdateParams {
@@ -189,6 +194,11 @@ export interface CredentialUpdateParams {
   origin?: string;
 
   /**
+   * Project to update the credential in.
+   */
+  projectId?: string;
+
+  /**
    * Value for the credential
    */
   value?: { [key: string]: string };
@@ -204,6 +214,11 @@ export interface CredentialListParams {
    * website origin the credential is for
    */
   origin?: string;
+
+  /**
+   * Project to query credentials from.
+   */
+  projectId?: string;
 }
 
 export interface CredentialDeleteParams {
@@ -216,6 +231,11 @@ export interface CredentialDeleteParams {
    * The namespace the credential is stored against. Defaults to "default".
    */
   namespace?: string;
+
+  /**
+   * Project to delete the credential from.
+   */
+  projectId?: string;
 }
 
 export declare namespace Credentials {

@@ -31,6 +31,8 @@ export {
   type ProfileGetResponse,
   type ProfileCreateParams,
   type ProfileUpdateParams,
+  type ProfileListParams,
+  type ProfileGetParams,
 } from './profiles';
 export {
   SessionslistSessionsSessionsCursor,

@@ -119,10 +119,19 @@ export class Sessions extends APIResource {
    * Releases all active sessions for the current organization.
    */
   releaseAll(
-    body?: SessionReleaseAllParams | null | undefined,
+    params?: SessionReleaseAllParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(options?: Core.RequestOptions): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(
+    params: SessionReleaseAllParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionReleaseAllResponse> {
-    return this._client.post('/v1/sessions/release', { body, ...options });
+    if (isRequestOptions(params)) {
+      return this.releaseAll({}, params);
+    }
+    const { projectId, ...body } = params;
+    return this._client.post('/v1/sessions/release', { query: { projectId }, body, ...options });
   }
 }
 
@@ -215,9 +224,20 @@ export interface Session {
   deviceConfig?: Session.DeviceConfig;
 
   /**
+   * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+   * UI.
+   */
+  fullscreen?: boolean;
+
+  /**
    * Indicates if the session is headless or headful
    */
   headless?: boolean;
+
+  /**
+   * Inactivity timeout in milliseconds, if one was set when the session was created
+   */
+  inactivityTimeout?: number;
 
   /**
    * Indicates if Selenium is used in the session
@@ -235,9 +255,28 @@ export interface Session {
   profileId?: string;
 
   /**
-   * The region where the session was created
+   * The project associated with the session
    */
-  region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
+  projectId?: string | null;
+
+  /**
+   * The region where the session was created.
+   */
+  region?:
+    | 'lax'
+    | 'ord'
+    | 'iad'
+    | 'scl'
+    | 'fra'
+    | 'nrt'
+    | 'us-east'
+    | 'us-west'
+    | 'us-central'
+    | 'eu-west'
+    | 'eu-central'
+    | 'ap-northeast'
+    | 'ap-southeast'
+    | 'sa-east';
 
   /**
    * Indicates if captcha solving is enabled
@@ -615,9 +654,20 @@ export namespace Sessionslist {
     deviceConfig?: Session.DeviceConfig;
 
     /**
+     * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+     * UI.
+     */
+    fullscreen?: boolean;
+
+    /**
      * Indicates if the session is headless or headful
      */
     headless?: boolean;
+
+    /**
+     * Inactivity timeout in milliseconds, if one was set when the session was created
+     */
+    inactivityTimeout?: number;
 
     /**
      * Indicates if Selenium is used in the session
@@ -635,9 +685,28 @@ export namespace Sessionslist {
     profileId?: string;
 
     /**
-     * The region where the session was created
+     * The project associated with the session
      */
-    region?: 'lax' | 'ord' | 'iad' | 'scl' | 'fra' | 'nrt';
+    projectId?: string | null;
+
+    /**
+     * The region where the session was created.
+     */
+    region?:
+      | 'lax'
+      | 'ord'
+      | 'iad'
+      | 'scl'
+      | 'fra'
+      | 'nrt'
+      | 'us-east'
+      | 'us-west'
+      | 'us-central'
+      | 'eu-west'
+      | 'eu-central'
+      | 'ap-northeast'
+      | 'ap-southeast'
+      | 'sa-east';
 
     /**
      * Indicates if captcha solving is enabled
@@ -825,6 +894,12 @@ export interface SessionCreateParams {
   blockAds?: boolean;
 
   /**
+   * PEM-encoded root CA certificates to trust in this session. THIS IS CURRENTLY AN
+   * EXPERIMENTAL FEATURE.
+   */
+  caCertificates?: Array<string>;
+
+  /**
    * Number of sessions to create concurrently (check your plan limit)
    */
   concurrency?: number;
@@ -847,7 +922,9 @@ export interface SessionCreateParams {
   deviceConfig?: SessionCreateParams.DeviceConfig;
 
   /**
-   * Viewport and browser window dimensions for the session
+   * Viewport and browser window dimensions for the session. Mobile sessions require
+   * dimensions of at least 508x1074; smaller mobile dimensions are rejected with a
+   * 400 response.
    */
   dimensions?: SessionCreateParams.Dimensions;
 
@@ -863,9 +940,24 @@ export interface SessionCreateParams {
   extensionIds?: Array<string>;
 
   /**
+   * Launch the browser in fullscreen mode, covering the full screen with no Chrome
+   * UI. Default is false.
+   */
+  fullscreen?: boolean;
+
+  /**
    * Enable headless browser mode (disable Headful mode)
    */
   headless?: boolean;
+
+  /**
+   * Inactivity timeout in milliseconds. When set, the session is released if no CDP
+   * command or remote input is received for this duration, even if `timeout` has not
+   * yet elapsed. Note that `timeout` remains the hard cap on session lifetime: if
+   * `inactivityTimeout` is greater than or equal to the effective `timeout`, it has
+   * no effect since `timeout` always elapses first. Omit to disable.
+   */
+  inactivityTimeout?: number;
 
   /**
    * Enable Selenium mode for the browser session (default is false). Use this when
@@ -895,6 +987,12 @@ export interface SessionCreateParams {
   profileId?: string;
 
   /**
+   * The project to create the session in. When provided, the session namespace is
+   * resolved from the project.
+   */
+  projectId?: string;
+
+  /**
    * Custom proxy URL for the browser session. Overrides useProxy, disabling
    * Steel-provided proxies in favor of your specified proxy. Format:
    * http(s)://username:password@hostname:port
@@ -902,8 +1000,9 @@ export interface SessionCreateParams {
   proxyUrl?: string;
 
   /**
-   * The desired region for the session to be started in. Available regions are lax,
-   * ord, iad
+   * The desired region for the session. Available: us-east, us-west, us-central,
+   * eu-west, eu-central, ap-northeast, ap-southeast, sa-east. Legacy codes (iad,
+   * lax, ord) are also accepted.
    */
   region?: unknown;
 
@@ -983,7 +1082,9 @@ export namespace SessionCreateParams {
   }
 
   /**
-   * Viewport and browser window dimensions for the session
+   * Viewport and browser window dimensions for the session. Mobile sessions require
+   * dimensions of at least 508x1074; smaller mobile dimensions are rejected with a
+   * 400 response.
    */
   export interface Dimensions {
     /**
@@ -2567,6 +2668,11 @@ export namespace SessionCreateParams {
 
 export interface SessionListParams extends SessionsCursorParams {
   /**
+   * Filter sessions by project
+   */
+  projectId?: string;
+
+  /**
    * Filter sessions by current status
    */
   status?: 'live' | 'released' | 'failed';
@@ -2607,9 +2713,9 @@ export declare namespace SessionComputerParams {
     action: 'click_mouse';
 
     /**
-     * Mouse button to click
+     * Mouse button to click. Defaults to 'left'
      */
-    button: 'left' | 'right' | 'middle' | 'back' | 'forward';
+    button?: 'left' | 'right' | 'middle' | 'back' | 'forward';
 
     /**
      * Type of click (down, up, or click). Defaults to 'click'
@@ -2765,7 +2871,12 @@ export interface SessionEventsParams {
 
 export interface SessionReleaseParams {}
 
-export interface SessionReleaseAllParams {}
+export interface SessionReleaseAllParams {
+  /**
+   * Release sessions only within this project
+   */
+  projectId?: string;
+}
 
 Sessions.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Sessions.Files = Files;
