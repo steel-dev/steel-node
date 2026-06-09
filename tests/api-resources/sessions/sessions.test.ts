@@ -30,6 +30,7 @@ describe('resource sessions', () => {
       client.sessions.create(
         {
           blockAds: true,
+          caCertificates: ['string'],
           concurrency: -9007199254740991,
           credentials: {
             autoSubmit: true,
