@@ -7,7 +7,7 @@ const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://
 
 describe('resource captchas', () => {
   test('solve', async () => {
-    const responsePromise = client.sessions.captchas.solve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
+    const responsePromise = client.sessions.captchas.solve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {});
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -15,30 +15,6 @@ describe('resource captchas', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  test('solve: request options instead of params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.sessions.captchas.solve('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {
-        path: '/_stainless_unknown_path',
-      }),
-    ).rejects.toThrow(Steel.NotFoundError);
-  });
-
-  test('solve: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.sessions.captchas.solve(
-        '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
-        {
-          pageId: 'pageId',
-          taskId: 'taskId',
-          url: 'url',
-        },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('solveImage: only required params', async () => {
