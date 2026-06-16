@@ -23,15 +23,7 @@ export class Sessions extends APIResource {
   /**
    * Creates a new session with the provided configuration.
    */
-  create(body?: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(options?: Core.RequestOptions): Core.APIPromise<Session>;
-  create(
-    body: SessionCreateParams | Core.RequestOptions = {},
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<Session> {
-    if (isRequestOptions(body)) {
-      return this.create({}, body);
-    }
+  create(body: SessionCreateParams, options?: Core.RequestOptions): Core.APIPromise<Session> {
     return this._client.post('/v1/sessions', { body, ...options });
   }
 
@@ -112,7 +104,7 @@ export class Sessions extends APIResource {
    */
   release(
     id: string,
-    body?: SessionReleaseParams | null | undefined,
+    body: SessionReleaseParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionReleaseResponse> {
     return this._client.post(`/v1/sessions/${id}/release`, { body, ...options });
@@ -122,17 +114,9 @@ export class Sessions extends APIResource {
    * Releases all active sessions for the current organization.
    */
   releaseAll(
-    params?: SessionReleaseAllParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionReleaseAllResponse>;
-  releaseAll(options?: Core.RequestOptions): Core.APIPromise<SessionReleaseAllResponse>;
-  releaseAll(
-    params: SessionReleaseAllParams | Core.RequestOptions = {},
+    params: SessionReleaseAllParams,
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionReleaseAllResponse> {
-    if (isRequestOptions(params)) {
-      return this.releaseAll({}, params);
-    }
     const { projectId, ...body } = params;
     return this._client.post('/v1/sessions/release', { query: { projectId }, body, ...options });
   }
