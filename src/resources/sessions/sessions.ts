@@ -266,6 +266,25 @@ export interface Session {
     | 'sa-east';
 
   /**
+   * Why the session reached a terminal state. Null while the session is live, or
+   * when the reason is unknown (e.g. sessions created before this was tracked). One
+   * of: user_requested (released via the API/SDK), timeout (hard `timeout` elapsed),
+   * inactivity_timeout (no activity for the configured window), creation_timeout
+   * (never started in time), startup_failed (could not be dispatched),
+   * browser_closed (the browser or agent closed itself — not a crash),
+   * browser_crashed (the browser crashed or its machine became unresponsive).
+   */
+  releaseReason?:
+    | 'user_requested'
+    | 'timeout'
+    | 'inactivity_timeout'
+    | 'creation_timeout'
+    | 'startup_failed'
+    | 'browser_closed'
+    | 'browser_crashed'
+    | null;
+
+  /**
    * Indicates if captcha solving is enabled
    */
   solveCaptcha?: boolean;
@@ -694,6 +713,25 @@ export namespace Sessionslist {
       | 'ap-northeast'
       | 'ap-southeast'
       | 'sa-east';
+
+    /**
+     * Why the session reached a terminal state. Null while the session is live, or
+     * when the reason is unknown (e.g. sessions created before this was tracked). One
+     * of: user_requested (released via the API/SDK), timeout (hard `timeout` elapsed),
+     * inactivity_timeout (no activity for the configured window), creation_timeout
+     * (never started in time), startup_failed (could not be dispatched),
+     * browser_closed (the browser or agent closed itself — not a crash),
+     * browser_crashed (the browser crashed or its machine became unresponsive).
+     */
+    releaseReason?:
+      | 'user_requested'
+      | 'timeout'
+      | 'inactivity_timeout'
+      | 'creation_timeout'
+      | 'startup_failed'
+      | 'browser_closed'
+      | 'browser_crashed'
+      | null;
 
     /**
      * Indicates if captcha solving is enabled
