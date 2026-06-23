@@ -25,6 +25,7 @@ describe('resource profiles', () => {
       dimensions: { height: 0, width: 0 },
       projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       proxyUrl: 'https://example.com',
+      useProxy: 'useProxy',
       userAgent: 'userAgent',
     });
   });
@@ -49,6 +50,7 @@ describe('resource profiles', () => {
       dimensions: { height: 0, width: 0 },
       body_projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
       proxyUrl: 'https://example.com',
+      useProxy: 'useProxy',
       userAgent: 'userAgent',
     });
   });
