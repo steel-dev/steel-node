@@ -163,7 +163,7 @@ describe('resource sessions', () => {
   });
 
   test('release', async () => {
-    const responsePromise = client.sessions.release('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', {});
+    const responsePromise = client.sessions.release('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -173,8 +173,15 @@ describe('resource sessions', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
+  test('release: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessions.release('182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
   test('releaseAll', async () => {
-    const responsePromise = client.sessions.releaseAll({});
+    const responsePromise = client.sessions.releaseAll();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -182,5 +189,22 @@ describe('resource sessions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('releaseAll: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.sessions.releaseAll({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('releaseAll: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessions.releaseAll(
+        { projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 });

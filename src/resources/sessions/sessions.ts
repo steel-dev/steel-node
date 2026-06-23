@@ -102,23 +102,27 @@ export class Sessions extends APIResource {
   /**
    * Releases a specific session by ID.
    */
-  release(
-    id: string,
-    body: SessionReleaseParams,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionReleaseResponse> {
-    return this._client.post(`/v1/sessions/${id}/release`, { body, ...options });
+  release(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionReleaseResponse> {
+    return this._client.post(`/v1/sessions/${id}/release`, options);
   }
 
   /**
    * Releases all active sessions for the current organization.
    */
   releaseAll(
-    params: SessionReleaseAllParams,
+    params?: SessionReleaseAllParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(options?: Core.RequestOptions): Core.APIPromise<SessionReleaseAllResponse>;
+  releaseAll(
+    params: SessionReleaseAllParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<SessionReleaseAllResponse> {
-    const { projectId, ...body } = params;
-    return this._client.post('/v1/sessions/release', { query: { projectId }, body, ...options });
+    if (isRequestOptions(params)) {
+      return this.releaseAll({}, params);
+    }
+    const { projectId } = params;
+    return this._client.post('/v1/sessions/release', { query: { projectId }, ...options });
   }
 }
 
@@ -2911,8 +2915,6 @@ export interface SessionEventsParams {
   pointer?: string;
 }
 
-export interface SessionReleaseParams {}
-
 export interface SessionReleaseAllParams {
   /**
    * Release sessions only within this project
@@ -2939,7 +2941,6 @@ export declare namespace Sessions {
     type SessionListParams as SessionListParams,
     type SessionComputerParams as SessionComputerParams,
     type SessionEventsParams as SessionEventsParams,
-    type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 

@@ -49,7 +49,6 @@ export {
   type SessionListParams,
   type SessionComputerParams,
   type SessionEventsParams,
-  type SessionReleaseParams,
   type SessionReleaseAllParams,
 } from './sessions/sessions';
 export {
