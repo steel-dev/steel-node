@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../../resource';
+import { isRequestOptions } from '../../core';
 import * as Core from '../../core';
 
 export class Captchas extends APIResource {
@@ -11,9 +12,18 @@ export class Captchas extends APIResource {
    */
   solve(
     sessionId: string,
-    body: CaptchaSolveParams,
+    body?: CaptchaSolveParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CaptchaSolveResponse>;
+  solve(sessionId: string, options?: Core.RequestOptions): Core.APIPromise<CaptchaSolveResponse>;
+  solve(
+    sessionId: string,
+    body: CaptchaSolveParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CaptchaSolveResponse> {
+    if (isRequestOptions(body)) {
+      return this.solve(sessionId, {}, body);
+    }
     return this._client.post(`/v1/sessions/${sessionId}/captchas/solve`, { body, ...options });
   }
 

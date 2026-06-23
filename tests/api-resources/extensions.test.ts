@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import Steel from 'steel-sdk';
+import Steel, { toFile } from 'steel-sdk';
 import { Response } from 'node-fetch';
 
 const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
 
 describe('resource extensions', () => {
   test('update', async () => {
-    const responsePromise = client.extensions.update('extensionId', {});
+    const responsePromise = client.extensions.update('extensionId');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -15,6 +15,24 @@ describe('resource extensions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.extensions.update('extensionId', { path: '/_stainless_unknown_path' }),
+    ).rejects.toThrow(Steel.NotFoundError);
+  });
+
+  test('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.extensions.update(
+        'extensionId',
+        { file: await toFile(Buffer.from('Example data'), 'README.md'), url: 'https://example.com' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('list', async () => {
@@ -90,7 +108,7 @@ describe('resource extensions', () => {
   });
 
   test('upload', async () => {
-    const responsePromise = client.extensions.upload({});
+    const responsePromise = client.extensions.upload();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -98,5 +116,22 @@ describe('resource extensions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('upload: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.extensions.upload({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('upload: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.extensions.upload(
+        { file: await toFile(Buffer.from('Example data'), 'README.md'), url: 'https://example.com' },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 });

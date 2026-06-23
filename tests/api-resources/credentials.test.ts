@@ -28,7 +28,7 @@ describe('resource credentials', () => {
   });
 
   test('update', async () => {
-    const responsePromise = client.credentials.update({});
+    const responsePromise = client.credentials.update();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -36,6 +36,29 @@ describe('resource credentials', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('update: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.credentials.update({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('update: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.credentials.update(
+        {
+          label: 'label',
+          namespace: 'namespace',
+          origin: 'origin',
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          value: { foo: 'string' },
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('list', async () => {
