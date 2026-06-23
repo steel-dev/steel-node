@@ -1060,7 +1060,12 @@ export interface SessionCreateParams {
   /**
    * Simple boolean to enable/disable Steel proxies
    */
-  useProxy?: boolean | SessionCreateParams.Geolocation | SessionCreateParams.Server | unknown;
+  useProxy?:
+    | boolean
+    | SessionCreateParams.Geolocation
+    | SessionCreateParams.Server
+    | SessionCreateParams.UnionMember3
+    | unknown;
 
   /**
    * Custom user agent string for the browser session
@@ -2688,6 +2693,18 @@ export namespace SessionCreateParams {
      * Proxy server URL
      */
     server: string;
+  }
+
+  export interface UnionMember3 {
+    /**
+     * Use Steel fixed IP proxies
+     */
+    type: 'fixed';
+
+    /**
+     * Specific fixed IP identifier. Omit to use any active fixed IP owned by the org.
+     */
+    id?: string;
   }
 }
 

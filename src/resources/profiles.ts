@@ -1555,6 +1555,12 @@ export interface ProfileCreateParams {
   proxyUrl?: string;
 
   /**
+   * JSON-encoded proxy configuration associated with the profile. For fixed IPs,
+   * send {"type":"fixed","id":"fixed:<id>"}.
+   */
+  useProxy?: string;
+
+  /**
    * The user agent associated with the profile
    */
   userAgent?: string;
@@ -1596,6 +1602,12 @@ export interface ProfileUpdateParams {
    * Body param: The proxy associated with the profile
    */
   proxyUrl?: string;
+
+  /**
+   * Body param: JSON-encoded proxy configuration associated with the profile. For
+   * fixed IPs, send {"type":"fixed","id":"fixed:<id>"}.
+   */
+  useProxy?: string;
 
   /**
    * Body param: The user agent associated with the profile
