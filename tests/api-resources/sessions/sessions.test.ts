@@ -7,7 +7,7 @@ const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://
 
 describe('resource sessions', () => {
   test('create', async () => {
-    const responsePromise = client.sessions.create({});
+    const responsePromise = client.sessions.create();
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -15,6 +15,112 @@ describe('resource sessions', () => {
     const dataAndResponse = await responsePromise.withResponse();
     expect(dataAndResponse.data).toBe(response);
     expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('create: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.sessions.create({ path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('create: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.sessions.create(
+        {
+          blockAds: true,
+          caCertificates: ['string'],
+          concurrency: -9007199254740991,
+          credentials: {
+            autoSubmit: true,
+            blurFields: true,
+            exactOrigin: true,
+          },
+          debugConfig: { interactive: true, systemCursor: true },
+          deviceConfig: { device: 'desktop' },
+          dimensions: { height: -9007199254740991, width: -9007199254740991 },
+          experimentalFeatures: ['string'],
+          extensionIds: ['string'],
+          fullscreen: true,
+          headless: true,
+          inactivityTimeout: 1,
+          isSelenium: true,
+          namespace: 'namespace',
+          optimizeBandwidth: true,
+          persistProfile: true,
+          profileId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          projectId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          proxyUrl: 'https://example.com',
+          region: {},
+          sessionContext: {
+            cookies: [
+              {
+                name: 'name',
+                value: 'value',
+                domain: 'domain',
+                expires: 0,
+                httpOnly: true,
+                partitionKey: { hasCrossSiteAncestor: true, topLevelSite: 'topLevelSite' },
+                path: 'path',
+                priority: 'Low',
+                sameParty: true,
+                sameSite: 'Strict',
+                secure: true,
+                session: true,
+                size: 0,
+                sourcePort: 0,
+                sourceScheme: 'Unset',
+                url: 'url',
+              },
+            ],
+            indexedDB: {
+              foo: [
+                {
+                  id: 0,
+                  data: [
+                    {
+                      id: 0,
+                      name: 'name',
+                      records: [
+                        {
+                          key: {},
+                          value: {},
+                          blobFiles: [
+                            {
+                              blobNumber: 0,
+                              mimeType: 'mimeType',
+                              size: 0,
+                              filename: 'filename',
+                              lastModified: '2019-12-27T18:11:19.117Z',
+                              path: 'path',
+                            },
+                          ],
+                        },
+                      ],
+                    },
+                  ],
+                  name: 'name',
+                },
+              ],
+            },
+            localStorage: { foo: { foo: 'string' } },
+            sessionStorage: { foo: { foo: 'string' } },
+          },
+          sessionId: '182bd5e5-6e1a-4fe4-a799-aa6d9a6ab26e',
+          solveCaptcha: true,
+          stealthConfig: {
+            autoCaptchaSolving: true,
+            humanizeInteractions: true,
+            skipFingerprintInjection: true,
+          },
+          timeout: -9007199254740991,
+          useProxy: true,
+          userAgent: 'userAgent',
+        },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(Steel.NotFoundError);
   });
 
   test('retrieve', async () => {

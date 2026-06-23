@@ -19,9 +19,17 @@ export class Credentials extends APIResource {
    * Encrypts and updates credentials for an origin
    */
   update(
-    body: CredentialUpdateParams,
+    body?: CredentialUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<CredentialUpdateResponse>;
+  update(options?: Core.RequestOptions): Core.APIPromise<CredentialUpdateResponse>;
+  update(
+    body: CredentialUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<CredentialUpdateResponse> {
+    if (isRequestOptions(body)) {
+      return this.update({}, body);
+    }
     return this._client.put('/v1/credentials', { body, ...options });
   }
 

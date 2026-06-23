@@ -1,6 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../resource';
+import { isRequestOptions } from '../core';
 import * as Core from '../core';
 
 export class Extensions extends APIResource {
@@ -10,9 +11,18 @@ export class Extensions extends APIResource {
    */
   update(
     extensionId: string,
-    body: ExtensionUpdateParams,
+    body?: ExtensionUpdateParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUpdateResponse>;
+  update(extensionId: string, options?: Core.RequestOptions): Core.APIPromise<ExtensionUpdateResponse>;
+  update(
+    extensionId: string,
+    body: ExtensionUpdateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ExtensionUpdateResponse> {
+    if (isRequestOptions(body)) {
+      return this.update(extensionId, {}, body);
+    }
     return this._client.put(
       `/v1/extensions/${extensionId}`,
       Core.multipartFormRequestOptions({ body, ...options }),
@@ -52,9 +62,17 @@ export class Extensions extends APIResource {
    * organization
    */
   upload(
-    body: ExtensionUploadParams,
+    body?: ExtensionUploadParams,
+    options?: Core.RequestOptions,
+  ): Core.APIPromise<ExtensionUploadResponse>;
+  upload(options?: Core.RequestOptions): Core.APIPromise<ExtensionUploadResponse>;
+  upload(
+    body: ExtensionUploadParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<ExtensionUploadResponse> {
+    if (isRequestOptions(body)) {
+      return this.upload({}, body);
+    }
     return this._client.post('/v1/extensions', Core.multipartFormRequestOptions({ body, ...options }));
   }
 }
