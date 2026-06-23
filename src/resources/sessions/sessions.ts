@@ -107,12 +107,8 @@ export class Sessions extends APIResource {
   /**
    * Releases a specific session by ID.
    */
-  release(
-    id: string,
-    body?: SessionReleaseParams | null | undefined,
-    options?: Core.RequestOptions,
-  ): Core.APIPromise<SessionReleaseResponse> {
-    return this._client.post(`/v1/sessions/${id}/release`, { body, ...options });
+  release(id: string, options?: Core.RequestOptions): Core.APIPromise<SessionReleaseResponse> {
+    return this._client.post(`/v1/sessions/${id}/release`, options);
   }
 
   /**
@@ -130,8 +126,8 @@ export class Sessions extends APIResource {
     if (isRequestOptions(params)) {
       return this.releaseAll({}, params);
     }
-    const { projectId, ...body } = params;
-    return this._client.post('/v1/sessions/release', { query: { projectId }, body, ...options });
+    const { projectId } = params;
+    return this._client.post('/v1/sessions/release', { query: { projectId }, ...options });
   }
 }
 
@@ -277,6 +273,25 @@ export interface Session {
     | 'ap-northeast'
     | 'ap-southeast'
     | 'sa-east';
+
+  /**
+   * Why the session reached a terminal state. Null while the session is live, or
+   * when the reason is unknown (e.g. sessions created before this was tracked). One
+   * of: user_requested (released via the API/SDK), timeout (hard `timeout` elapsed),
+   * inactivity_timeout (no activity for the configured window), creation_timeout
+   * (never started in time), startup_failed (could not be dispatched),
+   * browser_closed (the browser or agent closed itself — not a crash),
+   * browser_crashed (the browser crashed or its machine became unresponsive).
+   */
+  releaseReason?:
+    | 'user_requested'
+    | 'timeout'
+    | 'inactivity_timeout'
+    | 'creation_timeout'
+    | 'startup_failed'
+    | 'browser_closed'
+    | 'browser_crashed'
+    | null;
 
   /**
    * Indicates if captcha solving is enabled
@@ -709,6 +724,25 @@ export namespace Sessionslist {
       | 'sa-east';
 
     /**
+     * Why the session reached a terminal state. Null while the session is live, or
+     * when the reason is unknown (e.g. sessions created before this was tracked). One
+     * of: user_requested (released via the API/SDK), timeout (hard `timeout` elapsed),
+     * inactivity_timeout (no activity for the configured window), creation_timeout
+     * (never started in time), startup_failed (could not be dispatched),
+     * browser_closed (the browser or agent closed itself — not a crash),
+     * browser_crashed (the browser crashed or its machine became unresponsive).
+     */
+    releaseReason?:
+      | 'user_requested'
+      | 'timeout'
+      | 'inactivity_timeout'
+      | 'creation_timeout'
+      | 'startup_failed'
+      | 'browser_closed'
+      | 'browser_crashed'
+      | null;
+
+    /**
      * Indicates if captcha solving is enabled
      */
     solveCaptcha?: boolean;
@@ -1035,7 +1069,12 @@ export interface SessionCreateParams {
   /**
    * Simple boolean to enable/disable Steel proxies
    */
-  useProxy?: boolean | SessionCreateParams.Geolocation | SessionCreateParams.Server | unknown;
+  useProxy?:
+    | boolean
+    | SessionCreateParams.Geolocation
+    | SessionCreateParams.Server
+    | SessionCreateParams.UnionMember3
+    | unknown;
 
   /**
    * Custom user agent string for the browser session
@@ -2664,6 +2703,18 @@ export namespace SessionCreateParams {
      */
     server: string;
   }
+
+  export interface UnionMember3 {
+    /**
+     * Use Steel fixed IP proxies
+     */
+    type: 'fixed';
+
+    /**
+     * Specific fixed IP identifier. Omit to use any active fixed IP owned by the org.
+     */
+    id?: string;
+  }
 }
 
 export interface SessionListParams extends SessionsCursorParams {
@@ -2869,8 +2920,6 @@ export interface SessionEventsParams {
   pointer?: string;
 }
 
-export interface SessionReleaseParams {}
-
 export interface SessionReleaseAllParams {
   /**
    * Release sessions only within this project
@@ -2897,7 +2946,6 @@ export declare namespace Sessions {
     type SessionListParams as SessionListParams,
     type SessionComputerParams as SessionComputerParams,
     type SessionEventsParams as SessionEventsParams,
-    type SessionReleaseParams as SessionReleaseParams,
     type SessionReleaseAllParams as SessionReleaseAllParams,
   };
 
