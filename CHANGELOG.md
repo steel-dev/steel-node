@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.21.0 (2026-09-04)
+
+Full Changelog: [v0.20.0...v0.21.0](https://github.com/steel-dev/steel-node/compare/v0.20.0...v0.21.0)
+
+### Features
+
+* **api:** api update ([ecf3cd0](https://github.com/steel-dev/steel-node/commit/ecf3cd0e0e1e5c531380eb27afb84380fc7f78e2))
+* **stlc:** configurable CI runner and private-production-repo support in workflow templates ([407daf2](https://github.com/steel-dev/steel-node/commit/407daf26f0b38ff0364fd660bb18c67050f8659e))
+
+
+### Chores
+
+* **internal:** allow the mock server port to be set with STAINLESS_MOCK_PORT ([e59b918](https://github.com/steel-dev/steel-node/commit/e59b918b35c854248009dc0761592d549b5e3fd0))
+
 ## 0.20.0 (2026-06-23)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/steel-dev/steel-node/compare/v0.19.0...v0.20.0)
