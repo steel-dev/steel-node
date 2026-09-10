@@ -1,6 +1,23 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  Checkpoints,
+  type Checkpoint,
+  type CheckpointList,
+  type CheckpointRestoreParams,
+} from './checkpoints';
+export {
+  Computers,
+  type Computer,
+  type ComputerList,
+  type ComputerQuota,
+  type ComputerTransitions,
+  type ExecResult,
+  type ComputerCreateParams,
+  type ComputerCreateCheckpointParams,
+  type ComputerExecParams,
+} from './computers';
+export {
   Credentials,
   type CredentialCreateResponse,
   type CredentialUpdateResponse,

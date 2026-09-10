@@ -127,3 +127,40 @@ Methods:
 - <code title="patch /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">update</a>(id, { ...params }) -> ProfileUpdateResponse</code>
 - <code title="get /v1/profiles">client.profiles.<a href="./src/resources/profiles.ts">list</a>({ ...params }) -> ProfileListResponse</code>
 - <code title="get /v1/profiles/{id}">client.profiles.<a href="./src/resources/profiles.ts">get</a>(id, { ...params }) -> ProfileGetResponse</code>
+
+# Computers
+
+Types:
+
+- <code><a href="./src/resources/computers.ts">Computer</a></code>
+- <code><a href="./src/resources/computers.ts">ComputerList</a></code>
+- <code><a href="./src/resources/computers.ts">ComputerQuota</a></code>
+- <code><a href="./src/resources/computers.ts">ComputerTransitions</a></code>
+- <code><a href="./src/resources/computers.ts">ExecResult</a></code>
+
+Methods:
+
+- <code title="post /v1/computers">client.computers.<a href="./src/resources/computers.ts">create</a>({ ...params }) -> Computer</code>
+- <code title="get /v1/computers/{id}">client.computers.<a href="./src/resources/computers.ts">retrieve</a>(id) -> Computer</code>
+- <code title="get /v1/computers">client.computers.<a href="./src/resources/computers.ts">list</a>() -> ComputerList</code>
+- <code title="delete /v1/computers/{id}">client.computers.<a href="./src/resources/computers.ts">delete</a>(id) -> Computer</code>
+- <code title="post /v1/computers/{id}/checkpoints">client.computers.<a href="./src/resources/computers.ts">createCheckpoint</a>(id, { ...params }) -> Checkpoint</code>
+- <code title="post /v1/computers/{id}/exec">client.computers.<a href="./src/resources/computers.ts">exec</a>(id, { ...params }) -> ExecResult</code>
+- <code title="post /v1/computers/{id}/pause">client.computers.<a href="./src/resources/computers.ts">pause</a>(id) -> Computer</code>
+- <code title="get /v1/computers/quota">client.computers.<a href="./src/resources/computers.ts">quota</a>() -> ComputerQuota</code>
+- <code title="post /v1/computers/{id}/resume">client.computers.<a href="./src/resources/computers.ts">resume</a>(id) -> Computer</code>
+- <code title="get /v1/computers/{id}/transitions">client.computers.<a href="./src/resources/computers.ts">transitions</a>(id) -> ComputerTransitions</code>
+
+# Checkpoints
+
+Types:
+
+- <code><a href="./src/resources/checkpoints.ts">Checkpoint</a></code>
+- <code><a href="./src/resources/checkpoints.ts">CheckpointList</a></code>
+
+Methods:
+
+- <code title="get /v1/checkpoints/{id}">client.checkpoints.<a href="./src/resources/checkpoints.ts">retrieve</a>(id) -> Checkpoint</code>
+- <code title="get /v1/checkpoints">client.checkpoints.<a href="./src/resources/checkpoints.ts">list</a>() -> CheckpointList</code>
+- <code title="delete /v1/checkpoints/{id}">client.checkpoints.<a href="./src/resources/checkpoints.ts">delete</a>(id) -> Checkpoint</code>
+- <code title="post /v1/checkpoints/{id}/computers">client.checkpoints.<a href="./src/resources/checkpoints.ts">restore</a>(id, { ...params }) -> Computer</code>
