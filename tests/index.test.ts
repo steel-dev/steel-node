@@ -23,6 +23,7 @@ describe('instantiate client', () => {
     const client = new Steel({
       baseURL: 'http://localhost:5000/',
       defaultHeaders: { 'X-My-Default-Header': '2' },
+      steelAPIKey: 'My Steel API Key',
     });
 
     test('they are used in the request', async () => {
@@ -54,6 +55,7 @@ describe('instantiate client', () => {
       const client = new Steel({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo' },
+        steelAPIKey: 'My Steel API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo');
     });
@@ -62,6 +64,7 @@ describe('instantiate client', () => {
       const client = new Steel({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { apiVersion: 'foo', hello: 'world' },
+        steelAPIKey: 'My Steel API Key',
       });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/foo?apiVersion=foo&hello=world');
     });
@@ -70,6 +73,7 @@ describe('instantiate client', () => {
       const client = new Steel({
         baseURL: 'http://localhost:5000/',
         defaultQuery: { hello: 'world' },
+        steelAPIKey: 'My Steel API Key',
       });
       expect(client.buildURL('/foo', { hello: undefined })).toEqual('http://localhost:5000/foo');
     });
@@ -78,6 +82,7 @@ describe('instantiate client', () => {
   test('custom fetch', async () => {
     const client = new Steel({
       baseURL: 'http://localhost:5000/',
+      steelAPIKey: 'My Steel API Key',
       fetch: (url) => {
         return Promise.resolve(
           new Response(JSON.stringify({ url, custom: true }), {
@@ -93,12 +98,17 @@ describe('instantiate client', () => {
 
   test('explicit global fetch', async () => {
     // make sure the global fetch type is assignable to our Fetch type
-    const client = new Steel({ baseURL: 'http://localhost:5000/', fetch: defaultFetch });
+    const client = new Steel({
+      baseURL: 'http://localhost:5000/',
+      steelAPIKey: 'My Steel API Key',
+      fetch: defaultFetch,
+    });
   });
 
   test('custom signal', async () => {
     const client = new Steel({
       baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+      steelAPIKey: 'My Steel API Key',
       fetch: (...args) => {
         return new Promise((resolve, reject) =>
           setTimeout(
@@ -128,7 +138,11 @@ describe('instantiate client', () => {
       return new Response(JSON.stringify({}), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Steel({ baseURL: 'http://localhost:5000/', fetch: testFetch });
+    const client = new Steel({
+      baseURL: 'http://localhost:5000/',
+      steelAPIKey: 'My Steel API Key',
+      fetch: testFetch,
+    });
 
     await client.patch('/foo');
     expect(capturedRequest?.method).toEqual('PATCH');
@@ -136,12 +150,18 @@ describe('instantiate client', () => {
 
   describe('baseUrl', () => {
     test('trailing slash', () => {
-      const client = new Steel({ baseURL: 'http://localhost:5000/custom/path/' });
+      const client = new Steel({
+        baseURL: 'http://localhost:5000/custom/path/',
+        steelAPIKey: 'My Steel API Key',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
     test('no trailing slash', () => {
-      const client = new Steel({ baseURL: 'http://localhost:5000/custom/path' });
+      const client = new Steel({
+        baseURL: 'http://localhost:5000/custom/path',
+        steelAPIKey: 'My Steel API Key',
+      });
       expect(client.buildURL('/foo', null)).toEqual('http://localhost:5000/custom/path/foo');
     });
 
@@ -150,37 +170,37 @@ describe('instantiate client', () => {
     });
 
     test('explicit option', () => {
-      const client = new Steel({ baseURL: 'https://example.com' });
+      const client = new Steel({ baseURL: 'https://example.com', steelAPIKey: 'My Steel API Key' });
       expect(client.baseURL).toEqual('https://example.com');
     });
 
     test('env variable', () => {
       process.env['STEEL_BASE_URL'] = 'https://example.com/from_env';
-      const client = new Steel({});
+      const client = new Steel({ steelAPIKey: 'My Steel API Key' });
       expect(client.baseURL).toEqual('https://example.com/from_env');
     });
 
     test('empty env variable', () => {
       process.env['STEEL_BASE_URL'] = ''; // empty
-      const client = new Steel({});
+      const client = new Steel({ steelAPIKey: 'My Steel API Key' });
       expect(client.baseURL).toEqual('https://api.steel.dev');
     });
 
     test('blank env variable', () => {
       process.env['STEEL_BASE_URL'] = '  '; // blank
-      const client = new Steel({});
+      const client = new Steel({ steelAPIKey: 'My Steel API Key' });
       expect(client.baseURL).toEqual('https://api.steel.dev');
     });
 
     test('in request options', () => {
-      const client = new Steel({});
+      const client = new Steel({ steelAPIKey: 'My Steel API Key' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/option/foo',
       );
     });
 
     test('in request options overridden by client options', () => {
-      const client = new Steel({ baseURL: 'http://localhost:5000/client' });
+      const client = new Steel({ steelAPIKey: 'My Steel API Key', baseURL: 'http://localhost:5000/client' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/client/foo',
       );
@@ -188,7 +208,7 @@ describe('instantiate client', () => {
 
     test('in request options overridden by env variable', () => {
       process.env['STEEL_BASE_URL'] = 'http://localhost:5000/env';
-      const client = new Steel({});
+      const client = new Steel({ steelAPIKey: 'My Steel API Key' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(
         'http://localhost:5000/env/foo',
       );
@@ -196,17 +216,31 @@ describe('instantiate client', () => {
   });
 
   test('maxRetries option is correctly set', () => {
-    const client = new Steel({ maxRetries: 4 });
+    const client = new Steel({ maxRetries: 4, steelAPIKey: 'My Steel API Key' });
     expect(client.maxRetries).toEqual(4);
 
     // default
-    const client2 = new Steel({});
+    const client2 = new Steel({ steelAPIKey: 'My Steel API Key' });
     expect(client2.maxRetries).toEqual(2);
+  });
+
+  test('with environment variable arguments', () => {
+    // set options via env var
+    process.env['STEEL_API_KEY'] = 'My Steel API Key';
+    const client = new Steel();
+    expect(client.steelAPIKey).toBe('My Steel API Key');
+  });
+
+  test('with overridden environment variable arguments', () => {
+    // set options via env var
+    process.env['STEEL_API_KEY'] = 'another My Steel API Key';
+    const client = new Steel({ steelAPIKey: 'My Steel API Key' });
+    expect(client.steelAPIKey).toBe('My Steel API Key');
   });
 });
 
 describe('request building', () => {
-  const client = new Steel({});
+  const client = new Steel({ steelAPIKey: 'My Steel API Key' });
 
   describe('Content-Length', () => {
     test('handles multi-byte characters', async () => {
@@ -248,7 +282,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Steel({ timeout: 10, fetch: testFetch });
+    const client = new Steel({
+      steelAPIKey: 'My Steel API Key',
+      timeout: 10,
+      fetch: testFetch,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -278,7 +316,11 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Steel({ fetch: testFetch, maxRetries: 4 });
+    const client = new Steel({
+      steelAPIKey: 'My Steel API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
 
@@ -302,7 +344,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Steel({ fetch: testFetch, maxRetries: 4 });
+    const client = new Steel({
+      steelAPIKey: 'My Steel API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -332,6 +378,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
     const client = new Steel({
+      steelAPIKey: 'My Steel API Key',
       fetch: testFetch,
       maxRetries: 4,
       defaultHeaders: { 'X-Stainless-Retry-Count': null },
@@ -363,7 +410,11 @@ describe('retries', () => {
       capturedRequest = init;
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
-    const client = new Steel({ fetch: testFetch, maxRetries: 4 });
+    const client = new Steel({
+      steelAPIKey: 'My Steel API Key',
+      fetch: testFetch,
+      maxRetries: 4,
+    });
 
     expect(
       await client.request({
@@ -390,7 +441,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Steel({ fetch: testFetch });
+    const client = new Steel({ steelAPIKey: 'My Steel API Key', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);
@@ -417,7 +468,7 @@ describe('retries', () => {
       return new Response(JSON.stringify({ a: 1 }), { headers: { 'Content-Type': 'application/json' } });
     };
 
-    const client = new Steel({ fetch: testFetch });
+    const client = new Steel({ steelAPIKey: 'My Steel API Key', fetch: testFetch });
 
     expect(await client.request({ path: '/foo', method: 'get' })).toEqual({ a: 1 });
     expect(count).toEqual(2);

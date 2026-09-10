@@ -29,6 +29,9 @@ export class Sessions extends APIResource {
     body: SessionCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
   ): Core.APIPromise<Session> {
+    if (isRequestOptions(body)) {
+      return this.create({}, body);
+    }
     return this._client.post('/v1/sessions', { body, ...options });
   }
 
@@ -142,6 +145,11 @@ export interface Session {
    * Unique identifier for the session
    */
   id: string;
+
+  /**
+   * Browser mode used for this session.
+   */
+  browserMode: 'stealth' | 'standard' | 'unknown';
 
   /**
    * Timestamp when the session started
@@ -258,21 +266,7 @@ export interface Session {
   /**
    * The region where the session was created.
    */
-  region?:
-    | 'lax'
-    | 'ord'
-    | 'iad'
-    | 'scl'
-    | 'fra'
-    | 'nrt'
-    | 'us-east'
-    | 'us-west'
-    | 'us-central'
-    | 'eu-west'
-    | 'eu-central'
-    | 'ap-northeast'
-    | 'ap-southeast'
-    | 'sa-east';
+  region?: string;
 
   /**
    * Why the session reached a terminal state. Null while the session is live, or
@@ -593,6 +587,11 @@ export namespace Sessionslist {
     id: string;
 
     /**
+     * Browser mode used for this session.
+     */
+    browserMode: 'stealth' | 'standard' | 'unknown';
+
+    /**
      * Timestamp when the session started
      */
     createdAt: string;
@@ -707,21 +706,7 @@ export namespace Sessionslist {
     /**
      * The region where the session was created.
      */
-    region?:
-      | 'lax'
-      | 'ord'
-      | 'iad'
-      | 'scl'
-      | 'fra'
-      | 'nrt'
-      | 'us-east'
-      | 'us-west'
-      | 'us-central'
-      | 'eu-west'
-      | 'eu-central'
-      | 'ap-northeast'
-      | 'ap-southeast'
-      | 'sa-east';
+    region?: string;
 
     /**
      * Why the session reached a terminal state. Null while the session is live, or

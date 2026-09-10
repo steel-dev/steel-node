@@ -3,7 +3,10 @@
 import Steel, { toFile } from 'steel-sdk';
 import { Response } from 'node-fetch';
 
-const client = new Steel({ baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010' });
+const client = new Steel({
+  steelAPIKey: 'My Steel API Key',
+  baseURL: process.env['TEST_API_BASE_URL'] ?? 'http://127.0.0.1:4010',
+});
 
 describe('resource profiles', () => {
   test('create: only required params', async () => {

@@ -6,7 +6,7 @@ This library provides convenient access to the Steel REST API from server-side T
 
 The REST API documentation can be found on [docs.steel.dev](https://docs.steel.dev). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainlessapi.com/).
+It is generated with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -22,7 +22,9 @@ The full API of this library can be found in [api.md](api.md).
 ```js
 import Steel from 'steel-sdk';
 
-const client = new Steel();
+const client = new Steel({
+  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+});
 
 const session = await client.sessions.create({ timeout: 20000, useProxy: true });
 
@@ -37,7 +39,9 @@ This library includes TypeScript definitions for all request params and response
 ```ts
 import Steel from 'steel-sdk';
 
-const client = new Steel();
+const client = new Steel({
+  steelAPIKey: process.env['STEEL_API_KEY'], // This is the default and can be omitted
+});
 
 const session: Steel.Session = await client.sessions.create();
 ```

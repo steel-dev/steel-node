@@ -16,6 +16,18 @@ import {
   ScreenshotParams,
   ScreenshotResponse,
 } from './resources/top-level';
+import { Checkpoint, CheckpointList, CheckpointRestoreParams, Checkpoints } from './resources/checkpoints';
+import {
+  Computer,
+  ComputerCreateCheckpointParams,
+  ComputerCreateParams,
+  ComputerExecParams,
+  ComputerList,
+  ComputerQuota,
+  ComputerTransitions,
+  Computers,
+  ExecResult,
+} from './resources/computers';
 import {
   CredentialCreateParams,
   CredentialCreateResponse,
@@ -195,6 +207,8 @@ export class Steel extends Core.APIClient {
   sessions: API.Sessions = new API.Sessions(this);
   extensions: API.Extensions = new API.Extensions(this);
   profiles: API.Profiles = new API.Profiles(this);
+  computers: API.Computers = new API.Computers(this);
+  checkpoints: API.Checkpoints = new API.Checkpoints(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -275,6 +289,8 @@ Steel.Sessions = Sessions;
 Steel.SessionslistSessionsSessionsCursor = SessionslistSessionsSessionsCursor;
 Steel.Extensions = Extensions;
 Steel.Profiles = Profiles;
+Steel.Computers = Computers;
+Steel.Checkpoints = Checkpoints;
 
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
@@ -353,6 +369,25 @@ export declare namespace Steel {
     type ProfileUpdateParams as ProfileUpdateParams,
     type ProfileListParams as ProfileListParams,
     type ProfileGetParams as ProfileGetParams,
+  };
+
+  export {
+    Computers as Computers,
+    type Computer as Computer,
+    type ComputerList as ComputerList,
+    type ComputerQuota as ComputerQuota,
+    type ComputerTransitions as ComputerTransitions,
+    type ExecResult as ExecResult,
+    type ComputerCreateParams as ComputerCreateParams,
+    type ComputerCreateCheckpointParams as ComputerCreateCheckpointParams,
+    type ComputerExecParams as ComputerExecParams,
+  };
+
+  export {
+    Checkpoints as Checkpoints,
+    type Checkpoint as Checkpoint,
+    type CheckpointList as CheckpointList,
+    type CheckpointRestoreParams as CheckpointRestoreParams,
   };
 }
 
