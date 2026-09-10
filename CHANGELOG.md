@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.21.0](https://github.com/steel-dev/steel-node/compare/v0.20.0...v0.21.0) (2026-09-10)
+
+
+### Features
+
+* **api:** drop region and make the computer template optional ([24cb125](https://github.com/steel-dev/steel-node/commit/24cb12588f5a87dc80c1c208350ae47210cb96a8))
+* restore custom code and changelog ([33e8535](https://github.com/steel-dev/steel-node/commit/33e8535e44a6f0261840d6477ffd985336b14cea))
+
+
+### Bug Fixes
+
+* restore the yarn lockfile ([68b9b1b](https://github.com/steel-dev/steel-node/commit/68b9b1bc585d25afe44fc0d3179cc3c8e769b14c))
+
+
+### Chores
+
+* restore the changelog ([181486b](https://github.com/steel-dev/steel-node/commit/181486b55c11cb3d57261a91c159643047ebf94c))
+
 ## 0.20.0 (2026-06-23)
 
 Full Changelog: [v0.19.0...v0.20.0](https://github.com/steel-dev/steel-node/compare/v0.19.0...v0.20.0)
