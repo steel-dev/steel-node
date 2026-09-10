@@ -6,35 +6,35 @@ import * as CheckpointsAPI from './checkpoints';
 
 export class Computers extends APIResource {
   /**
-   * Create a computer
+   * Declare a new computer; it boots asynchronously.
    */
   create(body: ComputerCreateParams, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.post('/v1/computers', { body, ...options });
   }
 
   /**
-   * Get a computer
+   * Retrieve a computer by its ID.
    */
   retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.get(`/v1/computers/${id}`, options);
   }
 
   /**
-   * List computers
+   * List the organization's computers, newest first; deleted ones are omitted.
    */
   list(options?: Core.RequestOptions): Core.APIPromise<ComputerList> {
     return this._client.get('/v1/computers', options);
   }
 
   /**
-   * Delete a computer
+   * Request a delete; already deleting or deleted is a success.
    */
   delete(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.delete(`/v1/computers/${id}`, options);
   }
 
   /**
-   * Create a checkpoint
+   * Save the computer's current state as a checkpoint; it uploads asynchronously.
    */
   createCheckpoint(
     id: string,
@@ -58,28 +58,28 @@ export class Computers extends APIResource {
   }
 
   /**
-   * Pause a computer
+   * Request a pause; already pausing or paused is a success.
    */
   pause(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.post(`/v1/computers/${id}/pause`, options);
   }
 
   /**
-   * Get computer quota
+   * The organization's computer limits and current usage.
    */
   quota(options?: Core.RequestOptions): Core.APIPromise<ComputerQuota> {
     return this._client.get('/v1/computers/quota', options);
   }
 
   /**
-   * Resume a computer
+   * Request a resume; already waking or running is a success.
    */
   resume(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.post(`/v1/computers/${id}/resume`, options);
   }
 
   /**
-   * List computer transitions
+   * The computer's status ledger, newest first.
    */
   transitions(id: string, options?: Core.RequestOptions): Core.APIPromise<ComputerTransitions> {
     return this._client.get(`/v1/computers/${id}/transitions`, options);
