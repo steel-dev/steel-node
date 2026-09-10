@@ -6,28 +6,28 @@ import * as ComputersAPI from './computers';
 
 export class Checkpoints extends APIResource {
   /**
-   * Get a checkpoint
+   * Retrieve a checkpoint by its ID.
    */
   retrieve(id: string, options?: Core.RequestOptions): Core.APIPromise<Checkpoint> {
     return this._client.get(`/v1/checkpoints/${id}`, options);
   }
 
   /**
-   * List checkpoints
+   * List the organization's checkpoints, newest first; deleted ones are omitted.
    */
   list(options?: Core.RequestOptions): Core.APIPromise<CheckpointList> {
     return this._client.get('/v1/checkpoints', options);
   }
 
   /**
-   * Delete a checkpoint
+   * Request a delete; already deleting or deleted is a success.
    */
   delete(id: string, options?: Core.RequestOptions): Core.APIPromise<Checkpoint> {
     return this._client.delete(`/v1/checkpoints/${id}`, options);
   }
 
   /**
-   * Create a computer from a checkpoint
+   * Start a new computer from a ready checkpoint; it restores asynchronously.
    */
   restore(
     id: string,
