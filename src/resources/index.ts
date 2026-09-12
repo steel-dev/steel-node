@@ -29,6 +29,16 @@ export {
   type CredentialDeleteParams,
 } from './credentials';
 export {
+  Environments,
+  type Environment,
+  type EnvironmentList,
+  type EnvironmentCreateParams,
+  type EnvironmentRetrieveParams,
+  type EnvironmentUpdateParams,
+  type EnvironmentListParams,
+  type EnvironmentDeleteParams,
+} from './environments';
+export {
   Extensions,
   type ExtensionUpdateResponse,
   type ExtensionListResponse,
@@ -51,6 +61,16 @@ export {
   type ProfileListParams,
   type ProfileGetParams,
 } from './profiles';
+export {
+  Secrets,
+  type Secret,
+  type SecretList,
+  type SecretCreateParams,
+  type SecretRetrieveParams,
+  type SecretUpdateParams,
+  type SecretListParams,
+  type SecretDeleteParams,
+} from './secrets';
 export {
   SessionslistSessionsSessionsCursor,
   Sessions,

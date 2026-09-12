@@ -40,6 +40,16 @@ import {
   Credentials,
 } from './resources/credentials';
 import {
+  Environment,
+  EnvironmentCreateParams,
+  EnvironmentDeleteParams,
+  EnvironmentList,
+  EnvironmentListParams,
+  EnvironmentRetrieveParams,
+  EnvironmentUpdateParams,
+  Environments,
+} from './resources/environments';
+import {
   ExtensionDeleteAllResponse,
   ExtensionDeleteResponse,
   ExtensionDownloadResponse,
@@ -62,6 +72,16 @@ import {
   ProfileUpdateResponse,
   Profiles,
 } from './resources/profiles';
+import {
+  Secret,
+  SecretCreateParams,
+  SecretDeleteParams,
+  SecretList,
+  SecretListParams,
+  SecretRetrieveParams,
+  SecretUpdateParams,
+  Secrets,
+} from './resources/secrets';
 import {
   Session,
   SessionComputerParams,
@@ -209,6 +229,8 @@ export class Steel extends Core.APIClient {
   profiles: API.Profiles = new API.Profiles(this);
   computers: API.Computers = new API.Computers(this);
   checkpoints: API.Checkpoints = new API.Checkpoints(this);
+  secrets: API.Secrets = new API.Secrets(this);
+  environments: API.Environments = new API.Environments(this);
 
   /**
    * Check whether the base URL is set to its default.
@@ -291,6 +313,8 @@ Steel.Extensions = Extensions;
 Steel.Profiles = Profiles;
 Steel.Computers = Computers;
 Steel.Checkpoints = Checkpoints;
+Steel.Secrets = Secrets;
+Steel.Environments = Environments;
 
 export declare namespace Steel {
   export type RequestOptions = Core.RequestOptions;
@@ -388,6 +412,28 @@ export declare namespace Steel {
     type Checkpoint as Checkpoint,
     type CheckpointList as CheckpointList,
     type CheckpointRestoreParams as CheckpointRestoreParams,
+  };
+
+  export {
+    Secrets as Secrets,
+    type Secret as Secret,
+    type SecretList as SecretList,
+    type SecretCreateParams as SecretCreateParams,
+    type SecretRetrieveParams as SecretRetrieveParams,
+    type SecretUpdateParams as SecretUpdateParams,
+    type SecretListParams as SecretListParams,
+    type SecretDeleteParams as SecretDeleteParams,
+  };
+
+  export {
+    Environments as Environments,
+    type Environment as Environment,
+    type EnvironmentList as EnvironmentList,
+    type EnvironmentCreateParams as EnvironmentCreateParams,
+    type EnvironmentRetrieveParams as EnvironmentRetrieveParams,
+    type EnvironmentUpdateParams as EnvironmentUpdateParams,
+    type EnvironmentListParams as EnvironmentListParams,
+    type EnvironmentDeleteParams as EnvironmentDeleteParams,
   };
 }
 

@@ -72,10 +72,32 @@ export class Computers extends APIResource {
   }
 
   /**
+   * Reboot a running computer in place. The disk survives; memory does not.
+   */
+  restart(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
+    return this._client.post(`/v1/computers/${id}/restart`, options);
+  }
+
+  /**
    * Request a resume; already waking or running is a success.
    */
   resume(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
     return this._client.post(`/v1/computers/${id}/resume`, options);
+  }
+
+  /**
+   * Boot a stopped computer; already waking or running is a success.
+   */
+  start(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
+    return this._client.post(`/v1/computers/${id}/start`, options);
+  }
+
+  /**
+   * Shut the computer down but keep its disk; already stopped is a success. Start it
+   * again to pick up where the disk left off.
+   */
+  stop(id: string, options?: Core.RequestOptions): Core.APIPromise<Computer> {
+    return this._client.post(`/v1/computers/${id}/stop`, options);
   }
 
   /**
@@ -95,7 +117,13 @@ export interface Computer {
 
   diskMib: number;
 
+  environmentId: string | null;
+
+  idleTimeoutSeconds: number;
+
   memoryMib: number;
+
+  projectId: string;
 
   status:
     | 'none'
@@ -132,7 +160,13 @@ export namespace ComputerList {
 
     diskMib: number;
 
+    environmentId: string | null;
+
+    idleTimeoutSeconds: number;
+
     memoryMib: number;
+
+    projectId: string;
 
     status:
       | 'none'
@@ -232,7 +266,27 @@ export interface ComputerCreateParams {
    */
   diskMib?: number;
 
+  env?: { [key: string]: string };
+
+  environmentId?: string;
+
+  /**
+   * Pause the computer after this many seconds without incoming traffic, so a later
+   * resume continues where it left off. 0 disables idle pausing.
+   */
+  idleTimeoutSeconds?: number;
+
   memoryMib?: number;
+
+  name?: string;
+
+  networkPolicy?: ComputerCreateParams.NetworkPolicy;
+
+  networkSecrets?: Array<ComputerCreateParams.NetworkSecret>;
+
+  projectId?: string;
+
+  secrets?: { [key: string]: string };
 
   template?: string;
 
@@ -243,6 +297,42 @@ export interface ComputerCreateParams {
   timeoutSeconds?: number;
 
   vcpu?: number;
+}
+
+export namespace ComputerCreateParams {
+  export interface NetworkPolicy {
+    cidrs?: NetworkPolicy.Cidrs;
+
+    domains?: NetworkPolicy.Domains;
+
+    internetAccess?: boolean;
+  }
+
+  export namespace NetworkPolicy {
+    export interface Cidrs {
+      allow?: Array<string>;
+
+      deny?: Array<string>;
+    }
+
+    export interface Domains {
+      allow?: Array<string>;
+
+      deny?: Array<string>;
+    }
+  }
+
+  export interface NetworkSecret {
+    domain: string;
+
+    header: string;
+
+    secretId: string;
+
+    template: string;
+
+    port?: number;
+  }
 }
 
 export interface ComputerCreateCheckpointParams {

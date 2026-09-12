@@ -79,6 +79,12 @@ export interface CheckpointRestoreParams {
   autoPause?: boolean;
 
   /**
+   * Pause the restored computer after this many seconds without incoming traffic. 0
+   * disables idle pausing.
+   */
+  idleTimeoutSeconds?: number;
+
+  /**
    * How long the restored computer may run before it is stopped, or paused when
    * autoPause is set.
    */

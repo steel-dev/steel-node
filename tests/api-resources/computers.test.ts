@@ -132,6 +132,24 @@ describe('resource computers', () => {
     );
   });
 
+  test('restart', async () => {
+    const responsePromise = client.computers.restart('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('restart: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.computers.restart('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
   test('resume', async () => {
     const responsePromise = client.computers.resume('x');
     const rawResponse = await responsePromise.asResponse();
@@ -146,6 +164,42 @@ describe('resource computers', () => {
   test('resume: request options instead of params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(client.computers.resume('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('start', async () => {
+    const responsePromise = client.computers.start('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('start: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.computers.start('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
+      Steel.NotFoundError,
+    );
+  });
+
+  test('stop', async () => {
+    const responsePromise = client.computers.stop('x');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  test('stop: request options instead of params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(client.computers.stop('x', { path: '/_stainless_unknown_path' })).rejects.toThrow(
       Steel.NotFoundError,
     );
   });
