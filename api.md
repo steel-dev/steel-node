@@ -148,7 +148,10 @@ Methods:
 - <code title="post /v1/computers/{id}/exec">client.computers.<a href="./src/resources/computers.ts">exec</a>(id, { ...params }) -> ExecResult</code>
 - <code title="post /v1/computers/{id}/pause">client.computers.<a href="./src/resources/computers.ts">pause</a>(id) -> Computer</code>
 - <code title="get /v1/computers/quota">client.computers.<a href="./src/resources/computers.ts">quota</a>() -> ComputerQuota</code>
+- <code title="post /v1/computers/{id}/restart">client.computers.<a href="./src/resources/computers.ts">restart</a>(id) -> Computer</code>
 - <code title="post /v1/computers/{id}/resume">client.computers.<a href="./src/resources/computers.ts">resume</a>(id) -> Computer</code>
+- <code title="post /v1/computers/{id}/start">client.computers.<a href="./src/resources/computers.ts">start</a>(id) -> Computer</code>
+- <code title="post /v1/computers/{id}/stop">client.computers.<a href="./src/resources/computers.ts">stop</a>(id) -> Computer</code>
 - <code title="get /v1/computers/{id}/transitions">client.computers.<a href="./src/resources/computers.ts">transitions</a>(id) -> ComputerTransitions</code>
 
 # Checkpoints
@@ -164,3 +167,33 @@ Methods:
 - <code title="get /v1/checkpoints">client.checkpoints.<a href="./src/resources/checkpoints.ts">list</a>() -> CheckpointList</code>
 - <code title="delete /v1/checkpoints/{id}">client.checkpoints.<a href="./src/resources/checkpoints.ts">delete</a>(id) -> Checkpoint</code>
 - <code title="post /v1/checkpoints/{id}/computers">client.checkpoints.<a href="./src/resources/checkpoints.ts">restore</a>(id, { ...params }) -> Computer</code>
+
+# Secrets
+
+Types:
+
+- <code><a href="./src/resources/secrets.ts">Secret</a></code>
+- <code><a href="./src/resources/secrets.ts">SecretList</a></code>
+
+Methods:
+
+- <code title="post /v1/secrets">client.secrets.<a href="./src/resources/secrets.ts">create</a>({ ...params }) -> Secret</code>
+- <code title="get /v1/secrets/{id}">client.secrets.<a href="./src/resources/secrets.ts">retrieve</a>(id, { ...params }) -> Secret</code>
+- <code title="patch /v1/secrets/{id}">client.secrets.<a href="./src/resources/secrets.ts">update</a>(id, { ...params }) -> Secret</code>
+- <code title="get /v1/secrets">client.secrets.<a href="./src/resources/secrets.ts">list</a>({ ...params }) -> SecretList</code>
+- <code title="delete /v1/secrets/{id}">client.secrets.<a href="./src/resources/secrets.ts">delete</a>(id, { ...params }) -> void</code>
+
+# Environments
+
+Types:
+
+- <code><a href="./src/resources/environments.ts">Environment</a></code>
+- <code><a href="./src/resources/environments.ts">EnvironmentList</a></code>
+
+Methods:
+
+- <code title="post /v1/environments">client.environments.<a href="./src/resources/environments.ts">create</a>({ ...params }) -> Environment</code>
+- <code title="get /v1/environments/{id}">client.environments.<a href="./src/resources/environments.ts">retrieve</a>(id, { ...params }) -> Environment</code>
+- <code title="patch /v1/environments/{id}">client.environments.<a href="./src/resources/environments.ts">update</a>(id, { ...params }) -> Environment</code>
+- <code title="get /v1/environments">client.environments.<a href="./src/resources/environments.ts">list</a>({ ...params }) -> EnvironmentList</code>
+- <code title="delete /v1/environments/{id}">client.environments.<a href="./src/resources/environments.ts">delete</a>(id, { ...params }) -> void</code>
