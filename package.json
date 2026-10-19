@@ -118,5 +118,8 @@
       "require": "./dist/*.js",
       "default": "./dist/*.mjs"
     }
+  },
+  "resolutions": {
+    "**/@typescript-eslint/typescript-estree/minimatch": "^9.0.9"
   }
 }
